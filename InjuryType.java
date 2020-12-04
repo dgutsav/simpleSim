@@ -1,0 +1,8 @@
+public enum InjuryType {
+    CRUCIATE_LIGAMENT,
+    CALF,
+    HAMSTRING,
+    CONCUSSION,
+    FRACTURE,
+    SICKNESS
+}
