@@ -27,7 +27,7 @@ public class League {
     public String getId() {
         return this.id;
     }
-    
+
     public void addTeam(String team_id) {
         teams.add(team_id);
     }
@@ -36,8 +36,17 @@ public class League {
         teams.remove(table.getTeamAtRank(position));
     }
 
+    public int getTotalMatchDays() {
+        int matches_per_team = this.teams.size() - 1;
+        if (this.teams.size() > 12) {
+            return matches_per_team * 2;
+        } else {
+            return matches_per_team * 4;
+        }
+    }
+
     public void setFixtures() {
-        fixtures = FixtureScheduler.scheduleFixtures(this.teams);
+        fixtures = FixtureScheduler.scheduleFixtures(this.teams, true);
     }
 
     public void seasonStart() {
@@ -48,8 +57,8 @@ public class League {
 
     public List<Match> getMatchesForMatchDay(int matchday) {
         List<Match> matches = new ArrayList<>();
-        for(Match match : fixtures) {
-            if(match.matchday == matchday) {
+        for (Match match : fixtures) {
+            if (match.matchday == matchday) {
                 matches.add(match);
             }
         }
@@ -58,7 +67,7 @@ public class League {
 
     public void simulateMatchDay(int matchday) {
         List<Match> matches = getMatchesForMatchDay(matchday);
-        for(Match match : matches) {
+        for (Match match : matches) {
             match.simulate(Sim.getTeam(match.home_id), Sim.getTeam(match.away_id));
             match.display();
             table.updateTeamPerformance(match.home_id, match.home_team_goals, match.away_team_goals);
@@ -67,8 +76,7 @@ public class League {
     }
 
     public void simulateSeason() {
-        int total_matchdays = 2 * (teams.size() - 1);
-        for(int i=1; i<=total_matchdays; i++) {
+        for (int i = 1; i <= this.getTotalMatchDays(); i++) {
             this.simulateMatchDay(i);
         }
         this.table.showLong();

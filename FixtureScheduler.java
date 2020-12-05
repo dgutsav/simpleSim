@@ -2,11 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FixtureScheduler {
-    public static List<Match> scheduleFixtures(List<String> teams_list) {
+    public static List<Match> scheduleFixtures(List<String> teams_list, boolean allow_double) {
         Team[] teams = Sim.getTeamArray(teams_list);
         List<Match> matches = new ArrayList<>();
         List<Integer[]> generate = generateMatches(teams.length);
-        for(Integer[] array : generate) {
+        if (allow_double && teams.length <= 12) {
+            List<Integer[]> generate2 = generateMatches(teams.length);
+            for (Integer[] array : generate2) {
+                array[2] += 2 * (teams.length - 1);
+            }
+            generate.addAll(generate2);
+        }
+        for (Integer[] array : generate) {
             Match match = new Match();
             match.home_team = teams[array[0]].name;
             match.away_team = teams[array[1]].name;
@@ -18,12 +25,12 @@ public class FixtureScheduler {
         return matches;
     }
 
-    public static int[] shuffle (int[] array) {
-        int r; 
+    public static int[] shuffle(int[] array) {
+        int r;
         int temp;
         int[] copy = array;
-        for(int i=0;i<array.length;i++) {
-            r = (int)(Math.random()*(array.length - i));
+        for (int i = 0; i < array.length; i++) {
+            r = (int) (Math.random() * (array.length - i));
             temp = copy[r];
             copy[r] = copy[array.length - i - 1];
             copy[array.length - i - 1] = temp;
@@ -31,37 +38,37 @@ public class FixtureScheduler {
         return copy;
     }
 
-    public static List<Integer[]> generateMatches (int count) {
+    public static List<Integer[]> generateMatches(int count) {
         List<Integer[]> gen = new ArrayList<>();
-        
+
         int[] ids = new int[count];
-        for(int i= 0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             ids[i] = i;
         }
         ids = shuffle(ids);
-        int[] home = new int [count/2];
-        int[] away = new int [count/2];
-        for(int i = 0; i<count/2;i++){
+        int[] home = new int[count / 2];
+        int[] away = new int[count / 2];
+        for (int i = 0; i < count / 2; i++) {
             home[i] = ids[i];
-            away[i] = ids[i+(count/2)];
+            away[i] = ids[i + (count / 2)];
         }
 
-        int[] away_days = new int[count-1];
-        for(int i=0; i<count-1; i++) {
+        int[] away_days = new int[count - 1];
+        for (int i = 0; i < count - 1; i++) {
             away_days[i] = count + i;
         }
 
-        for(int i = 1; i<=(count-1);i++) {  
-            //select away day
-            int away_index = (int)(Math.random()*(away_days.length - i + 1));
+        for (int i = 1; i <= (count - 1); i++) {
+            // select away day
+            int away_index = (int) (Math.random() * (away_days.length - i + 1));
             int away_day = away_days[away_index];
             away_days[away_index] = away_days[away_days.length - i];
             away_days[away_days.length - i] = away_day;
 
-            for(int j=0;j<home.length;j++) {
+            for (int j = 0; j < home.length; j++) {
                 Integer[] arr_home = new Integer[3];
                 Integer[] arr_away = new Integer[3];
-                if (i%2 == 0) {
+                if (i % 2 == 0) {
                     arr_home[0] = Integer.valueOf(home[j]);
                     arr_home[1] = Integer.valueOf(away[j]);
                     arr_away[0] = Integer.valueOf(away[j]);
@@ -77,14 +84,14 @@ public class FixtureScheduler {
                 gen.add(arr_home);
                 gen.add(arr_away);
             }
-            //swaps
+            // swaps
             int add_to_home = away[0];
             int add_to_away = home[home.length - 1];
-            for(int j = home.length - 1; j>1;j--)
-                home[j] = home[j-1];
+            for (int j = home.length - 1; j > 1; j--)
+                home[j] = home[j - 1];
             home[1] = add_to_home;
-            for(int j=0;j<away.length-1;j++)
-                away[j] = away[j+1];
+            for (int j = 0; j < away.length - 1; j++)
+                away[j] = away[j + 1];
             away[away.length - 1] = add_to_away;
         }
         return gen;

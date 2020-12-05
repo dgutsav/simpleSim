@@ -39,35 +39,74 @@ public class Base {
         return (int) (Math.random() * range);
     }
 
-    public static League createLeague(int league_rating, int size, int variance, String nation_name) {
-        int[] team_ratings = new int[size];
-        int sum = 0;
-        for (int i = 0; i < size; i++) {
-            team_ratings[i] = league_rating + getRandomInt(variance);
-            System.out.println(team_ratings[i]);
-            sum += team_ratings[i];
+    public static int[] getDistribution(int size, int average, int variation) {
+        int starting_value, starting_value2;
+        int[] array = new int[size];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = average;
         }
+        if (variation == 1) {
+            // single horse with n-nearby
+            starting_value = Base.getRandomNumber((int) (0.1f * average)) + 6;
+            for (int i = 0; i < size; i++) {
+                if (i < size / 5) {
+                    array[i] += starting_value;
+                    starting_value /= 2;
+                } else {
+                    array[i] += Base.getRandomInt(1);
+                }
+            }
+        } else if (variation == 2) {
+            // two-horse with m-nearby
+            starting_value = Base.getRandomNumber((int) (0.15f * average)) + 6;
+            starting_value2 = Base.getRandomNumber((int) (0.12f * average)) + 6;
+            for (int i = 0; i < size; i++) {
+                if (i < size / 2) {
+                    if (i % 2 == 0) {
+                        array[i] += starting_value;
+                        starting_value /= 2;
+                    } else {
+                        array[i] += starting_value2;
+                        starting_value2 /= 2;
+                    }
+                } else {
+                    array[i] += Base.getRandomInt(1);
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                array[i] += Base.getRandomInt(1);
+            }
+        }
+        return array;
+    }
 
-        System.out.println(sum + "  " + sum / size);
-
+    public static League createLeague(int league_rating, int size, int variance, String nation_name) {
+        int[] team_ratings = Base.getDistribution(size, league_rating, variance);
         League league = getLeague();
         for (int i = 0; i < team_ratings.length; i++) {
             Team team = getTeam((float) team_ratings[i], nation_name);
             String team_id = Sim.addTeam(team);
             league.addTeam(team_id);
         }
-
         return league;
     }
 
     public static String getTeamNameForCountry(String nation_name) {
+        int year = Base.getRandomNumber(100) + 1863;
+        String addedendum = String.valueOf(year);
+        String[] prefix = { "FC", "SC", "FK", "RB", "AFC", "Union", "", "PFC", "NK", "AC", "SG", "VfB", "Real", "RC" };
+        String[] suffix = { addedendum, "United", "City", "FC", "Town", "Lions", "Eagles" };
         String team_name = Cities.getCity(nation_name);
-        int year = Base.getRandomNumber(100);
-        String addedendum = year >= 10 ? year+"" : "0" + year;
-        return team_name + " " + addedendum;
+        if (Base.getRandomNumber(2) == 0) {
+            team_name = prefix[Base.getRandomNumber(prefix.length)] + " " + team_name;
+        } else {
+            team_name += " " + suffix[Base.getRandomNumber(suffix.length)];
+        }
+        return team_name.trim();
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         for (int i = 0; i < 1; i++) {
             // createLeague(80,16,5);
         }

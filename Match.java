@@ -16,19 +16,18 @@ public class Match {
     }
 
     public void display() {
-        if(simulated) {
-            System.out.println(home_team + " " + home_team_goals+"-"+away_team_goals+" "+away_team);
+        if (simulated) {
+            System.out.println(home_team + " " + home_team_goals + "-" + away_team_goals + " " + away_team);
         } else {
             System.out.println(home_team + " vs " + away_team);
         }
     }
 
     public void simulate(Team home, Team away) {
-        if(this.simulated) {
+        if (this.simulated) {
             return;
-        }
-        else {
-            if(MatchSimulator.simulateMatch(this, home, away)) {
+        } else {
+            if (MatchSimulator.simulateMatch(this, home, away)) {
                 this.home_team_goals = MatchSimulator.getHomeGoals();
                 this.away_team_goals = MatchSimulator.getAwayGoals();
                 this.afterSimulation();

@@ -9,6 +9,7 @@ public class Team {
     public float squad_rating = 0.0f;
     private List<Injury> injuries = new ArrayList<>();
     private String form_results;
+    private double elo_rating = 0;
 
     // Constants
     public static final float INJURY_PROBABILITY = 5.0f;
@@ -19,6 +20,7 @@ public class Team {
         this.squad_rating = 0.0f;
         this.injuries = new ArrayList<>();
         this.form_results = "DDDDDD";
+        this.elo_rating = 0;
     }
 
     public Team(String name, float rating) {
@@ -26,6 +28,7 @@ public class Team {
         this.squad_rating = rating;
         this.injuries = new ArrayList<>();
         this.form_results = "DDDDDD";
+        this.elo_rating = (rating * 20);
     }
 
     public Document getTeamDocument() {
@@ -42,6 +45,14 @@ public class Team {
 
     public float getSquadRating() {
         return this.squad_rating;
+    }
+
+    public double getEloRating() {
+        return this.elo_rating;
+    }
+
+    public void updateElo(double new_elo) {
+        this.elo_rating = new_elo;
     }
 
     public float getForm() {

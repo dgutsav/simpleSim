@@ -1,19 +1,20 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Nation {
     private List<String> leagues;
     private String name;
+    private String code;
     private int id;
-    private int ranking;
+    private int league_ranking;
 
-    //Continental places
-    private int[] continental_places;
-
-    public Nation(String name, int id, int rank) {
+    public Nation(String name, String code, int id, int rank) {
         this.name = name;
+        this.code = code;
         this.id = id;
-        this.ranking = rank;
+        this.league_ranking = rank;
         this.leagues = new ArrayList<>();
     }
 
@@ -21,10 +22,10 @@ public class Nation {
         leagues.add(league_id);
     }
 
-    public League getLeague (int level) {
+    public League getLeague(int level) {
         League[] leagues_list = Sim.getLeagues(this.leagues);
-        for(League league : leagues_list) {
-            if(league.getCompetitionLevel() == level) {
+        for (League league : leagues_list) {
+            if (league.getCompetitionLevel() == level) {
                 return league;
             }
         }
@@ -40,33 +41,39 @@ public class Nation {
     }
 
     public int getRanking() {
-        return this.ranking;
+        return this.league_ranking;
     }
 
-    public List<String> getContinentalTeams (int continental_competition) {
-        int start_rank = 1; 
+    public String getCode() {
+        return this.code;
+    }
+
+    public void getContinentalTeams(int continental_competition) {
+        int start_rank = 1;
         int end_rank = 1;
-        switch(continental_competition) {
-            case 0:
-                start_rank = 1;
-                end_rank = continental_places[0];
-                break;
+        switch (continental_competition) {
             case 1:
-                start_rank = continental_places[0] + 1;
-                end_rank = continental_places[0] + continental_places[1];
+                start_rank = 1;
+                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking);
                 break;
             case 2:
-                start_rank = continental_places[0] + continental_places[1] + 1;
-                end_rank = continental_places[0] + continental_places[1] + continental_places[2];
+                start_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking) + 1;
+                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking);
+                break;
+            case 3:
+                start_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking) + 1;
+                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking)
+                        + ContinentalCompetition.getPlacesForCompetition(3, this.league_ranking);
                 break;
             default:
                 start_rank = 1;
-                end_rank = continental_places[0];
+                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking);
         }
-        List<String> continental_teams = new ArrayList<>();
-        for(int i=start_rank; i<=end_rank; i++) {
-            continental_teams.add(this.getLeague(0).getTeamAtRank(i));
+        for (int i = start_rank; i <= end_rank; i++) {
+            ContinentalCompetition.addTeams(continental_competition, this.code + i, this.getLeague(1).getTeamAtRank(i));
         }
-        return continental_teams;
     }
 }

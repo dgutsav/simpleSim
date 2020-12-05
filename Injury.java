@@ -3,14 +3,14 @@ public class Injury {
     public InjuryType injury_type;
     private int games_missed = 0;
 
-    public Injury (InjuryType type, float f) {
+    public Injury(InjuryType type, float f) {
         this.effect = f;
         this.injury_type = type;
         this.games_missed = 0;
     }
 
     public int getGames() {
-        switch(this.injury_type) {
+        switch (this.injury_type) {
             case CRUCIATE_LIGAMENT:
                 return 30 - this.games_missed;
             case CALF:
@@ -33,7 +33,7 @@ public class Injury {
     }
 
     public static InjuryType getInjury(int id) {
-        switch(id) {
+        switch (id) {
             case 0:
                 return InjuryType.CALF;
             case 1:

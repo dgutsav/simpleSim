@@ -2,5 +2,11 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\ASUS\\Downloads\\mongo-java-driver-3.11.2.jar"
-    ]
+    ],
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
 }
