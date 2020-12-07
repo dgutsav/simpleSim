@@ -10,24 +10,16 @@ public class LeagueTable {
     public void startNewSeason(List<String> list) {
         Team[] teams = Sim.getTeamArray(list);
         for (int i = 0; i < teams.length; i++) {
-            // System.out.println(teams[i].name);
-            performances[i] = new TeamPerformance(teams[i].id, teams[i].name);
+            performances[i] = new TeamPerformance(teams[i].getId(), teams[i].getName());
         }
-    }
-
-    private void diag() {
-        for (int i = 0; i < performances.length; i++) {
-            System.out.print(performances[i].points() + "   ");
-        }
-        System.out.println();
     }
 
     public void sortTable() {
         int num_teams = performances.length;
-        int big, index;
+        int big; 
+        int index;
         TeamPerformance temp;
         for (int i = 0; i < num_teams; i++) {
-            // diag();
             big = performances[i].points();
             index = i;
             for (int j = i + 1; j < num_teams; j++) {
@@ -35,13 +27,13 @@ public class LeagueTable {
                     big = performances[j].points();
                     index = j;
                 } else if (big == performances[j].points()) {
-                    if (performances[i].goal_difference() < performances[j].goal_difference()) {
+                    if (performances[i].goalDifference() < performances[j].goalDifference()) {
                         index = j;
-                    } else if (performances[i].goal_difference() == performances[j].goal_difference()) {
-                        if (performances[i].matches_won() < performances[j].matches_won()) {
+                    } else if (performances[i].goalDifference() == performances[j].goalDifference()) {
+                        if (performances[i].matchesWon() < performances[j].matchesWon()) {
                             index = j;
-                        } else if (performances[i].matches_won() == performances[j].matches_won()) {
-                            if (performances[i].goals_scored() < performances[j].goals_scored()) {
+                        } else if (performances[i].matchesWon() == performances[j].matchesWon()) {
+                            if (performances[i].goalsScored() < performances[j].goalsScored()) {
                                 index = j;
                             } else {
                                 // nothing to do here
@@ -53,7 +45,6 @@ public class LeagueTable {
             temp = performances[i];
             performances[i] = performances[index];
             performances[index] = temp;
-            // diag();
         }
     }
 

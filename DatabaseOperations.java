@@ -9,7 +9,7 @@ import org.bson.Document;
 import java.util.Iterator;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
+//import com.mongodb.MongoCredential;
 
 public class DatabaseOperations {
 
@@ -20,7 +20,7 @@ public class DatabaseOperations {
     public static void connectToDatabase() {
         try {
             mongo = new MongoClient("localhost", 27017);
-            MongoCredential credential = MongoCredential.createCredential("me", "simp", "password".toCharArray());
+            //MongoCredential credential = MongoCredential.createCredential("me", "simp", "password".toCharArray());
             database = mongo.getDatabase("simp");
             System.out.println("Connected to database");
         } catch (Exception e) {

@@ -1,5 +1,8 @@
 public class EloRankings {
-    public static int WEIGHT_NORMAL = 50;
+    private static final int WEIGHT_NORMAL = 50;
+
+    private EloRankings() {
+    }
 
     public static void calculate(Team a, Team b, Match match) {
         double old_a = a.getEloRating();
@@ -9,15 +12,16 @@ public class EloRankings {
                 : match.away_team_goals > match.home_team_goals ? 2 : 3;
 
         float K = WEIGHT_NORMAL;
-
+        float G;
+        
         int gd = Math.abs(match.home_team_goals - match.away_team_goals);
-        float G = 0f;
+
         if (gd <= 1) {
             G = 1f;
         } else if (gd == 2) {
             G = 1.5f;
         } else {
-            G = (11 + gd) / 8;
+            G = (11 + gd) / 8.0f;
         }
 
         float W = result == 1 ? 1.0f : result == 2 ? 0.5f : 0f;
@@ -31,7 +35,7 @@ public class EloRankings {
 
         a.updateElo(old_a + P);
         b.updateElo(old_b - P);
-        Sim.updateTeam(a, a.id);
-        Sim.updateTeam(b, b.id);
+        Sim.updateTeam(a, a.getId());
+        Sim.updateTeam(b, b.getId());
     }
 }

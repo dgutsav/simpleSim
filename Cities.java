@@ -50,37 +50,40 @@ public class Cities {
             "Kolding", "Horsens", "Vejle", "Roskilde", "Herning", "Horsholm", "Elsinore", "Silkeborg", "Naestved",
             "Fredericia", "Viborg", "Koge", "Holstebro", "Taastrup" };
 
+    private Cities() {
+    }
+
     public static String getCity(String nation_name) {
         if (nation_name.equalsIgnoreCase("England")) {
-            return englandCities[Base.getRandomNumber(englandCities.length)];
+            return englandCities[CommonFunctions.getRandomNumber(englandCities.length)];
         } else if (nation_name.equalsIgnoreCase("Spain")) {
-            return spainCities[Base.getRandomNumber(spainCities.length)];
+            return spainCities[CommonFunctions.getRandomNumber(spainCities.length)];
         } else if (nation_name.equalsIgnoreCase("Germany")) {
-            return germanyCities[Base.getRandomNumber(germanyCities.length)];
+            return germanyCities[CommonFunctions.getRandomNumber(germanyCities.length)];
         } else if (nation_name.equalsIgnoreCase("France")) {
-            return franceCities[Base.getRandomNumber(franceCities.length)];
+            return franceCities[CommonFunctions.getRandomNumber(franceCities.length)];
         } else if (nation_name.equalsIgnoreCase("Italy")) {
-            return italyCities[Base.getRandomNumber(italyCities.length)];
+            return italyCities[CommonFunctions.getRandomNumber(italyCities.length)];
         } else if (nation_name.equalsIgnoreCase("Portugal")) {
-            return portugalCities[Base.getRandomNumber(portugalCities.length)];
+            return portugalCities[CommonFunctions.getRandomNumber(portugalCities.length)];
         } else if (nation_name.equalsIgnoreCase("belgium")) {
-            return belgiumCities[Base.getRandomNumber(belgiumCities.length)];
+            return belgiumCities[CommonFunctions.getRandomNumber(belgiumCities.length)];
         } else if (nation_name.equalsIgnoreCase("netherlands")) {
-            return netherlandsCities[Base.getRandomNumber(netherlandsCities.length)];
+            return netherlandsCities[CommonFunctions.getRandomNumber(netherlandsCities.length)];
         } else if (nation_name.equalsIgnoreCase("russia")) {
-            return russiaCities[Base.getRandomNumber(russiaCities.length)];
+            return russiaCities[CommonFunctions.getRandomNumber(russiaCities.length)];
         } else if (nation_name.equalsIgnoreCase("ukraine")) {
-            return ukraineCities[Base.getRandomNumber(ukraineCities.length)];
+            return ukraineCities[CommonFunctions.getRandomNumber(ukraineCities.length)];
         } else if (nation_name.equalsIgnoreCase("austria")) {
-            return austriaCities[Base.getRandomNumber(austriaCities.length)];
+            return austriaCities[CommonFunctions.getRandomNumber(austriaCities.length)];
         } else if (nation_name.equalsIgnoreCase("scotland")) {
-            return scotlandCities[Base.getRandomNumber(scotlandCities.length)];
+            return scotlandCities[CommonFunctions.getRandomNumber(scotlandCities.length)];
         } else if (nation_name.equalsIgnoreCase("turkey")) {
-            return turkeyCities[Base.getRandomNumber(turkeyCities.length)];
+            return turkeyCities[CommonFunctions.getRandomNumber(turkeyCities.length)];
         } else if (nation_name.equalsIgnoreCase("croatia")) {
-            return croatiaCities[Base.getRandomNumber(croatiaCities.length)];
+            return croatiaCities[CommonFunctions.getRandomNumber(croatiaCities.length)];
         } else if (nation_name.equalsIgnoreCase("denmark")) {
-            return denmarkCities[Base.getRandomNumber(denmarkCities.length)];
+            return denmarkCities[CommonFunctions.getRandomNumber(denmarkCities.length)];
         }
         return "Eden";
     }

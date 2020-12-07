@@ -15,27 +15,14 @@ public class FixtureScheduler {
         }
         for (Integer[] array : generate) {
             Match match = new Match();
-            match.home_team = teams[array[0]].name;
-            match.away_team = teams[array[1]].name;
-            match.home_id = teams[array[0]].id;
-            match.away_id = teams[array[1]].id;
+            match.home_team = teams[array[0]].getName();
+            match.away_team = teams[array[1]].getName();
+            match.home_id = teams[array[0]].getId();
+            match.away_id = teams[array[1]].getId();
             match.matchday = array[2];
             matches.add(match);
         }
         return matches;
-    }
-
-    public static int[] shuffle(int[] array) {
-        int r;
-        int temp;
-        int[] copy = array;
-        for (int i = 0; i < array.length; i++) {
-            r = (int) (Math.random() * (array.length - i));
-            temp = copy[r];
-            copy[r] = copy[array.length - i - 1];
-            copy[array.length - i - 1] = temp;
-        }
-        return copy;
     }
 
     public static List<Integer[]> generateMatches(int count) {
@@ -45,7 +32,7 @@ public class FixtureScheduler {
         for (int i = 0; i < count; i++) {
             ids[i] = i;
         }
-        ids = shuffle(ids);
+        ids = CommonFunctions.shuffle(ids);
         int[] home = new int[count / 2];
         int[] away = new int[count / 2];
         for (int i = 0; i < count / 2; i++) {
@@ -60,7 +47,7 @@ public class FixtureScheduler {
 
         for (int i = 1; i <= (count - 1); i++) {
             // select away day
-            int away_index = (int) (Math.random() * (away_days.length - i + 1));
+            int away_index = CommonFunctions.getRandomNumber(away_days.length - i + 1);
             int away_day = away_days[away_index];
             away_days[away_index] = away_days[away_days.length - i];
             away_days[away_days.length - i] = away_day;
@@ -97,7 +84,7 @@ public class FixtureScheduler {
         return gen;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         generateMatches(20);
     }
 

@@ -22,11 +22,11 @@ public class TeamPerformance {
         this.goals_scored = 0;
     }
 
-    public int goal_difference() {
+    public int goalDifference() {
         return this.goals_scored - this.goals_conceded;
     }
 
-    public int matches_played() {
+    public int matchesPlayed() {
         return this.matches_won + this.matches_drawn + this.matches_lost;
     }
 
@@ -35,23 +35,23 @@ public class TeamPerformance {
                 + (this.matches_lost * POINTS_FOR_LOSS);
     }
 
-    public int matches_won() {
+    public int matchesWon() {
         return this.matches_won;
     }
 
-    public int matches_drawn() {
+    public int matchesDrawn() {
         return this.matches_drawn;
     }
 
-    public int matches_lost() {
+    public int matchesLost() {
         return this.matches_lost;
     }
 
-    public int goals_scored() {
+    public int goalsScored() {
         return this.goals_scored;
     }
 
-    public int goals_conceded() {
+    public int goalsConceded() {
         return this.goals_conceded;
     }
 
@@ -61,7 +61,7 @@ public class TeamPerformance {
     }
 
     public String displayShort() {
-        return this.team_name + "\t" + this.matches_played() + "  " + this.goal_difference() + "  " + this.points();
+        return this.team_name + "\t" + this.matchesPlayed() + "  " + this.goalDifference() + "  " + this.points();
     }
 
     public void updatePerformance(int scored, int against) {

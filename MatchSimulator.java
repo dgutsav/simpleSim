@@ -1,12 +1,7 @@
 public class MatchSimulator {
-    private static Team home_team = null;
-    private static Team away_team = null;
 
-    private static int home_goals = 0;
-    private static int away_goals = 0;
-
-    private static int home_elo = 0;
-    private static int away_elo = 0;
+    private static int homeGoals = 0;
+    private static int awayGoals = 0;
 
     // Global Constants
     public static final float HOME_ADVANTAGE = 0.5f;
@@ -16,15 +11,13 @@ public class MatchSimulator {
     public static final int HOME_LOSS = 2;
     public static final int DRAW = 3;
 
-    public static boolean simulateMatch(Match current_match, Team home, Team away) {
-        // match = current_match;
-        home_team = home;
-        away_team = away;
+    private MatchSimulator() {
+    }
 
-        float home_team_rating = home_team.squad_rating + home_team.getForm() - home_team.getInjuries() + HOME_ADVANTAGE
+    public static boolean simulateMatch(Match current_match, Team home, Team away) {
+        float home_team_rating = home.getSquadRating() + home.getForm() - home.getInjuries() + HOME_ADVANTAGE
                 + getRandomness();
-        float away_team_rating = away_team.squad_rating + away_team.getForm() - away_team.getInjuries()
-                + getRandomness();
+        float away_team_rating = away.getSquadRating() + away.getForm() - away.getInjuries() + getRandomness();
 
         int winner_goals = getWinnerGoals(home_team_rating, away_team_rating);
         int result;
@@ -38,19 +31,19 @@ public class MatchSimulator {
 
         if (result == DRAW) {
             winner_goals = getGoalsForDraw();
-            home_goals = winner_goals;
-            away_goals = winner_goals;
+            homeGoals = winner_goals;
+            awayGoals = winner_goals;
             Sim.updateTeamForm(current_match.home_id, 3);
             Sim.updateTeamForm(current_match.away_id, 3);
         } else {
             if (result == HOME_WIN) {
-                home_goals = winner_goals;
-                away_goals = getLoserGoals(winner_goals);
+                homeGoals = winner_goals;
+                awayGoals = getLoserGoals(winner_goals);
                 Sim.updateTeamForm(current_match.home_id, 1);
                 Sim.updateTeamForm(current_match.away_id, 2);
             } else {
-                home_goals = getLoserGoals(winner_goals);
-                away_goals = winner_goals;
+                homeGoals = getLoserGoals(winner_goals);
+                awayGoals = winner_goals;
                 Sim.updateTeamForm(current_match.home_id, 2);
                 Sim.updateTeamForm(current_match.away_id, 1);
             }
@@ -60,7 +53,7 @@ public class MatchSimulator {
     }
 
     public static int getGoalsForDraw() {
-        int rand = (int) (Math.random() * 100) + 1;
+        int rand = CommonFunctions.getRandomNumber(100) + 1;
         if (rand <= 25) {
             return 0;
         } else if (rand <= 80) {
@@ -77,7 +70,7 @@ public class MatchSimulator {
     }
 
     public static int getLoserGoals(int diff) {
-        int rand = (int) (Math.random() * 100) + 1;
+        int rand = CommonFunctions.getRandomNumber(100) + 1;
         if (diff >= 4) {
             if (rand <= 60) {
                 return 0;
@@ -133,10 +126,10 @@ public class MatchSimulator {
     }
 
     public static int getHomeGoals() {
-        return home_goals;
+        return homeGoals;
     }
 
     public static int getAwayGoals() {
-        return away_goals;
+        return awayGoals;
     }
 }

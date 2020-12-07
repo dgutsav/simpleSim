@@ -1,16 +1,16 @@
 public class Injury {
-    public float effect;
-    public InjuryType injury_type;
+    private float effect;
+    private InjuryType injuryType;
     private int games_missed = 0;
 
     public Injury(InjuryType type, float f) {
         this.effect = f;
-        this.injury_type = type;
+        this.injuryType = type;
         this.games_missed = 0;
     }
 
     public int getGames() {
-        switch (this.injury_type) {
+        switch (this.injuryType) {
             case CRUCIATE_LIGAMENT:
                 return 30 - this.games_missed;
             case CALF:

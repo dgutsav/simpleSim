@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Nation {
     private List<String> leagues;
@@ -54,26 +52,26 @@ public class Nation {
         switch (continental_competition) {
             case 1:
                 start_rank = 1;
-                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking);
+                end_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking);
                 break;
             case 2:
-                start_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking) + 1;
-                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
-                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking);
+                start_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking) + 1;
+                end_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetitionCentre.getPlacesForCompetition(2, this.league_ranking);
                 break;
             case 3:
-                start_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
-                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking) + 1;
-                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking)
-                        + ContinentalCompetition.getPlacesForCompetition(2, this.league_ranking)
-                        + ContinentalCompetition.getPlacesForCompetition(3, this.league_ranking);
+                start_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetitionCentre.getPlacesForCompetition(2, this.league_ranking) + 1;
+                end_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking)
+                        + ContinentalCompetitionCentre.getPlacesForCompetition(2, this.league_ranking)
+                        + ContinentalCompetitionCentre.getPlacesForCompetition(3, this.league_ranking);
                 break;
             default:
                 start_rank = 1;
-                end_rank = ContinentalCompetition.getPlacesForCompetition(1, this.league_ranking);
+                end_rank = ContinentalCompetitionCentre.getPlacesForCompetition(1, this.league_ranking);
         }
         for (int i = start_rank; i <= end_rank; i++) {
-            ContinentalCompetition.addTeams(continental_competition, this.code + i, this.getLeague(1).getTeamAtRank(i));
+            ContinentalCompetitionCentre.addTeams(continental_competition, this.code + i, this.getLeague(1).getTeamAtRank(i));
         }
     }
 }

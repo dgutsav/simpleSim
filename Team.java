@@ -4,12 +4,13 @@ import java.util.List;
 import org.bson.Document;
 
 public class Team {
-    public String id;
-    public String name;
-    public float squad_rating = 0.0f;
+    private String id;
+    private String name;
+    private float squad_rating = 0.0f;
     private List<Injury> injuries = new ArrayList<>();
     private String form_results;
     private double elo_rating = 0;
+    private double coefficient = 0.0;
 
     // Constants
     public static final float INJURY_PROBABILITY = 5.0f;
@@ -21,6 +22,7 @@ public class Team {
         this.injuries = new ArrayList<>();
         this.form_results = "DDDDDD";
         this.elo_rating = 0;
+        this.coefficient = 0.0;
     }
 
     public Team(String name, float rating) {
@@ -29,6 +31,7 @@ public class Team {
         this.injuries = new ArrayList<>();
         this.form_results = "DDDDDD";
         this.elo_rating = (rating * 20);
+        this.coefficient = (rating - 70) > 0 ? (rating - 70) * 3 : 0;
     }
 
     public Document getTeamDocument() {
@@ -39,12 +42,24 @@ public class Team {
         return this.id;
     }
 
+    public void setId(String team_id) {
+        this.id = team_id;
+    }
+
     public String getName() {
         return this.name;
     }
 
     public float getSquadRating() {
         return this.squad_rating;
+    }
+
+    public double getCoefficient() {
+        return this.coefficient;
+    }
+
+    public void setCoefficient(double new_coefficient) {
+        this.coefficient = new_coefficient;
     }
 
     public double getEloRating() {
@@ -89,7 +104,7 @@ public class Team {
         double _injury = Math.random() * 100;
         if (_injury > (100 - INJURY_PROBABILITY)) {
             float effect = (float) (Math.random() * this.squad_rating * 0.1f);
-            Injury injury = new Injury(Injury.getInjury((int) (Math.random() * FORM_RESULTS_SIZE)), effect);
+            Injury injury = new Injury(Injury.getInjury(CommonFunctions.getRandomNumber(FORM_RESULTS_SIZE)), effect);
             injuries.add(injury);
         }
     }

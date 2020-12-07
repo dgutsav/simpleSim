@@ -1,5 +1,6 @@
 public class Match {
-    String home_id, away_id;
+    String home_id;
+    String away_id;
     String home_team;
     String away_team;
     int home_team_goals = 0;
@@ -24,14 +25,10 @@ public class Match {
     }
 
     public void simulate(Team home, Team away) {
-        if (this.simulated) {
-            return;
-        } else {
-            if (MatchSimulator.simulateMatch(this, home, away)) {
-                this.home_team_goals = MatchSimulator.getHomeGoals();
-                this.away_team_goals = MatchSimulator.getAwayGoals();
-                this.afterSimulation();
-            }
+        if (!this.simulated && MatchSimulator.simulateMatch(this, home, away)) {
+            this.home_team_goals = MatchSimulator.getHomeGoals();
+            this.away_team_goals = MatchSimulator.getAwayGoals();
+            this.afterSimulation();
         }
     }
 }
