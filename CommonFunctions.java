@@ -1,13 +1,15 @@
 public class CommonFunctions {
     private CommonFunctions() {
-        
+
     }
+
     public static Team getTeam(float rating, String nation_name) {
         return new Team(CommonFunctions.getTeamNameForCountry(nation_name), rating);
     }
 
-    public static League getLeague() {
-        return new League(getRandomName("league"), 1, 0, 0);
+    public static League getLeague(String nation_name, int division, int promotion, int relegation) {
+        String name = Catalogues.getDenonym(nation_name) + " League " + division;
+        return new League(name, division, promotion, relegation);
     }
 
     public static String getRandomName(String type) {
@@ -84,9 +86,9 @@ public class CommonFunctions {
         return array;
     }
 
-    public static League createLeague(int league_rating, int size, int variance, String nation_name) {
+    public static League createLeague(int league_rating, int size, int variance, String nation_name, int level, int promotion, int relegation) {
         int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
-        League league = getLeague();
+        League league = getLeague(nation_name, level, promotion, relegation);
         for (int i = 0; i < team_ratings.length; i++) {
             Team team = getTeam((float) team_ratings[i], nation_name);
             String team_id = Sim.addTeam(team);
@@ -98,13 +100,14 @@ public class CommonFunctions {
     public static String getTeamNameForCountry(String nation_name) {
         int year = CommonFunctions.getRandomNumber(100) + 1863;
         String addedendum = String.valueOf(year);
-        String[] prefix = { "FC", "SC", "FK", "RB", "AFC", "Union", "", "PFC", "NK", "AC", "SG", "VfB", "Real", "RC" };
-        String[] suffix = { addedendum, "United", "City", "FC", "Town", "Lions", "Eagles" };
-        String team_name = Cities.getCity(nation_name);
-        if (CommonFunctions.getRandomNumber(2) == 0) {
-            team_name = prefix[CommonFunctions.getRandomNumber(prefix.length)] + " " + team_name;
+        String team_name = Catalogues.getCity(nation_name);
+        if (CommonFunctions.getRandomNumber(100) < Catalogues.getPrefixChance(nation_name)) {
+            team_name = Catalogues.getPrefix(nation_name) + " " + team_name;
+            if (CommonFunctions.getRandomNumber(100) > 90) {
+                team_name += " " + addedendum;
+            }
         } else {
-            team_name += " " + suffix[CommonFunctions.getRandomNumber(suffix.length)];
+            team_name = team_name + " " + Catalogues.getSuffix(nation_name);
         }
         return team_name.trim();
     }

@@ -13,7 +13,7 @@ public class EloRankings {
 
         float K = WEIGHT_NORMAL;
         float G;
-        
+
         int gd = Math.abs(match.home_team_goals - match.away_team_goals);
 
         if (gd <= 1) {
@@ -33,8 +33,8 @@ public class EloRankings {
 
         double P = K * G * (W - We);
 
-        a.updateElo(old_a + P);
-        b.updateElo(old_b - P);
+        a.updateElo(old_a + P > 0 ? old_a + P : 0);
+        b.updateElo(old_b - P > 0 ? old_b - P : 0);
         Sim.updateTeam(a, a.getId());
         Sim.updateTeam(b, b.getId());
     }

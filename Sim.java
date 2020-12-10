@@ -14,11 +14,21 @@ public class Sim {
     static List<Match> matches = new ArrayList<>();
     static Map<Integer, Nation> nations = new HashMap<>();
 
+    public static int current_season = 1;
+
     private Sim() {
     }
 
     public static void updateTeam(Team team, String id) {
         teams.put(id, team);
+    }
+
+    public static void updateLeague(League league, String id) {
+        leagues.put(id, league);
+    }
+
+    public static int getSeasonNumber() {
+        return Sim.current_season;
     }
 
     public static Team getTeam(String id) {
@@ -55,14 +65,14 @@ public class Sim {
 
     public static void setupContinentalCompetitions() {
         for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
-            for (int i = 1; i <= ContinentalCompetitionCentre.NUMBER_OF_COMPETITIONS; i++) {
+            for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
                 entry.getValue().getContinentalTeams(i);
             }
         }
-        for (int i = 1; i <= ContinentalCompetitionCentre.NUMBER_OF_COMPETITIONS; i++) {
-            ContinentalCompetitionCentre.setGroups(i);
-            ContinentalCompetitionCentre.displayGroups(i);
+        for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
+            TournamentController.setGroups(i);
         }
+        TournamentController.initCompetitions();
     }
 
     public static void sim() {
@@ -71,6 +81,8 @@ public class Sim {
             entry.getValue().simulateSeason();
         }
         setupContinentalCompetitions();
+        TournamentController.simulateCompetitions();
+        seasonEndChanges();
     }
 
     public static void updateTeamForm(String team_id, int result) {
@@ -96,21 +108,21 @@ public class Sim {
 
     public static List<Nation_Setup> getSetups() {
         List<Nation_Setup> setups = new ArrayList<>();
-        setups.add(new Nation_Setup("England", "ENG", 1, 1, 1, 20, 81));
-        setups.add(new Nation_Setup("Spain", "ESP", 2, 2, 1, 20, 78));
-        setups.add(new Nation_Setup("Germany", "GER", 3, 3, 1, 18, 79));
-        setups.add(new Nation_Setup("Italy", "ITA", 4, 4, 1, 20, 78));
-        setups.add(new Nation_Setup("France", "FRA", 5, 5, 1, 20, 74));
-        setups.add(new Nation_Setup("Portugal", "POR", 6, 6, 1, 18, 70));
-        setups.add(new Nation_Setup("Belgium", "BEL", 7, 7, 1, 16, 68));
-        setups.add(new Nation_Setup("Netherlands", "NED", 8, 8, 1, 18, 69));
-        setups.add(new Nation_Setup("Russia", "RUS", 9, 9, 1, 16, 68));
-        setups.add(new Nation_Setup("Ukraine", "UKR", 10, 10, 1, 10, 67));
-        setups.add(new Nation_Setup("Austria", "AUT", 11, 11, 1, 12, 64));
-        setups.add(new Nation_Setup("Scotland", "SCO", 12, 12, 1, 12, 64));
-        setups.add(new Nation_Setup("Turkey", "TUR", 13, 13, 1, 16, 64));
-        setups.add(new Nation_Setup("Denmark", "DEN", 14, 14, 1, 14, 60));
-        setups.add(new Nation_Setup("Croatia", "CRO", 15, 15, 1, 10, 62));
+        setups.add(new Nation_Setup("England", "ENG", 1, 1, 4, 20, 80));
+        setups.add(new Nation_Setup("Spain", "ESP", 2, 2, 2, 20, 78));
+        setups.add(new Nation_Setup("Germany", "GER", 3, 3, 3, 18, 79));
+        setups.add(new Nation_Setup("Italy", "ITA", 4, 4, 2, 20, 78));
+        setups.add(new Nation_Setup("France", "FRA", 5, 5, 2, 20, 76));
+        setups.add(new Nation_Setup("Portugal", "POR", 6, 6, 2, 18, 74));
+        setups.add(new Nation_Setup("Belgium", "BEL", 7, 7, 2, 16, 74));
+        setups.add(new Nation_Setup("Netherlands", "NED", 8, 8, 2, 18, 74));
+        setups.add(new Nation_Setup("Russia", "RUS", 9, 9, 3, 16, 74));
+        setups.add(new Nation_Setup("Ukraine", "UKR", 10, 10, 2, 10, 72));
+        setups.add(new Nation_Setup("Austria", "AUT", 11, 11, 2, 12, 69));
+        setups.add(new Nation_Setup("Scotland", "SCO", 12, 12, 2, 12, 69));
+        setups.add(new Nation_Setup("Turkey", "TUR", 13, 13, 3, 16, 73));
+        setups.add(new Nation_Setup("Denmark", "DEN", 14, 14, 2, 14, 68));
+        setups.add(new Nation_Setup("Croatia", "CRO", 15, 15, 2, 10, 68));
         return setups;
     }
 
@@ -119,10 +131,24 @@ public class Sim {
         List<Nation_Setup> setups = Sim.getSetups();
         for (Nation_Setup setup : setups) {
             Nation nation = new Nation(setup.name, setup.short_name, count, setup.league_ranking);
-            League league = CommonFunctions.createLeague(setup.league_rating, setup.num_team_leagues,
-                    CommonFunctions.getRandomNumber(4), nation.getName());
-            String league_id = Sim.addLeague(league);
-            nation.addLeague(league_id);
+            for (int i = 1; i <= setup.num_leagues; i++) {
+                int promotion = League.getPyramidPlaces(setup.num_team_leagues);
+                int relegation = League.getPyramidPlaces(setup.num_team_leagues);
+                if (i == 1) {
+                    promotion = 0;
+                }
+                if (i == setup.num_leagues) {
+                    relegation = 0;
+                }
+                int rating = setup.league_rating;
+                if (i > 1) {
+                    rating = (int) (setup.league_ranking * (Math.pow(0.75, (double) i - 1)));
+                }
+                League league = CommonFunctions.createLeague(rating, setup.num_team_leagues,
+                        CommonFunctions.getRandomNumber(4), nation.getName(), i, promotion, relegation);
+                String league_id = Sim.addLeague(league);
+                nation.addLeague(league_id);
+            }
             nations.put(nation.getId(), nation);
             count++;
         }
@@ -151,9 +177,25 @@ public class Sim {
         }
     }
 
+    public static void seasonEndChanges() {
+        for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
+            entry.getValue().promotionDemotion();
+        }
+        for (Map.Entry<String, League> entry : leagues.entrySet()) {
+            entry.getValue().saveCompetitionHistory();
+            updateLeague(entry.getValue(), entry.getKey());
+        }
+        current_season++;
+    }
+
     public static void main(String[] args) {
         initSetup();
         sim();
+        sim();
+        sim();
+        for (Map.Entry<String, League> entry : leagues.entrySet()) {
+            entry.getValue().showCompetitionHistory();
+        }
         showElo();
     }
 }

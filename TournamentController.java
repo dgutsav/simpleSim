@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -6,13 +7,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class ContinentalCompetitionCentre {
+public class TournamentController {
 
     public static final int NUMBER_OF_COMPETITIONS = 3;
     public static final int TEAMS_PER_GROUP = 4;
     public static final int NUM_CL_TEAMS = 32;
     public static final int NUM_EL_TEAMS = 48;
     public static final int NUM_ECL_TEAMS = 40;
+
+    public static final int TEAMS_PROGRESS_FROM_GROUP = 2;
+    public static final int GROUP_MATCHDAYS = 6;
 
     private static Map<String, String> clTeams = new HashMap<>();
     private static Map<String, String> elTeams = new HashMap<>();
@@ -22,7 +26,11 @@ public class ContinentalCompetitionCentre {
     private static String[][] elGroups = new String[NUM_EL_TEAMS / TEAMS_PER_GROUP][TEAMS_PER_GROUP];
     private static String[][] eclGroups = new String[NUM_ECL_TEAMS / TEAMS_PER_GROUP][TEAMS_PER_GROUP];
 
-    private ContinentalCompetitionCentre() {
+    private static Tournament championsLeague;
+    private static Tournament europaLeague;
+    private static Tournament conferenceLeague;
+
+    private TournamentController() {
         // compliance
     }
 
@@ -73,11 +81,11 @@ public class ContinentalCompetitionCentre {
     public static int getNumGroups(int competition_level) {
         switch (competition_level) {
             case 1:
-                return ContinentalCompetitionCentre.NUM_CL_TEAMS / ContinentalCompetitionCentre.TEAMS_PER_GROUP;
+                return TournamentController.NUM_CL_TEAMS / TournamentController.TEAMS_PER_GROUP;
             case 2:
-                return ContinentalCompetitionCentre.NUM_EL_TEAMS / ContinentalCompetitionCentre.TEAMS_PER_GROUP;
+                return TournamentController.NUM_EL_TEAMS / TournamentController.TEAMS_PER_GROUP;
             default:
-                return ContinentalCompetitionCentre.NUM_ECL_TEAMS / ContinentalCompetitionCentre.TEAMS_PER_GROUP;
+                return TournamentController.NUM_ECL_TEAMS / TournamentController.TEAMS_PER_GROUP;
         }
     }
 
@@ -100,6 +108,41 @@ public class ContinentalCompetitionCentre {
                 return elGroups;
             default:
                 return eclGroups;
+        }
+    }
+
+    public static Tournament getCompetition(int competition_level) {
+        switch (competition_level) {
+            case 1:
+                return championsLeague;
+            case 2:
+                return europaLeague;
+            default:
+                return conferenceLeague;
+        }
+    }
+
+    public static String getCodeForTeam(String team_id) {
+        for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
+            Map<String, String> findTeams = TournamentController.getTeams(i);
+            for (Map.Entry<String, String> entry : findTeams.entrySet()) {
+                if (entry.getValue().equalsIgnoreCase(team_id)) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return "LOREM";
+    }
+
+    public static String getTeamForCode(String code) {
+        if (clTeams.containsKey(code)) {
+            return clTeams.get(code);
+        } else if (elTeams.containsKey(code)) {
+            return elTeams.get(code);
+        } else if (eclTeams.containsKey(code)) {
+            return eclTeams.get(code);
+        } else {
+            return "";
         }
     }
 
@@ -127,8 +170,8 @@ public class ContinentalCompetitionCentre {
     }
 
     public static String[][] setPots(int competition_level, List<String> list) {
-        int number_of_groups = ContinentalCompetitionCentre.getNumGroups(competition_level);
-        String[][] pots = new String[ContinentalCompetitionCentre.TEAMS_PER_GROUP][number_of_groups];
+        int number_of_groups = TournamentController.getNumGroups(competition_level);
+        String[][] pots = new String[TournamentController.TEAMS_PER_GROUP][number_of_groups];
         if (competition_level == 1) {
             int count = 0;
             for (int i = 0; i < list.size(); i++) {
@@ -142,14 +185,14 @@ public class ContinentalCompetitionCentre {
                     }
                 }
             }
-            for (int i = 1; i < ContinentalCompetitionCentre.TEAMS_PER_GROUP; i++) {
+            for (int i = 1; i < TournamentController.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
                     list.remove(0);
                 }
             }
         } else {
-            for (int i = 0; i < ContinentalCompetitionCentre.TEAMS_PER_GROUP; i++) {
+            for (int i = 0; i < TournamentController.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
                     list.remove(0);
@@ -164,10 +207,29 @@ public class ContinentalCompetitionCentre {
         return code1.substring(0, 2).equalsIgnoreCase(code2.substring(0, 2));
     }
 
+    public static boolean fromSameGroup(String[][] groups, String code1, String code2) {
+        for (int i = 0; i < groups.length / TournamentController.TEAMS_PER_GROUP; i++) {
+            boolean found1 = false;
+            boolean found2 = false;
+            for (String team : groups[i]) {
+                if (team.equalsIgnoreCase(code1)) {
+                    found1 = true;
+                }
+                if (team.equalsIgnoreCase(code2)) {
+                    found2 = true;
+                }
+            }
+            if (found1 && found2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void setGroups(int competition_level) {
-        int number_of_groups = ContinentalCompetitionCentre.getNumGroups(competition_level);
-        String[][] pots = ContinentalCompetitionCentre.setPots(competition_level,
-                ContinentalCompetitionCentre.sortByCoefficients(competition_level));
+        int number_of_groups = TournamentController.getNumGroups(competition_level);
+        String[][] pots = TournamentController.setPots(competition_level,
+                TournamentController.sortByCoefficients(competition_level));
         String[][] groups = new String[number_of_groups][TEAMS_PER_GROUP];
         for (int i = 0; i < number_of_groups; i++) {
             for (int j = 0; j < TEAMS_PER_GROUP; j++) {
@@ -182,10 +244,14 @@ public class ContinentalCompetitionCentre {
         }
         for (int i = 2; i <= TEAMS_PER_GROUP; i++) {
             Pot pot = new Pot();
-            pot.init(pots[i - 1], ContinentalCompetitionCentre.getNumGroups(competition_level), i, groups);
+            pot.init(pots[i - 1], TournamentController.getNumGroups(competition_level), i, groups);
             while (!pot.isEmpty()) {
                 String current_team = pot.drawTeam();
                 List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
+                if(possible_groups.isEmpty()) {
+                    TournamentController.setGroups(competition_level);
+                    return;
+                }
                 int group_selected = possible_groups.get(CommonFunctions.getRandomNumber(possible_groups.size()));
                 groups[group_selected][i - 1] = current_team;
                 pot.updatePossibleGroups(groups);
@@ -201,9 +267,9 @@ public class ContinentalCompetitionCentre {
     }
 
     public static void displayGroups(int competition_level) {
-        String[][] groups = ContinentalCompetitionCentre.getGroups(competition_level);
-        System.out.println(ContinentalCompetitionCentre.getName(competition_level));
-        for (int i = 0; i < ContinentalCompetitionCentre.getNumGroups(competition_level); i++) {
+        String[][] groups = TournamentController.getGroups(competition_level);
+        System.out.println(TournamentController.getName(competition_level));
+        for (int i = 0; i < TournamentController.getNumGroups(competition_level); i++) {
             System.out.println("Group " + (i + 1));
             for (String str : groups[i]) {
                 System.out.print(str + "\t");
@@ -213,8 +279,8 @@ public class ContinentalCompetitionCentre {
     }
 
     public static void displayPots(int competition_level, List<String> list) {
-        String[][] pots = ContinentalCompetitionCentre.setPots(competition_level, list);
-        System.out.println(ContinentalCompetitionCentre.getName(competition_level));
+        String[][] pots = TournamentController.setPots(competition_level, list);
+        System.out.println(TournamentController.getName(competition_level));
         for (int i = 0; i < TEAMS_PER_GROUP; i++) {
             System.out.println("Group " + (i + 1));
             for (String str : pots[i]) {
@@ -224,40 +290,65 @@ public class ContinentalCompetitionCentre {
         }
     }
 
-    public static void main(String[] args) {
-        List<String> teams = new ArrayList<>();
-        teams.add("ESP1");
-        teams.add("ESP2");
-        teams.add("ESP3");
-        teams.add("ESP4");
-        teams.add("ENG1");
-        teams.add("ENG2");
-        teams.add("ENG3");
-        teams.add("ENG4");
-        teams.add("ITA1");
-        teams.add("ITA2");
-        teams.add("ITA3");
-        teams.add("ITA4");
-        teams.add("GER1");
-        teams.add("GER2");
-        teams.add("GER3");
-        teams.add("FRA1");
-        teams.add("FRA2");
-        teams.add("FRA3");
-        teams.add("POR1");
-        teams.add("POR2");
-        teams.add("UKR1");
-        teams.add("UKR2");
-        teams.add("NED1");
-        teams.add("NED2");
-        teams.add("RUS1");
-        teams.add("RUS2");
-        teams.add("TUR1");
-        teams.add("SCO1");
-        teams.add("CRO1");
-        teams.add("AUT1");
-        teams.add("BEL1");
-        teams.add("DEN1");
-        displayPots(1, teams);
+    public static void initCompetitions() {
+        championsLeague = new Tournament(1, 8);
+        championsLeague.setTeams(clTeams);
+        championsLeague.setupGroups(clGroups);
+        europaLeague = new Tournament(2, 12);
+        europaLeague.setTeams(elTeams);
+        europaLeague.setupGroups(elGroups);
+        conferenceLeague = new Tournament(3, 10);
+        conferenceLeague.setTeams(eclTeams);
+        conferenceLeague.setupGroups(eclGroups);
+    }
+
+    public static void simulateCompetitions() {
+        championsLeague.simulateGroups();
+        europaLeague.simulateGroups();
+        conferenceLeague.simulateGroups();
+        championsLeague.setKnockoutTies();
+        europaLeague.setKnockoutTies();
+        conferenceLeague.setKnockoutTies();
+        championsLeague.simulateKnockoutRounds();
+        europaLeague.simulateKnockoutRounds();
+        conferenceLeague.simulateKnockoutRounds();
+
+        testTransferredTeams();
+    }
+
+    public static void testTransferredTeams() {
+        String[] transferred_cl = championsLeague.getTransferredTeams();
+        String[] transferred_el = europaLeague.getTransferredTeams();
+        List<KnockoutTie> el_r32 = europaLeague.getKnockoutRound().get(1);
+        List<KnockoutTie> ecl_r32 = conferenceLeague.getKnockoutRound().get(1);
+        for (String transferred : transferred_cl) {
+            boolean found = false;
+            for (KnockoutTie tie : el_r32) {
+                if (transferred.equalsIgnoreCase(tie.getTeam1()) || transferred.equalsIgnoreCase(tie.getTeam2())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println(transferred + " not found in new competition");
+            }
+        }
+        for (String transferred : transferred_el) {
+            boolean found = false;
+            for (KnockoutTie tie : ecl_r32) {
+                if (transferred.equalsIgnoreCase(tie.getTeam1()) || transferred.equalsIgnoreCase(tie.getTeam2())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println(transferred + " not found in new competition");
+            }
+        }
+    }
+
+    public static char getGroupName(int group_number) {
+        group_number += 65;
+        return (char) group_number;
     }
 }

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class League {
     private String name;
@@ -10,6 +12,17 @@ public class League {
     private int relegation_places;
     private List<Match> fixtures;
     private String id;
+    private Map<Integer, List<TeamHistory>> competitionHistory;
+
+    public League() {
+        this.name = "";
+        this.competition_level = 0;
+        this.promotion_places = 0;
+        this.relegation_places = 0;
+        this.teams = new ArrayList<>();
+        this.fixtures = new ArrayList<>();
+        this.competitionHistory = new HashMap<>();
+    }
 
     public League(String name, int level, int promotion, int relegation) {
         this.name = name;
@@ -18,6 +31,7 @@ public class League {
         this.relegation_places = relegation;
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
+        this.competitionHistory = new HashMap<>();
     }
 
     public void setId(String id) {
@@ -36,6 +50,14 @@ public class League {
         teams.remove(table.getTeamAtRank(position));
     }
 
+    public void removeTeam(String team_to_remove) {
+        this.teams.remove(team_to_remove);
+    }
+
+    public List<String> getTeams() {
+        return this.teams;
+    }
+
     public int getTotalMatchDays() {
         int matches_per_team = this.teams.size() - 1;
         if (this.teams.size() > 12) {
@@ -49,10 +71,22 @@ public class League {
         fixtures = FixtureScheduler.scheduleFixtures(this.teams, true);
     }
 
-    public void seasonStart() {
+    public void setFixtures(List<Match> fixtures) {
+        this.fixtures = fixtures;
+    }
+
+    public void setupTable() {
         this.table = new LeagueTable(this.teams.size());
-        this.setFixtures();
         this.table.startNewSeason(this.teams);
+    }
+
+    public void seasonStart() {
+        this.setFixtures();
+        this.setupTable();
+    }
+
+    public LeagueTable getTable() {
+        return this.table;
     }
 
     public List<Match> getMatchesForMatchDay(int matchday) {
@@ -76,7 +110,9 @@ public class League {
     }
 
     public void simulateSeason() {
+        System.out.println("\n" + this.name);
         for (int i = 1; i <= this.getTotalMatchDays(); i++) {
+            System.out.println("Matchday " + i);
             this.simulateMatchDay(i);
         }
         this.table.showLong();
@@ -105,5 +141,52 @@ public class League {
 
     public int getPromotionPlaces() {
         return this.promotion_places;
+    }
+
+    public List<String> getPromotedTeams() {
+        List<String> promoted = new ArrayList<>();
+        for (int i = 1; i <= this.promotion_places; i++) {
+            promoted.add(this.getTeamAtRank(i));
+        }
+        return promoted;
+    }
+
+    public List<String> getRelegatedTeams() {
+        List<String> demoted = new ArrayList<>();
+        for (int i = this.teams.size(); i > this.teams.size() - this.relegation_places; i--) {
+            demoted.add(this.getTeamAtRank(i));
+        }
+        return demoted;
+    }
+
+    public boolean isTeamInLeague(String team_id) {
+        if (this.teams.contains(team_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void saveCompetitionHistory() {
+        List<TeamHistory> histories = new ArrayList<>();
+        for (int i = 1; i <= this.teams.size(); i++) {
+            TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i);
+            histories.add(history);
+        }
+        this.competitionHistory.put(Sim.getSeasonNumber(), histories);
+    }
+
+    public void showCompetitionHistory() {
+        System.out.println(this.getName());
+        for (Map.Entry<Integer, List<TeamHistory>> entry : this.competitionHistory.entrySet()) {
+            System.out.println("Season " + entry.getKey());
+            for (TeamHistory history : entry.getValue()) {
+                history.show();
+            }
+        }
+    }
+
+    public static int getPyramidPlaces(int size) {
+        return size / 6;
     }
 }

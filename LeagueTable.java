@@ -66,6 +66,7 @@ public class LeagueTable {
 
     public void showLong() {
         sortTable();
+        System.out.println();
         for (int i = 0; i < performances.length; i++) {
             System.out.println((i + 1) + " " + performances[i].displayLong());
         }
@@ -76,5 +77,14 @@ public class LeagueTable {
         for (int i = 0; i < performances.length; i++) {
             System.out.println((i + 1) + " " + performances[i].displayShort());
         }
+    }
+
+    public TeamPerformance getTeamPerformance(String team_id) {
+        for(TeamPerformance performance : this.performances) {
+            if(performance.getTeamId().equalsIgnoreCase(team_id)) {
+                return performance;
+            }
+        }
+        return new TeamPerformance(team_id, "");
     }
 }
