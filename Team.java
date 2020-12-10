@@ -93,11 +93,10 @@ public class Team {
     }
 
     public void physio() {
-        for (int i = 0; i < injuries.size(); i++) {
+        for (int i = injuries.size() - 1; i >= 0; i--) {
             injuries.get(i).gameMissed();
             if (injuries.get(i).getGames() < 1) {
                 injuries.remove(i);
-                i--;
             }
         }
 

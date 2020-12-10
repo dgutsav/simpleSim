@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -156,11 +155,8 @@ public class Sim {
 
     public static Map<String, Team> sortByElo(Map<String, Team> map) {
         List<Map.Entry<String, Team>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Team>>() {
-            public int compare(Map.Entry<String, Team> o1, Map.Entry<String, Team> o2) {
-                return (int) ((o2.getValue().getEloRating()) - (o1.getValue().getEloRating()));
-            }
-        });
+        Collections.sort(list, (Map.Entry<String, Team> o1,
+                Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getEloRating()) - (o1.getValue().getEloRating())));
         HashMap<String, Team> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());

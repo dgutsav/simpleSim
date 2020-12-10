@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -157,11 +155,9 @@ public class TournamentController {
             teams.put(entry.getKey(), Sim.getTeam(entry.getValue()));
         }
         List<Map.Entry<String, Team>> list = new LinkedList<>(teams.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Team>>() {
-            public int compare(Map.Entry<String, Team> o1, Map.Entry<String, Team> o2) {
-                return (int) ((o2.getValue().getCoefficient()) - (o1.getValue().getCoefficient()));
-            }
-        });
+        Collections.sort(list,
+                (Map.Entry<String, Team> o1, Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getCoefficient())
+                        - (o1.getValue().getCoefficient())));
         List<String> sorted = new ArrayList<>();
         for (Map.Entry<String, Team> aa : list) {
             sorted.add(aa.getKey());
@@ -248,7 +244,7 @@ public class TournamentController {
             while (!pot.isEmpty()) {
                 String current_team = pot.drawTeam();
                 List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
-                if(possible_groups.isEmpty()) {
+                if (possible_groups.isEmpty()) {
                     TournamentController.setGroups(competition_level);
                     return;
                 }
@@ -312,7 +308,6 @@ public class TournamentController {
         championsLeague.simulateKnockoutRounds();
         europaLeague.simulateKnockoutRounds();
         conferenceLeague.simulateKnockoutRounds();
-
         testTransferredTeams();
     }
 
