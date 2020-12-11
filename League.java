@@ -12,7 +12,7 @@ public class League {
     private int relegation_places;
     private List<Match> fixtures;
     private String id;
-    private Map<Integer, List<TeamHistory>> competitionHistory;
+    private List<CompetitionHistory> competitionHistory;
 
     public League() {
         this.name = "";
@@ -21,7 +21,7 @@ public class League {
         this.relegation_places = 0;
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
-        this.competitionHistory = new HashMap<>();
+        this.competitionHistory = new ArrayList<>();
     }
 
     public League(String name, int level, int promotion, int relegation) {
@@ -31,7 +31,7 @@ public class League {
         this.relegation_places = relegation;
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
-        this.competitionHistory = new HashMap<>();
+        this.competitionHistory = new ArrayList<>();
     }
 
     public void setId(String id) {
@@ -173,16 +173,14 @@ public class League {
             TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i);
             histories.add(history);
         }
-        this.competitionHistory.put(Sim.getSeasonNumber(), histories);
+        CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
+        this.competitionHistory.add(compHistory);
     }
 
     public void showCompetitionHistory() {
         System.out.println(this.getName());
-        for (Map.Entry<Integer, List<TeamHistory>> entry : this.competitionHistory.entrySet()) {
-            System.out.println("Season " + entry.getKey());
-            for (TeamHistory history : entry.getValue()) {
-                history.show();
-            }
+        for(CompetitionHistory compHistory : this.competitionHistory) {
+            compHistory.show(3);
         }
     }
 

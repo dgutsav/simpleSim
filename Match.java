@@ -7,6 +7,8 @@ public class Match {
     int away_team_goals = 0;
     int matchday;
     boolean simulated = false;
+    boolean isNeutral = false;
+    int tournament_level = 0;
 
     public boolean isSimulated() {
         return simulated;
@@ -14,6 +16,18 @@ public class Match {
 
     public void afterSimulation() {
         this.simulated = true;
+    }
+
+    public void setTournamentLevel(int competition_level) {
+        this.tournament_level = competition_level;
+    }
+
+    public int getTournamentLevel() {
+        return this.tournament_level;
+    }
+
+    public void setNeutralMatch() {
+        this.isNeutral = true;
     }
 
     public void display() {

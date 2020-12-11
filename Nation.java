@@ -38,7 +38,7 @@ public class Nation {
         return this.id;
     }
 
-    public int getRanking() {
+    public int getLeagueRanking() {
         return this.league_ranking;
     }
 

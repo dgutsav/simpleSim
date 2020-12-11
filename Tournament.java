@@ -9,12 +9,22 @@ public class Tournament {
     private int competition_level;
     private League[] groups;
     private Map<Integer, List<KnockoutTie>> knockoutRound;
+    private List<CompetitionHistory> competitionHistories;
 
     public Tournament(int level, int num_groups) {
         this.competition_level = level;
         this.number_of_groups = num_groups;
         this.groups = new League[num_groups];
         for (int i = 0; i < num_groups; i++) {
+            this.groups[i] = new League();
+        }
+        this.knockoutRound = new HashMap<>();
+        this.competitionHistories = new ArrayList<>();
+    }
+
+    public void reset() {
+        this.groups = new League[this.number_of_groups];
+        for (int i = 0; i < this.number_of_groups; i++) {
             this.groups[i] = new League();
         }
         this.knockoutRound = new HashMap<>();
@@ -40,12 +50,32 @@ public class Tournament {
         this.competition_level = level;
     }
 
+    public int getNumberOfKnockoutRounds() {
+        int total_knockout_teams = TournamentController.TEAMS_PROGRESS_FROM_GROUP * this.number_of_groups;
+        int rounds = 0;
+        while (total_knockout_teams != 1) {
+            total_knockout_teams /= 2;
+            rounds++;
+        }
+        return rounds;
+    }
+
+    public List<Match> setCompetitionLevelMatches(List<Match> matches) {
+        List<Match> competiion_matches = new ArrayList<>();
+        for (Match match : matches) {
+            match.setTournamentLevel(this.competition_level);
+            competiion_matches.add(match);
+        }
+        return competiion_matches;
+    }
+
     public void setupGroups(String[][] group_teams) {
         for (int i = 0; i < TournamentController.getNumGroups(competition_level); i++) {
             for (String team : group_teams[i]) {
                 this.groups[i].addTeam(teams.get(team));
             }
-            this.groups[i].setFixtures(FixtureScheduler.scheduleFixtures(this.groups[i].getTeams(), false));
+            this.groups[i].setFixtures(this
+                    .setCompetitionLevelMatches(FixtureScheduler.scheduleFixtures(this.groups[i].getTeams(), false)));
             this.groups[i].setupTable();
         }
     }
@@ -149,7 +179,7 @@ public class Tournament {
             System.out.println(opponent_team + " " + drawn_team);
             seeded.remove(drawn_team);
             unseeded.remove(opponent_team);
-            KnockoutTie tie = new KnockoutTie(opponent_team, drawn_team);
+            KnockoutTie tie = new KnockoutTie(opponent_team, drawn_team, this.competition_level);
             ties.add(tie);
         }
         if (ties.isEmpty()) {
@@ -174,7 +204,7 @@ public class Tournament {
         while (!teamList.isEmpty()) {
             String team1 = teamList.remove(CommonFunctions.getRandomNumber(teamList.size()));
             String team2 = teamList.remove(CommonFunctions.getRandomNumber(teamList.size()));
-            KnockoutTie tie = new KnockoutTie(team2, team1);
+            KnockoutTie tie = new KnockoutTie(team2, team1, this.competition_level);
             ties.add(tie);
         }
         return ties;
@@ -225,5 +255,21 @@ public class Tournament {
 
     public Map<Integer, List<KnockoutTie>> getKnockoutRound() {
         return this.knockoutRound;
+    }
+
+    public void saveCompetitionHistory() {
+        List<TeamHistory> histories = new ArrayList<>();
+        KnockoutTie final_match = this.knockoutRound.get(this.getNumberOfKnockoutRounds()).get(0);
+        histories.add(new TeamHistory(final_match.getWinner(), 1));
+        histories.add(new TeamHistory(final_match.getLoser(), 2));
+        CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
+        this.competitionHistories.add(compHistory);
+    }
+
+    public void showCompetitionHistory() {
+        System.out.println(this.getName());
+        for (CompetitionHistory compHistory : this.competitionHistories) {
+            compHistory.show(2);
+        }
     }
 }

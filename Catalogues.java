@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Catalogues {
     // Nations
     private static String england = "England";
@@ -107,14 +110,14 @@ public class Catalogues {
     }
 
     private static String[] englandPrefixes = { "AFC", "FC" };
-    private static String[] englandSuffixes = { "FC", "City", "Town", "United", "Wanderers", "Rovers", "Rangers",
-            "Park" };
+    private static String[] englandSuffixes = { "FC", "City", "Town", "United", "Wanderers", "Rovers", "Rangers", "",
+            "FC" };
 
     private static String[] spainPrefixes = { "FC", "Atletico", "Athletic", "Real", "RCD", "SD", "CD", "CA", "RC",
             "Deportivo", "Sporting" };
     private static String[] spainSuffixes = { "FC", "CF", "UD" };
 
-    private static String[] germanyPrefixes = { "VfB", "VfL", "FC", "1.", "FSV", "SV", "SpVgg", "VfR", "TSG",
+    private static String[] germanyPrefixes = { "VfB", "VfL", "FC", "1. FC", "FSV", "SV", "SpVgg", "VfR", "TSG",
             "Eintracht", "SC" };
     private static String[] germanySuffixes = { "FC", "SV" };
 
@@ -124,144 +127,155 @@ public class Catalogues {
     private static String[] francePrefixes = { "AS", "Olympique", "Stade", "FC", "SC", "RC", "Racing", "ES" };
     private static String[] franceSuffixes = { "FCO", "FC", "Olympique", "SC", "Foot" };
 
-    private static String[] portugalPrefixes = { "GD", "Sporting", "Sport", "OS", "FC", "CD", "Vitoria de ", "UD" };
+    private static String[] portugalPrefixes = { "GD", "Sporting", "Sport", "OS", "FC", "CD", "Vitoria de", "UD" };
     private static String[] portugalSuffixes = { "FC", "Clube", "SC", "CP" };
 
-    private static String[] belgiumPrefixes = { "Club", "Cercle", "Standard", "RSC", "KSC", "KVC", "KAA", "KRC", "KVV", "Koninklijke" };
+    private static String[] belgiumPrefixes = { "Club", "Cercle", "Standard", "RSC", "KSC", "KVC", "KAA", "KRC", "KVV",
+            "Koninklijke" };
     private static String[] belgiumSuffixes = { "FC", "SK", "SC", "VV", "SV" };
 
-    public static String getPrefix(String nation_name) {
-        if (nation_name.equalsIgnoreCase(Catalogues.england)) {
-            return englandPrefixes[CommonFunctions.getRandomNumber(englandPrefixes.length)];
+    private static String[] russiaPrefixes = { "FC", "PFC", "CSKA", "Dinamo", "Spartak", "Lokomotiv", "Torpedo",
+            "SKA" };
+    private static String[] russiaSuffixes = { "FC", "Zvezda" };
+
+    private static String[] netherlandsPrefixes = { "FC", "ADO", "SC", "SV", "Sparta", "SBV", "SVV", "VV" };
+    private static String[] netherlandsSuffixes = { "SV", "FC", "RC", "JC", "Sport" };
+
+    private static String[] croatiaPrefixes = { "NK", "GNK", "HNK", "Dinamo", "Lokomotiva", "Hrvatski", "Slaven" };
+    private static String[] croatiaSuffixes = { "NK" };
+
+    private static String[] denmarkPrefixes = { "AC", "FC", "AB", "HB", "HIK" };
+    private static String[] denmarkSuffixes = { "IF", "BK", "IF", "fB" };
+
+    private static String[] ukrainePrefixes = { "FC", "PFC", "Shakhtar", "Dynamo", "Spartak", "Arsenal", "Olimpik",
+            "Metalist", "Stal", "MFC" };
+    private static String[] ukraineSuffixes = { "FC" };
+
+    private static String[] turkeyPrefixes = { "BK", "BB", "" };
+    private static String[] turkeySuffixes = { "Spor", "JK", "SK", "FK" };
+
+    private static String[] austriaPrefixes = { "SV", "TSV", "1.", "FC", "ASK", "SC", "SK", "VfB" };
+    private static String[] austriaSuffixes = { "SC", "FC", "SV", "TSV", "SK" };
+
+    public static List<String[]> getPrefixOrSuffixData(String nation_name) {
+        List<String[]> data = new ArrayList<>();
+        if (nation_name.equalsIgnoreCase(Catalogues.england) || nation_name.equalsIgnoreCase(Catalogues.scotland)) {
+            data.add(englandPrefixes);
+            data.add(englandSuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
-            return spainPrefixes[CommonFunctions.getRandomNumber(spainPrefixes.length)];
+            data.add(spainPrefixes);
+            data.add(spainSuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
-            return germanyPrefixes[CommonFunctions.getRandomNumber(germanyPrefixes.length)];
+            data.add(germanyPrefixes);
+            data.add(germanySuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
-            return francePrefixes[CommonFunctions.getRandomNumber(francePrefixes.length)];
+            data.add(francePrefixes);
+            data.add(franceSuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
-            return italyPrefixes[CommonFunctions.getRandomNumber(italyPrefixes.length)];
+            data.add(italyPrefixes);
+            data.add(italySuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
-            return portugalPrefixes[CommonFunctions.getRandomNumber(portugalPrefixes.length)];
+            data.add(portugalPrefixes);
+            data.add(portugalSuffixes);
+            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
-            return belgiumPrefixes[CommonFunctions.getRandomNumber(belgiumPrefixes.length)];
+            data.add(belgiumPrefixes);
+            data.add(belgiumSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.russia)) {
+            data.add(russiaPrefixes);
+            data.add(russiaSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
+            data.add(netherlandsPrefixes);
+            data.add(netherlandsSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.croatia)) {
+            data.add(croatiaPrefixes);
+            data.add(croatiaSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.denmark)) {
+            data.add(denmarkPrefixes);
+            data.add(denmarkSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
+            data.add(ukrainePrefixes);
+            data.add(ukraineSuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
+            data.add(turkeyPrefixes);
+            data.add(turkeySuffixes);
+            return data;
+        } else if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
+            data.add(austriaPrefixes);
+            data.add(austriaSuffixes);
+            return data;
         } else {
-            return "FC";
+            String[] temp = { "FC" };
+            data.add(temp);
+            data.add(temp);
+            return data;
         }
+
+    }
+
+    public static String getPrefix(String nation_name) {
+        String[] data = Catalogues.getPrefixOrSuffixData(nation_name).get(0);
+        return data[CommonFunctions.getRandomNumber(data.length)];
     }
 
     public static String getSuffix(String nation_name) {
-        if (nation_name.equalsIgnoreCase(Catalogues.england)) {
-            return englandSuffixes[CommonFunctions.getRandomNumber(englandSuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
-            return spainSuffixes[CommonFunctions.getRandomNumber(spainSuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
-            return germanySuffixes[CommonFunctions.getRandomNumber(germanySuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
-            return franceSuffixes[CommonFunctions.getRandomNumber(franceSuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
-            return italySuffixes[CommonFunctions.getRandomNumber(italySuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
-            return portugalSuffixes[CommonFunctions.getRandomNumber(portugalSuffixes.length)];
-        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
-            return belgiumSuffixes[CommonFunctions.getRandomNumber(belgiumSuffixes.length)];
-        } else {
-            return "FC";
-        }
+        String[] data = Catalogues.getPrefixOrSuffixData(nation_name).get(1);
+        return data[CommonFunctions.getRandomNumber(data.length)];
     }
 
     public static int getPrefixChance(String nation_name) {
-        int num = 0, den = 0;
-        if (nation_name.equalsIgnoreCase(Catalogues.england)) {
-            num = englandPrefixes.length;
-            den = englandPrefixes.length + englandSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
-            num = spainPrefixes.length;
-            den = spainPrefixes.length + spainSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
-            num = germanyPrefixes.length;
-            den = germanyPrefixes.length + germanySuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
-            num = francePrefixes.length;
-            den = francePrefixes.length + franceSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
-            num = italyPrefixes.length;
-            den = italyPrefixes.length + italySuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
-            num = portugalPrefixes.length;
-            den = portugalPrefixes.length + portugalSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
-            num = belgiumPrefixes.length;
-            den = belgiumPrefixes.length + belgiumSuffixes.length;
-        } else {
-            num = 1;
-            den = 2;
-        }
-        return (num * 100) / den;
+        List<String[]> data = Catalogues.getPrefixOrSuffixData(nation_name);
+        return (data.get(0).length * 100) / (data.get(0).length + data.get(1).length);
     }
 
     public static int getSuffixChance(String nation_name) {
-        int num = 0, den = 0;
-        if (nation_name.equalsIgnoreCase(Catalogues.england)) {
-            num = englandSuffixes.length;
-            den = englandPrefixes.length + englandSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
-            num = spainSuffixes.length;
-            den = spainPrefixes.length + spainSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
-            num = germanySuffixes.length;
-            den = germanyPrefixes.length + germanySuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
-            num = franceSuffixes.length;
-            den = francePrefixes.length + franceSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
-            num = italySuffixes.length;
-            den = italyPrefixes.length + italySuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
-            num = portugalSuffixes.length;
-            den = portugalPrefixes.length + portugalSuffixes.length;
-        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
-            num = belgiumSuffixes.length;
-            den = belgiumPrefixes.length + belgiumSuffixes.length;
-        } else {
-            num = 1;
-            den = 2;
-        }
-        return (num * 100) / den;
+        List<String[]> data = Catalogues.getPrefixOrSuffixData(nation_name);
+        return (data.get(1).length * 100) / (data.get(0).length + data.get(1).length);
     }
 
     public static String getDenonym(String nation_name) {
-        if(nation_name.equalsIgnoreCase(Catalogues.austria)) {
+        if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
             return "Austrian";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.belgium)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
             return "Belgian";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.croatia)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.croatia)) {
             return "Croatian";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.czechia)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.czechia)) {
             return "Czech";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.denmark)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.denmark)) {
             return "Danish";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.england)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.england)) {
             return "English";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.france)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
             return "French";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.germany)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
             return "German";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.italy)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
             return "Italian";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
             return "Dutch";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.portugal)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
             return "Portuguese";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.russia)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.russia)) {
             return "Russian";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.scotland)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.scotland)) {
             return "Scottish";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.spain)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
             return "Spanish";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.turkey)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
             return "Turkish";
-        } else if(nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
             return "Ukrainian";
         } else {
             return "Edener";

@@ -169,17 +169,10 @@ public class TournamentController {
         int number_of_groups = TournamentController.getNumGroups(competition_level);
         String[][] pots = new String[TournamentController.TEAMS_PER_GROUP][number_of_groups];
         if (competition_level == 1) {
-            int count = 0;
-            for (int i = 0; i < list.size(); i++) {
-                if ((list.get(i).charAt(list.get(i).length() - 1) == '1')) {
-                    pots[0][count] = list.get(i);
-                    list.remove(i);
-                    i--;
-                    count++;
-                    if (count >= number_of_groups) {
-                        break;
-                    }
-                }
+            for (int i = 1; i <= number_of_groups; i++) {
+                String code = Sim.getNationByLeagueRanking(i).getCode() + "1";
+                pots[0][i - 1] = code;
+                list.remove(code);
             }
             for (int i = 1; i < TournamentController.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
@@ -288,12 +281,18 @@ public class TournamentController {
 
     public static void initCompetitions() {
         championsLeague = new Tournament(1, 8);
+        europaLeague = new Tournament(2, 12);
+        conferenceLeague = new Tournament(3, 10);
+    }
+
+    public static void setupCompetitions() {
+        championsLeague.reset();
+        europaLeague.reset();
+        conferenceLeague.reset();
         championsLeague.setTeams(clTeams);
         championsLeague.setupGroups(clGroups);
-        europaLeague = new Tournament(2, 12);
         europaLeague.setTeams(elTeams);
         europaLeague.setupGroups(elGroups);
-        conferenceLeague = new Tournament(3, 10);
         conferenceLeague.setTeams(eclTeams);
         conferenceLeague.setupGroups(eclGroups);
     }
@@ -340,6 +339,18 @@ public class TournamentController {
                 System.out.println(transferred + " not found in new competition");
             }
         }
+    }
+
+    public static void saveCompetitionHistory() {
+        championsLeague.saveCompetitionHistory();
+        europaLeague.saveCompetitionHistory();
+        conferenceLeague.saveCompetitionHistory();
+    }
+
+    public static void showCompetitionHistory() {
+        championsLeague.showCompetitionHistory();
+        europaLeague.showCompetitionHistory();
+        conferenceLeague.showCompetitionHistory();
     }
 
     public static char getGroupName(int group_number) {
