@@ -28,7 +28,8 @@ public class KnockoutTie {
         this.first_leg.simulate(Sim.getTeam(this.first_leg.home_id), Sim.getTeam(this.first_leg.away_id));
         this.second_leg.simulate(Sim.getTeam(this.second_leg.home_id), Sim.getTeam(this.second_leg.away_id));
         this.setWinner();
-        this.show();
+        //this.show();
+        //this.showAggregate();
     }
 
     public void setWinner() {
@@ -40,20 +41,39 @@ public class KnockoutTie {
         } else if (team_2_goals > team_1_goals) {
             this.winning_team = 2;
         } else {
-            if(this.first_leg.away_team_goals > this.second_leg.away_team_goals) {
+            if (this.first_leg.away_team_goals > this.second_leg.away_team_goals) {
                 this.winning_team = 1;
-            } else if(this.first_leg.away_team_goals < this.second_leg.away_team_goals) {
+            } else if (this.first_leg.away_team_goals < this.second_leg.away_team_goals) {
                 this.winning_team = 2;
             } else {
-                //need to add condition here
                 this.after_extra_time = true;
-                this.winning_team = 1;
+                Match match = new Match();
+                match.home_id = team2;
+                match.away_id = team1;
+                match.away_team = Sim.getTeam(team1).getName();
+                match.home_team = Sim.getTeam(team2).getName();
+                match.simulate(Sim.getTeam(team2), Sim.getTeam(team1));
+                if (match.home_team_goals > match.away_team_goals) {
+                    this.winning_team = 2;
+                } else if (match.away_team_goals > match.home_team_goals) {
+                    this.winning_team = 1;
+                } else {
+                    this.winning_team = CommonFunctions.getRandomNumber(2) % 2 == 0 ? 1 : 2;
+                }
             }
         }
     }
 
+    public int getTeam1Goals() {
+        return this.first_leg.away_team_goals + this.second_leg.home_team_goals;
+    }
+
+    public int getTeam2Goals() {
+        return this.second_leg.away_team_goals + this.first_leg.home_team_goals;
+    }
+
     public String getWinner() {
-        if(this.winning_team == 1) {
+        if (this.winning_team == 1) {
             return this.team1;
         } else {
             return this.team2;
@@ -61,7 +81,7 @@ public class KnockoutTie {
     }
 
     public String getLoser() {
-        if(this.winning_team != 1) {
+        if (this.winning_team != 1) {
             return this.team1;
         } else {
             return this.team2;
@@ -76,8 +96,20 @@ public class KnockoutTie {
         return this.team2;
     }
 
+    public void showAggregate() {
+        String agg = this.first_leg.away_team + " " + this.getTeam1Goals() + "-" + this.getTeam2Goals() + " "
+                + this.first_leg.home_team;
+        if (this.after_extra_time) {
+            System.out.println(agg + " (a.e.t.)");
+        } else {
+            System.out.println(agg);
+        }
+    }
+
     public void show() {
-        this.first_leg.display();
-        this.second_leg.display();
+        //System.out.println();
+        //this.first_leg.display();
+        //this.second_leg.display();
+        this.showAggregate();
     }
 }

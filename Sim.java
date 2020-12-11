@@ -163,10 +163,10 @@ public class Sim {
         }
     }
 
-    public static Map<String, Team> sortByElo(Map<String, Team> map) {
+    public static Map<String, Team> sortBySquadRating(Map<String, Team> map) {
         List<Map.Entry<String, Team>> list = new LinkedList<>(map.entrySet());
         Collections.sort(list, (Map.Entry<String, Team> o1,
-                Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getEloRating()) - (o1.getValue().getEloRating())));
+                Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getSquadRating()) - (o1.getValue().getSquadRating())));
         HashMap<String, Team> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
@@ -174,8 +174,8 @@ public class Sim {
         return temp;
     }
 
-    public static void showElo() {
-        Map<String, Team> sorted = Sim.sortByElo(teams);
+    public static void showTeams() {
+        Map<String, Team> sorted = Sim.sortBySquadRating(teams);
         int count = 1;
         for (Map.Entry<String, Team> entry : sorted.entrySet()) {
             System.out.println(count + " " + entry.getValue().getName() + "\t" + entry.getValue().getEloRating() + "\t"
@@ -207,6 +207,6 @@ public class Sim {
             entry.getValue().showCompetitionHistory();
         }
         TournamentController.showCompetitionHistory();
-        showElo();
+        showTeams();
     }
 }

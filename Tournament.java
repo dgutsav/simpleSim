@@ -51,7 +51,9 @@ public class Tournament {
     }
 
     public int getNumberOfKnockoutRounds() {
-        int total_knockout_teams = TournamentController.TEAMS_PROGRESS_FROM_GROUP * this.number_of_groups;
+        int total_knockout_teams = TournamentController.TEAMS_PROGRESS_FROM_GROUP * this.number_of_groups
+                + TournamentController.getCompetition(this.competition_level - 1).number_of_groups;
+
         int rounds = 0;
         while (total_knockout_teams != 1) {
             total_knockout_teams /= 2;
@@ -166,7 +168,6 @@ public class Tournament {
         List<List<String>> pots = this.getKnockoutPots();
         List<String> seeded = pots.get(0);
         List<String> unseeded = pots.get(1);
-        System.out.println(this.getName() + "\n" + seeded + "\n" + unseeded);
         List<KnockoutTie> ties = new ArrayList<>();
         while (!seeded.isEmpty()) {
             String drawn_team = this.drawSeededTeam(seeded, unseeded);
@@ -176,7 +177,6 @@ public class Tournament {
                 return;
             }
             String opponent_team = possible_opponents.get(CommonFunctions.getRandomNumber(possible_opponents.size()));
-            System.out.println(opponent_team + " " + drawn_team);
             seeded.remove(drawn_team);
             unseeded.remove(opponent_team);
             KnockoutTie tie = new KnockoutTie(opponent_team, drawn_team, this.competition_level);
@@ -259,9 +259,10 @@ public class Tournament {
 
     public void saveCompetitionHistory() {
         List<TeamHistory> histories = new ArrayList<>();
-        KnockoutTie final_match = this.knockoutRound.get(this.getNumberOfKnockoutRounds()).get(0);
-        histories.add(new TeamHistory(final_match.getWinner(), 1));
-        histories.add(new TeamHistory(final_match.getLoser(), 2));
+        histories.add(new TeamHistory(this.knockoutRound.get(this.getNumberOfKnockoutRounds()).get(0).getWinner(), 1));
+        histories.add(new TeamHistory(this.knockoutRound.get(this.getNumberOfKnockoutRounds()).get(0).getLoser(), 2));
+        histories.add(new TeamHistory(this.knockoutRound.get(this.getNumberOfKnockoutRounds() - 1).get(0).getLoser(), 3));
+        histories.add(new TeamHistory(this.knockoutRound.get(this.getNumberOfKnockoutRounds() - 1).get(1).getLoser(), 4));
         CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
         this.competitionHistories.add(compHistory);
     }
@@ -269,7 +270,7 @@ public class Tournament {
     public void showCompetitionHistory() {
         System.out.println(this.getName());
         for (CompetitionHistory compHistory : this.competitionHistories) {
-            compHistory.show(2);
+            compHistory.show(4);
         }
     }
 }
