@@ -28,8 +28,6 @@ public class KnockoutTie {
         this.first_leg.simulate(Sim.getTeam(this.first_leg.home_id), Sim.getTeam(this.first_leg.away_id));
         this.second_leg.simulate(Sim.getTeam(this.second_leg.home_id), Sim.getTeam(this.second_leg.away_id));
         this.setWinner();
-        //this.show();
-        //this.showAggregate();
     }
 
     public void setWinner() {

@@ -42,15 +42,4 @@ public class EloRankings {
         Sim.updateTeam(a, a.getId());
         Sim.updateTeam(b, b.getId());
     }
-
-    public static void main(String[] args) {
-        Team team1 = CommonFunctions.getTeam(85.0f, "England");
-        Team team2 = CommonFunctions.getTeam(85.0f, "Spain");
-        Match match = new Match();
-        match.home_team = team1.getName();
-        match.away_team = team2.getName();
-        match.home_team_goals = 2;
-        match.away_team_goals = 5;
-        EloRankings.calculate(team1, team2, match);
-    }
 }

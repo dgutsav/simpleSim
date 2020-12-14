@@ -177,14 +177,14 @@ public class TournamentController {
             for (int i = 1; i < TournamentController.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
-                    list.remove(0);
+                    list.remove(pots[i][j]);
                 }
             }
         } else {
             for (int i = 0; i < TournamentController.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
-                    list.remove(0);
+                    list.remove(pots[i][j]);
                 }
             }
         }

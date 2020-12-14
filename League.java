@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class League {
     private String name;
@@ -13,22 +11,25 @@ public class League {
     private List<Match> fixtures;
     private String id;
     private List<CompetitionHistory> competitionHistory;
+    private int nation_id;
 
     public League() {
         this.name = "";
         this.competition_level = 0;
         this.promotion_places = 0;
         this.relegation_places = 0;
+        this.nation_id = 0;
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
         this.competitionHistory = new ArrayList<>();
     }
 
-    public League(String name, int level, int promotion, int relegation) {
+    public League(String name, int level, int promotion, int relegation, int nation_id) {
         this.name = name;
         this.competition_level = level;
         this.promotion_places = promotion;
         this.relegation_places = relegation;
+        this.nation_id = nation_id;
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
         this.competitionHistory = new ArrayList<>();
@@ -103,16 +104,22 @@ public class League {
         List<Match> matches = getMatchesForMatchDay(matchday);
         for (Match match : matches) {
             match.simulate(Sim.getTeam(match.home_id), Sim.getTeam(match.away_id));
-            match.display();
+            if(!Sim.TEST) {
+                match.display();
+            }
             table.updateTeamPerformance(match.home_id, match.home_team_goals, match.away_team_goals);
             table.updateTeamPerformance(match.away_id, match.away_team_goals, match.home_team_goals);
         }
     }
 
     public void simulateSeason() {
-        System.out.println("\n" + this.name);
+        if(!Sim.TEST) {
+            System.out.println("\n" + this.name);
+        }
         for (int i = 1; i <= this.getTotalMatchDays(); i++) {
-            System.out.println("Matchday " + i);
+            if(!Sim.TEST) {
+                System.out.println("Matchday " + i);
+            }
             this.simulateMatchDay(i);
         }
         this.table.showLong();
@@ -182,6 +189,10 @@ public class League {
         for(CompetitionHistory compHistory : this.competitionHistory) {
             compHistory.show(3);
         }
+    }
+
+    public int getNationId() {
+        return this.nation_id;
     }
 
     public static int getPyramidPlaces(int size) {

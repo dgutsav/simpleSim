@@ -11,6 +11,9 @@ public class Team {
     private String form_results;
     private double elo_rating = 0;
     private double coefficient = 0.0;
+    private int formation = 0;
+    private int nation_id = 0;
+    private List<String> players;
 
     // Constants
     public static final float INJURY_PROBABILITY = 5.0f;
@@ -23,15 +26,21 @@ public class Team {
         this.form_results = "DDDDDD";
         this.elo_rating = 0;
         this.coefficient = 0.0;
+        this.formation = 0;
+        this.nation_id = 0;
+        this.players = new ArrayList<>();
     }
 
-    public Team(String name, float rating) {
+    public Team(String name, float rating, int nation) {
         this.name = name;
         this.squad_rating = rating;
         this.injuries = new ArrayList<>();
         this.form_results = "DDDDDD";
         this.elo_rating = (rating * 20);
         this.coefficient = (rating - 70) > 0 ? (rating - 70) * 3 : 0;
+        this.formation = CommonFunctions.getRandomNumber(Catalogues.numFormations());
+        this.nation_id = nation;
+        this.players = new ArrayList<>();
     }
 
     public Document getTeamDocument() {
@@ -51,7 +60,7 @@ public class Team {
     }
 
     public float getSquadRating() {
-        return this.squad_rating;
+        return this.getBestSquadRating();
     }
 
     public double getCoefficient() {
@@ -116,5 +125,119 @@ public class Team {
             }
         }
         return effect;
+    }
+
+    public int getFormationId() {
+        return this.formation;
+    }
+
+    public Position[] getFormation() {
+        return Catalogues.getFormation(this.formation);
+    }
+
+    public int getNationId() {
+        return this.nation_id;
+    }
+
+    public void addPlayer(String player_id) {
+        this.players.add(player_id);
+    }
+
+    public void removePlayer(String player_id) {
+        this.players.remove(player_id);
+    }
+
+    public List<String> getPlayers() {
+        return this.players;
+    }
+
+    public int getBestSquadRating() {
+        int rating = 0;
+        List<String> lineup = this.getBestLineup();
+        for (String str : lineup) {
+            rating += Sim.getPlayer(str).getRating();
+        }
+        return rating / 11;
+    }
+
+    public Player getBestPlayerAtPosition(Position position, List<String> players_to_ignore) {
+        int rating = 0;
+        String player_id = "";
+        for (String str : this.players) {
+            Player player = Sim.getPlayer(str);
+            if (players_to_ignore.contains(str) || player.getPosition() != position) {
+                continue;
+            }
+            if (player.getRating() > rating) {
+                player_id = player.getId();
+                rating = player.getRating();
+            }
+        }
+        return Sim.getPlayer(player_id);
+    }
+
+    public List<String> getBestLineup() {
+        Position[] positions = this.getFormation();
+        List<String> lineup = new ArrayList<>();
+        for (Position position : positions) {
+            Player player = this.getBestPlayerAtPosition(position, lineup);
+            if (player == null) {
+                player = emergencyPlayer(position);
+            }
+            lineup.add(player.getId());
+        }
+        return lineup;
+    }
+
+    public Player emergencyPlayer(Position position) {
+        String nation_name = Sim.getNation(this.nation_id).getName();
+        int rating = Player.adjustRating((int) this.squad_rating + (int) (CommonFunctions.getRandomInt(5)));
+        int age = CommonFunctions.getRandomInt(5) + 27;
+        Player player = CommonFunctions.getPlayer(nation_name, nation_id, rating, age, position);
+        String player_id = Sim.addPlayer(player);
+        this.addPlayer(player_id);
+        return player;
+    }
+
+    public List<Position> retiredPlayersCheck() {
+        Position[] positions = this.getFormation();
+        List<String> lineup = new ArrayList<>();
+        List<Position> needed_positions = new ArrayList<>();
+        for (Position position : positions) {
+            Player player = this.getBestPlayerAtPosition(position, lineup);
+            if (player == null) {
+                needed_positions.add(position);
+            } else {
+                lineup.add(player.getId());
+            }
+        }
+        return needed_positions;
+    }
+
+    public void promoteAcademyPlayers() {
+        int count = 0;
+        List<Position> positions = retiredPlayersCheck();
+        if (this.players.size() < 23) {
+            count = 23 - this.players.size();
+        }
+        count += CommonFunctions.getRandomNumber(3) + 1;
+        int forced_positions = positions.size();
+        for (int i = forced_positions; i < count; i++) {
+            positions.add(PositionHelper.getPosition(CommonFunctions.getRandomNumber(12)));
+        }
+        int[] ratings = new int[count];
+        for (int i = 0; i < count; i++) {
+            ratings[i] = Player.adjustRating((int) (this.squad_rating * 0.75f) + CommonFunctions.getRandomInt(10));
+        }
+        String nation_name = Sim.getNation(this.nation_id).getName();
+        for (int i = 0; i < ratings.length; i++) {
+            Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i], 17, positions.get(i));
+            String player_id = Sim.addPlayer(player);
+            this.addPlayer(player_id);
+        }
+    }
+
+    public void endSeasonChanges() {
+        this.promoteAcademyPlayers();
     }
 }

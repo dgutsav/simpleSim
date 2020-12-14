@@ -35,8 +35,8 @@ public class CompetitionHistory {
     }
 
     public static String padString(String string) {
-        for(int i = string.length(); i<TEAM_NAME_LENGTH; i++) {
-            string += " ";
+        for (int i = string.length(); i < TEAM_NAME_LENGTH; i++) {
+            string = string + " ";
         }
         return string;
     }
@@ -44,7 +44,8 @@ public class CompetitionHistory {
     public void show(int rank) {
         System.out.print(season);
         for (int i = 1; i <= rank; i++) {
-            System.out.print("\t" + CompetitionHistory.padString(Sim.getTeam(this.getTeamHistory(i).getTeamId()).getName()));
+            System.out.print(
+                    "\t" + CompetitionHistory.padString(Sim.getTeam(this.getTeamHistory(i).getTeamId()).getName()));
         }
         System.out.println();
     }

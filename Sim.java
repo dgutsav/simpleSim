@@ -8,12 +8,15 @@ import java.util.Map;
 
 public class Sim {
 
-    static Map<String, League> leagues = new HashMap<>();
-    static Map<String, Team> teams = new HashMap<>();
-    static List<Match> matches = new ArrayList<>();
-    static Map<Integer, Nation> nations = new HashMap<>();
+    private static Map<String, League> leagues = new HashMap<>();
+    private static Map<String, Team> teams = new HashMap<>();
+    private static Map<Integer, Nation> nations = new HashMap<>();
+    private static Map<String, Player> players = new HashMap<>();
 
     public static int current_season = 2020;
+
+    private static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
+    public static boolean TEST = false;
 
     private Sim() {
     }
@@ -63,6 +66,20 @@ public class Sim {
         }
     }
 
+    public static Player getPlayer(String player_id) {
+        if (players.containsKey(player_id)) {
+            return players.get(player_id);
+        }
+        return null;
+    }
+
+    public static Nation getNation(int id) {
+        if (nations.containsKey(id)) {
+            return nations.get(id);
+        }
+        return null;
+    }
+
     public static League[] getLeagues(List<String> array) {
         League[] array_leagues = new League[array.size()];
         for (int i = 0; i < array.size(); i++) {
@@ -88,8 +105,10 @@ public class Sim {
             entry.getValue().seasonStart();
             entry.getValue().simulateSeason();
         }
-        setupContinentalCompetitions();
-        TournamentController.simulateCompetitions();
+        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+            setupContinentalCompetitions();
+            TournamentController.simulateCompetitions();
+        }
         seasonEndChanges();
     }
 
@@ -112,6 +131,55 @@ public class Sim {
         league.setId(id);
         leagues.put(id, league);
         return id;
+    }
+
+    public static String addPlayer(Player player) {
+        String id = CommonFunctions.getRandomId();
+        player.setId(id);
+        players.put(id, player);
+        return id;
+    }
+
+    public static void removePlayer(String player_id) {
+        Team team = Sim.getTeam(Sim.findPlayerInTeam(player_id));
+        if (team != null) {
+            team.removePlayer(player_id);
+        }
+        players.remove(player_id);
+    }
+
+    public static void updatePlayer(Player player) {
+        players.put(player.getId(), player);
+    }
+
+    public static String findTeamInLeague(Team team) {
+        Nation nation = Sim.getNation(team.getNationId());
+        if (nation != null) {
+            for (String league_id : nation.getLeagues()) {
+                League league = Sim.getLeague(league_id);
+                if (league != null && league.getTeams().contains(team.getId())) {
+                    return league_id;
+                }
+            }
+        }
+        return "";
+    }
+
+    public static String findPlayerInTeam(String player_id) {
+        for (Map.Entry<String, Team> entry : teams.entrySet()) {
+            if (entry.getValue().getPlayers().contains(player_id)) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
+
+    public static String findPlayerInLeague(String player_id) {
+        Team team = Sim.getTeam(Sim.findPlayerInTeam(player_id));
+        if (team != null) {
+            return Sim.findTeamInLeague(team);
+        }
+        return "";
     }
 
     public static List<Nation_Setup> getSetups() {
@@ -153,7 +221,7 @@ public class Sim {
                     rating = (int) (multiplier);
                 }
                 League league = CommonFunctions.createLeague(rating, setup.num_team_leagues,
-                        CommonFunctions.getRandomNumber(4), nation.getName(), i, promotion, relegation);
+                        CommonFunctions.getRandomNumber(4), nation.getId(), i, promotion, relegation, nation.getName());
                 System.out.println(league.getName() + " " + rating);
                 String league_id = Sim.addLeague(league);
                 nation.addLeague(league_id);
@@ -161,12 +229,16 @@ public class Sim {
             nations.put(nation.getId(), nation);
             count++;
         }
+        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+            TournamentController.initCompetitions();
+        }
     }
 
     public static Map<String, Team> sortBySquadRating(Map<String, Team> map) {
         List<Map.Entry<String, Team>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, (Map.Entry<String, Team> o1,
-                Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getSquadRating()) - (o1.getValue().getSquadRating())));
+        Collections.sort(list,
+                (Map.Entry<String, Team> o1, Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getSquadRating())
+                        - (o1.getValue().getSquadRating())));
         HashMap<String, Team> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
@@ -180,6 +252,34 @@ public class Sim {
         for (Map.Entry<String, Team> entry : sorted.entrySet()) {
             System.out.println(count + " " + entry.getValue().getName() + "\t" + entry.getValue().getEloRating() + "\t"
                     + entry.getValue().getSquadRating());
+            if (count >= 20) {
+                break;
+            }
+            count++;
+        }
+    }
+
+    public static Map<String, Player> sortByRating(Map<String, Player> map) {
+        List<Map.Entry<String, Player>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, (Map.Entry<String, Player> o1,
+                Map.Entry<String, Player> o2) -> (int) ((o2.getValue().getRating()) - (o1.getValue().getRating())));
+        HashMap<String, Player> temp = new LinkedHashMap<>();
+        for (Map.Entry<String, Player> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+
+    public static void showPlayers() {
+        Map<String, Player> sorted = Sim.sortByRating(players);
+        int count = 1;
+        for (Map.Entry<String, Player> entry : sorted.entrySet()) {
+            Player player = entry.getValue();
+            String team = Sim.getTeam(Sim.findPlayerInTeam(player.getId())).getName();
+            System.out.println(count + " " + player.getName() + "\t" + team + "\t" + player.getRating());
+            if (count >= 50) {
+                break;
+            }
             count++;
         }
     }
@@ -192,21 +292,43 @@ public class Sim {
             entry.getValue().saveCompetitionHistory();
             updateLeague(entry.getValue(), entry.getKey());
         }
-        TournamentController.saveCompetitionHistory();
+        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+            TournamentController.saveCompetitionHistory();
+        }
+        List<String> retired_players = new ArrayList<>();
+        for (Map.Entry<String, Player> entry : players.entrySet()) {
+            entry.getValue().seasonEndChanges();
+            if (entry.getValue().isRetired()) {
+                retired_players.add(entry.getValue().getId());
+            }
+        }
+        System.out.println("retired players count: " + retired_players.size());
+        for (String player : retired_players) {
+            Sim.removePlayer(player);
+        }
+        for (Map.Entry<String, Team> entry : teams.entrySet()) {
+            entry.getValue().endSeasonChanges();
+        }
+        System.out.println("season end changes done");
         current_season++;
+    }
+
+    public static void showCompetitionHistories() {
+        for (Map.Entry<String, League> entry : leagues.entrySet()) {
+            entry.getValue().showCompetitionHistory();
+        }
+        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+            TournamentController.showCompetitionHistory();
+        }
     }
 
     public static void main(String[] args) {
         initSetup();
-        TournamentController.initCompetitions();
-        sim();
-        sim();
-        sim();
-        sim();
-        for (Map.Entry<String, League> entry : leagues.entrySet()) {
-            entry.getValue().showCompetitionHistory();
+        for (int i = 0; i < 30; i++) {
+            sim();
         }
-        TournamentController.showCompetitionHistory();
+        showCompetitionHistories();
         showTeams();
+        showPlayers();
     }
 }

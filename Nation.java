@@ -46,6 +46,10 @@ public class Nation {
         return this.code;
     }
 
+    public List<String> getLeagues() {
+        return this.leagues;
+    }
+
     public void getContinentalTeams(int continental_competition) {
         int start_rank = 1;
         int end_rank = 1;

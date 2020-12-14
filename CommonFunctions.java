@@ -1,15 +1,64 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class CommonFunctions {
     private CommonFunctions() {
 
     }
 
-    public static Team getTeam(float rating, String nation_name) {
-        return new Team(CommonFunctions.getTeamNameForCountry(nation_name), rating);
+    public static Team getTeam(float rating, String nation_name, int nation_id) {
+        Team team = new Team(CommonFunctions.getTeamNameForCountry(nation_name), rating, nation_id);
+        int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
+        Position[] positions = CommonFunctions.getPositions(team.getFormation(), ratings.length);
+        for (int i = 0; i < ratings.length; i++) {
+            Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i],
+                    CommonFunctions.getRandomNumber(19) + 17, positions[i]);
+            String player_id = Sim.addPlayer(player);
+            team.addPlayer(player_id);
+        }
+        return team;
     }
 
-    public static League getLeague(String nation_name, int division, int promotion, int relegation) {
+    public static Position[] getPositions(Position[] formation, int length) {
+        Position[] positions = new Position[length];
+        for (int i = 0; i < formation.length; i++) {
+            positions[i] = formation[i];
+        }
+        List<Position> all_positions = PositionHelper.getAllPositions();
+        int count = 0;
+        for (Position position : all_positions) {
+            positions[11 + count] = position;
+            count++;
+        }
+        int left = length - 23;
+        for (int i = 0; i < left; i++) {
+            positions[23 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
+        }
+        return positions;
+    }
+
+    public static League getLeague(String nation_name, int division, int promotion, int relegation, int nation_id) {
         String name = Catalogues.getDenonym(nation_name) + " League " + division;
-        return new League(name, division, promotion, relegation);
+        return new League(name, division, promotion, relegation, nation_id);
+    }
+
+    public static Player getPlayer(String nation_name, int nation_id, int rating, int age, Position position) {
+        String name = Catalogues.getPlayerName(nation_name);
+        return new Player(name, position, age, nation_id, rating, 0);
+    }
+
+    public static int[] getPlayerDistribution(int rating) {
+        int totalPlayers = 23 + CommonFunctions.getRandomNumber(8);
+        int[] ratings = new int[totalPlayers];
+        for (int i = 0; i < totalPlayers; i++) {
+            if (i < 11) {
+                ratings[i] = rating + CommonFunctions.getRandomInt(5);
+            } else {
+                ratings[i] = ((int) ((double) rating * 0.75)) + CommonFunctions.getRandomNumber(5);
+            }
+            ratings[i] = Player.adjustRating(ratings[i]);
+        }
+        return ratings;
     }
 
     public static String getRandomName(String type) {
@@ -52,7 +101,7 @@ public class CommonFunctions {
         }
         if (variation == 1) {
             // single horse with n-nearby
-            starting_value = CommonFunctions.getRandomNumber((int) (0.1f * average)) + 6;
+            starting_value = CommonFunctions.getRandomNumber((int) (0.1f * average)) + 2;
             for (int i = 0; i < size; i++) {
                 if (i < size / 5) {
                     array[i] += starting_value;
@@ -63,8 +112,8 @@ public class CommonFunctions {
             }
         } else if (variation == 2) {
             // two-horse with m-nearby
-            starting_value = CommonFunctions.getRandomNumber((int) (0.15f * average)) + 6;
-            starting_value2 = CommonFunctions.getRandomNumber((int) (0.12f * average)) + 6;
+            starting_value = CommonFunctions.getRandomNumber((int) (0.15f * average)) + 2;
+            starting_value2 = CommonFunctions.getRandomNumber((int) (0.12f * average)) + 2;
             for (int i = 0; i < size; i++) {
                 if (i < size / 2) {
                     if (i % 2 == 0) {
@@ -86,11 +135,12 @@ public class CommonFunctions {
         return array;
     }
 
-    public static League createLeague(int league_rating, int size, int variance, String nation_name, int level, int promotion, int relegation) {
+    public static League createLeague(int league_rating, int size, int variance, int nation_id, int level,
+            int promotion, int relegation, String nation_name) {
         int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
-        League league = getLeague(nation_name, level, promotion, relegation);
+        League league = getLeague(nation_name, level, promotion, relegation, nation_id);
         for (int i = 0; i < team_ratings.length; i++) {
-            Team team = getTeam((float) team_ratings[i], nation_name);
+            Team team = getTeam((float) team_ratings[i], nation_name, nation_id);
             String team_id = Sim.addTeam(team);
             league.addTeam(team_id);
         }

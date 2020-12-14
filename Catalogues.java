@@ -20,10 +20,50 @@ public class Catalogues {
     private static String austria = "Austria";
     private static String czechia = "Czechia";
 
+    public static String getDenonym(String nation_name) {
+        if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
+            return "Austrian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
+            return "Belgian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.croatia)) {
+            return "Croatian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.czechia)) {
+            return "Czech";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.denmark)) {
+            return "Danish";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.england)) {
+            return "English";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
+            return "French";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
+            return "German";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
+            return "Italian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
+            return "Dutch";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
+            return "Portuguese";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.russia)) {
+            return "Russian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.scotland)) {
+            return "Scottish";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
+            return "Spanish";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
+            return "Turkish";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
+            return "Ukrainian";
+        } else {
+            return "Edener";
+        }
+    }
+
+    // Cities
     private static String[] englandCities = { "London", "Liverpool", "Manchester", "Birmingham", "Sheffield",
             "Southampton", "Newcastle", "Leeds", "Bradford", "Bristol", "Leicester", "Wakefield", "Coventry",
             "Nottingham", "Sunderland", "Brighton", "Hull", "Plymouth", "Wolverhampton", "Stoke", "Derby", "Salford",
-            "Westminster", "Portsmouth", "York", "Oxford", "Cambridge" };
+            "Westminster", "Portsmouth", "York", "Oxford", "Cambridge", "Cornwall", "Buckingham", "Durham",
+            "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport", "Dorset", "Chesire" };
     private static String[] spainCities = { "Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Malaga", "Oviedo",
             "Gijon", "Elche", "Las Palmas", "Zaragoza", "Murcia", "Tenerife", "Granada", "Palma", "Vigo", "Cartagena",
             "Cadiz", "San Sebastian", "Coruna", "Valladolid", "Pamplona", "Santander", "Lleida", "Toledo", "Compostela",
@@ -109,9 +149,10 @@ public class Catalogues {
         return "Eden";
     }
 
+    // Prefixes and Suffixes
     private static String[] englandPrefixes = { "AFC", "FC" };
     private static String[] englandSuffixes = { "FC", "City", "Town", "United", "Wanderers", "Rovers", "Rangers", "",
-            "FC" };
+            "FC", "County" };
 
     private static String[] spainPrefixes = { "FC", "Atletico", "Athletic", "Real", "RCD", "SD", "CD", "CA", "RC",
             "Deportivo", "Sporting" };
@@ -121,7 +162,7 @@ public class Catalogues {
             "Eintracht", "SC" };
     private static String[] germanySuffixes = { "FC", "SV" };
 
-    private static String[] italyPrefixes = { "FC", "SSC", "US", "AC" };
+    private static String[] italyPrefixes = { "FC", "SSC", "US", "AC", "AS" };
     private static String[] italySuffixes = { "FC", "Calcio", "CFC" };
 
     private static String[] francePrefixes = { "AS", "Olympique", "Stade", "FC", "SC", "RC", "Racing", "ES" };
@@ -134,8 +175,8 @@ public class Catalogues {
             "Koninklijke" };
     private static String[] belgiumSuffixes = { "FC", "SK", "SC", "VV", "SV" };
 
-    private static String[] russiaPrefixes = { "FC", "PFC", "CSKA", "Dinamo", "Spartak", "Lokomotiv", "Torpedo",
-            "SKA" };
+    private static String[] russiaPrefixes = { "FC", "PFC", "CSKA", "Dinamo", "Spartak", "Lokomotiv", "Torpedo", "SKA",
+            "Zenit" };
     private static String[] russiaSuffixes = { "FC", "Zvezda" };
 
     private static String[] netherlandsPrefixes = { "FC", "ADO", "SC", "SV", "Sparta", "SBV", "SVV", "VV" };
@@ -162,66 +203,51 @@ public class Catalogues {
         if (nation_name.equalsIgnoreCase(Catalogues.england) || nation_name.equalsIgnoreCase(Catalogues.scotland)) {
             data.add(englandPrefixes);
             data.add(englandSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
             data.add(spainPrefixes);
             data.add(spainSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
             data.add(germanyPrefixes);
             data.add(germanySuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
             data.add(francePrefixes);
             data.add(franceSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
             data.add(italyPrefixes);
             data.add(italySuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
             data.add(portugalPrefixes);
             data.add(portugalSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
             data.add(belgiumPrefixes);
             data.add(belgiumSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.russia)) {
             data.add(russiaPrefixes);
             data.add(russiaSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
             data.add(netherlandsPrefixes);
             data.add(netherlandsSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.croatia)) {
             data.add(croatiaPrefixes);
             data.add(croatiaSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.denmark)) {
             data.add(denmarkPrefixes);
             data.add(denmarkSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
             data.add(ukrainePrefixes);
             data.add(ukraineSuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
             data.add(turkeyPrefixes);
             data.add(turkeySuffixes);
-            return data;
         } else if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
             data.add(austriaPrefixes);
             data.add(austriaSuffixes);
-            return data;
         } else {
             String[] temp = { "FC" };
             data.add(temp);
             data.add(temp);
-            return data;
         }
-
+        return data;
     }
 
     public static String getPrefix(String nation_name) {
@@ -244,41 +270,66 @@ public class Catalogues {
         return (data.get(1).length * 100) / (data.get(0).length + data.get(1).length);
     }
 
-    public static String getDenonym(String nation_name) {
-        if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
-            return "Austrian";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
-            return "Belgian";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.croatia)) {
-            return "Croatian";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.czechia)) {
-            return "Czech";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.denmark)) {
-            return "Danish";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.england)) {
-            return "English";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
-            return "French";
+    // Formations
+    private static Position[][] formations = {
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+                    Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.RIGHT_MIDFIELDER,
+                    Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+                    Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.RIGHT_WINGER,
+                    Position.LEFT_WINGER, Position.CENTRAL_MIDFIELDER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+                    Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER,
+                    Position.LEFT_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
+                    Position.LEFT_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.RIGHT_WINGER, Position.LEFT_WINGER, Position.RIGHT_MIDFIELDER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+                    Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
+                    Position.ATTACKING_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.STRIKER } };
+
+    private static String[] formationNames = { "4-4-2", "4-3-3", "4-2-3-1 Wide", "3-4-3", "4-2-3-1" };
+
+    public static Position[] getFormation(int formation_id) {
+        return formations[formation_id];
+    }
+
+    public static String getFormationName(int formation_id) {
+        return formationNames[formation_id];
+    }
+
+    public static int numFormations() {
+        return Catalogues.formationNames.length;
+    }
+
+    // Names
+    private static String[] englishNames = { "Adam", "Andrew", "Alexander", "Matthew", "Sam", "Robin", "Arthur",
+            "Douglas", "Michael", "Gareth", "Alfred", "Simon", "Henry", "Robert", "Jack", "Jacob", "Jake", "George",
+            "Lewis", "Peter", "Lando", "Kevin", "Luke", "Oliver", "Harry", "Leo", "Lionel", "Oscar", "Jim", "Jeremy",
+            "Boris", "Denis", "John", "Fred", "Kieran", "Mark", "Christopher", "William", "Will", "James", "Steven",
+            "Frank", "David", "Bradley", "Marcus" };
+    private static String[] englishSurnames = { "Charlton", "Kane", "Winks", "Trippier", "Armstrong", "Russell",
+            "Hamilton", "Wood", "Adams", "Jones", "Sharp", "Bale", "Hart", "Stokes", "Strauss", "Paul", "Gerrard",
+            "Lampard", "Hutchinson", "Sterling", "Morgan", "Derbyshire", "London", "Palmer", "Cook", "Lucas", "Beckham",
+            "Anderson", "Ferdinand", "Neville", "Southall", "Southgate", "Hodgson", "Shaw", "Collins" };
+    private static String[] germanNames = { "Toni", "Marco", "Jurgen", "Timo", "Marcel", "Manuel", "Bastian", "Kai",
+            "Klaus", "Steffen", "Karl", "Heinz", "Oliver", "Stefan", "Maximillian", "Leon", "Serge", "Leroy", "Thomas",
+            "Jonas", "Lukas", "Michael", "Fritz", "Uwe", "Hans", "Nico", "Christian", "Moritz", "Patrick", "Florian",
+            "Daniel", "Dennis", "Phillip" };
+    private static String[] germanSurnames = { "Kroos", "Reus", "Klinsmann", "Werner", "Schmelzer", "Halstenberg",
+            "Neuer", "Schweinsteiger", "Havertz", "Allofs", "Podolski", "Meyer", "Goretzka", "Muller", "Hoffmann",
+            "Kahn", "Ballack", "Walter", "Rosler", "Schmidt", "Schneider", "Fischer", "Weber", "Wagner", "Becker",
+            "Schafer", "Koch", "Bauer", "Fuchs" };
+
+    public static String getPlayerName(String nation_name) {
+        if (nation_name.equalsIgnoreCase(Catalogues.england)) {
+            return englishNames[CommonFunctions.getRandomNumber(englishNames.length)] + " "
+                    + englishSurnames[CommonFunctions.getRandomNumber(englishSurnames.length)];
         } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
-            return "German";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
-            return "Italian";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.netherlands)) {
-            return "Dutch";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.portugal)) {
-            return "Portuguese";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.russia)) {
-            return "Russian";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.scotland)) {
-            return "Scottish";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
-            return "Spanish";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
-            return "Turkish";
-        } else if (nation_name.equalsIgnoreCase(Catalogues.ukraine)) {
-            return "Ukrainian";
+            return germanNames[CommonFunctions.getRandomNumber(germanNames.length)] + " "
+                    + germanSurnames[CommonFunctions.getRandomNumber(germanSurnames.length)];
         } else {
-            return "Edener";
+            return "Player Player";
         }
     }
 }

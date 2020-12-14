@@ -9,7 +9,6 @@ import org.bson.Document;
 import java.util.Iterator;
 
 import com.mongodb.MongoClient;
-//import com.mongodb.MongoCredential;
 
 public class DatabaseOperations {
 
@@ -20,7 +19,6 @@ public class DatabaseOperations {
     public static void connectToDatabase() {
         try {
             mongo = new MongoClient("localhost", 27017);
-            //MongoCredential credential = MongoCredential.createCredential("me", "simp", "password".toCharArray());
             database = mongo.getDatabase("simp");
             System.out.println("Connected to database");
         } catch (Exception e) {
@@ -32,6 +30,7 @@ public class DatabaseOperations {
         try {
             database.createCollection(collection_name);
         } catch (Exception e) {
+            // do something
         }
     }
 
@@ -47,11 +46,10 @@ public class DatabaseOperations {
 
     public static void showAll(String collection_name) {
         FindIterable<Document> docs = findAll(collection_name);
-        Iterator it = docs.iterator();
+        Iterator<Document> it = docs.iterator();
         while (it.hasNext()) {
-            Document doc = (Document) it.next();
+            Document doc = it.next();
             System.out.println(doc);
-            // i++;
         }
     }
 
@@ -72,6 +70,7 @@ public class DatabaseOperations {
             documents = database.getCollection("teams").find(Filters.eq("id", id));
             document = documents.first();
         } catch (Exception e) {
+            // do something
         }
         return document;
     }

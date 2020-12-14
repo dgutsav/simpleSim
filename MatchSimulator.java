@@ -15,12 +15,12 @@ public class MatchSimulator {
     }
 
     public static boolean simulateMatch(Match current_match, Team home, Team away) {
-        float home_team_rating = home.getSquadRating() + home.getForm() - home.getInjuries() + HOME_ADVANTAGE
+        float home_team_rating = home.getBestSquadRating() + home.getForm() - home.getInjuries() + HOME_ADVANTAGE
                 + getRandomness();
         if(current_match.isNeutral) {
             home_team_rating -= HOME_ADVANTAGE;
         }
-        float away_team_rating = away.getSquadRating() + away.getForm() - away.getInjuries() + getRandomness();
+        float away_team_rating = away.getBestSquadRating() + away.getForm() - away.getInjuries() + getRandomness();
 
         int winner_goals = getWinnerGoals(home_team_rating, away_team_rating);
         int result;
