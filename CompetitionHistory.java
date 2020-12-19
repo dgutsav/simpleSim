@@ -5,7 +5,7 @@ public class CompetitionHistory {
     private int season;
     private List<TeamHistory> team_history;
 
-    private static final int TEAM_NAME_LENGTH = 20;
+    private static final int TEAM_NAME_LENGTH = 30;
 
     public CompetitionHistory(int season) {
         this.season = season;
@@ -44,8 +44,9 @@ public class CompetitionHistory {
     public void show(int rank) {
         System.out.print(season);
         for (int i = 1; i <= rank; i++) {
-            System.out.print(
-                    "\t" + CompetitionHistory.padString(Sim.getTeam(this.getTeamHistory(i).getTeamId()).getName()));
+            String team_name = Sim.getTeam(this.getTeamHistory(i).getTeamId()).getName() + "("
+                    + this.getTeamHistory(i).getRating() + ")";
+            System.out.print("\t" + CompetitionHistory.padString(team_name));
         }
         System.out.println();
     }

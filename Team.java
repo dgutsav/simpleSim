@@ -18,6 +18,7 @@ public class Team {
     // Constants
     public static final float INJURY_PROBABILITY = 5.0f;
     public static final int FORM_RESULTS_SIZE = 6;
+    public static final int PADDED_LENGTH = 30;
 
     public Team() {
         this.name = "";
@@ -57,6 +58,14 @@ public class Team {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getPaddedName() {
+        String padded = this.name;
+        for (int i = padded.length(); i < PADDED_LENGTH; i++) {
+            padded += " ";
+        }
+        return padded;
     }
 
     public float getSquadRating() {
@@ -227,7 +236,8 @@ public class Team {
         }
         int[] ratings = new int[count];
         for (int i = 0; i < count; i++) {
-            ratings[i] = Player.adjustRating((int) (this.squad_rating * 0.75f) + CommonFunctions.getRandomInt(10));
+            float temp = this.squad_rating * 0.8f;
+            ratings[i] = Player.adjustRating((int) (temp + CommonFunctions.getRandomInt(10)));
         }
         String nation_name = Sim.getNation(this.nation_id).getName();
         for (int i = 0; i < ratings.length; i++) {

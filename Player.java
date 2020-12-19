@@ -11,6 +11,7 @@ public class Player {
     private boolean retired;
 
     public static final int MAX_LEVELS = 500;
+    public static final int PADDED_LENGTH = 30;
 
     public Player(String name, Position position, int age, int nation, int rating, double xp) {
         this.name = name;
@@ -129,21 +130,21 @@ public class Player {
     public void seasonEndChanges() {
         int max_growth = 0;
         if (this.age < 18) {
-            max_growth = 5;
+            max_growth = 6;
         } else if (this.age < 20) {
-            max_growth = 4;
+            max_growth = 5;
         } else if (this.age < 22) {
-            max_growth = 3;
+            max_growth = 4;
         } else if (this.age < 24) {
-            max_growth = 2;
+            max_growth = 3;
         } else if (this.age < 26) {
             max_growth = 1;
         } else if (this.age < 30) {
             max_growth = 0;
         } else if (this.age < 32) {
-            max_growth = -2;
+            max_growth = -3;
         } else if (this.age < 35) {
-            max_growth = -4;
+            max_growth = -5;
         }
         if (max_growth > 0) {
             this.rating += CommonFunctions.getRandomNumber(max_growth);
@@ -156,5 +157,13 @@ public class Player {
             this.retired = true;
         }
         this.updatePlayer();
+    }
+
+    public String getPaddedName() {
+        String padded = this.name;
+        for (int i = padded.length(); i < Player.PADDED_LENGTH; i++) {
+            padded += " ";
+        }
+        return padded;
     }
 }

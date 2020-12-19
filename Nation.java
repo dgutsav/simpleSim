@@ -75,7 +75,7 @@ public class Nation {
                 end_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking);
         }
         for (int i = start_rank; i <= end_rank; i++) {
-            TournamentController.addTeams(continental_competition, this.code + i, this.getLeague(1).getTeamAtRank(i));
+            TournamentController.addTeams(continental_competition, this.id, i, this.getLeague(1).getTeamAtRank(i));
         }
     }
 
@@ -108,7 +108,7 @@ public class Nation {
                         validated = false;
                     }
                 }
-                if(!validated) {
+                if (!validated) {
                     System.out.println("Error in promotion demotion");
                 } else {
                     Sim.updateLeague(lower, lower.getId());

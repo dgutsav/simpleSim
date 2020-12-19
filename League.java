@@ -104,7 +104,7 @@ public class League {
         List<Match> matches = getMatchesForMatchDay(matchday);
         for (Match match : matches) {
             match.simulate(Sim.getTeam(match.home_id), Sim.getTeam(match.away_id));
-            if(!Sim.TEST) {
+            if (!Sim.TEST) {
                 match.display();
             }
             table.updateTeamPerformance(match.home_id, match.home_team_goals, match.away_team_goals);
@@ -113,11 +113,11 @@ public class League {
     }
 
     public void simulateSeason() {
-        if(!Sim.TEST) {
+        if (!Sim.TEST) {
             System.out.println("\n" + this.name);
         }
         for (int i = 1; i <= this.getTotalMatchDays(); i++) {
-            if(!Sim.TEST) {
+            if (!Sim.TEST) {
                 System.out.println("Matchday " + i);
             }
             this.simulateMatchDay(i);
@@ -177,7 +177,8 @@ public class League {
     public void saveCompetitionHistory() {
         List<TeamHistory> histories = new ArrayList<>();
         for (int i = 1; i <= this.teams.size(); i++) {
-            TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i);
+            int rating = (int) Sim.getTeam(this.getTeamAtRank(i)).getSquadRating();
+            TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i, rating);
             histories.add(history);
         }
         CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
@@ -186,7 +187,7 @@ public class League {
 
     public void showCompetitionHistory() {
         System.out.println(this.getName());
-        for(CompetitionHistory compHistory : this.competitionHistory) {
+        for (CompetitionHistory compHistory : this.competitionHistory) {
             compHistory.show(3);
         }
     }

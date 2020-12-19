@@ -24,42 +24,97 @@ public class TournamentController {
     private static String[][] elGroups = new String[NUM_EL_TEAMS / TEAMS_PER_GROUP][TEAMS_PER_GROUP];
     private static String[][] eclGroups = new String[NUM_ECL_TEAMS / TEAMS_PER_GROUP][TEAMS_PER_GROUP];
 
-    private static Tournament championsLeague;
-    private static Tournament europaLeague;
-    private static Tournament conferenceLeague;
+    private static Competition championsLeague;
+    private static Competition europaLeague;
+    private static Competition conferenceLeague;
+
+    private static final boolean USE_CONFERENCE_LEAGUE = false;
 
     private TournamentController() {
         // compliance
     }
 
-    public static int getPlacesForCompetition(int competition_level, int league_ranking) {
-        switch (competition_level) {
+    public static int getPlacesForCompetition(int level, int rank) {
+        switch (level) {
             case 1:
-                if (league_ranking <= 3) {
+                if (rank <= 4) {
                     return 4;
-                } else if (league_ranking <= 5) {
+                } else if (rank <= 6) {
                     return 3;
-                } else if (league_ranking <= 9) {
+                } else if (rank <= 15) {
                     return 2;
                 } else {
                     return 1;
                 }
             case 2:
-                if (league_ranking <= 5) {
-                    return 3;
-                } else if (league_ranking <= 8) {
-                    return 4;
-                } else {
-                    return 3;
-                }
+                return 3;
             case 3:
-                if (league_ranking <= 11) {
+                if (rank <= 11) {
                     return 3;
-                } else {
+                } else if (rank <= 15) {
                     return 2;
+                } else {
+                    return 0;
                 }
             default:
                 return 1;
+        }
+    }
+
+    public static int getSeeding(int level, int league_rank, int div_rank) {
+        if (level == 1) {
+            if (div_rank == 1) {
+                if (league_rank <= 11) {
+                    return 0;
+                } else if (league_rank <= 13) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            } else if (div_rank == 2) {
+                if (league_rank <= 6) {
+                    return 0;
+                } else if (league_rank <= 9) {
+                    return 2;
+                } else {
+                    return 3;
+                }
+            } else if (div_rank == 3) {
+                if (league_rank <= 5) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 0;
+            }
+        } else if (level == 2) {
+            div_rank -= getPlacesForCompetition(level, league_rank);
+            if (div_rank == 1) {
+                if (league_rank <= 12) {
+                    return 0;
+                } else if (league_rank <= 24) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            } else if (div_rank == 2) {
+                if (league_rank <= 5) {
+                    return 0;
+                } else if (league_rank <= 9) {
+                    return 2;
+                } else {
+                    return 3;
+                }
+            } else {
+                if (league_rank <= 5) {
+                    return 2;
+                } else {
+                    return 3;
+                }
+            }
+        } else {
+            return 0;
         }
     }
 
@@ -109,7 +164,7 @@ public class TournamentController {
         }
     }
 
-    public static Tournament getCompetition(int competition_level) {
+    public static Competition getCompetition(int competition_level) {
         switch (competition_level) {
             case 1:
                 return championsLeague;
@@ -132,6 +187,11 @@ public class TournamentController {
         return "LOREM";
     }
 
+    public static boolean isDomesticChampion(String team_id) {
+        String code = TournamentController.getCodeForTeam(team_id);
+        return code.charAt(code.length() - 1) == '1';
+    }
+
     public static String getTeamForCode(String code) {
         if (clTeams.containsKey(code)) {
             return clTeams.get(code);
@@ -144,8 +204,21 @@ public class TournamentController {
         }
     }
 
-    public static void addTeams(int competition_level, String code, String team_id) {
-        getTeams(competition_level).put(code, team_id);
+    public static void addTeams(int level, int nation_id, int rank, String team_id) {
+        if (level == 3) {
+            return;
+        }
+        Nation nation = Sim.getNation(nation_id);
+        String team_code = nation.getCode() + rank;
+        int seeding = getSeeding(level, nation.getLeagueRanking(), rank);
+        getTeams(level).put(team_code, team_id);
+        getCompetition(level).addTeam(seeding, team_id);
+        Team team = Sim.getTeam(team_id);
+        // if (level != 2) {
+        // return;
+        // }
+        System.out.println(
+                team.getName() + "(" + team_code + ") added to " + getName(level) + " with seeding " + seeding);
     }
 
     public static List<String> sortByCoefficients(int competition_level) {
@@ -163,6 +236,47 @@ public class TournamentController {
             sorted.add(aa.getKey());
         }
         return sorted;
+    }
+
+    public static List<String> sortByCoefficients(List<String> teams_to_sort) {
+        List<String> sorted = new ArrayList<>();
+        List<Team> teams = new ArrayList<>();
+        for (String team : teams_to_sort) {
+            teams.add(Sim.getTeam(team));
+        }
+        Collections.sort(teams, (Team a, Team b) -> (int) (b.getCoefficient() - a.getCoefficient()));
+        for (Team team : teams) {
+            sorted.add(team.getId());
+        }
+        return sorted;
+    }
+
+    public static List<List<String>> divideIntoSeededPots(List<String> current_teams) {
+        List<String> champions = new ArrayList<>();
+        List<String> non_champions = new ArrayList<>();
+        for (String team : current_teams) {
+            if (isDomesticChampion(team)) {
+                champions.add(team);
+            } else {
+                non_champions.add(team);
+            }
+        }
+        champions = TournamentController.sortByCoefficients(champions);
+        non_champions = TournamentController.sortByCoefficients(non_champions);
+        List<String> seeded_teams = new ArrayList<>();
+        List<String> unseeded_teams = new ArrayList<>();
+        for (int i = 0; i < champions.size() / 2; i++) {
+            seeded_teams.add(champions.get(i));
+            unseeded_teams.add(champions.get((champions.size() / 2) + i));
+        }
+        for (int i = 0; i < non_champions.size() / 2; i++) {
+            seeded_teams.add(non_champions.get(i));
+            unseeded_teams.add(non_champions.get((non_champions.size() / 2) + i));
+        }
+        List<List<String>> pots = new ArrayList<>();
+        pots.add(seeded_teams);
+        pots.add(unseeded_teams);
+        return pots;
     }
 
     public static String[][] setPots(int competition_level, List<String> list) {
@@ -255,6 +369,44 @@ public class TournamentController {
         }
     }
 
+    public static void setGroups2(int competition_level, String[][] pots) {
+        int number_of_groups = TournamentController.getNumGroups(competition_level);
+        String[][] groups = new String[number_of_groups][TEAMS_PER_GROUP];
+        for (int i = 0; i < number_of_groups; i++) {
+            for (int j = 0; j < TEAMS_PER_GROUP; j++) {
+                groups[i][j] = "LOREM";
+            }
+        }
+        int current_pot = 0;
+        String[] current_pot_teams = pots[current_pot];
+        current_pot_teams = CommonFunctions.shuffle(current_pot_teams);
+        for (int i = 0; i < current_pot_teams.length; i++) {
+            groups[i][0] = current_pot_teams[i];
+        }
+        for (int i = 2; i <= TEAMS_PER_GROUP; i++) {
+            Pot pot = new Pot();
+            pot.init(pots[i - 1], TournamentController.getNumGroups(competition_level), i, groups);
+            while (!pot.isEmpty()) {
+                String current_team = pot.drawTeam();
+                List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
+                if (possible_groups.isEmpty()) {
+                    TournamentController.setGroups(competition_level);
+                    return;
+                }
+                int group_selected = possible_groups.get(CommonFunctions.getRandomNumber(possible_groups.size()));
+                groups[group_selected][i - 1] = current_team;
+                pot.updatePossibleGroups(groups);
+            }
+        }
+        if (competition_level == 1) {
+            clGroups = groups;
+        } else if (competition_level == 2) {
+            elGroups = groups;
+        } else {
+            eclGroups = groups;
+        }
+    }
+
     public static void displayGroups(int competition_level) {
         String[][] groups = TournamentController.getGroups(competition_level);
         System.out.println(TournamentController.getName(competition_level));
@@ -280,34 +432,56 @@ public class TournamentController {
     }
 
     public static void initCompetitions() {
-        championsLeague = new Tournament(1, 8);
-        europaLeague = new Tournament(2, 12);
-        conferenceLeague = new Tournament(3, 10);
+        championsLeague = new Competition(1);
+        europaLeague = new Competition(2);
+        conferenceLeague = new Competition(3);
+
     }
 
     public static void setupCompetitions() {
         championsLeague.reset();
         europaLeague.reset();
-        conferenceLeague.reset();
-        championsLeague.setTeams(clTeams);
-        championsLeague.setupGroups(clGroups);
-        europaLeague.setTeams(elTeams);
-        europaLeague.setupGroups(elGroups);
-        conferenceLeague.setTeams(eclTeams);
-        conferenceLeague.setupGroups(eclGroups);
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.reset();
+        }
+    }
+
+    public static void simulateQualifiers() {
+        championsLeague.simulateQualifiers();
+        europaLeague.simulateQualifiers();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.simulateQualifiers();
+        }
+    }
+
+    public static void simulateGroups() {
+        championsLeague.setupGroups();
+        championsLeague.simulateGroups();
+        europaLeague.setupGroups();
+        europaLeague.simulateGroups();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.setupGroups();
+            conferenceLeague.simulateGroups();
+        }
+    }
+
+    public static void simulateKnockouts() {
+        championsLeague.setInitialKnockoutTies();
+        europaLeague.setInitialKnockoutTies();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.setInitialKnockoutTies();
+        }
+        championsLeague.simulateKnockoutRounds();
+        europaLeague.simulateKnockoutRounds();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.simulateKnockoutRounds();
+        }
     }
 
     public static void simulateCompetitions() {
-        championsLeague.simulateGroups();
-        europaLeague.simulateGroups();
-        conferenceLeague.simulateGroups();
-        championsLeague.setKnockoutTies();
-        europaLeague.setKnockoutTies();
-        conferenceLeague.setKnockoutTies();
-        championsLeague.simulateKnockoutRounds();
-        europaLeague.simulateKnockoutRounds();
-        conferenceLeague.simulateKnockoutRounds();
-        testTransferredTeams();
+        simulateQualifiers();
+        simulateGroups();
+        simulateKnockouts();
     }
 
     public static void testTransferredTeams() {
@@ -344,13 +518,17 @@ public class TournamentController {
     public static void saveCompetitionHistory() {
         championsLeague.saveCompetitionHistory();
         europaLeague.saveCompetitionHistory();
-        conferenceLeague.saveCompetitionHistory();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.saveCompetitionHistory();
+        }
     }
 
     public static void showCompetitionHistory() {
         championsLeague.showCompetitionHistory();
         europaLeague.showCompetitionHistory();
-        conferenceLeague.showCompetitionHistory();
+        if (USE_CONFERENCE_LEAGUE) {
+            conferenceLeague.showCompetitionHistory();
+        }
     }
 
     public static char getGroupName(int group_number) {

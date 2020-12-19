@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 
 public class CommonFunctions {
@@ -11,8 +10,25 @@ public class CommonFunctions {
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
         Position[] positions = CommonFunctions.getPositions(team.getFormation(), ratings.length);
         for (int i = 0; i < ratings.length; i++) {
-            Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i],
-                    CommonFunctions.getRandomNumber(19) + 17, positions[i]);
+            int age;
+            if (ratings[i] >= 86) {
+                age = CommonFunctions.getRandomNumber(10) + 28;
+            } else if (ratings[i] >= 84) {
+                age = CommonFunctions.getRandomNumber(12) + 26;
+            } else if (ratings[i] >= 82) {
+                age = CommonFunctions.getRandomNumber(14) + 24;
+            } else if (ratings[i] >= 80) {
+                age = CommonFunctions.getRandomNumber(16) + 22;
+            } else if (ratings[i] >= 78) {
+                age = CommonFunctions.getRandomNumber(18) + 21;
+            } else if (ratings[i] >= 75) {
+                age = CommonFunctions.getRandomNumber(20) + 20;
+            } else if (ratings[i] >= 70) {
+                age = CommonFunctions.getRandomNumber(18) + 18;
+            } else {
+                age = CommonFunctions.getRandomNumber(20) + 17;
+            }
+            Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i], age, positions[i]);
             String player_id = Sim.addPlayer(player);
             team.addPlayer(player_id);
         }
@@ -186,5 +202,13 @@ public class CommonFunctions {
             copy[array.length - i - 1] = temp;
         }
         return copy;
+    }
+
+    public static String getRandomElement(List<String> list) {
+        return list.get(getRandomNumber(list.size()));
+    }
+
+    public static String getRandomElement(String[] list) {
+        return list[getRandomNumber(list.length)];
     }
 }

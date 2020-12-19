@@ -15,7 +15,7 @@ public class Sim {
 
     public static int current_season = 2020;
 
-    private static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
+    public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
     public static boolean TEST = false;
 
     private Sim() {
@@ -89,15 +89,12 @@ public class Sim {
     }
 
     public static void setupContinentalCompetitions() {
+        TournamentController.setupCompetitions();
         for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
             for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
                 entry.getValue().getContinentalTeams(i);
             }
         }
-        for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
-            TournamentController.setGroups(i);
-        }
-        TournamentController.setupCompetitions();
     }
 
     public static void sim() {
@@ -105,7 +102,7 @@ public class Sim {
             entry.getValue().seasonStart();
             entry.getValue().simulateSeason();
         }
-        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             setupContinentalCompetitions();
             TournamentController.simulateCompetitions();
         }
@@ -189,22 +186,42 @@ public class Sim {
         setups.add(new Nation_Setup("Germany", "GER", 3, 3, 3, 18, 79));
         setups.add(new Nation_Setup("Italy", "ITA", 4, 4, 2, 20, 78));
         setups.add(new Nation_Setup("France", "FRA", 5, 5, 2, 20, 76));
-        setups.add(new Nation_Setup("Portugal", "POR", 6, 6, 2, 18, 74));
-        setups.add(new Nation_Setup("Belgium", "BEL", 7, 7, 2, 16, 74));
-        setups.add(new Nation_Setup("Netherlands", "NED", 8, 8, 2, 18, 74));
-        setups.add(new Nation_Setup("Russia", "RUS", 9, 9, 3, 16, 74));
-        setups.add(new Nation_Setup("Ukraine", "UKR", 10, 10, 2, 10, 72));
-        setups.add(new Nation_Setup("Austria", "AUT", 11, 11, 2, 12, 69));
-        setups.add(new Nation_Setup("Scotland", "SCO", 12, 12, 2, 12, 69));
-        setups.add(new Nation_Setup("Turkey", "TUR", 13, 13, 3, 16, 73));
-        setups.add(new Nation_Setup("Denmark", "DEN", 14, 14, 2, 14, 68));
+        setups.add(new Nation_Setup("Russia", "RUS", 6, 6, 3, 16, 74));
+        setups.add(new Nation_Setup("Portugal", "POR", 7, 7, 2, 18, 74));
+        setups.add(new Nation_Setup("Belgium", "BEL", 8, 8, 2, 16, 74));
+        setups.add(new Nation_Setup("Ukraine", "UKR", 9, 9, 2, 10, 72));
+        setups.add(new Nation_Setup("Turkey", "TUR", 10, 10, 3, 16, 73));
+        setups.add(new Nation_Setup("Netherlands", "NED", 11, 11, 2, 18, 74));
+        setups.add(new Nation_Setup("Austria", "AUT", 12, 12, 2, 12, 69));
+        setups.add(new Nation_Setup("Czechia", "CZE", 13, 13, 2, 14, 72));
+        setups.add(new Nation_Setup("Greece", "GRE", 14, 14, 3, 18, 73));
         setups.add(new Nation_Setup("Croatia", "CRO", 15, 15, 2, 10, 68));
+        setups.add(new Nation_Setup("Denmark", "DEN", 16, 16, 2, 14, 68));
+        setups.add(new Nation_Setup("Switzerland", "SUI", 17, 17, 3, 12, 73));
+        setups.add(new Nation_Setup("Cyprus", "CYP", 18, 18, 2, 10, 66));
+        setups.add(new Nation_Setup("Serbia", "SRB", 19, 19, 3, 16, 68));
+        setups.add(new Nation_Setup("Scotland", "SCO", 20, 20, 2, 12, 69));
+        setups.add(new Nation_Setup("Norway", "NOR", 21, 21, 3, 14, 67));
+        setups.add(new Nation_Setup("Poland", "POL", 22, 22, 3, 18, 68));
+        setups.add(new Nation_Setup("Israel", "ISR", 23, 23, 3, 12, 68));
+        setups.add(new Nation_Setup("Romania", "ROU", 24, 24, 3, 16, 69));
+        setups.add(new Nation_Setup("Hungary", "HUN", 25, 25, 3, 14, 68));
+        return setups;
+    }
+
+    public static List<Nation_Setup> getTestSetup() {
+        List<Nation_Setup> setups = new ArrayList<>();
+        setups.add(new Nation_Setup("England", "ENG", 1, 1, 1, 20, 80));
+        setups.add(new Nation_Setup("Spain", "ESP", 2, 2, 1, 20, 78));
         return setups;
     }
 
     public static void initSetup() {
         int count = 0;
         List<Nation_Setup> setups = Sim.getSetups();
+        if (Sim.TEST) {
+            setups = Sim.getTestSetup();
+        }
         for (Nation_Setup setup : setups) {
             Nation nation = new Nation(setup.name, setup.short_name, count, setup.league_ranking);
             for (int i = 1; i <= setup.num_leagues; i++) {
@@ -229,7 +246,7 @@ public class Sim {
             nations.put(nation.getId(), nation);
             count++;
         }
-        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             TournamentController.initCompetitions();
         }
     }
@@ -247,12 +264,13 @@ public class Sim {
     }
 
     public static void showTeams() {
+        System.out.println("\nTeams");
         Map<String, Team> sorted = Sim.sortBySquadRating(teams);
         int count = 1;
         for (Map.Entry<String, Team> entry : sorted.entrySet()) {
-            System.out.println(count + " " + entry.getValue().getName() + "\t" + entry.getValue().getEloRating() + "\t"
-                    + entry.getValue().getSquadRating());
-            if (count >= 20) {
+            System.out.println(count + " " + entry.getValue().getPaddedName() + "\t"
+                    + ((int) entry.getValue().getEloRating()) + "\t" + entry.getValue().getSquadRating());
+            if (count >= 100) {
                 break;
             }
             count++;
@@ -271,13 +289,16 @@ public class Sim {
     }
 
     public static void showPlayers() {
+        System.out.println("\nPlayers");
         Map<String, Player> sorted = Sim.sortByRating(players);
         int count = 1;
         for (Map.Entry<String, Player> entry : sorted.entrySet()) {
             Player player = entry.getValue();
-            String team = Sim.getTeam(Sim.findPlayerInTeam(player.getId())).getName();
-            System.out.println(count + " " + player.getName() + "\t" + team + "\t" + player.getRating());
-            if (count >= 50) {
+            String team = Sim.getTeam(Sim.findPlayerInTeam(player.getId())).getPaddedName();
+            String nation = Sim.getNation(player.getNationId()).getCode();
+            System.out
+                    .println(count + "\t" + player.getPaddedName() + nation + "\t" + team + "\t" + player.getRating());
+            if (count >= 300) {
                 break;
             }
             count++;
@@ -292,7 +313,7 @@ public class Sim {
             entry.getValue().saveCompetitionHistory();
             updateLeague(entry.getValue(), entry.getKey());
         }
-        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             TournamentController.saveCompetitionHistory();
         }
         List<String> retired_players = new ArrayList<>();
@@ -317,14 +338,14 @@ public class Sim {
         for (Map.Entry<String, League> entry : leagues.entrySet()) {
             entry.getValue().showCompetitionHistory();
         }
-        if (SIMULATE_CONTINENTAL_COMPETITIONS || !TEST) {
+        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             TournamentController.showCompetitionHistory();
         }
     }
 
     public static void main(String[] args) {
         initSetup();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 2; i++) {
             sim();
         }
         showCompetitionHistories();
