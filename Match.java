@@ -30,6 +30,22 @@ public class Match {
         this.isNeutral = true;
     }
 
+    public String getWinner(boolean cup) {
+        if(this.home_team_goals > this.away_team_goals) {
+            return this.home_id;
+        } else if (this.home_team_goals < this.away_team_goals) {
+            return this.away_id; 
+        } else {
+            if(cup) {
+                this.simulated = false;
+                this.simulate(Sim.getTeam(away_id), Sim.getTeam(home_id));
+                return this.getWinner(cup);
+            } else {
+                return "";
+            }
+        }
+    }
+
     public void display() {
         if (simulated) {
             System.out.println(home_team + " " + home_team_goals + "-" + away_team_goals + " " + away_team);

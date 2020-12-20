@@ -211,4 +211,14 @@ public class CommonFunctions {
     public static String getRandomElement(String[] list) {
         return list[getRandomNumber(list.length)];
     }
+
+    public static void display2DArray(String[][] array, int a, int b) {
+        System.out.println();
+        for (int i = 0; i < a; i++) {
+            for (int j = 0; j < b; j++) {
+                System.out.print(array[i][j] + "   ");
+            }
+            System.out.println();
+        }
+    }
 }

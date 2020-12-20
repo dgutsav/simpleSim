@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Competition {
     private Map<Integer, List<String>> teams;
@@ -9,8 +12,6 @@ public class Competition {
     private Map<Integer, List<KnockoutTie>> knockouts;
 
     private List<CompetitionHistory> competitionHistories;
-
-    public int count = 0;
 
     public Competition(int level) {
         this.teams = new HashMap<>();
@@ -137,7 +138,6 @@ public class Competition {
             pots.get(1).remove(drawn_team);
             KnockoutTie tie = new KnockoutTie(drawn_team, opponent, this.competition_level);
             ties.add(tie);
-            System.out.println("Tie created");
         }
         qualifiers.put(seed, ties);
     }
@@ -167,7 +167,9 @@ public class Competition {
     public List<String> getTeamsForGroup() {
         if (competition_level == 2) {
             List<String> actual_teams = this.getTeamsForQualifiers(0);
-            actual_teams.addAll(TournamentController.getCompetition(1).getUnqualifiedTeams());
+            List<String> unqualified = TournamentController.getCompetition(1).getUnqualifiedTeams();
+            actual_teams.addAll(unqualified);
+            return actual_teams;
         }
         return this.getTeamsForQualifiers(0);
     }
@@ -183,6 +185,7 @@ public class Competition {
             for (int j = 0; j < this.getTotalGroups(); j++) {
                 pots[i][j] = group_teams.get(0);
                 group_teams.remove(pots[i][j]);
+                pots[i][j] = TournamentController.getCodeForTeam(pots[i][j]);
             }
         }
         return pots;
@@ -198,7 +201,7 @@ public class Competition {
     }
 
     public void setupGroups() {
-        TournamentController.setGroups2(this.competition_level, this.getGroupPots());
+        TournamentController.setGroups(this.competition_level, this.getGroupPots());
         String[][] group_matrix = TournamentController.getGroups(this.competition_level);
         for (int i = 0; i < this.getTotalGroups(); i++) {
             for (int j = 0; j < TournamentController.TEAMS_PER_GROUP; j++) {

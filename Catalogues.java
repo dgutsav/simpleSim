@@ -673,7 +673,7 @@ public class Catalogues {
             "Goran", "Radomir", "Vukasin", "Miomir", "Branimir", "Budimir", "Nikola", "Ivan", "Jovan", "Mihailo",
             "Aleksandar", "Andrej", "Djordje", "Stefan", "Petar", "Vasilije", "Todor", "Marko", "Antonije", "Pavle",
             "Srdjan", "Igor", "Dejan", "Vuk", "Nenad", "Prodan", "Stanisa", "Lazar", "Sasa", "Bojan", "Branislav",
-            "Novak", "Zivko", "Zdravko", "Nemanja" };
+            "Novak", "Zivko", "Zdravko", "Nemanja", "Andrija", "Predrag" };
     private static String[] serbianSurnames = { "Jovanovic", "Petrovic", "Nikolic", "Markovic", "Djordjevic",
             "Stojanovic", "Ilic", "Stankovic", "Pavlovic", "Milosevic", "Milankovic", "Petric", "Katic", "Sindjelic",
             "Nedic", "Maric", "Visnjic", "Janjic", "Saric", "Milicic", "Milenic", "Natalic", "Zoric", "Smiljic",

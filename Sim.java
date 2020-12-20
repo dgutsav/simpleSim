@@ -12,6 +12,7 @@ public class Sim {
     private static Map<String, Team> teams = new HashMap<>();
     private static Map<Integer, Nation> nations = new HashMap<>();
     private static Map<String, Player> players = new HashMap<>();
+    private static Map<String, Cup> cups = new HashMap<>();
 
     public static int current_season = 2020;
 
@@ -80,6 +81,13 @@ public class Sim {
         return null;
     }
 
+    public static Cup getCup(String id) {
+        if (cups.containsKey(id)) {
+            return cups.get(id);
+        }
+        return null;
+    }
+
     public static League[] getLeagues(List<String> array) {
         League[] array_leagues = new League[array.size()];
         for (int i = 0; i < array.size(); i++) {
@@ -102,6 +110,12 @@ public class Sim {
             entry.getValue().seasonStart();
             entry.getValue().simulateSeason();
         }
+
+        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+            entry.getValue().setup();
+            entry.getValue().simulateCup();
+        }
+
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             setupContinentalCompetitions();
             TournamentController.simulateCompetitions();
@@ -134,6 +148,13 @@ public class Sim {
         String id = CommonFunctions.getRandomId();
         player.setId(id);
         players.put(id, player);
+        return id;
+    }
+
+    public static String addCup(Cup cup) {
+        String id = CommonFunctions.getRandomId();
+        cup.setId(id);
+        cups.put(id, cup);
         return id;
     }
 
@@ -243,6 +264,9 @@ public class Sim {
                 String league_id = Sim.addLeague(league);
                 nation.addLeague(league_id);
             }
+            Cup cup = new Cup(Catalogues.getDenonym(nation.getName()) + " Cup", nation.getId());
+            String cup_id = Sim.addCup(cup);
+            nation.setCupId(cup_id);
             nations.put(nation.getId(), nation);
             count++;
         }
@@ -292,12 +316,22 @@ public class Sim {
         System.out.println("\nPlayers");
         Map<String, Player> sorted = Sim.sortByRating(players);
         int count = 1;
+        String team_name = "";
+        Team team;
+        Nation nation;
+        String code = "";
         for (Map.Entry<String, Player> entry : sorted.entrySet()) {
             Player player = entry.getValue();
-            String team = Sim.getTeam(Sim.findPlayerInTeam(player.getId())).getPaddedName();
-            String nation = Sim.getNation(player.getNationId()).getCode();
-            System.out
-                    .println(count + "\t" + player.getPaddedName() + nation + "\t" + team + "\t" + player.getRating());
+            team = Sim.getTeam(Sim.findPlayerInTeam(player.getId()));
+            if (team != null) {
+                team_name = team.getPaddedName();
+            }
+            nation = Sim.getNation(player.getNationId());
+            if (nation != null) {
+                code = nation.getCode();
+            }
+            System.out.println(
+                    count + "\t" + player.getPaddedName() + code + "\t" + team_name + "\t" + player.getRating());
             if (count >= 300) {
                 break;
             }
@@ -345,7 +379,7 @@ public class Sim {
 
     public static void main(String[] args) {
         initSetup();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 55; i++) {
             sim();
         }
         showCompetitionHistories();

@@ -89,7 +89,8 @@ public class TournamentController {
                 return 0;
             }
         } else if (level == 2) {
-            div_rank -= getPlacesForCompetition(level, league_rank);
+            div_rank -= getPlacesForCompetition(1, league_rank);
+            System.out.print(div_rank + " ");
             if (div_rank == 1) {
                 if (league_rank <= 12) {
                     return 0;
@@ -100,6 +101,7 @@ public class TournamentController {
                 }
             } else if (div_rank == 2) {
                 if (league_rank <= 5) {
+                    System.out.print(league_rank + "  ");
                     return 0;
                 } else if (league_rank <= 9) {
                     return 2;
@@ -213,12 +215,6 @@ public class TournamentController {
         int seeding = getSeeding(level, nation.getLeagueRanking(), rank);
         getTeams(level).put(team_code, team_id);
         getCompetition(level).addTeam(seeding, team_id);
-        Team team = Sim.getTeam(team_id);
-        // if (level != 2) {
-        // return;
-        // }
-        System.out.println(
-                team.getName() + "(" + team_code + ") added to " + getName(level) + " with seeding " + seeding);
     }
 
     public static List<String> sortByCoefficients(int competition_level) {
@@ -329,47 +325,7 @@ public class TournamentController {
         return false;
     }
 
-    public static void setGroups(int competition_level) {
-        int number_of_groups = TournamentController.getNumGroups(competition_level);
-        String[][] pots = TournamentController.setPots(competition_level,
-                TournamentController.sortByCoefficients(competition_level));
-        String[][] groups = new String[number_of_groups][TEAMS_PER_GROUP];
-        for (int i = 0; i < number_of_groups; i++) {
-            for (int j = 0; j < TEAMS_PER_GROUP; j++) {
-                groups[i][j] = "LOREM";
-            }
-        }
-        int current_pot = 0;
-        String[] current_pot_teams = pots[current_pot];
-        current_pot_teams = CommonFunctions.shuffle(current_pot_teams);
-        for (int i = 0; i < current_pot_teams.length; i++) {
-            groups[i][0] = current_pot_teams[i];
-        }
-        for (int i = 2; i <= TEAMS_PER_GROUP; i++) {
-            Pot pot = new Pot();
-            pot.init(pots[i - 1], TournamentController.getNumGroups(competition_level), i, groups);
-            while (!pot.isEmpty()) {
-                String current_team = pot.drawTeam();
-                List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
-                if (possible_groups.isEmpty()) {
-                    TournamentController.setGroups(competition_level);
-                    return;
-                }
-                int group_selected = possible_groups.get(CommonFunctions.getRandomNumber(possible_groups.size()));
-                groups[group_selected][i - 1] = current_team;
-                pot.updatePossibleGroups(groups);
-            }
-        }
-        if (competition_level == 1) {
-            clGroups = groups;
-        } else if (competition_level == 2) {
-            elGroups = groups;
-        } else {
-            eclGroups = groups;
-        }
-    }
-
-    public static void setGroups2(int competition_level, String[][] pots) {
+    public static void setGroups(int competition_level, String[][] pots) {
         int number_of_groups = TournamentController.getNumGroups(competition_level);
         String[][] groups = new String[number_of_groups][TEAMS_PER_GROUP];
         for (int i = 0; i < number_of_groups; i++) {
@@ -390,7 +346,7 @@ public class TournamentController {
                 String current_team = pot.drawTeam();
                 List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
                 if (possible_groups.isEmpty()) {
-                    TournamentController.setGroups(competition_level);
+                    TournamentController.setGroups(competition_level, pots);
                     return;
                 }
                 int group_selected = possible_groups.get(CommonFunctions.getRandomNumber(possible_groups.size()));
@@ -404,30 +360,6 @@ public class TournamentController {
             elGroups = groups;
         } else {
             eclGroups = groups;
-        }
-    }
-
-    public static void displayGroups(int competition_level) {
-        String[][] groups = TournamentController.getGroups(competition_level);
-        System.out.println(TournamentController.getName(competition_level));
-        for (int i = 0; i < TournamentController.getNumGroups(competition_level); i++) {
-            System.out.println("Group " + (i + 1));
-            for (String str : groups[i]) {
-                System.out.print(str + "\t");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void displayPots(int competition_level, List<String> list) {
-        String[][] pots = TournamentController.setPots(competition_level, list);
-        System.out.println(TournamentController.getName(competition_level));
-        for (int i = 0; i < TEAMS_PER_GROUP; i++) {
-            System.out.println("Group " + (i + 1));
-            for (String str : pots[i]) {
-                System.out.print(str + "\t");
-            }
-            System.out.println();
         }
     }
 
@@ -482,37 +414,6 @@ public class TournamentController {
         simulateQualifiers();
         simulateGroups();
         simulateKnockouts();
-    }
-
-    public static void testTransferredTeams() {
-        String[] transferred_cl = championsLeague.getTransferredTeams();
-        String[] transferred_el = europaLeague.getTransferredTeams();
-        List<KnockoutTie> el_r32 = europaLeague.getKnockoutRound().get(1);
-        List<KnockoutTie> ecl_r32 = conferenceLeague.getKnockoutRound().get(1);
-        for (String transferred : transferred_cl) {
-            boolean found = false;
-            for (KnockoutTie tie : el_r32) {
-                if (transferred.equalsIgnoreCase(tie.getTeam1()) || transferred.equalsIgnoreCase(tie.getTeam2())) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                System.out.println(transferred + " not found in new competition");
-            }
-        }
-        for (String transferred : transferred_el) {
-            boolean found = false;
-            for (KnockoutTie tie : ecl_r32) {
-                if (transferred.equalsIgnoreCase(tie.getTeam1()) || transferred.equalsIgnoreCase(tie.getTeam2())) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                System.out.println(transferred + " not found in new competition");
-            }
-        }
     }
 
     public static void saveCompetitionHistory() {

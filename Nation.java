@@ -7,6 +7,7 @@ public class Nation {
     private String code;
     private int id;
     private int league_ranking;
+    private String cup;
 
     public Nation(String name, String code, int id, int rank) {
         this.name = name;
@@ -116,5 +117,22 @@ public class Nation {
                 }
             }
         }
+    }
+
+    public List<String> getTeamsForCup() {
+        List<String> all_teams = new ArrayList<>();
+        int total_leagues = this.leagues.size();
+        for (int i = total_leagues; i > 0; i--) {
+            League league = this.getLeague(i);
+            int league_size = league.getTeams().size();
+            for (int j = league_size; j > 0; j--) {
+                all_teams.add(league.getTeamAtRank(j));
+            }
+        }
+        return all_teams;
+    }
+
+    public void setCupId(String cup_id) {
+        this.cup = cup_id;
     }
 }
