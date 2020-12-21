@@ -16,7 +16,7 @@ public class Sim {
 
     public static int current_season = 2020;
 
-    public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
+    public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = false;
     public static boolean TEST = false;
 
     private Sim() {
@@ -28,6 +28,10 @@ public class Sim {
 
     public static void updateLeague(League league, String id) {
         leagues.put(id, league);
+    }
+
+    public static void updateCup(Cup cup, String id) {
+        cups.put(id, cup);
     }
 
     public static int getSeasonNumber() {
@@ -347,6 +351,10 @@ public class Sim {
             entry.getValue().saveCompetitionHistory();
             updateLeague(entry.getValue(), entry.getKey());
         }
+        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+            entry.getValue().saveCompetitionHistory();
+            updateCup(entry.getValue(), entry.getKey());
+        }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             TournamentController.saveCompetitionHistory();
         }
@@ -372,6 +380,9 @@ public class Sim {
         for (Map.Entry<String, League> entry : leagues.entrySet()) {
             entry.getValue().showCompetitionHistory();
         }
+        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+            entry.getValue().showCompetitionHistory();
+        }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             TournamentController.showCompetitionHistory();
         }
@@ -379,7 +390,7 @@ public class Sim {
 
     public static void main(String[] args) {
         initSetup();
-        for (int i = 0; i < 55; i++) {
+        for (int i = 0; i < 1; i++) {
             sim();
         }
         showCompetitionHistories();

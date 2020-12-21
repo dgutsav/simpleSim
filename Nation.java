@@ -135,4 +135,12 @@ public class Nation {
     public void setCupId(String cup_id) {
         this.cup = cup_id;
     }
+
+    public Cup getCup() {
+        return Sim.getCup(this.cup);
+    }
+
+    public String getCupId() {
+        return this.cup;
+    }
 }
