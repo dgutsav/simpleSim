@@ -177,7 +177,7 @@ public class League {
     public void saveCompetitionHistory() {
         List<TeamHistory> histories = new ArrayList<>();
         for (int i = 1; i <= this.teams.size(); i++) {
-            int rating = (int) Sim.getTeam(this.getTeamAtRank(i)).getSquadRating();
+            int rating = (int) Sim.getTeam(this.getTeamAtRank(i)).getBestSquadRating();
             TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i, rating);
             histories.add(history);
         }

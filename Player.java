@@ -57,6 +57,16 @@ public class Player {
         return this.injured;
     }
 
+    public void healInjury() {
+        this.injured = false;
+        this.currentInjury = null;
+    }
+
+    public void injurePlayer(Injury injury) {
+        this.currentInjury = injury;
+        this.injured = true;
+    }
+
     public double getXP() {
         return this.xp;
     }
@@ -165,5 +175,10 @@ public class Player {
             padded += " ";
         }
         return padded;
+    }
+
+    public int getRatingForPosition(Position position) {
+        double factored_rating = PositionHelper.getPositionSimilarity(this.position, position) * this.getRating();
+        return (int) factored_rating;
     }
 }

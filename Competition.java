@@ -6,6 +6,7 @@ import java.util.Map;
 public class Competition {
     private Map<Integer, List<String>> teams;
     private int competition_level;
+    private String continent;
 
     private Map<Integer, List<KnockoutTie>> qualifiers;
     private League[] groups;
@@ -13,11 +14,12 @@ public class Competition {
 
     private List<CompetitionHistory> competitionHistories;
 
-    public Competition(int level) {
+    public Competition(int level, String continent) {
         this.teams = new HashMap<>();
         this.competition_level = level;
         this.reset();
         this.competitionHistories = new ArrayList<>();
+        this.continent = continent;
     }
 
     public void reset() {
@@ -45,20 +47,25 @@ public class Competition {
     }
 
     public String getName() {
-        return TournamentController.getName(this.competition_level);
+        if (this.continent.equalsIgnoreCase("europe")) {
+            return ControllerUEFA.getName(this.competition_level);
+        } else {
+            return ControllerCONMEBOL.getName(this.competition_level);
+        }
     }
 
     public int getHighestSeed() {
-        int seed = 0;
-        while (this.teams.containsKey(seed)) {
-            seed++;
+        if (this.continent.equalsIgnoreCase("europe")) {
+            return ControllerUEFA.getHighestSeed(this.competition_level);
+        } else if (this.continent.equalsIgnoreCase("south america")) {
+            return ControllerCONMEBOL.getHighestSeed(this.competition_level);
         }
-        return seed - 1;
+        return 0;
     }
 
     public int getNumberOfKnockoutRounds() {
-        int total_knockout_teams = TournamentController.TEAMS_PROGRESS_FROM_GROUP * this.getTotalGroups()
-                + TournamentController.getCompetition(this.competition_level - 1).getTotalGroups();
+        int total_knockout_teams = ControllerUEFA.TEAMS_PROGRESS_FROM_GROUP * this.getTotalGroups()
+                + ControllerUEFA.getCompetition(this.competition_level - 1).getTotalGroups();
 
         int rounds = 0;
         while (total_knockout_teams != 1) {
@@ -71,7 +78,7 @@ public class Competition {
     public List<String> getPossibleOpponents(String team, List<String> opponents, boolean is_qualifiers) {
         int nation = Sim.getTeam(team).getNationId();
         List<String> possible = new ArrayList<>();
-        boolean champion = TournamentController.isDomesticChampion(team);
+        boolean champion = ControllerUEFA.isDomesticChampion(team);
         for (String opponent : opponents) {
             if (nation == Sim.getTeam(opponent).getNationId()) {
                 continue;
@@ -83,8 +90,8 @@ public class Competition {
                         continue;
                     }
                 }
-            } else {
-                boolean opponent_champion = TournamentController.isDomesticChampion(opponent);
+            } else if (this.continent.equalsIgnoreCase("europe")) {
+                boolean opponent_champion = ControllerUEFA.isDomesticChampion(opponent);
                 if (opponent_champion != champion) {
                     continue;
                 }
@@ -107,6 +114,9 @@ public class Competition {
         List<String> winners = new ArrayList<>();
         if (is_qualifiers) {
             List<KnockoutTie> ties = this.qualifiers.get(round);
+            if (ties == null) {
+                return winners;
+            }
             for (KnockoutTie tie : ties) {
                 winners.add(tie.getWinner());
             }
@@ -118,14 +128,25 @@ public class Competition {
     public List<String> getTeamsForQualifiers(int seed) {
         List<String> quali_teams = this.teams.get(seed);
         if (seed < this.getHighestSeed()) {
-            quali_teams.addAll(this.getWinnersFromRound(seed + 1, true));
+            if (quali_teams == null) {
+                quali_teams = new ArrayList<>();
+            }
+            List<String> prev_winners = this.getWinnersFromRound(seed + 1, true);
+            if (prev_winners != null) {
+                quali_teams.addAll(prev_winners);
+            }
         }
         return quali_teams;
     }
 
     public void setQualifiers(int seed) {
         List<KnockoutTie> ties = new ArrayList<>();
-        List<List<String>> pots = TournamentController.divideIntoSeededPots(this.getTeamsForQualifiers(seed));
+        List<List<String>> pots;
+        if (this.continent.equalsIgnoreCase("europe")) {
+            pots = ControllerUEFA.divideIntoSeededPots(this.getTeamsForQualifiers(seed));
+        } else {
+            pots = ControllerCONMEBOL.divideIntoPots(this.getTeamsForQualifiers(seed));
+        }
         while (!pots.get(1).isEmpty()) {
             String drawn_team = this.drawTeam(pots.get(1), pots.get(0), true);
             List<String> possible_opponents = this.getPossibleOpponents(drawn_team, pots.get(0), true);
@@ -167,7 +188,7 @@ public class Competition {
     public List<String> getTeamsForGroup() {
         if (competition_level == 2) {
             List<String> actual_teams = this.getTeamsForQualifiers(0);
-            List<String> unqualified = TournamentController.getCompetition(1).getUnqualifiedTeams();
+            List<String> unqualified = ControllerUEFA.getCompetition(1).getUnqualifiedTeams();
             actual_teams.addAll(unqualified);
             return actual_teams;
         }
@@ -175,17 +196,17 @@ public class Competition {
     }
 
     public int getTotalGroups() {
-        return TournamentController.getNumGroups(this.competition_level);
+        return ControllerUEFA.getNumGroups(this.competition_level);
     }
 
     public String[][] getGroupPots() {
-        List<String> group_teams = TournamentController.sortByCoefficients(this.getTeamsForGroup());
-        String[][] pots = new String[TournamentController.TEAMS_PER_GROUP][this.getTotalGroups()];
-        for (int i = 0; i < TournamentController.TEAMS_PER_GROUP; i++) {
+        List<String> group_teams = CommonFunctions.sortByCoefficients(this.getTeamsForGroup());
+        String[][] pots = new String[ControllerUEFA.TEAMS_PER_GROUP][this.getTotalGroups()];
+        for (int i = 0; i < ControllerUEFA.TEAMS_PER_GROUP; i++) {
             for (int j = 0; j < this.getTotalGroups(); j++) {
                 pots[i][j] = group_teams.get(0);
                 group_teams.remove(pots[i][j]);
-                pots[i][j] = TournamentController.getCodeForTeam(pots[i][j]);
+                pots[i][j] = ControllerUEFA.getCodeForTeam(pots[i][j]);
             }
         }
         return pots;
@@ -200,15 +221,8 @@ public class Competition {
         return competiion_matches;
     }
 
-    public void setupGroups() {
-        TournamentController.setGroups(this.competition_level, this.getGroupPots());
-        String[][] group_matrix = TournamentController.getGroups(this.competition_level);
-        for (int i = 0; i < this.getTotalGroups(); i++) {
-            for (int j = 0; j < TournamentController.TEAMS_PER_GROUP; j++) {
-                group_matrix[i][j] = TournamentController.getTeamForCode(group_matrix[i][j]);
-            }
-        }
-        for (int i = 0; i < TournamentController.getNumGroups(competition_level); i++) {
+    public void initGroups(String[][] group_matrix) {
+        for (int i = 0; i < ControllerUEFA.getNumGroups(competition_level); i++) {
             for (String team : group_matrix[i]) {
                 this.groups[i].addTeam(team);
             }
@@ -218,9 +232,25 @@ public class Competition {
         }
     }
 
+    public void setupGroups() {
+        ControllerUEFA.setGroups(this.competition_level, this.getGroupPots());
+        String[][] group_matrix = ControllerUEFA.getGroups(this.competition_level);
+        for (int i = 0; i < this.getTotalGroups(); i++) {
+            for (int j = 0; j < ControllerUEFA.TEAMS_PER_GROUP; j++) {
+                group_matrix[i][j] = ControllerUEFA.getTeamForCode(group_matrix[i][j]);
+            }
+        }
+        this.initGroups(group_matrix);
+    }
+
+    public void setupGroupsCONMEBOL() {
+        String[][] group_matrix = ControllerCONMEBOL.getLibGroups();
+        this.initGroups(group_matrix);
+    }
+
     public void simulateGroup(int group_number) {
-        System.out.println("\nGroup " + TournamentController.getGroupName(group_number));
-        for (int i = 1; i <= TournamentController.GROUP_MATCHDAYS; i++) {
+        System.out.println("\nGroup " + ControllerUEFA.getGroupName(group_number));
+        for (int i = 1; i <= ControllerUEFA.GROUP_MATCHDAYS; i++) {
             System.out.println("Matchday " + i);
             this.groups[group_number].simulateMatchDay(i);
         }
@@ -245,8 +275,8 @@ public class Competition {
         String[] transferred = new String[this.getTotalGroups()];
         TeamPerformance[] performances = new TeamPerformance[this.getTotalGroups()];
         for (int i = 0; i < this.getTotalGroups(); i++) {
-            performances[i] = this.groups[i].getTable().getTeamPerformance(
-                    this.groups[i].getTeamAtRank(TournamentController.TEAMS_PROGRESS_FROM_GROUP + 1));
+            performances[i] = this.groups[i].getTable()
+                    .getTeamPerformance(this.groups[i].getTeamAtRank(ControllerUEFA.TEAMS_PROGRESS_FROM_GROUP + 1));
         }
         LeagueTable table = new LeagueTable(this.getTotalGroups());
         table.performances = performances;
@@ -261,8 +291,7 @@ public class Competition {
         List<String> seeded = this.getTeamsAtRank(1);
         List<String> unseeded = this.getTeamsAtRank(2);
         if (this.competition_level > 1) {
-            String[] transferredTeams = TournamentController.getCompetition(this.competition_level - 1)
-                    .getTransferredTeams();
+            String[] transferredTeams = ControllerUEFA.getCompetition(this.competition_level - 1).getTransferredTeams();
             for (int i = 0; i < transferredTeams.length; i++) {
                 if (i < transferredTeams.length / 2) {
                     seeded.add(transferredTeams[i]);
@@ -295,6 +324,10 @@ public class Competition {
             KnockoutTie tie = new KnockoutTie(opponent_team, drawn_team, this.competition_level);
             ties.add(tie);
         }
+        this.knockouts.put(1, ties);
+    }
+
+    public void setInitialKnockoutTies(List<KnockoutTie> ties) {
         this.knockouts.put(1, ties);
     }
 
@@ -400,5 +433,13 @@ public class Competition {
             max_seed--;
         }
         return losers;
+    }
+
+    public List<KnockoutTie> getTies(int round, boolean is_qualifiers) {
+        if (is_qualifiers) {
+            return this.qualifiers.get(round);
+        } else {
+            return this.knockouts.get(round);
+        }
     }
 }

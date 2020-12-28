@@ -7,9 +7,9 @@ public class EloRankings {
     private EloRankings() {
     }
 
-    public static void calculate(Team a, Team b, Match match) {
-        double old_a = a.getEloRating();
-        double old_b = b.getEloRating();
+    public static void calculate(Club a, Club b, Match match) {
+        //double old_a = a.getEloRating();
+        //double old_b = b.getEloRating();
         float K = WEIGHT_NORMAL;
         if(match.getTournamentLevel() == 1) {
             K = WEIGHT_CL;
@@ -33,12 +33,12 @@ public class EloRankings {
         } else if (match.home_team_goals == match.away_team_goals) {
             W = 0.5f;
         }
-        double dr = old_a - old_b;
-        double den = 1 + Math.pow(10, dr / (-400));
-        double We = 1.0 / den;
-        double P = K * G * (W - We);
-        a.updateElo(old_a + P > 0 ? old_a + P : 0);
-        b.updateElo(old_b - P > 0 ? old_b - P : 0);
+        //double dr = old_a - old_b;
+        //double den = 1 + Math.pow(10, dr / (-400));
+        //double We = 1.0 / den;
+        //double P = K * G * (W - We);
+        //a.updateElo(old_a + P > 0 ? old_a + P : 0);
+        //b.updateElo(old_b - P > 0 ? old_b - P : 0);
         Sim.updateTeam(a, a.getId());
         Sim.updateTeam(b, b.getId());
     }

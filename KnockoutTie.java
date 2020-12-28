@@ -104,10 +104,18 @@ public class KnockoutTie {
         }
     }
 
+    public Match getFirstLeg() {
+        return this.first_leg;
+    }
+
+    public Match getSecondLeg() {
+        return this.second_leg;
+    }
+
     public void show() {
-        //System.out.println();
-        //this.first_leg.display();
-        //this.second_leg.display();
+        // System.out.println();
+        // this.first_leg.display();
+        // this.second_leg.display();
         this.showAggregate();
     }
 }

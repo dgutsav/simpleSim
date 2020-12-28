@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class TournamentController {
+public class ControllerUEFA {
 
     public static final int NUMBER_OF_COMPETITIONS = 3;
     public static final int TEAMS_PER_GROUP = 4;
@@ -30,7 +29,9 @@ public class TournamentController {
 
     private static final boolean USE_CONFERENCE_LEAGUE = false;
 
-    private TournamentController() {
+    private static String continent = "Europe";
+
+    private ControllerUEFA() {
         // compliance
     }
 
@@ -90,7 +91,6 @@ public class TournamentController {
             }
         } else if (level == 2) {
             div_rank -= getPlacesForCompetition(1, league_rank);
-            System.out.print(div_rank + " ");
             if (div_rank == 1) {
                 if (league_rank <= 12) {
                     return 0;
@@ -101,7 +101,6 @@ public class TournamentController {
                 }
             } else if (div_rank == 2) {
                 if (league_rank <= 5) {
-                    System.out.print(league_rank + "  ");
                     return 0;
                 } else if (league_rank <= 9) {
                     return 2;
@@ -120,6 +119,13 @@ public class TournamentController {
         }
     }
 
+    public static int getHighestSeed(int level) {
+        if(level == 1 || level == 2) {
+            return 3;
+        }
+        return 0;
+    }
+
     public static String getName(int competition_level) {
         switch (competition_level) {
             case 1:
@@ -136,11 +142,11 @@ public class TournamentController {
     public static int getNumGroups(int competition_level) {
         switch (competition_level) {
             case 1:
-                return TournamentController.NUM_CL_TEAMS / TournamentController.TEAMS_PER_GROUP;
+                return ControllerUEFA.NUM_CL_TEAMS / ControllerUEFA.TEAMS_PER_GROUP;
             case 2:
-                return TournamentController.NUM_EL_TEAMS / TournamentController.TEAMS_PER_GROUP;
+                return ControllerUEFA.NUM_EL_TEAMS / ControllerUEFA.TEAMS_PER_GROUP;
             default:
-                return TournamentController.NUM_ECL_TEAMS / TournamentController.TEAMS_PER_GROUP;
+                return ControllerUEFA.NUM_ECL_TEAMS / ControllerUEFA.TEAMS_PER_GROUP;
         }
     }
 
@@ -153,6 +159,12 @@ public class TournamentController {
             default:
                 return eclTeams;
         }
+    }
+
+    public static void clearTeams() {
+        clTeams.clear();
+        elTeams.clear();
+        eclTeams.clear();
     }
 
     public static String[][] getGroups(int competition_level) {
@@ -178,8 +190,8 @@ public class TournamentController {
     }
 
     public static String getCodeForTeam(String team_id) {
-        for (int i = 1; i <= TournamentController.NUMBER_OF_COMPETITIONS; i++) {
-            Map<String, String> findTeams = TournamentController.getTeams(i);
+        for (int i = 1; i <= ControllerUEFA.NUMBER_OF_COMPETITIONS; i++) {
+            Map<String, String> findTeams = ControllerUEFA.getTeams(i);
             for (Map.Entry<String, String> entry : findTeams.entrySet()) {
                 if (entry.getValue().equalsIgnoreCase(team_id)) {
                     return entry.getKey();
@@ -190,7 +202,7 @@ public class TournamentController {
     }
 
     public static boolean isDomesticChampion(String team_id) {
-        String code = TournamentController.getCodeForTeam(team_id);
+        String code = ControllerUEFA.getCodeForTeam(team_id);
         return code.charAt(code.length() - 1) == '1';
     }
 
@@ -217,34 +229,52 @@ public class TournamentController {
         getCompetition(level).addTeam(seeding, team_id);
     }
 
-    public static List<String> sortByCoefficients(int competition_level) {
-        Map<String, String> comp_teams = getTeams(competition_level);
-        Map<String, Team> teams = new HashMap<>();
-        for (Map.Entry<String, String> entry : comp_teams.entrySet()) {
-            teams.put(entry.getKey(), Sim.getTeam(entry.getValue()));
-        }
-        List<Map.Entry<String, Team>> list = new LinkedList<>(teams.entrySet());
-        Collections.sort(list,
-                (Map.Entry<String, Team> o1, Map.Entry<String, Team> o2) -> (int) ((o2.getValue().getCoefficient())
-                        - (o1.getValue().getCoefficient())));
-        List<String> sorted = new ArrayList<>();
-        for (Map.Entry<String, Team> aa : list) {
-            sorted.add(aa.getKey());
-        }
-        return sorted;
+    public static List<Nation> sortByLeagueRanking() {
+        List<Nation> nations = Sim.getNationFromContinent("europe");
+        Collections.sort(nations, (Nation o1, Nation o2) -> o1.getLeagueRanking() - o2.getLeagueRanking());
+        return nations;
     }
 
-    public static List<String> sortByCoefficients(List<String> teams_to_sort) {
-        List<String> sorted = new ArrayList<>();
-        List<Team> teams = new ArrayList<>();
-        for (String team : teams_to_sort) {
-            teams.add(Sim.getTeam(team));
+    public static void getTeams() {
+        ControllerUEFA.clearTeams();
+        List<Nation> nations = ControllerUEFA.sortByLeagueRanking();
+        for (Nation nation : nations) {
+            int clPlaces = ControllerUEFA.getPlacesForCompetition(1, nation.getLeagueRanking());
+            int elPlaces = ControllerUEFA.getPlacesForCompetition(2, nation.getLeagueRanking());
+            List<String> champTeams = new ArrayList<>();
+            for (int i = 1; i <= clPlaces; i++) {
+                champTeams.add(nation.getTeamAtRank(i));
+            }
+            List<String> europaTeams = new ArrayList<>();
+            for (int i = clPlaces + 1; i <= clPlaces + elPlaces; i++) {
+                europaTeams.add(nation.getTeamAtRank(i));
+            }
+            String cup_winner = nation.getCupWinner();
+            if (!champTeams.contains(cup_winner)) {
+                if (europaTeams.contains(cup_winner)) {
+                    europaTeams.remove(cup_winner);
+                } else {
+                    europaTeams.remove(nation.getTeamAtRank(clPlaces + elPlaces));
+                }
+                europaTeams.add(0, cup_winner);
+                System.out.println("cup winner added to Europa League for " + nation.getName());
+            }
+            for (int i = 1; i <= clPlaces; i++) {
+                String code = nation.getCode() + i;
+                getTeams(1).put(code, champTeams.get(i - 1));
+                getCompetition(1).addTeam(ControllerUEFA.getSeeding(1, nation.getLeagueRanking(), i),
+                        champTeams.get(i - 1));
+                System.out.println(code + " " + Sim.getTeam(champTeams.get(i - 1)).getName() + " added to CL");
+            }
+            for (int i = clPlaces + 1; i <= elPlaces + clPlaces; i++) {
+                String code = nation.getCode() + i;
+                getTeams(2).put(code, europaTeams.get(i - (1 + clPlaces)));
+                getCompetition(2).addTeam(ControllerUEFA.getSeeding(2, nation.getLeagueRanking(), i),
+                        europaTeams.get(i - (1 + clPlaces)));
+                System.out.println(
+                        code + " " + Sim.getTeam(europaTeams.get(i - (1 + clPlaces))).getName() + " added to EL");
+            }
         }
-        Collections.sort(teams, (Team a, Team b) -> (int) (b.getCoefficient() - a.getCoefficient()));
-        for (Team team : teams) {
-            sorted.add(team.getId());
-        }
-        return sorted;
     }
 
     public static List<List<String>> divideIntoSeededPots(List<String> current_teams) {
@@ -257,8 +287,8 @@ public class TournamentController {
                 non_champions.add(team);
             }
         }
-        champions = TournamentController.sortByCoefficients(champions);
-        non_champions = TournamentController.sortByCoefficients(non_champions);
+        champions = CommonFunctions.sortByCoefficients(champions);
+        non_champions = CommonFunctions.sortByCoefficients(non_champions);
         List<String> seeded_teams = new ArrayList<>();
         List<String> unseeded_teams = new ArrayList<>();
         for (int i = 0; i < champions.size() / 2; i++) {
@@ -276,22 +306,22 @@ public class TournamentController {
     }
 
     public static String[][] setPots(int competition_level, List<String> list) {
-        int number_of_groups = TournamentController.getNumGroups(competition_level);
-        String[][] pots = new String[TournamentController.TEAMS_PER_GROUP][number_of_groups];
+        int number_of_groups = ControllerUEFA.getNumGroups(competition_level);
+        String[][] pots = new String[ControllerUEFA.TEAMS_PER_GROUP][number_of_groups];
         if (competition_level == 1) {
             for (int i = 1; i <= number_of_groups; i++) {
                 String code = Sim.getNationByLeagueRanking(i).getCode() + "1";
                 pots[0][i - 1] = code;
                 list.remove(code);
             }
-            for (int i = 1; i < TournamentController.TEAMS_PER_GROUP; i++) {
+            for (int i = 1; i < ControllerUEFA.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
                     list.remove(pots[i][j]);
                 }
             }
         } else {
-            for (int i = 0; i < TournamentController.TEAMS_PER_GROUP; i++) {
+            for (int i = 0; i < ControllerUEFA.TEAMS_PER_GROUP; i++) {
                 for (int j = 0; j < number_of_groups; j++) {
                     pots[i][j] = list.get(0);
                     list.remove(pots[i][j]);
@@ -307,7 +337,7 @@ public class TournamentController {
     }
 
     public static boolean fromSameGroup(String[][] groups, String code1, String code2) {
-        for (int i = 0; i < groups.length / TournamentController.TEAMS_PER_GROUP; i++) {
+        for (int i = 0; i < groups.length / ControllerUEFA.TEAMS_PER_GROUP; i++) {
             boolean found1 = false;
             boolean found2 = false;
             for (String team : groups[i]) {
@@ -326,7 +356,7 @@ public class TournamentController {
     }
 
     public static void setGroups(int competition_level, String[][] pots) {
-        int number_of_groups = TournamentController.getNumGroups(competition_level);
+        int number_of_groups = ControllerUEFA.getNumGroups(competition_level);
         String[][] groups = new String[number_of_groups][TEAMS_PER_GROUP];
         for (int i = 0; i < number_of_groups; i++) {
             for (int j = 0; j < TEAMS_PER_GROUP; j++) {
@@ -341,12 +371,12 @@ public class TournamentController {
         }
         for (int i = 2; i <= TEAMS_PER_GROUP; i++) {
             Pot pot = new Pot();
-            pot.init(pots[i - 1], TournamentController.getNumGroups(competition_level), i, groups);
+            pot.init(pots[i - 1], ControllerUEFA.getNumGroups(competition_level), i, groups);
             while (!pot.isEmpty()) {
                 String current_team = pot.drawTeam();
                 List<Integer> possible_groups = pot.getPossibleGroupsForDrawnTeam();
                 if (possible_groups.isEmpty()) {
-                    TournamentController.setGroups(competition_level, pots);
+                    ControllerUEFA.setGroups(competition_level, pots);
                     return;
                 }
                 int group_selected = possible_groups.get(CommonFunctions.getRandomNumber(possible_groups.size()));
@@ -364,9 +394,9 @@ public class TournamentController {
     }
 
     public static void initCompetitions() {
-        championsLeague = new Competition(1);
-        europaLeague = new Competition(2);
-        conferenceLeague = new Competition(3);
+        championsLeague = new Competition(1, continent);
+        europaLeague = new Competition(2, continent);
+        conferenceLeague = new Competition(3, continent);
 
     }
 

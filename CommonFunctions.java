@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CommonFunctions {
@@ -5,10 +7,10 @@ public class CommonFunctions {
 
     }
 
-    public static Team getTeam(float rating, String nation_name, int nation_id) {
-        Team team = new Team(CommonFunctions.getTeamNameForCountry(nation_name), rating, nation_id);
+    public static Club getTeam(float rating, String nation_name, int nation_id) {
+        Club team = new Club(CommonFunctions.getTeamNameForCountry(nation_name), nation_id);
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
-        Position[] positions = CommonFunctions.getPositions(team.getFormation(), ratings.length);
+        Position[] positions = CommonFunctions.getPositions(team.getSeniorSquad().getPositions(), ratings.length);
         for (int i = 0; i < ratings.length; i++) {
             int age;
             if (ratings[i] >= 86) {
@@ -30,7 +32,7 @@ public class CommonFunctions {
             }
             Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i], age, positions[i]);
             String player_id = Sim.addPlayer(player);
-            team.addPlayer(player_id);
+            team.getSeniorSquad().addPlayer(player_id);
         }
         return team;
     }
@@ -41,14 +43,15 @@ public class CommonFunctions {
             positions[i] = formation[i];
         }
         List<Position> all_positions = PositionHelper.getAllPositions();
+        all_positions.addAll(PositionHelper.getAllPositions());
         int count = 0;
         for (Position position : all_positions) {
             positions[11 + count] = position;
             count++;
         }
-        int left = length - 23;
+        int left = length - 34;
         for (int i = 0; i < left; i++) {
-            positions[23 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
+            positions[34 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
         }
         return positions;
     }
@@ -64,7 +67,7 @@ public class CommonFunctions {
     }
 
     public static int[] getPlayerDistribution(int rating) {
-        int totalPlayers = 23 + CommonFunctions.getRandomNumber(8);
+        int totalPlayers = 35 + CommonFunctions.getRandomNumber(10);
         int[] ratings = new int[totalPlayers];
         for (int i = 0; i < totalPlayers; i++) {
             if (i < 11) {
@@ -151,12 +154,18 @@ public class CommonFunctions {
         return array;
     }
 
-    public static League createLeague(int league_rating, int size, int variance, int nation_id, int level,
-            int promotion, int relegation, String nation_name) {
+    public static League createLeague(int league_rating, int size, int nation_id, int level, int promotion,
+            int relegation, String nation_name) {
+        int variance = 0;
+        if (level == 1) {
+            variance = CommonFunctions.getRandomNumber(2);
+        } else {
+            variance = CommonFunctions.getRandomNumber(3);
+        }
         int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
         League league = getLeague(nation_name, level, promotion, relegation, nation_id);
         for (int i = 0; i < team_ratings.length; i++) {
-            Team team = getTeam((float) team_ratings[i], nation_name, nation_id);
+            Club team = getTeam((float) team_ratings[i], nation_name, nation_id);
             String team_id = Sim.addTeam(team);
             league.addTeam(team_id);
         }
@@ -208,6 +217,10 @@ public class CommonFunctions {
         return list.get(getRandomNumber(list.size()));
     }
 
+    public static int getRandomIntElement(List<Integer> list) {
+        return list.get(getRandomNumber(list.size()));
+    }
+
     public static String getRandomElement(String[] list) {
         return list[getRandomNumber(list.length)];
     }
@@ -220,5 +233,18 @@ public class CommonFunctions {
             }
             System.out.println();
         }
+    }
+
+    public static List<String> sortByCoefficients(List<String> teams_to_sort) {
+        List<String> sorted = new ArrayList<>();
+        List<Club> teams = new ArrayList<>();
+        for (String team : teams_to_sort) {
+            teams.add(Sim.getTeam(team));
+        }
+        Collections.sort(teams, (Club a, Club b) -> (int) (b.getCoefficient() - a.getCoefficient()));
+        for (Club team : teams) {
+            sorted.add(team.getId());
+        }
+        return sorted;
     }
 }

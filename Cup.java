@@ -105,8 +105,8 @@ public class Cup {
         System.out.println(round_name);
         List<Match> matches_to_simulate = this.matches.get(round);
         for (int i = 0; i < matches_to_simulate.size(); i++) {
-            Team home_team = Sim.getTeam(matches_to_simulate.get(i).home_id);
-            Team away_team = Sim.getTeam(matches_to_simulate.get(i).away_id);
+            Club home_team = Sim.getTeam(matches_to_simulate.get(i).home_id);
+            Club away_team = Sim.getTeam(matches_to_simulate.get(i).away_id);
             matches_to_simulate.get(i).simulate(home_team, away_team);
             matches_to_simulate.get(i).display();
         }
@@ -191,11 +191,5 @@ public class Cup {
             default:
                 return "Preliminary Round";
         }
-    }
-
-    public static void main(String args[]) {
-        System.out.println(getRoundCount(80));
-        int first_round_teams = (80 - (int) (Math.pow(2, Cup.getRoundCount(80))));
-        System.out.println(first_round_teams);
     }
 }

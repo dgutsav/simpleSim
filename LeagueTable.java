@@ -8,7 +8,7 @@ public class LeagueTable {
     }
 
     public void startNewSeason(List<String> list) {
-        Team[] teams = Sim.getTeamArray(list);
+        Club[] teams = Sim.getTeamArray(list);
         for (int i = 0; i < teams.length; i++) {
             performances[i] = new TeamPerformance(teams[i].getId(), teams[i].getName());
         }

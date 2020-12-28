@@ -86,7 +86,118 @@ public class PositionHelper {
         return positions;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getPositionName(getPosition(5)));
+    public static double getPositionSimilarity(Position a, Position b) {
+        if (a == b) {
+            return 1;
+        } else {
+            if (a == Position.GOALKEEPER) {
+                return 0;
+            } else if (a == Position.CENTRE_BACK) {
+                if (b == Position.DEFENSIVE_MIDFIELDER || b == Position.LEFT_BACK || b == Position.RIGHT_BACK) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.RIGHT_BACK) {
+                if (b == Position.RIGHT_MIDFIELDER) {
+                    return 0.9;
+                } else if (b == Position.CENTRE_BACK) {
+                    return 0.8;
+                } else if (b == Position.LEFT_BACK) {
+                    return 0.75;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.LEFT_BACK) {
+                if (b == Position.LEFT_MIDFIELDER) {
+                    return 0.9;
+                } else if (b == Position.CENTRE_BACK) {
+                    return 0.8;
+                } else if (b == Position.RIGHT_BACK) {
+                    return 0.75;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.DEFENSIVE_MIDFIELDER) {
+                if (b == Position.CENTRE_BACK) {
+                    return 0.8;
+                } else if (b == Position.CENTRAL_MIDFIELDER) {
+                    return 0.95;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.CENTRAL_MIDFIELDER) {
+                if (b == Position.DEFENSIVE_MIDFIELDER) {
+                    return 0.95;
+                } else if (b == Position.ATTACKING_MIDFIELDER) {
+                    return 0.9;
+                } else if (b == Position.RIGHT_MIDFIELDER || b == Position.LEFT_MIDFIELDER) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.ATTACKING_MIDFIELDER) {
+                if (b == Position.CENTRAL_MIDFIELDER) {
+                    return 0.9;
+                } else if (b == Position.STRIKER) {
+                    return 0.85;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.STRIKER) {
+                if (b == Position.ATTACKING_MIDFIELDER) {
+                    return 0.85;
+                } else if (b == Position.RIGHT_WINGER || b == Position.LEFT_WINGER) {
+                    return 0.85;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.RIGHT_MIDFIELDER) {
+                if (b == Position.RIGHT_WINGER) {
+                    return 0.95;
+                } else if (b == Position.RIGHT_BACK) {
+                    return 0.9;
+                } else if (b == Position.LEFT_MIDFIELDER) {
+                    return 0.85;
+                } else if (b == Position.CENTRAL_MIDFIELDER) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.LEFT_MIDFIELDER) {
+                if (b == Position.LEFT_WINGER) {
+                    return 0.95;
+                } else if (b == Position.LEFT_BACK) {
+                    return 0.9;
+                } else if (b == Position.RIGHT_MIDFIELDER) {
+                    return 0.85;
+                } else if (b == Position.CENTRAL_MIDFIELDER) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.RIGHT_WINGER) {
+                if (b == Position.RIGHT_MIDFIELDER) {
+                    return 0.95;
+                } else if (b == Position.LEFT_WINGER) {
+                    return 0.85;
+                } else if (b == Position.STRIKER) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            } else if (a == Position.LEFT_WINGER) {
+                if (b == Position.LEFT_MIDFIELDER) {
+                    return 0.95;
+                } else if (b == Position.RIGHT_WINGER) {
+                    return 0.85;
+                } else if (b == Position.STRIKER) {
+                    return 0.8;
+                } else {
+                    return 0;
+                }
+            }
+        }
+        return 0;
     }
 }

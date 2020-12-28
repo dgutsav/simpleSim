@@ -8,6 +8,8 @@ public class Nation {
     private int id;
     private int league_ranking;
     private String cup;
+    private int youth_rating;
+    private String continent;
 
     public Nation(String name, String code, int id, int rank) {
         this.name = name;
@@ -51,32 +53,40 @@ public class Nation {
         return this.leagues;
     }
 
+    public void setYouthRating(int youth) {
+        this.youth_rating = youth;
+    }
+
+    public int getYouthRating() {
+        return this.youth_rating;
+    }
+
     public void getContinentalTeams(int continental_competition) {
         int start_rank = 1;
         int end_rank = 1;
         switch (continental_competition) {
             case 1:
                 start_rank = 1;
-                end_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking);
+                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking);
                 break;
             case 2:
-                start_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking) + 1;
-                end_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking)
-                        + TournamentController.getPlacesForCompetition(2, this.league_ranking);
+                start_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking) + 1;
+                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
+                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking);
                 break;
             case 3:
-                start_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking)
-                        + TournamentController.getPlacesForCompetition(2, this.league_ranking) + 1;
-                end_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking)
-                        + TournamentController.getPlacesForCompetition(2, this.league_ranking)
-                        + TournamentController.getPlacesForCompetition(3, this.league_ranking);
+                start_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
+                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking) + 1;
+                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
+                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking)
+                        + ControllerUEFA.getPlacesForCompetition(3, this.league_ranking);
                 break;
             default:
                 start_rank = 1;
-                end_rank = TournamentController.getPlacesForCompetition(1, this.league_ranking);
+                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking);
         }
         for (int i = start_rank; i <= end_rank; i++) {
-            TournamentController.addTeams(continental_competition, this.id, i, this.getLeague(1).getTeamAtRank(i));
+            ControllerUEFA.addTeams(continental_competition, this.id, i, this.getLeague(1).getTeamAtRank(i));
         }
     }
 
@@ -142,5 +152,21 @@ public class Nation {
 
     public String getCupId() {
         return this.cup;
+    }
+
+    public String getCupWinner() {
+        return Sim.getCup(this.cup).getWinner();
+    }
+
+    public String getTeamAtRank(int rank) {
+        return this.getLeague(1).getTeamAtRank(rank);
+    }
+
+    public String getContinent() {
+        return this.continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
     }
 }

@@ -9,6 +9,7 @@ public class Match {
     boolean simulated = false;
     boolean isNeutral = false;
     int tournament_level = 0;
+    boolean is_youth_team_match = false;
 
     public boolean isSimulated() {
         return simulated;
@@ -54,7 +55,7 @@ public class Match {
         }
     }
 
-    public void simulate(Team home, Team away) {
+    public void simulate(Club home, Club away) {
         if (!this.simulated && MatchSimulator.simulateMatch(this, home, away)) {
             this.home_team_goals = MatchSimulator.getHomeGoals();
             this.away_team_goals = MatchSimulator.getAwayGoals();

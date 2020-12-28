@@ -2,7 +2,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
 
 import org.bson.Document;
 
@@ -15,6 +14,9 @@ public class DatabaseOperations {
     public static MongoDatabase database;
     public static MongoClient mongo;
     public static String teams_collection = "teams";
+
+    private DatabaseOperations() {
+    }
 
     public static void connectToDatabase() {
         try {
@@ -77,13 +79,5 @@ public class DatabaseOperations {
 
     public static void closeDatabase() {
         mongo.close();
-    }
-
-    public static void main(String args[]) {
-        connectToDatabase();
-        String[] players = { "player_2", "player_3", "player_4" };
-        getCollection(teams_collection).updateOne(Filters.eq("name", "the starters"), Updates.push("players", players));
-        showAll(teams_collection);
-        closeDatabase();
     }
 }

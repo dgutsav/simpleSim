@@ -2,8 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FixtureScheduler {
+    
+    private FixtureScheduler() {
+    }
+
     public static List<Match> scheduleFixtures(List<String> teams_list, boolean allow_double) {
-        Team[] teams = Sim.getTeamArray(teams_list);
+        Club[] teams = Sim.getTeamArray(teams_list);
         List<Match> matches = new ArrayList<>();
         List<Integer[]> generate = generateMatches(teams.length);
         if (allow_double && teams.length <= 12) {
@@ -83,9 +87,4 @@ public class FixtureScheduler {
         }
         return gen;
     }
-
-    public static void main(String[] args) {
-        generateMatches(20);
-    }
-
 }

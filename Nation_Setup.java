@@ -6,9 +6,11 @@ public class Nation_Setup {
     int num_leagues;
     int num_team_leagues;
     int league_rating;
+    int youth_rating;
+    String continent;
 
     public Nation_Setup(String name, String shortString, int nat_rank, int leg_rank, int num_leg, int team_leg,
-            int leg_strength) {
+            int leg_strength, int youth_rating, String continent) {
         this.name = name;
         this.short_name = shortString;
         this.national_team_ranking = nat_rank;
@@ -16,5 +18,7 @@ public class Nation_Setup {
         this.num_leagues = num_leg;
         this.num_team_leagues = team_leg;
         this.league_rating = leg_strength;
+        this.youth_rating = youth_rating;
+        this.continent = continent;
     }
 }

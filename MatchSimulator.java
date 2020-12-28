@@ -12,16 +12,20 @@ public class MatchSimulator {
     public static final int DRAW = 3;
 
     private MatchSimulator() {
-    }
+    } 
 
-    public static boolean simulateMatch(Match current_match, Team home, Team away) {
-        float home_team_rating = home.getBestSquadRating() + home.getForm() - home.getInjuries() + HOME_ADVANTAGE
-                + getRandomness();
-        if(current_match.isNeutral) {
+    public static boolean simulateMatch(Match current_match, Club home, Club away) {
+        Squad home_squad = home.getSeniorSquad(); 
+        Squad away_squad = away.getSeniorSquad();
+        if(current_match.is_youth_team_match) {
+            home_squad = home.getYouthSquad();
+            away_squad = away.getYouthSquad();
+        }
+        float home_team_rating = home_squad.getCurrentLineupRating() + home_squad.getForm() + HOME_ADVANTAGE + getRandomness();
+        if (current_match.isNeutral) {
             home_team_rating -= HOME_ADVANTAGE;
         }
-        float away_team_rating = away.getBestSquadRating() + away.getForm() - away.getInjuries() + getRandomness();
-
+        float away_team_rating = away_squad.getCurrentLineupRating() + away_squad.getForm() + getRandomness();
         int winner_goals = getWinnerGoals(home_team_rating, away_team_rating);
         int result;
         if (winner_goals == 0) {
@@ -36,22 +40,22 @@ public class MatchSimulator {
             winner_goals = getGoalsForDraw();
             homeGoals = winner_goals;
             awayGoals = winner_goals;
-            Sim.updateTeamForm(current_match.home_id, 3);
-            Sim.updateTeamForm(current_match.away_id, 3);
+            Sim.updateTeamForm(current_match.home_id, 3, current_match.is_youth_team_match);
+            Sim.updateTeamForm(current_match.away_id, 3, current_match.is_youth_team_match);
         } else {
             if (result == HOME_WIN) {
                 homeGoals = winner_goals;
                 awayGoals = getLoserGoals(winner_goals);
-                Sim.updateTeamForm(current_match.home_id, 1);
-                Sim.updateTeamForm(current_match.away_id, 2);
+                Sim.updateTeamForm(current_match.home_id, 1, current_match.is_youth_team_match);
+                Sim.updateTeamForm(current_match.away_id, 2, current_match.is_youth_team_match);
             } else {
                 homeGoals = getLoserGoals(winner_goals);
                 awayGoals = winner_goals;
-                Sim.updateTeamForm(current_match.home_id, 2);
-                Sim.updateTeamForm(current_match.away_id, 1);
+                Sim.updateTeamForm(current_match.home_id, 2, current_match.is_youth_team_match);
+                Sim.updateTeamForm(current_match.away_id, 1, current_match.is_youth_team_match);
             }
         }
-        EloRankings.calculate(home, away, current_match);
+        //EloRankings.calculate(home, away, current_match);
         return true;
     }
 

@@ -54,4 +54,8 @@ public class Injury {
     public float getEffect() {
         return this.effect;
     }
+
+    public static int injuryTypes() {
+        return 6;
+    }
 }
