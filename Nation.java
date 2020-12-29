@@ -10,6 +10,7 @@ public class Nation {
     private String cup;
     private int youth_rating;
     private String continent;
+    private NationalTeam national_team;
 
     public Nation(String name, String code, int id, int rank) {
         this.name = name;
@@ -17,6 +18,7 @@ public class Nation {
         this.id = id;
         this.league_ranking = rank;
         this.leagues = new ArrayList<>();
+        this.national_team = new NationalTeam(id);
     }
 
     public void addLeague(String league_id) {
@@ -168,5 +170,9 @@ public class Nation {
 
     public void setContinent(String continent) {
         this.continent = continent;
+    }
+
+    public NationalTeam getNationalTeam() {
+        return this.national_team;
     }
 }

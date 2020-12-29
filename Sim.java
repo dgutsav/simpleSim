@@ -217,8 +217,19 @@ public class Sim {
         return "";
     }
 
+    public static List<Player> getAllPlayersFromNation(int nation_id) {
+        List<Player> all_players = new ArrayList<>();
+        for (Map.Entry<String, Player> entry : players.entrySet()) {
+            if (entry.getValue().getNationId() == nation_id) {
+                all_players.add(entry.getValue());
+            }
+        }
+        return all_players;
+    }
+
     public static List<Nation_Setup> getSetups() {
         List<Nation_Setup> setups = new ArrayList<>();
+        // Europe
         setups.add(new Nation_Setup("England", "ENG", 1, 1, 4, 20, 80, 157, "Europe"));
         setups.add(new Nation_Setup("Spain", "ESP", 2, 2, 2, 20, 78, 163, "Europe"));
         setups.add(new Nation_Setup("Germany", "GER", 3, 3, 3, 18, 79, 162, "Europe"));
@@ -244,7 +255,7 @@ public class Sim {
         setups.add(new Nation_Setup("Israel", "ISR", 23, 23, 3, 12, 68, 127, "Europe"));
         setups.add(new Nation_Setup("Romania", "ROU", 24, 24, 3, 16, 69, 143, "Europe"));
         setups.add(new Nation_Setup("Hungary", "HUN", 25, 25, 3, 14, 68, 134, "Europe"));
-
+        // SouthAmerica
         setups.add(new Nation_Setup("Argentina", "ARG", 26, 1, 3, 22, 74, 162, "South America"));
         setups.add(new Nation_Setup("Brazil", "BRA", 27, 2, 3, 20, 75, 163, "South America"));
         setups.add(new Nation_Setup("Colombia", "COL", 30, 3, 3, 20, 71, 154, "South America"));
@@ -421,6 +432,13 @@ public class Sim {
         }
     }
 
+    public static void showNationalTeams() {
+        for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
+            System.out.print("\n" + entry.getValue().getName() + " ");
+            entry.getValue().getNationalTeam().callup();
+        }
+    }
+
     public static void main(String[] args) {
         initSetup();
         try {
@@ -429,9 +447,11 @@ public class Sim {
             }
         } catch (Exception e) {
             System.out.println(Sim.season);
+            e.printStackTrace();
         }
-        showCompetitionHistories();
-        showTeams();
-        showPlayers();
+        //showCompetitionHistories();
+        //showTeams();
+        //showPlayers();
+        showNationalTeams();
     }
 }
