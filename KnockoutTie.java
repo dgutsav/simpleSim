@@ -25,8 +25,8 @@ public class KnockoutTie {
     }
 
     public void simulate() {
-        this.first_leg.simulate(Sim.getTeam(this.first_leg.home_id), Sim.getTeam(this.first_leg.away_id));
-        this.second_leg.simulate(Sim.getTeam(this.second_leg.home_id), Sim.getTeam(this.second_leg.away_id));
+        this.first_leg.simulate();
+        this.second_leg.simulate();
         this.setWinner();
     }
 
@@ -50,7 +50,7 @@ public class KnockoutTie {
                 match.away_id = team1;
                 match.away_team = Sim.getTeam(team1).getName();
                 match.home_team = Sim.getTeam(team2).getName();
-                match.simulate(Sim.getTeam(team2), Sim.getTeam(team1));
+                match.simulate();
                 if (match.home_team_goals > match.away_team_goals) {
                     this.winning_team = 2;
                 } else if (match.away_team_goals > match.home_team_goals) {

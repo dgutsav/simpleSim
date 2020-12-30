@@ -29,6 +29,10 @@ public class Club {
         return this.coefficient;
     }
 
+    public void update() {
+        Sim.updateTeam(this, this.getId());
+    }
+
     public void setCoefficient(double new_coefficient) {
         this.coefficient = new_coefficient;
     }
@@ -43,6 +47,10 @@ public class Club {
 
     public void setId(String id) {
         this.id = id;
+        this.senior_squad.setUpdateCallback(x -> {
+            this.update();
+            return x;
+        });
     }
 
     public String getName() {

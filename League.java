@@ -12,6 +12,7 @@ public class League {
     private String id;
     private List<CompetitionHistory> competitionHistory;
     private int nation_id;
+    private boolean is_international = false;
 
     public League() {
         this.name = "";
@@ -41,6 +42,14 @@ public class League {
 
     public String getId() {
         return this.id;
+    }
+
+    public void setInternational() {
+        this.is_international = true;
+    }
+
+    public boolean isInternational() {
+        return this.is_international;
     }
 
     public void addTeam(String team_id) {
@@ -77,7 +86,7 @@ public class League {
     }
 
     public void setupTable() {
-        this.table = new LeagueTable(this.teams.size());
+        this.table = new LeagueTable(this.teams.size(), this.isInternational());
         this.table.startNewSeason(this.teams);
     }
 
@@ -103,7 +112,7 @@ public class League {
     public void simulateMatchDay(int matchday) {
         List<Match> matches = getMatchesForMatchDay(matchday);
         for (Match match : matches) {
-            match.simulate(Sim.getTeam(match.home_id), Sim.getTeam(match.away_id));
+            match.simulate();
             if (!Sim.TEST) {
                 match.display();
             }

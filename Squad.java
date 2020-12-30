@@ -9,12 +9,14 @@ public class Squad {
     private int formation;
     private Function<Position, Player> emergency_player_promotion;
     private String form = "DDDDDD";
+    private Function<String, String> update_parent;
 
     public Squad() {
         this.players = new ArrayList<>();
         this.formation = CommonFunctions.getRandomNumber(Catalogues.numFormations());
         this.emergency_player_promotion = null;
         this.form = "DDDDDD";
+        this.update_parent = null;
     }
 
     public Squad(int formation_id) {
@@ -22,6 +24,7 @@ public class Squad {
         this.formation = formation_id;
         this.emergency_player_promotion = null;
         this.form = "DDDDDD";
+        this.update_parent = null;
     }
 
     public void setFormation(int id) {
@@ -30,6 +33,10 @@ public class Squad {
 
     public void setEmergencyPlayerPromotionCallback(Function<Position, Player> callback) {
         this.emergency_player_promotion = callback;
+    }
+
+    public void setUpdateCallback(Function<String, String> callback) {
+        this.update_parent = callback;
     }
 
     public List<String> getPlayerIds() {
@@ -173,6 +180,7 @@ public class Squad {
     public void postMatchChanges(int type) {
         this.medical();
         this.updateForm(type);
+        this.update_parent.apply("");
     }
 
     public int countPlayersAtPosition(Position pos) {

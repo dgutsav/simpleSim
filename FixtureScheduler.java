@@ -29,6 +29,29 @@ public class FixtureScheduler {
         return matches;
     }
 
+    public static List<Match> scheduleInternationalFixtures(List<String> teams_list, boolean allow_double) {
+        NationalTeam[] teams = Sim.getNationalTeamArray(teams_list);
+        List<Match> matches = new ArrayList<>();
+        List<Integer[]> generate = generateMatches(teams.length);
+        if (allow_double && teams.length <= 12) {
+            List<Integer[]> generate2 = generateMatches(teams.length);
+            for (Integer[] array : generate2) {
+                array[2] += 2 * (teams.length - 1);
+            }
+            generate.addAll(generate2);
+        }
+        for (Integer[] array : generate) {
+            Match match = new Match();
+            match.home_team = teams[array[0]].getName();
+            match.away_team = teams[array[1]].getName();
+            match.home_id = teams[array[0]].getId();
+            match.away_id = teams[array[1]].getId();
+            match.matchday = array[2];
+            matches.add(match);
+        }
+        return matches;
+    }
+
     public static List<Integer[]> generateMatches(int count) {
         List<Integer[]> gen = new ArrayList<>();
 

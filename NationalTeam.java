@@ -5,14 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 public class NationalTeam {
+    private String id;
     private int nation_id;
     private Squad squad;
     private Map<Position, List<Player>> pool;
+    private int points;
 
-    public NationalTeam(int id) {
+    public NationalTeam(int id, int rank) {
         this.nation_id = id;
         this.squad = new Squad();
         this.pool = new EnumMap<>(Position.class);
+        this.points = 1604 - (4 * rank);
+    }
+
+    public String getName() {
+        return Sim.getNation(nation_id).getName();
     }
 
     public static int getPoolRequirements(Position pos) {
@@ -109,10 +116,41 @@ public class NationalTeam {
         }
     }
 
+    public void clearPool() {
+        this.pool.clear();
+        this.squad.removeAllPlayers();
+    }
+
     public void callup() {
+        this.clearPool();
         this.fillPool();
         this.fillSquad();
         this.setBestFormation();
-        this.showBestLineup();
+        //this.showBestLineup();
+        this.update();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+        this.squad.setUpdateCallback(x -> {
+            this.update();
+            return x;
+        });
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void update() {
+        Sim.updateNationalTeam(this, this.getId());
+    }
+
+    public Squad getSquad() {
+        return this.squad;
+    }
+
+    public int getPoints() {
+        return this.points;
     }
 }

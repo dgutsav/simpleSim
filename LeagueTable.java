@@ -2,21 +2,30 @@ import java.util.List;
 
 public class LeagueTable {
     public TeamPerformance[] performances;
+    public boolean is_international = false;
 
-    public LeagueTable(int size) {
+    public LeagueTable(int size, boolean internationals) {
         performances = new TeamPerformance[size];
+        is_international = internationals;
     }
 
     public void startNewSeason(List<String> list) {
-        Club[] teams = Sim.getTeamArray(list);
-        for (int i = 0; i < teams.length; i++) {
-            performances[i] = new TeamPerformance(teams[i].getId(), teams[i].getName());
+        if (!this.is_international) {
+            Club[] teams = Sim.getTeamArray(list);
+            for (int i = 0; i < teams.length; i++) {
+                performances[i] = new TeamPerformance(teams[i].getId(), teams[i].getName());
+            }
+        } else {
+            NationalTeam[] nat_teams = Sim.getNationalTeamArray(list);
+            for (int i = 0; i < nat_teams.length; i++) {
+                performances[i] = new TeamPerformance(nat_teams[i].getId(), nat_teams[i].getName());
+            }
         }
     }
 
     public void sortTable() {
         int num_teams = performances.length;
-        int big; 
+        int big;
         int index;
         TeamPerformance temp;
         for (int i = 0; i < num_teams; i++) {
@@ -80,8 +89,8 @@ public class LeagueTable {
     }
 
     public TeamPerformance getTeamPerformance(String team_id) {
-        for(TeamPerformance performance : this.performances) {
-            if(performance.getTeamId().equalsIgnoreCase(team_id)) {
+        for (TeamPerformance performance : this.performances) {
+            if (performance.getTeamId().equalsIgnoreCase(team_id)) {
                 return performance;
             }
         }

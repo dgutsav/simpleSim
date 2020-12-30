@@ -10,7 +10,7 @@ public class Nation {
     private String cup;
     private int youth_rating;
     private String continent;
-    private NationalTeam national_team;
+    private String national_team;
 
     public Nation(String name, String code, int id, int rank) {
         this.name = name;
@@ -18,7 +18,6 @@ public class Nation {
         this.id = id;
         this.league_ranking = rank;
         this.leagues = new ArrayList<>();
-        this.national_team = new NationalTeam(id);
     }
 
     public void addLeague(String league_id) {
@@ -173,6 +172,14 @@ public class Nation {
     }
 
     public NationalTeam getNationalTeam() {
+        return Sim.getNationalTeam(this.national_team);
+    }
+
+    public String getNationalTeamId() {
         return this.national_team;
+    }
+
+    public void setNationalTeamId(String id) {
+        this.national_team = id;
     }
 }

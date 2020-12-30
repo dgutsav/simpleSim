@@ -105,9 +105,7 @@ public class Cup {
         System.out.println(round_name);
         List<Match> matches_to_simulate = this.matches.get(round);
         for (int i = 0; i < matches_to_simulate.size(); i++) {
-            Club home_team = Sim.getTeam(matches_to_simulate.get(i).home_id);
-            Club away_team = Sim.getTeam(matches_to_simulate.get(i).away_id);
-            matches_to_simulate.get(i).simulate(home_team, away_team);
+            matches_to_simulate.get(i).simulate();
             matches_to_simulate.get(i).display();
         }
         this.matches.put(round, matches_to_simulate);

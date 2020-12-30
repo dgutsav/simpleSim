@@ -10,6 +10,7 @@ public class Match {
     boolean isNeutral = false;
     int tournament_level = 0;
     boolean is_youth_team_match = false;
+    boolean is_international_match = false;
 
     public boolean isSimulated() {
         return simulated;
@@ -32,14 +33,14 @@ public class Match {
     }
 
     public String getWinner(boolean cup) {
-        if(this.home_team_goals > this.away_team_goals) {
+        if (this.home_team_goals > this.away_team_goals) {
             return this.home_id;
         } else if (this.home_team_goals < this.away_team_goals) {
-            return this.away_id; 
+            return this.away_id;
         } else {
-            if(cup) {
+            if (cup) {
                 this.simulated = false;
-                this.simulate(Sim.getTeam(away_id), Sim.getTeam(home_id));
+                this.simulate();
                 return this.getWinner(cup);
             } else {
                 return "";
@@ -55,11 +56,26 @@ public class Match {
         }
     }
 
-    public void simulate(Club home, Club away) {
-        if (!this.simulated && MatchSimulator.simulateMatch(this, home, away)) {
-            this.home_team_goals = MatchSimulator.getHomeGoals();
-            this.away_team_goals = MatchSimulator.getAwayGoals();
-            this.afterSimulation();
+    public void simulate() {
+        Squad home, away;
+        if (!this.simulated) {
+            if (this.is_international_match) {
+                home = Sim.getNationalTeam(this.home_id).getSquad();
+                away = Sim.getNationalTeam(this.away_id).getSquad();
+            } else {
+                if (this.is_youth_team_match) {
+                    home = Sim.getTeam(this.home_id).getYouthSquad();
+                    away = Sim.getTeam(this.away_id).getYouthSquad();
+                } else {
+                    home = Sim.getTeam(this.home_id).getSeniorSquad();
+                    away = Sim.getTeam(this.away_id).getSeniorSquad();
+                }
+            }
+            if (MatchSimulator.simulateMatch(this, home, away)) {
+                this.home_team_goals = MatchSimulator.getHomeGoals();
+                this.away_team_goals = MatchSimulator.getAwayGoals();
+                this.afterSimulation();
+            }
         }
     }
 }

@@ -30,6 +30,15 @@ public class Catalogues {
     private static String poland = "Poland";
     private static String romania = "Romania";
 
+    private static String belarus = "Belarus";
+    private static String slovakia = "Slovakia";
+    private static String slovenia = "Slovenia";
+    private static String bulgaria = "Bulgaria";
+    private static String sweden = "Sweden";
+    private static String albania = "Albania";
+    private static String finland = "Finland";
+    private static String ireland = "Ireland";
+
     private static String argentina = "Argentina";
     private static String bolivia = "Bolivia";
     private static String brazil = "Brazil";
@@ -42,16 +51,22 @@ public class Catalogues {
     private static String venezuela = "Venezuela";
 
     public static String getDenonym(String nation_name) {
-        if (nation_name.equalsIgnoreCase(Catalogues.argentina)) {
+        if (nation_name.equalsIgnoreCase(Catalogues.albania)) {
+            return "Albanian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.argentina)) {
             return "Argentine";
         } else if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
             return "Austrian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.belarus)) {
+            return "Belarussian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.belgium)) {
             return "Belgian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.bolivia)) {
             return "Bolivian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.brazil)) {
             return "Brazilian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.bulgaria)) {
+            return "Bulgarian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.chile)) {
             return "Chilean";
         } else if (nation_name.equalsIgnoreCase(Catalogues.colombia)) {
@@ -68,6 +83,8 @@ public class Catalogues {
             return "Ecuadorian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.england)) {
             return "English";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.finland)) {
+            return "Finnish";
         } else if (nation_name.equalsIgnoreCase(Catalogues.france)) {
             return "French";
         } else if (nation_name.equalsIgnoreCase(Catalogues.germany)) {
@@ -76,6 +93,8 @@ public class Catalogues {
             return "Greek";
         } else if (nation_name.equalsIgnoreCase(Catalogues.hungary)) {
             return "Hungarian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.ireland)) {
+            return "Irish";
         } else if (nation_name.equalsIgnoreCase(Catalogues.israel)) {
             return "Israeli";
         } else if (nation_name.equalsIgnoreCase(Catalogues.italy)) {
@@ -100,8 +119,14 @@ public class Catalogues {
             return "Scottish";
         } else if (nation_name.equalsIgnoreCase(Catalogues.serbia)) {
             return "Serbian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.slovakia)) {
+            return "Slovakian";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.slovenia)) {
+            return "Slovenian";
         } else if (nation_name.equalsIgnoreCase(Catalogues.spain)) {
             return "Spanish";
+        } else if (nation_name.equalsIgnoreCase(Catalogues.sweden)) {
+            return "Swedish";
         } else if (nation_name.equalsIgnoreCase(Catalogues.switzerland)) {
             return "Swiss";
         } else if (nation_name.equalsIgnoreCase(Catalogues.turkey)) {
@@ -208,21 +233,22 @@ public class Catalogues {
             "Brasov", "Galati", "Ploiesti", "Oradea", "Braila", "Arad", "Sibiu", "Pitesti", "Bacau", "Targu Mures",
             "Baia Mare", "Buzau", "Botosani", "Ramnicu Valcea", "Severin", "Suceava", "Neamt", "Targu Jiu",
             "Targoviste", "Focsani", "Bistrita", "Tulcea", "Restita", "Slatina", "Giurgiu" };
+    private static String[] belarusCities = { "Minsk", "Brest", "Gomel", "Grodno", "Mogilev", "Vitebsk", "Baranavichi",
+            "Pinsk", "Kobryn", "Mazyr", "Zhlobin", "Lida", "Bobriusk", "Borisov", "Salihorsk", "Orsha", "Polotsk" };
 
     private static String[] argentinaCities = { "Buenos Aires", "Cordoba", "Rosario", "La Plata", "Mar del Plata",
             "Salta", "Tucuman", "San Juan", "Resistencia", "Santiago del Estero", "Corrientes", "Mendoza", "Posadas",
             "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana" };
     private static String[] brazilCities = { "Sao Paulo", "Belo Horizonte", "Manaus", "Curitiba", "Rio de Janeiro",
             "Salvador", "Brasilia", "Fortaleza", "Recife", "Porto Alegre", "Belem", "Goiania", "Guarulhos", "Campinas",
-            "Sao Luis", "Sao Gonncalo", "Maceio", "Duque de Caxias", "Natal", "Campo Grande", "Teresina", "Ignacu",
-            "Joao Pessoa", "Santo Andre" };
+            "Sao Luis", "Sao Gonncalo", "Maceio", "Caxias", "Natal", "Teresina", "Ignacu" };
     private static String[] chileCities = { "Santiago", "Puente Alto", "Iquique", "Valparaiso", "Antofagasta",
             "Copiapo", "La Serena", "Arica", "Rancagua", "Talca", "Chilan", "Concepcion", "Temuco", "Valdivia",
             "Puerto Montt", "Coyhaique" };
     private static String[] colombiaCities = { "Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Cucuta",
             "Soledad", "Ibague", "Bucaramanga", "Soacha", "Villavicencio", "Santa Marta", "Valledupar", "Bello",
-            "Pereira", "Montería", "San Juan de Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira", "Armenia",
-            "Riohacha", "Sincelejo", "Popayán", "Itagüí" };
+            "Pereira", "Monteria", "Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira", "Armenia", "Riohacha",
+            "Sincelejo", "Popayán", "Itagüí" };
     private static String[] ecuadorCities = { "Guayaquil", "Quito", "Cuenca", "Santo Domingo", "Machala", "Duran",
             "Manta", "Portoviejo", "Ibarra", "Quevedo", "Loja", "Ambato", "Esmeraldas", "Riobamba", "Milagro",
             "Latacunga", "La Libertad", "Babahoyo" };
@@ -234,10 +260,10 @@ public class Catalogues {
             "Chincha Alta", "Huanuco", "Tarapoto", "Puno" };
     private static String[] paraguayCities = { "Asuncion", "Ciudad del Este", "San Lorenzo", "Luque", "Capiata",
             "Lambare", "Limpio", "Nemby", "Encarnacion", "Villa Elisa", "Caaguazu", "Coronel Oviedo", "Hernandarias",
-            "Itauguá", "Concepción", "Villarrica", "San Antonio", "Pilar", "Caacupe", "Ita" };
-    private static String[] uruguayCities = { "Montevideo", "Salto", "Ciudad de la Costa", "Paysandú", "Las Piedras",
-            "Rivera", "Maldonado", "Tacuarembó", "Melo", "Mercedes", "Artigas", "Minas", "San José de Mayo", "Durazno",
-            "Florida", "Barros Blancos", "Ciudad del Plata", "San Carlos", "Colonia del Sacramento", "Pando" };
+            "Itaugua", "Concepcion", "Villarrica", "San Antonio", "Pilar", "Caacupe", "Ita" };
+    private static String[] uruguayCities = { "Montevideo", "Salto", "Paysandu", "Las Piedras", "Rivera", "Maldonado",
+            "Tacuarembo", "Melo", "Mercedes", "Artigas", "Minas", "San Jose", "Durazno", "Florida", "Barros Blancos",
+            "San Carlos", "Colonia Sacramento", "Pando" };
     private static String[] venezuelaCities = { "Caracas", "Maracaibo", "Barquisimeto", "Valencia", "Ciudad Guayana",
             "Maturín", "Barcelona", "Cumaná", "Petare", "Turmero", "Mérida", "Ciudad Bolívar", "Barinas", "Los Teques",
             "Punto Fijo", "La Guaira", "El Vigía", "San Cristóbal" };
@@ -514,30 +540,30 @@ public class Catalogues {
             { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.LEFT_BACK,
                     Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.RIGHT_MIDFIELDER,
                     Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
-            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
-                    Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.RIGHT_WINGER,
-                    Position.LEFT_WINGER, Position.CENTRAL_MIDFIELDER, Position.STRIKER },
-            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+            { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.LEFT_BACK,
+                    Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.RIGHT_WINGER, Position.STRIKER, Position.LEFT_WINGER },
+            { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.LEFT_BACK,
                     Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER,
                     Position.LEFT_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.STRIKER },
             { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                    Position.LEFT_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                    Position.RIGHT_WINGER, Position.LEFT_WINGER, Position.RIGHT_MIDFIELDER, Position.STRIKER },
-            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
+                    Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.LEFT_MIDFIELDER, Position.RIGHT_WINGER, Position.STRIKER, Position.LEFT_WINGER },
+            { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.LEFT_BACK,
                     Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
                     Position.ATTACKING_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
+                    Position.CENTRE_BACK, Position.LEFT_BACK, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.RIGHT_WINGER, Position.STRIKER, Position.LEFT_WINGER },
             { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                    Position.RIGHT_BACK, Position.LEFT_BACK, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                    Position.RIGHT_WINGER, Position.LEFT_WINGER, Position.STRIKER },
-            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                    Position.RIGHT_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                    Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.STRIKER, Position.STRIKER },
+                    Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
             { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
-                    Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.RIGHT_MIDFIELDER,
-                    Position.LEFT_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.STRIKER } };
+                    Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER } };
 
     private static String[] formationNames = { "4-4-2", "4-3-3", "4-2-3-1 Wide", "3-4-3", "4-2-3-1", "5-2-3", "3-5-2",
-            "4-5-1" };
+            "4-1-4-1" };
 
     public static Position[] getFormation(int formation_id) {
         return formations[formation_id];
@@ -589,7 +615,7 @@ public class Catalogues {
             "Ezequiel", "Sergi", "Roberto", "Rodrigo", "Pablo", "Mario", "Esteban", "Joaquin", "Alberto", "Aitor",
             "Joselu", "Ruben", "Ivan", "Ramon", "Roman", "Eduardo", "Santi", "Marcos", "Alfonso", "Julio", "Roque",
             "Marc", "Ignacio", "Mikel", "Carles", "Gerard", "Arturo", "Hector", "Angel", "Facundo", "Sebastian",
-            "Federico", "Fede", "Enrico", "Dario" };
+            "Federico", "Fede", "Enrico", "Dario", "Alvaro", "Xavi", "Xabi", "Julen" };
     private static String[] spanishSurnames = { "Cuenca", "de la Fuente", "Mesa", "Hurtado", "Trujillo", "Santamaria",
             "Iniesta", "Izquierdo", "Camacho", "Merino", "Pardo", "Llorente", "Luque", "Ruidiaz", "Roca", "Salazar",
             "Munoz", "Puyol", "Manzano", "Bentancur", "Rocha", "de Los Santos", "de Leon", "Silvera", "Machado",
@@ -656,13 +682,14 @@ public class Catalogues {
             "Mattijs", "Thijs", "Meindert", "Machiel", "Michiel", "Peter", "Petrus", "Pieter", "Roelof", "Rudolf",
             "Steven", "Stephanus", "Teube", "Tobias", "Teunis", "Tonnis", "Theodorus", "Dorus", "Doris", "Wichart",
             "Willem", "Johan", "Max", "Martijn", "Marten", "Arjen", "Ruud", "Frenkie", "Jos", "Kevin", "Nick", "Theo",
-            "Luuk", "Siem", "Rafael" };
+            "Luuk", "Siem", "Rafael", "Dries", "Toby", "Erik", "Robin", "Wout", "Bas" };
     private static String[] dutchSurnames = { "de Jong", "Jansen", "de Vries", "van der Berg", "van den Berg",
             "van de Berg", "van Dijk", "Bakker", "Janssen", "Visser", "Smit", "Meijer", "de Boer", "Mulder", "de Groot",
             "Bos", "Vos", "Peters", "Hendriks", "Dekker", "van Leeuwen", "Brouwer", "Verstappen", "van der Vaart",
             "Krol", "van Nistelrooy", "Robben", "Heitinga", "Vossen", "Mertens", "de Bruyne", "de Wit", "Dijkstra",
             "Smits", "de Graaf", "van der Meer", "Willems", "Gossens", "de Wout", "Thyssen", "Teuling", "de Ligt",
-            "de Konig", "Bouwman", "Huntelaar", "Promes", "Depay", "Wijnaldum", "de Bruin", "van der Westhuizen" };
+            "de Konig", "Bouwman", "Huntelaar", "Promes", "Depay", "Wijnaldum", "de Bruin", "van der Westhuizen",
+            "Weghorst", "Dost", "Alderweireld" };
 
     private static String[] portugueseNames = { "Bruno", "Eder", "Pepe", "Bernardo", "Cristiano", "Joao", "Ruben",
             "Jose", "Henrique", "Hernanes", "Gedson", "David", "Antonio", "Felix", "Pedro", "Guilherme", "Joaquim",
