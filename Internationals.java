@@ -24,9 +24,9 @@ public class Internationals {
     public static void setup() {
         List<NationalTeam> europeanTeams = Internationals.sortByPoints(Sim.getNationFromContinent("europe"));
         List<NationalTeam> latinTeams = Internationals.sortByPoints(Sim.getNationFromContinent("south america"));
-        nationsLeague = new League("Nations League", 0, 0, 0, 1);
+        nationsLeague = new League("Nations League", 0, 0, 0, 1, 200);
         nationsLeague.setInternational();
-        for (int i = 0; i < europeanTeams.size(); i++) {
+        for (int i = 0; i < europeanTeams.size() - 1; i++) {
             europeanTeams.get(i).callup();
             nationsLeague.addTeam(europeanTeams.get(i).getId());
         }
@@ -42,7 +42,7 @@ public class Internationals {
 
     public static void simulateNationsLeague() {
         System.out.println("Nations League");
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 66; i++) {
             System.out.println("Matchday " + i);
             nationsLeague.simulateMatchDay(i);
         }

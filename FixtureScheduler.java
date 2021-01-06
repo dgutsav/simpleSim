@@ -7,7 +7,7 @@ public class FixtureScheduler {
     }
 
     public static List<Match> scheduleFixtures(List<String> teams_list, boolean allow_double) {
-        Club[] teams = Sim.getTeamArray(teams_list);
+        Club[] teams = Sim.getClubArray(teams_list);
         List<Match> matches = new ArrayList<>();
         List<Integer[]> generate = generateMatches(teams.length);
         if (allow_double && teams.length <= 12) {

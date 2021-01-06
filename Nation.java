@@ -101,6 +101,7 @@ public class Nation {
             League lower = this.getLeague(i + 1);
             List<String> promoted_teams = lower.getPromotedTeams();
             List<String> relegated_teams = upper.getRelegatedTeams();
+            int rep_change = upper.getReputation() / 10;
             if (promoted_teams.size() != relegated_teams.size()) {
                 System.out.println("Inequal movement of teams");
             } else {
@@ -110,6 +111,8 @@ public class Nation {
                     lower.removeTeam(promoted_teams.get(j));
                     upper.addTeam(promoted_teams.get(j));
                     lower.addTeam(relegated_teams.get(j));
+                    Sim.getClub(relegated_teams.get(j)).addReputation(rep_change * -1);
+                    Sim.getClub(promoted_teams.get(j)).addReputation(rep_change);
                 }
                 boolean validated = true;
                 for (int j = 0; j < exchange; j++) {

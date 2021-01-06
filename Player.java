@@ -170,15 +170,57 @@ public class Player {
     }
 
     public String getPaddedName() {
-        String padded = this.name;
-        for (int i = padded.length(); i < Player.PADDED_LENGTH; i++) {
-            padded += " ";
-        }
-        return padded;
+        return CommonFunctions.getPaddedString(this.name, Player.PADDED_LENGTH);
     }
 
     public int getRatingForPosition(Position position) {
         double factored_rating = PositionHelper.getPositionSimilarity(this.position, position) * this.getRating();
         return (int) factored_rating;
+    }
+
+    public int getBaseValue() {
+        double value = 0;
+        int player_rating = this.getRating();
+        if (player_rating >= 95) {
+            value = 150;
+        } else if (player_rating >= 90) {
+            value = 75 + (player_rating - 90) * 15;
+        } else if (player_rating >= 85) {
+            value = 40 + (player_rating - 85) * 7;
+        } else if (player_rating >= 80) {
+            value = 15 + (player_rating - 80) * 5;
+        } else if (player_rating >= 75) {
+            value = 5 + (player_rating - 75) * 2;
+        } else if (player_rating >= 70) {
+            value = 1 + (player_rating - 70) * 0.8;
+        } else if (player_rating >= 60) {
+            value = 0.1 + (player_rating - 60) * 0.09;
+        } else if (player_rating >= 50) {
+            value = 0.01 + (player_rating - 50) * 0.009;
+        } else {
+            value = 0.01;
+        }
+        int player_age = this.getAge();
+        if (player_age <= 17) {
+            value *= 2.5;
+        } else if (player_age <= 19) {
+            value *= 2 + (19 - player_age) * 0.25;
+        } else if (player_age <= 21) {
+            value *= 1.75 + (21 - player_age) * 0.125;
+        } else if (player_age <= 23) {
+            value *= 1.55 + (23 - player_age) * 0.1;
+        } else if (player_age <= 25) {
+            value *= 1.15 + (25 - player_age) * 0.2;
+        } else if (player_age <= 30) {
+            value *= 1;
+        } else if (player_age <= 33) {
+            value *= 0.85;
+        } else if (player_age <= 35) {
+            value *= 0.65;
+        } else if (player_age <= 38) {
+            value *= 0.5;
+        }
+        value *= 1000000;
+        return (int) Math.round(value);
     }
 }

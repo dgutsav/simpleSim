@@ -120,7 +120,7 @@ public class ControllerUEFA {
     }
 
     public static int getHighestSeed(int level) {
-        if(level == 1 || level == 2) {
+        if (level == 1 || level == 2) {
             return 3;
         }
         return 0;
@@ -186,6 +186,14 @@ public class ControllerUEFA {
                 return europaLeague;
             default:
                 return conferenceLeague;
+        }
+    }
+
+    public static int getReputation(int competition_level) {
+        if (competition_level == 1) {
+            return 195;
+        } else {
+            return 170;
         }
     }
 
@@ -257,22 +265,19 @@ public class ControllerUEFA {
                     europaTeams.remove(nation.getTeamAtRank(clPlaces + elPlaces));
                 }
                 europaTeams.add(0, cup_winner);
-                System.out.println("cup winner added to Europa League for " + nation.getName());
             }
             for (int i = 1; i <= clPlaces; i++) {
                 String code = nation.getCode() + i;
                 getTeams(1).put(code, champTeams.get(i - 1));
                 getCompetition(1).addTeam(ControllerUEFA.getSeeding(1, nation.getLeagueRanking(), i),
                         champTeams.get(i - 1));
-                System.out.println(code + " " + Sim.getTeam(champTeams.get(i - 1)).getName() + " added to CL");
             }
-            for (int i = clPlaces + 1; i <= elPlaces + clPlaces; i++) {
+            int x = clPlaces + 1;
+            for (int i = x; i <= elPlaces + clPlaces; i++) {
                 String code = nation.getCode() + i;
-                getTeams(2).put(code, europaTeams.get(i - (1 + clPlaces)));
+                getTeams(2).put(code, europaTeams.get(i - x));
                 getCompetition(2).addTeam(ControllerUEFA.getSeeding(2, nation.getLeagueRanking(), i),
-                        europaTeams.get(i - (1 + clPlaces)));
-                System.out.println(
-                        code + " " + Sim.getTeam(europaTeams.get(i - (1 + clPlaces))).getName() + " added to EL");
+                        europaTeams.get(i - x));
             }
         }
     }
@@ -440,10 +445,16 @@ public class ControllerUEFA {
         }
     }
 
+    public static void endSeasonChanges() {
+        championsLeague.endSeasonChanges();
+        europaLeague.endSeasonChanges();
+    }
+
     public static void simulateCompetitions() {
         simulateQualifiers();
         simulateGroups();
         simulateKnockouts();
+        endSeasonChanges();
     }
 
     public static void saveCompetitionHistory() {

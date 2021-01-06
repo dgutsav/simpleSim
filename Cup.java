@@ -69,8 +69,8 @@ public class Cup {
             Match tie = new Match();
             tie.home_id = team1;
             tie.away_id = team2;
-            tie.home_team = Sim.getTeam(team1).getName();
-            tie.away_team = Sim.getTeam(team2).getName();
+            tie.home_team = Sim.getClub(team1).getName();
+            tie.away_team = Sim.getClub(team2).getName();
             ties.add(tie);
         }
         return ties;
@@ -162,9 +162,9 @@ public class Cup {
         String team_id;
         List<TeamHistory> histories = new ArrayList<>();
         team_id = this.getTeamAtRank(1);
-        histories.add(new TeamHistory(team_id, 1, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 1, Sim.getClub(team_id).getBestSquadRating()));
         team_id = this.getTeamAtRank(2);
-        histories.add(new TeamHistory(team_id, 2, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 2, Sim.getClub(team_id).getBestSquadRating()));
         CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
         this.competitionHistories.add(compHistory);
     }

@@ -10,10 +10,12 @@ public class Club {
     private int recruitment_level;
     private boolean has_youth_squad;
     private double coefficient;
+    private int reputation;
+    private long budget;
 
     private static final int MAX_YOUTH_AGE = 19;
 
-    public Club(String name, int nation_id) {
+    public Club(String name, int nation_id, int starting_reputation) {
         this.name = name;
         this.nation_id = nation_id;
         this.senior_squad = new Squad();
@@ -23,6 +25,8 @@ public class Club {
         });
         this.coefficient = 0;
         this.recruitment_level = 15 + CommonFunctions.getRandomInt(3);
+        this.reputation = starting_reputation;
+        this.budget = 1000 * 1000 * 1000;
     }
 
     public double getCoefficient() {
@@ -30,7 +34,7 @@ public class Club {
     }
 
     public void update() {
-        Sim.updateTeam(this, this.getId());
+        Sim.updateClub(this, this.getId());
     }
 
     public void setCoefficient(double new_coefficient) {
@@ -55,6 +59,10 @@ public class Club {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getPaddedName() {
+        return CommonFunctions.getPaddedString(this.name, 40);
     }
 
     public String getId() {
@@ -174,5 +182,36 @@ public class Club {
         for (Player player : promoted_players) {
             this.senior_squad.addPlayer(player.getId());
         }
+    }
+
+    public int getPlayerRankAtClub(Player player) {
+        if (this.senior_squad.getPlayerIds().contains(player.getId())) {
+            return this.senior_squad.getPlayerRankInSquad(player);
+        } else {
+            return this.senior_squad.getProspectivePlayerRankInSquad(player);
+        }
+    }
+
+    public int getReputation() {
+        return this.reputation;
+    }
+
+    public void addReputation(int change) {
+        this.reputation += change;
+        this.update();
+    }
+
+    public long getBudget() {
+        return this.budget;
+    }
+
+    public void updateBudget(long change) {
+        this.budget += change;
+        this.update();
+    }
+
+    public Target getTransferTargetDetails() {
+        return new Target(this.senior_squad.getWeakestPosition(), this.senior_squad.getBestLineupRating(), this.budget,
+                this);
     }
 }

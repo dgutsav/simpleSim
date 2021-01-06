@@ -64,11 +64,11 @@ public class Match {
                 away = Sim.getNationalTeam(this.away_id).getSquad();
             } else {
                 if (this.is_youth_team_match) {
-                    home = Sim.getTeam(this.home_id).getYouthSquad();
-                    away = Sim.getTeam(this.away_id).getYouthSquad();
+                    home = Sim.getClub(this.home_id).getYouthSquad();
+                    away = Sim.getClub(this.away_id).getYouthSquad();
                 } else {
-                    home = Sim.getTeam(this.home_id).getSeniorSquad();
-                    away = Sim.getTeam(this.away_id).getSeniorSquad();
+                    home = Sim.getClub(this.home_id).getSeniorSquad();
+                    away = Sim.getClub(this.away_id).getSeniorSquad();
                 }
             }
             if (MatchSimulator.simulateMatch(this, home, away)) {

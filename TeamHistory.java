@@ -22,6 +22,6 @@ public class TeamHistory {
     }
 
     public void show() {
-        System.out.println(rank + "  " + Sim.getTeam(team_id).getName() + "(" + rating + ")");
+        System.out.println(rank + "  " + Sim.getClub(team_id).getName() + "(" + rating + ")");
     }
 }

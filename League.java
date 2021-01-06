@@ -13,6 +13,7 @@ public class League {
     private List<CompetitionHistory> competitionHistory;
     private int nation_id;
     private boolean is_international = false;
+    private int reputation;
 
     public League() {
         this.name = "";
@@ -23,9 +24,10 @@ public class League {
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
         this.competitionHistory = new ArrayList<>();
+        this.reputation = 0;
     }
 
-    public League(String name, int level, int promotion, int relegation, int nation_id) {
+    public League(String name, int level, int promotion, int relegation, int nation_id, int rating) {
         this.name = name;
         this.competition_level = level;
         this.promotion_places = promotion;
@@ -34,6 +36,7 @@ public class League {
         this.teams = new ArrayList<>();
         this.fixtures = new ArrayList<>();
         this.competitionHistory = new ArrayList<>();
+        this.reputation = (rating + 10) * 2;
     }
 
     public void setId(String id) {
@@ -132,7 +135,7 @@ public class League {
             this.simulateMatchDay(i);
         }
         this.table.showLong();
-        System.out.println(Sim.getTeam(this.getWinner()).getName());
+        System.out.println(Sim.getClub(this.getWinner()).getName());
     }
 
     public String getWinner() {
@@ -186,7 +189,7 @@ public class League {
     public void saveCompetitionHistory() {
         List<TeamHistory> histories = new ArrayList<>();
         for (int i = 1; i <= this.teams.size(); i++) {
-            int rating = (int) Sim.getTeam(this.getTeamAtRank(i)).getBestSquadRating();
+            int rating = (int) Sim.getClub(this.getTeamAtRank(i)).getBestSquadRating();
             TeamHistory history = new TeamHistory(this.getTeamAtRank(i), i, rating);
             histories.add(history);
         }
@@ -207,5 +210,30 @@ public class League {
 
     public static int getPyramidPlaces(int size) {
         return size / 6;
+    }
+
+    public int getReputation() {
+        return this.reputation;
+    }
+
+    public void endSeasonChanges() {
+        this.updateTeamReputations();
+    }
+
+    public void updateTeamReputations() {
+        int reputation_steps = this.reputation / this.teams.size();
+        List<String> sorted_teams = CommonFunctions.sortByReputation(this.teams);
+        for (int i = 0; i < this.teams.size(); i++) {
+            String team = sorted_teams.get(i);
+            int rank = this.table.getRankOfTeam(team);
+            int diff = rank - (i + 1);
+            if (diff < 3 || diff > -3) {
+                continue;
+            } else if (diff > 0) {
+                Sim.getClub(team).addReputation(reputation_steps * (diff - 3) * -1);
+            } else {
+                Sim.getClub(team).addReputation(reputation_steps * ((diff * -1) + 3));
+            }
+        }
     }
 }

@@ -12,14 +12,14 @@ public class KnockoutTie {
         this.first_leg = new Match();
         this.first_leg.home_id = team2;
         this.first_leg.away_id = team1;
-        this.first_leg.away_team = Sim.getTeam(team1).getName();
-        this.first_leg.home_team = Sim.getTeam(team2).getName();
+        this.first_leg.away_team = Sim.getClub(team1).getName();
+        this.first_leg.home_team = Sim.getClub(team2).getName();
         this.first_leg.setTournamentLevel(level);
         this.second_leg = new Match();
         this.second_leg.home_id = team1;
         this.second_leg.away_id = team2;
-        this.second_leg.away_team = Sim.getTeam(team2).getName();
-        this.second_leg.home_team = Sim.getTeam(team1).getName();
+        this.second_leg.away_team = Sim.getClub(team2).getName();
+        this.second_leg.home_team = Sim.getClub(team1).getName();
         this.second_leg.setTournamentLevel(level);
         this.after_extra_time = false;
     }
@@ -48,8 +48,8 @@ public class KnockoutTie {
                 Match match = new Match();
                 match.home_id = team2;
                 match.away_id = team1;
-                match.away_team = Sim.getTeam(team1).getName();
-                match.home_team = Sim.getTeam(team2).getName();
+                match.away_team = Sim.getClub(team1).getName();
+                match.home_team = Sim.getClub(team2).getName();
                 match.simulate();
                 if (match.home_team_goals > match.away_team_goals) {
                     this.winning_team = 2;

@@ -11,7 +11,7 @@ public class LeagueTable {
 
     public void startNewSeason(List<String> list) {
         if (!this.is_international) {
-            Club[] teams = Sim.getTeamArray(list);
+            Club[] teams = Sim.getClubArray(list);
             for (int i = 0; i < teams.length; i++) {
                 performances[i] = new TeamPerformance(teams[i].getId(), teams[i].getName());
             }
@@ -63,6 +63,16 @@ public class LeagueTable {
             return performances[rank - 1].getTeamId();
         }
         return null;
+    }
+
+    public int getRankOfTeam(String team_id) {
+        this.sortTable();
+        for (int i = 0; i < performances.length; i++) {
+            if (team_id.equalsIgnoreCase(performances[i].getTeamId())) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 
     public void updateTeamPerformance(String id, int scored, int conceded) {

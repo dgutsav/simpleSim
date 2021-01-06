@@ -44,7 +44,7 @@ public class CompetitionHistory {
     public void show(int rank) {
         System.out.print(season);
         for (int i = 1; i <= rank; i++) {
-            String team_name = Sim.getTeam(this.getTeamHistory(i).getTeamId()).getName() + "("
+            String team_name = Sim.getClub(this.getTeamHistory(i).getTeamId()).getName() + "("
                     + this.getTeamHistory(i).getRating() + ")";
             System.out.print("\t" + CompetitionHistory.padString(team_name));
         }

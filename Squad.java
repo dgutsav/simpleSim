@@ -224,4 +224,35 @@ public class Squad {
         this.form = this.form.substring(0, FORM_RESULTS_SIZE - 1);
         this.form = result + this.form;
     }
+
+    public int getPlayerRankInSquad(Player player) {
+        List<String> assessed = this.getBestLineupPlayers();
+        if (assessed.contains(player.getId())) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public int getProspectivePlayerRankInSquad(Player player) {
+        Player best_player = this.getBestPlayerAtPosition(player.getPosition(), new ArrayList<>(), false);
+        if (best_player.getRatingForPosition(player.getPosition()) < player.getRating()) {
+            return 1;
+        }
+        return 2;
+    }
+
+    public Position getWeakestPosition() {
+        Position weakest = Position.GOALKEEPER;
+        int rating = 99;
+        Map<String, Position> lineup = this.getBestLineup();
+        for (Map.Entry<String, Position> entry : lineup.entrySet()) {
+            Player player = Sim.getPlayer(entry.getKey());
+            if (rating > player.getRatingForPosition(entry.getValue())) {
+                weakest = entry.getValue();
+                rating = player.getRatingForPosition(entry.getValue());
+            }
+        }
+        return weakest;
+    }
 }

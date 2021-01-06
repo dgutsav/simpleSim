@@ -7,8 +7,9 @@ public class CommonFunctions {
 
     }
 
-    public static Club getTeam(float rating, String nation_name, int nation_id) {
-        Club team = new Club(CommonFunctions.getTeamNameForCountry(nation_name), nation_id);
+    public static Club getTeam(float rating, String nation_name, int nation_id, float league_rating) {
+        int reputation = Math.round(rating * league_rating);
+        Club team = new Club(CommonFunctions.getTeamNameForCountry(nation_name), nation_id, reputation);
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
         Position[] positions = CommonFunctions.getPositions(team.getSeniorSquad().getPositions(), ratings.length);
         for (int i = 0; i < ratings.length; i++) {
@@ -56,9 +57,10 @@ public class CommonFunctions {
         return positions;
     }
 
-    public static League getLeague(String nation_name, int division, int promotion, int relegation, int nation_id) {
+    public static League getLeague(String nation_name, int division, int promotion, int relegation, int nation_id,
+            int rating) {
         String name = Catalogues.getDenonym(nation_name) + " League " + division;
-        return new League(name, division, promotion, relegation, nation_id);
+        return new League(name, division, promotion, relegation, nation_id, rating);
     }
 
     public static Player getPlayer(String nation_name, int nation_id, int rating, int age, Position position) {
@@ -120,7 +122,7 @@ public class CommonFunctions {
         }
         if (variation == 1) {
             // single horse with n-nearby
-            starting_value = CommonFunctions.getRandomNumber((int) (0.1f * average)) + 2;
+            starting_value = CommonFunctions.getRandomNumber((int) (0.1f * average)) + 4;
             for (int i = 0; i < size; i++) {
                 if (i < size / 5) {
                     array[i] += starting_value;
@@ -131,8 +133,8 @@ public class CommonFunctions {
             }
         } else if (variation == 2) {
             // two-horse with m-nearby
-            starting_value = CommonFunctions.getRandomNumber((int) (0.15f * average)) + 2;
-            starting_value2 = CommonFunctions.getRandomNumber((int) (0.12f * average)) + 2;
+            starting_value = CommonFunctions.getRandomNumber((int) (0.15f * average)) + 4;
+            starting_value2 = CommonFunctions.getRandomNumber((int) (0.12f * average)) + 4;
             for (int i = 0; i < size; i++) {
                 if (i < size / 2) {
                     if (i % 2 == 0) {
@@ -163,17 +165,17 @@ public class CommonFunctions {
             variance = CommonFunctions.getRandomNumber(3);
         }
         int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
-        League league = getLeague(nation_name, level, promotion, relegation, nation_id);
+        League league = getLeague(nation_name, level, promotion, relegation, nation_id, league_rating);
         for (int i = 0; i < team_ratings.length; i++) {
-            Club team = getTeam((float) team_ratings[i], nation_name, nation_id);
-            String team_id = Sim.addTeam(team);
+            Club team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
+            String team_id = Sim.addClub(team);
             league.addTeam(team_id);
         }
         return league;
     }
 
     public static String getTeamNameForCountry(String nation_name) {
-        int year = CommonFunctions.getRandomNumber(100) + 1863;
+        int year = CommonFunctions.getRandomNumber(110) + 1890;
         String addedendum = String.valueOf(year);
         String team_name = Catalogues.getCity(nation_name);
         if (CommonFunctions.getRandomNumber(100) < Catalogues.getPrefixChance(nation_name)) {
@@ -235,16 +237,68 @@ public class CommonFunctions {
         }
     }
 
+    public static List<Club> getTeams(List<String> teams_to_find) {
+        List<Club> teams = new ArrayList<>();
+        for (String team_id : teams_to_find) {
+            teams.add(Sim.getClub(team_id));
+        }
+        return teams;
+    }
+
     public static List<String> sortByCoefficients(List<String> teams_to_sort) {
         List<String> sorted = new ArrayList<>();
-        List<Club> teams = new ArrayList<>();
-        for (String team : teams_to_sort) {
-            teams.add(Sim.getTeam(team));
-        }
+        List<Club> teams = CommonFunctions.getTeams(teams_to_sort);
         Collections.sort(teams, (Club a, Club b) -> (int) (b.getCoefficient() - a.getCoefficient()));
         for (Club team : teams) {
             sorted.add(team.getId());
         }
         return sorted;
+    }
+
+    public static List<String> sortByReputation(List<String> teams_to_sort) {
+        List<String> sorted = new ArrayList<>();
+        List<Club> teams = CommonFunctions.getTeams(teams_to_sort);
+        Collections.sort(teams, (Club a, Club b) -> (int) (b.getReputation() - a.getReputation()));
+        for (Club team : teams) {
+            sorted.add(team.getId());
+        }
+        return sorted;
+    }
+
+    public static String formatMoney(long amount) {
+        String money = String.valueOf(amount);
+        List<Integer> parts = new ArrayList<>();
+        while (amount > 0) {
+            int part = (int) (amount % 1000);
+            parts.add(0, part);
+            amount /= 1000;
+        }
+        money = "";
+        for (int i : parts) {
+            String temp = String.valueOf(i);
+            if (temp.length() != 3) {
+                for (int x = temp.length(); x < 3; x++) {
+                    temp = "0" + temp;
+                }
+            }
+            money = money + "," + temp;
+        }
+        while (true) {
+            if (money.charAt(0) == ',' || money.charAt(0) == '0') {
+                money = money.substring(1);
+            } else {
+                break;
+            }
+        }
+        return money;
+    }
+
+    public static String getPaddedString(String x, int len) {
+        String padded = x;
+        for (int i = padded.length(); i < len; i++) {
+            padded += " ";
+        }
+        return padded;
+
     }
 }

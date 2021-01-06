@@ -76,11 +76,11 @@ public class Competition {
     }
 
     public List<String> getPossibleOpponents(String team, List<String> opponents, boolean is_qualifiers) {
-        int nation = Sim.getTeam(team).getNationId();
+        int nation = Sim.getClub(team).getNationId();
         List<String> possible = new ArrayList<>();
         boolean champion = ControllerUEFA.isDomesticChampion(team);
         for (String opponent : opponents) {
-            if (nation == Sim.getTeam(opponent).getNationId()) {
+            if (nation == Sim.getClub(opponent).getNationId()) {
                 continue;
             }
             if (!is_qualifiers) {
@@ -170,7 +170,7 @@ public class Competition {
             for (int i = 0; i < ties.size(); i++) {
                 ties.get(i).simulate();
                 ties.get(i).show();
-                System.out.println(Sim.getTeam(ties.get(i).getWinner()).getName());
+                System.out.println(Sim.getClub(ties.get(i).getWinner()).getName());
             }
             qualifiers.put(round, ties);
         }
@@ -393,7 +393,7 @@ public class Competition {
     }
 
     public void show() {
-        System.out.println(this.getName() + "   " + Sim.getTeam(this.getWinner()).getName());
+        System.out.println(this.getName() + "   " + Sim.getClub(this.getWinner()).getName());
     }
 
     public Map<Integer, List<KnockoutTie>> getKnockoutRound() {
@@ -404,13 +404,13 @@ public class Competition {
         String team_id;
         List<TeamHistory> histories = new ArrayList<>();
         team_id = this.knockouts.get(this.getNumberOfKnockoutRounds()).get(0).getWinner();
-        histories.add(new TeamHistory(team_id, 1, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 1, Sim.getClub(team_id).getBestSquadRating()));
         team_id = this.knockouts.get(this.getNumberOfKnockoutRounds()).get(0).getLoser();
-        histories.add(new TeamHistory(team_id, 2, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 2, Sim.getClub(team_id).getBestSquadRating()));
         team_id = this.knockouts.get(this.getNumberOfKnockoutRounds() - 1).get(0).getLoser();
-        histories.add(new TeamHistory(team_id, 3, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 3, Sim.getClub(team_id).getBestSquadRating()));
         team_id = this.knockouts.get(this.getNumberOfKnockoutRounds() - 1).get(1).getLoser();
-        histories.add(new TeamHistory(team_id, 4, Sim.getTeam(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 4, Sim.getClub(team_id).getBestSquadRating()));
         CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
         this.competitionHistories.add(compHistory);
     }
@@ -441,5 +441,29 @@ public class Competition {
         } else {
             return this.knockouts.get(round);
         }
+    }
+
+    public int getReputation() {
+        if (this.continent.equalsIgnoreCase("europe")) {
+            return ControllerUEFA.getReputation(this.competition_level);
+        } else {
+            return ControllerCONMEBOL.getRepuation(this.competition_level);
+        }
+    }
+
+    public void endSeasonChanges() {
+        this.updateTeamReputations();
+    }
+
+    public void updateTeamReputations() {
+        int comp_reputation = this.getReputation();
+        int winner_bonus = (int) (comp_reputation * 0.05);
+        int max_rounds = this.getNumberOfKnockoutRounds();
+        Sim.getClub(this.knockouts.get(max_rounds).get(0).getWinner()).addReputation(winner_bonus);
+        winner_bonus /= 2;
+        Sim.getClub(this.knockouts.get(max_rounds).get(0).getLoser()).addReputation(winner_bonus);
+        winner_bonus /= 2;
+        Sim.getClub(this.knockouts.get(max_rounds - 1).get(0).getLoser()).addReputation(winner_bonus);
+        Sim.getClub(this.knockouts.get(max_rounds - 1).get(1).getLoser()).addReputation(winner_bonus);
     }
 }

@@ -153,4 +153,9 @@ public class NationalTeam {
     public int getPoints() {
         return this.points;
     }
+
+    public void updatePoints(double d) {
+        this.points += d;
+        this.update();
+    }
 }

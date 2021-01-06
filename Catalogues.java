@@ -147,7 +147,10 @@ public class Catalogues {
             "Southampton", "Newcastle", "Leeds", "Bradford", "Bristol", "Leicester", "Wakefield", "Coventry",
             "Nottingham", "Sunderland", "Brighton", "Hull", "Plymouth", "Wolverhampton", "Stoke", "Derby", "Salford",
             "Westminster", "Portsmouth", "York", "Oxford", "Cambridge", "Cornwall", "Buckingham", "Durham",
-            "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport", "Dorset", "Chesire" };
+            "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport", "Dorset", "Chesire", "Bolton", "Blackburn",
+            "Camden", "Greenwich", "Hackney", "Hammersmith", "Islington", "Chelsea", "Lambeth", "Lewisham", "Southwark",
+            "Wandswoth", "Barking", "Barnet", "Bexley", "Brent", "Bromley", "Haringey", "Harrow", "Havering",
+            "Hillingdon", "Hounslow", "Kingston", "Redbridge", "Sutton", "Tottenham", "Woolwich" };
     private static String[] spainCities = { "Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Malaga", "Oviedo",
             "Gijon", "Elche", "Las Palmas", "Zaragoza", "Murcia", "Tenerife", "Granada", "Palma", "Vigo", "Cartagena",
             "Cadiz", "San Sebastian", "Coruna", "Valladolid", "Pamplona", "Santander", "Lleida", "Toledo", "Compostela",
@@ -238,7 +241,13 @@ public class Catalogues {
 
     private static String[] argentinaCities = { "Buenos Aires", "Cordoba", "Rosario", "La Plata", "Mar del Plata",
             "Salta", "Tucuman", "San Juan", "Resistencia", "Santiago del Estero", "Corrientes", "Mendoza", "Posadas",
-            "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana" };
+            "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomía", "Almagro", "Balvanera", "Barracas",
+            "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales", "Constitución", "Flores",
+            "Floresta", "La Boca", "La Paternal", "Liniers", "Mataderos", "Monte Castro", "Monserrat", "Nueva Pompeya",
+            "Núñez", "Palermo", "Avellaneda", "Chacabuco", "Chas", "Patricios", "Puerto Madero", "Recoleta", "Retiro",
+            "Saavedra", "San Cristóbal", "San Nicolás", "San Telmo", "Vélez Sársfield", "Versalles", "Crespo", "Devoto",
+            "Lugano", "Luro", "Mitre", "Ortuzar", "Pueyrredon", "Villa Real", "Riachuelo", "Santa Rita", "Soldati",
+            "Urquiza" };
     private static String[] brazilCities = { "Sao Paulo", "Belo Horizonte", "Manaus", "Curitiba", "Rio de Janeiro",
             "Salvador", "Brasilia", "Fortaleza", "Recife", "Porto Alegre", "Belem", "Goiania", "Guarulhos", "Campinas",
             "Sao Luis", "Sao Gonncalo", "Maceio", "Caxias", "Natal", "Teresina", "Ignacu" };
@@ -342,6 +351,8 @@ public class Catalogues {
             return CommonFunctions.getRandomElement(ecuadorCities);
         } else if (nation_name.equalsIgnoreCase(Catalogues.peru)) {
             return CommonFunctions.getRandomElement(peruCities);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.belarus)) {
+            return CommonFunctions.getRandomElement(belarusCities);
         }
         return "Eden";
     }
@@ -429,6 +440,9 @@ public class Catalogues {
             "Sporting", "Union" };
     private static String[] latinSuffixes = { "FC", "CF", "UD", "Juniors" };
 
+    private static String[] belarusPrefixes = { "FC", "Dinamo", "Ruch", "Slavia", "Shaktyor", "Neman" };
+    private static String[] belarusSuffixes = { "FC" };
+
     public static List<String[]> getPrefixOrSuffixData(String nation_name) {
         String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay, venezuela };
         List<String[]> data = new ArrayList<>();
@@ -507,6 +521,9 @@ public class Catalogues {
         } else if (Arrays.asList(latin_countries).contains(nation_name)) {
             data.add(latinPrefixes);
             data.add(latinSuffixes);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.belarus)) {
+            data.add(belarusPrefixes);
+            data.add(belarusSuffixes);
         } else {
             String[] temp = { "FC" };
             data.add(temp);
@@ -872,7 +889,7 @@ public class Catalogues {
 
     private static String[] polishNames = { "Robert", "Arkadiusz", "Antoni", "Jakub", "Jan", "Szymon", "Franciszek",
             "Filip", "Aleksander", "Mikolaj", "Wojciech", "Kacper", "Stanislaw", "Kazimierz", "Piotr", "Lech",
-            "Mieszko", "Krzysztof", "Andrzej" };
+            "Mieszko", "Krzysztof", "Andrzej", "Mateusz" };
     private static String[] polishSurnames = { "Lewandowski", "Milik", "Blaszczykowski", "Szczesny", "Nowak",
             "Kowalski", "Wisniewski", "Wojcik", "Kowalczyk", "Kaminski", "Zielinksi", "Szymanski", "Wozniak",
             "Dabrowski", "Kozlowski", "Jankowski", "Mazur", "Kwiatkowski", "Wojciechowski", "Krawczyk", "Kaczmarek",
@@ -888,6 +905,14 @@ public class Catalogues {
             "Jakobsen", "Gundersen", "Moen", "Sorensen", "Iversen", "Svendsen", "Strand", "Solberg", "Martinsen",
             "Paulsen", "Knutsen", "Gulbrandsen", "Strom", "Fossum", "Odegaard", "Larsson", "Berger", "Haaland",
             "Moller" };
+
+    private static String[] belarusianNames = { "Ivan", "Jan", "Jaraslau", "Jury", "Uladzimir", "Piatro", "Pavel",
+            "Mikalaj", "Lieanid", "Stanislau", "Siarhiej", "Dzimitriy", "Vadzim", "Andrej", "Vasil", "Aliaksandr",
+            "Ihar" };
+    private static String[] belarusianSurnames = { "Hleb", "Daskievic", "Suskievic", "Vajciuskievic", "Mackievic",
+            "Mickievic", "Misilievic", "Navicki", "Kalinouski", "Piliecki", "Rusiecki", "Sadouski", "Caulouski",
+            "Bialiauski", "Ramancuk", "Kacuk", "Kavalcuk", "Moroz", "Zhuk", "Kot", "Lukasenka", "Jakavienka",
+            "Haponienka", "Malasonak", "Manionak" };
 
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
@@ -963,6 +988,13 @@ public class Catalogues {
                 return getName(romanianNames, romanianSurnames);
             } else {
                 return getName(hungarianNames, hungarianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(belarus)) {
+            int prob = CommonFunctions.getRandomNumber(100);
+            if (prob < 88) {
+                return getName(belarusianNames, belarusianSurnames);
+            } else {
+                return getName(russianNames, russianSurnames);
             }
         } else {
             return "Player Player";

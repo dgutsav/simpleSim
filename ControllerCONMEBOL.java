@@ -88,6 +88,14 @@ public class ControllerCONMEBOL {
         }
     }
 
+    public static int getRepuation(int competition_level) {
+        if (competition_level == 1) {
+            return 185;
+        } else {
+            return 155;
+        }
+    }
+
     public static List<Nation> sortByLeagueRanking() {
         List<Nation> nations = Sim.getNationFromContinent("South America");
         Collections.sort(nations, (Nation o1, Nation o2) -> o1.getLeagueRanking() - o2.getLeagueRanking());
@@ -223,7 +231,7 @@ public class ControllerCONMEBOL {
         for (int i = 0; i < 8; i++) {
             if (lib_groups[i][3].length() == 0) {
                 lib_groups[i][3] = winners.get(count);
-                System.out.println(Sim.getTeam(lib_groups[i][3]).getName() + " added to LIB GS");
+                //System.out.println(Sim.getTeam(lib_groups[i][3]).getName() + " added to LIB GS");
                 count++;
             }
         }
@@ -242,11 +250,9 @@ public class ControllerCONMEBOL {
                 unseeded.add(sorted_winners.get(i));
             }
         }
-        System.out.println(seeded.size());
         for (int i = 0; i < transferred.length; i++) {
             seeded.add(transferred[i]);
         }
-        System.out.println(seeded.size());
         List<KnockoutTie> lib_ties = libertadores.getTies(1, true);
         List<String> losers = new ArrayList<>();
         for (KnockoutTie tie : lib_ties) {
@@ -255,7 +261,6 @@ public class ControllerCONMEBOL {
         losers = ControllerCONMEBOL.convertTiesToTable(lib_ties, losers);
         seeded.add(losers.get(0));
         seeded.add(losers.get(1));
-        System.out.println(seeded.size());
         List<KnockoutTie> ties = new ArrayList<>();
         while (!seeded.isEmpty()) {
             String team1 = seeded.remove(CommonFunctions.getRandomNumber(seeded.size()));
@@ -325,10 +330,16 @@ public class ControllerCONMEBOL {
         sudamericana.simulateKnockoutRounds();
     }
 
+    public static void endSeasonChanges() {
+        libertadores.endSeasonChanges();
+        sudamericana.endSeasonChanges();
+    }
+
     public static void simulateCompetitions() {
         simulateQualifiers();
         simulateGroups();
         simulateKnockouts();
+        endSeasonChanges();
     }
 
     public static void saveCompetitionHistory() {
