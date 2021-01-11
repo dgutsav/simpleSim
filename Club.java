@@ -26,7 +26,7 @@ public class Club {
         this.coefficient = 0;
         this.recruitment_level = 15 + CommonFunctions.getRandomInt(3);
         this.reputation = starting_reputation;
-        this.budget = 1000 * 1000 * 1000;
+        this.budget = starting_reputation * 1000 * 10;
     }
 
     public double getCoefficient() {

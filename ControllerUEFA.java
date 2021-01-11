@@ -44,11 +44,17 @@ public class ControllerUEFA {
                     return 3;
                 } else if (rank <= 15) {
                     return 2;
-                } else {
+                } else if (rank <= 25) {
                     return 1;
+                } else {
+                    return 0;
                 }
             case 2:
-                return 3;
+                if(rank <= 25) {
+                    return 3;
+                } else {
+                    return 0;
+                }
             case 3:
                 if (rank <= 11) {
                     return 3;
@@ -398,6 +404,27 @@ public class ControllerUEFA {
         }
     }
 
+    public static void distributePrizeMoney() {
+        long cl_base = 15000000;
+        for (int i = 4; i >= 1; i--) {
+            List<KnockoutTie> ties = championsLeague.getTies(i, false);
+            if (ties == null) {
+                System.out.println(i + " no found");
+                continue;
+            }
+            for (KnockoutTie tie : ties) {
+                Sim.getClub(tie.getWinner()).updateBudget(cl_base * i);
+            }
+        }
+        long el_base = 5000000;
+        for (int i = 5; i >= 1; i--) {
+            List<KnockoutTie> ties = europaLeague.getTies(i, false);
+            for (KnockoutTie tie : ties) {
+                Sim.getClub(tie.getWinner()).updateBudget(el_base * i);
+            }
+        }
+    }
+
     public static void initCompetitions() {
         championsLeague = new Competition(1, continent);
         europaLeague = new Competition(2, continent);
@@ -455,6 +482,7 @@ public class ControllerUEFA {
         simulateGroups();
         simulateKnockouts();
         endSeasonChanges();
+        ControllerUEFA.distributePrizeMoney();
     }
 
     public static void saveCompetitionHistory() {

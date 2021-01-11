@@ -218,6 +218,7 @@ public class League {
 
     public void endSeasonChanges() {
         this.updateTeamReputations();
+        this.distributePrizeMoney();
     }
 
     public void updateTeamReputations() {
@@ -234,6 +235,21 @@ public class League {
             } else {
                 Sim.getClub(team).addReputation(reputation_steps * ((diff * -1) + 3));
             }
+        }
+    }
+
+    public void distributePrizeMoney() {
+        long prize_money = this.reputation * 200000;
+        int size = this.teams.size();
+        float[] shares = new float[size];
+        for (int i = 0; i < size / 2; i++) {
+            float multiplier = ((size / 2) - i) * 0.05f;
+            shares[i] = 1 + multiplier;
+            shares[size - i - 1] = 1 - multiplier;
+        }
+        for (int i = 1; i <= size; i++) {
+            double change = (double) prize_money * shares[i - 1];
+            Sim.getClub(this.getTeamAtRank(i)).updateBudget((long) change);
         }
     }
 }

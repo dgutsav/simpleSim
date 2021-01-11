@@ -10,7 +10,7 @@ public class Market {
 
     public static Map<String, Player> players;
     public static Map<String, Target> targets;
-    public static List<Offer> completed_transfers;
+    public static List<Deal> completed_transfers;
 
     private static int day = 0;
 
@@ -126,6 +126,9 @@ public class Market {
         for (Offer final_offer : finalizedOffers) {
             finalizeOffer(final_offer);
         }
+        for (Map.Entry<String, Target> target_entry : targets.entrySet()) {
+            target_entry.getValue().clearOffer();
+        }
     }
 
     public static Offer selectFinalOffer(List<Offer> player_offers) {
@@ -153,31 +156,35 @@ public class Market {
         buyer.update();
         seller.update();
         players.remove(offer.getPlayerId());
-        offer.setDate(day + "/" + Sim.getSeasonNumber());
-        completed_transfers.add(offer);
         targets.remove(offer.getTargetId());
         Target new_target = buyer.getTransferTargetDetails();
         targets.put(new_target.getId(), new_target);
+        Deal deal = new Deal();
+        deal.player_name = offer.getPlayer().getName();
+        deal.seller_name = seller.getName();
+        deal.buyer_name = buyer.getName();
+        deal.date = day + "/" + Sim.getSeasonNumber();
+        deal.amount = offer.getAmount();
+        completed_transfers.add(deal);
     }
 
     public static void simulateDay() {
         long start = System.nanoTime();
         makeOffers();
-        System.out.println("offers made " + (System.nanoTime() - start));
-        long diff = System.nanoTime() - start;
-        System.out.println(diff);
+        int diff = (int) ((System.nanoTime() - start) / 1000000000);
+        System.out.println(Sim.getSeasonNumber() + " offers made " + diff);
     }
 
     public static void showTopTransfers() {
-        Collections.sort(completed_transfers, (Offer a, Offer b) -> (int) (b.getAmount() - a.getAmount()));
+        Collections.sort(completed_transfers, (Deal a, Deal b) -> (int) (b.amount - a.amount));
         int count = 1;
-        for (Offer offer : completed_transfers) {
+        for (Deal deal : completed_transfers) {
             if (count > 25) {
                 break;
             }
-            System.out.println(count + " " + offer.getDate() + "\t" + offer.getPlayer().getPaddedName() + "  "
-                    + offer.getSellingClub().getName() + " --> " + offer.getBuyingClub().getName() + "\t"
-                    + CommonFunctions.formatMoney(offer.getAmount()));
+            String x = CommonFunctions.getPaddedString(deal.seller_name + " --> " + deal.buyer_name, 50);
+            System.out.println(count + " " + deal.date + "\t" + CommonFunctions.getPaddedString(deal.player_name, 40)
+                    + "  " + x + CommonFunctions.formatMoney(deal.amount));
             count++;
         }
     }
@@ -186,7 +193,6 @@ public class Market {
         initMarketForSeason();
         for (day = 0; day < WINDOW_LENGTH; day++) {
             simulateDay();
-            System.out.println("Simulated Day " + day);
         }
     }
 }

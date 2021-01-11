@@ -22,16 +22,18 @@ public class EloRankings {
             K = WC_KNOCKOUTS;
         }
         float W = 0f;
-        if (match.home_team_goals > match.away_team_goals) {
+        if (MatchSimulator.getHomeGoals() > MatchSimulator.getAwayGoals()) {
             W = 1.0f;
-        } else if (match.home_team_goals == match.away_team_goals) {
+        } else if (MatchSimulator.getHomeGoals() == MatchSimulator.getAwayGoals()) {
             W = 0.5f;
         }
+        System.out.println("K: " + K + " W: " + W);
         double dr = points_home - points_away;
         double den = 1 + Math.pow(10, dr / (-600));
         double We = 1.0 / den;
         double P = K * (W - We);
         home.updatePoints(P);
         away.updatePoints(P * -1);
+        System.out.println("points updated " + P);
     }
 }

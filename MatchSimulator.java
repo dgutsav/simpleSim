@@ -44,7 +44,10 @@ public class MatchSimulator {
             }
         }
         MatchSimulator.postMatchChanges(home, away, result);
-        // EloRankings.calculate(home, away, current_match);
+        if (current_match.is_international_match) {
+            System.out.println("updating elo");
+            EloRankings.calculate(current_match.home_id, current_match.away_id, current_match);
+        }
         return true;
     }
 

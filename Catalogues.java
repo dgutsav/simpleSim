@@ -29,12 +29,12 @@ public class Catalogues {
     private static String israel = "Israel";
     private static String poland = "Poland";
     private static String romania = "Romania";
-
     private static String belarus = "Belarus";
     private static String slovakia = "Slovakia";
     private static String slovenia = "Slovenia";
     private static String bulgaria = "Bulgaria";
     private static String sweden = "Sweden";
+
     private static String albania = "Albania";
     private static String finland = "Finland";
     private static String ireland = "Ireland";
@@ -276,6 +276,20 @@ public class Catalogues {
     private static String[] venezuelaCities = { "Caracas", "Maracaibo", "Barquisimeto", "Valencia", "Ciudad Guayana",
             "Maturín", "Barcelona", "Cumaná", "Petare", "Turmero", "Mérida", "Ciudad Bolívar", "Barinas", "Los Teques",
             "Punto Fijo", "La Guaira", "El Vigía", "San Cristóbal" };
+    private static String[] slovakiaCities = { "Bratislava", "Kosice", "Presov", "Zilina", "Banska Bystrica", "Nitra",
+            "Trnava", "Trencin", "Martin", "Poprad", "Prievidza", "Zvolen", "Michalovce", "Levice", "Bardejov",
+            "Ruzomberok", "Piestany" };
+    private static String[] sloveniaCities = { "Ljubljana", "Maribor", "Celje", "Kranj", "Koper", "Velenje",
+            "Novo Mesto", "Ptuj", "Trbovlje", "Kamnik", "Nova Gorica", "Jesenice", "Domzale", "Skofja Loka", "Izola",
+            "Murska Sobota" };
+    private static String[] bulgariaCities = { "Sofia", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora", "Pleven",
+            "Silven", "Dobrich", "Shumen", "Pernik", "Haskovo", "Yambol", "Pazardzhik", "Blagoevgrad", "Veliko Tarnovo",
+            "Vratsa", "Gabrovo", "Lovech" };
+    private static String[] swedenCities = { "Stockholm", "Goteborg", "Malmo", "Uppsala", "Sollentuna", "Västerås",
+            "Örebro", "Linkoping", "Helsingborg", "Jonkoping", "Norrkoping", "Lund", "Umea", "Gavle", "Boras",
+            "Sodertalje", "Eskilstuna", "Halmstad", "Vaxjo", "Karlstad", "Sundsvall", "Ostersund", "Trollhattan" };
+    private static String[] albaniaCities = { "Tirana", "Durres", "Vlore", "Elbasan", "Shkoder", "Kamez", "Fier",
+            "Korce", "Berat", "Lushnje", "Pogradec", "Kavaje", "Gjirokaster", "Lac", "Kukes" };
 
     private Catalogues() {
     }
@@ -353,6 +367,14 @@ public class Catalogues {
             return CommonFunctions.getRandomElement(peruCities);
         } else if (nation_name.equalsIgnoreCase(Catalogues.belarus)) {
             return CommonFunctions.getRandomElement(belarusCities);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.slovakia)) {
+            return CommonFunctions.getRandomElement(slovakiaCities);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.slovenia)) {
+            return CommonFunctions.getRandomElement(sloveniaCities);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.bulgaria)) {
+            return CommonFunctions.getRandomElement(bulgariaCities);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.sweden)) {
+            return CommonFunctions.getRandomElement(swedenCities);
         }
         return "Eden";
     }
@@ -443,6 +465,13 @@ public class Catalogues {
     private static String[] belarusPrefixes = { "FC", "Dinamo", "Ruch", "Slavia", "Shaktyor", "Neman" };
     private static String[] belarusSuffixes = { "FC" };
 
+    private static String[] sloveniaPrefixes = { "NK", "ND", "SD", "SNK", "NS", "MNK", "FC" };
+    private static String[] sloveniaSuffixes = { "NK", "FC" };
+
+    private static String[] bulgariaPrefixes = { "Beroe", "CSKA", "Lokomotiv", "Ludogorets", "PFC", "FC", "Botev",
+            "Slavia" };
+    private static String[] bulgariaSuffixes = { "FC", "PFC" };
+
     public static List<String[]> getPrefixOrSuffixData(String nation_name) {
         String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay, venezuela };
         List<String[]> data = new ArrayList<>();
@@ -488,7 +517,8 @@ public class Catalogues {
         } else if (nation_name.equalsIgnoreCase(Catalogues.austria)) {
             data.add(austriaPrefixes);
             data.add(austriaSuffixes);
-        } else if (nation_name.equalsIgnoreCase(Catalogues.czechia)) {
+        } else if (nation_name.equalsIgnoreCase(Catalogues.czechia)
+                || nation_name.equalsIgnoreCase(Catalogues.slovakia)) {
             data.add(czechiaPrefixes);
             data.add(czechiaSuffixes);
         } else if (nation_name.equalsIgnoreCase(Catalogues.switzerland)) {
@@ -524,6 +554,12 @@ public class Catalogues {
         } else if (nation_name.equalsIgnoreCase(Catalogues.belarus)) {
             data.add(belarusPrefixes);
             data.add(belarusSuffixes);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.slovenia)) {
+            data.add(sloveniaPrefixes);
+            data.add(sloveniaSuffixes);
+        } else if (nation_name.equalsIgnoreCase(Catalogues.bulgaria)) {
+            data.add(bulgariaPrefixes);
+            data.add(bulgariaSuffixes);
         } else {
             String[] temp = { "FC" };
             data.add(temp);
@@ -914,11 +950,56 @@ public class Catalogues {
             "Bialiauski", "Ramancuk", "Kacuk", "Kavalcuk", "Moroz", "Zhuk", "Kot", "Lukasenka", "Jakavienka",
             "Haponienka", "Malasonak", "Manionak" };
 
+    private static String[] slovakNames = { "Marek", "Jozef", "Jan", "Martin", "Peter", "Stefan", "Milan", "Michal",
+            "Miroslav", "Tomas", "Ladislav", "Dobromil", "Vojtech", "Lukas", "Slavo", "Victor" };
+    private static String[] slovakSurnames = { "Kovac", "Horvath", "Mlynar", "Baca", "Hamsik", "Pekarik", "Kucar",
+            "Sklenar", "Suchy", "Surovy", "Tichy", "Mraz" };
+
+    private static String[] sloveneNames = { "Jan", "Josip", "Robert", "Franc", "Janez", "Marko", "Ivan", "Andrej",
+            "Anton", "Jozef", "Joze", "Luka", "Peter", "Matej", "Tomaz", "Ales", "Bojan", "Branko", "Rok", "Bostjan",
+            "Miha" };
+    private static String[] sloveneSurnames = { "Oblak", "Mlakar", "Ilicic", "Koren", "Krajnc", "Kos", "Golob",
+            "Potocnik", "Zupancic", "Vidmar", "Kralj", "Bizjak", "Korosec", "Zupan", "Kotnik", "Hribar", "Kavcic",
+            "Rozman", "Zajc", "Ceh", "Ceferin", "Matavz" };
+
+    private static String[] bulgarianNames = { "Andrei", "Angel", "Aleksandar", "Aleksi", "Anastas", "Anton", "Asen",
+            "Asparuh", "Atanas", "Blagun", "Bogdan", "Bogomil", "Bojidar", "Boris", "Borislav", "Boyan", "Boiko",
+            "Branimir", "Dafo", "Daniel", "Danuil", "Delyan", "Desislav", "Dimo", "Dobromir", "Dragan", "Dragomir",
+            "Elian", "Genadi", "Georgi", "Grozdan", "Hristo", "Hristofor", "Ilian", "Iordan", "Ivan", "Ivo", "Ivailo",
+            "Kalin", "Kaloyan", "Kiril", "Kostadin", "Krasimir", "Krum", "Lyuben", "Lyubomir", "Mihail", "Milan",
+            "Milen", "Miroslav", "Mladen", "Momchil", "Nayden", "Nedelcho", "Nedyalko", "Nikola", "Nikolay", "Ognian",
+            "Ognyan", "Petar", "Plamen", "Radko", "Radomir", "Radoslav", "Rayko", "Rumen", "Sabin", "Samuil", "Simeon",
+            "Spas", "Stefan", "Stanimir", "Stanislav", "Stanko", "Stilyan", "Stoyan", "Theodosii", "Tihomir", "Todor",
+            "Tsvetan", "Valko", "Vasil", "Ventsislav", "Veselin", "Vladimir", "Vladislav", "Yasen", "Yavor", "Zdravko",
+            "Zhelyazko", "Zhivko", "Zlatan", "Zlatko" };
+    private static String[] bulgarianSurnames = { "Ivanov", "Georgiev", "Dimitrov", "Petrov", "Nikolov", "Hristov",
+            "Stoyanov", "Todorov", "Iliev", "Angelov", "Stoichkov", "Asparuhov", "Kolev", "Nedelev", "Mihaylov",
+            "Kostadinov", "Marinov", "Kraev", "Popov", "Lazarov", "Pandev", "Penev", "Minchev" };
+
+    private static String[] swedishNames = { "Lars", "Per", "Karl", "Jan", "Hans", "Nils", "Sven", "Viktor", "Kim",
+            "Carl", "Erik", "Bengt", "Bo", "Anders", "Mats", "Leif", "Ulf", "Bjorn", "Ronnie", "Fredrik", "Jonas",
+            "Rolf" };
+    private static String[] swedishSurnames = { "Johansson", "Andersson", "Karlsson", "Nilsson", "Eriksson", "Larsson",
+            "Olsson", "Persson", "Svensson", "Gustafsson", "Pettersson", "Jonsson", "Jansson", "Hansson", "Bengtsson",
+            "Carlsson", "Jonsson", "Petersson", "Lindberg", "Magnusson", "Gustavsson", "Olofsson", "Lindgren",
+            "Lindstrom", "Axelsson", "Kallstrom", "Lindelof" };
+
+    private static String[] albanianNames = { "Arben", "Xherdan", "Vedat", "Milot", "Agim", "Fatmir", "Enis", "Altin",
+            "Petrit", "Agron", "Kujtim", "Gezim", "Besnik", "Dritan", "Edmond", "Bujar" };
+    private static String[] albanianSurnames = { "Hoxha", "Prifti", "Shehu", "Dervishi", "Bektashi", "Begu", "Gjoni",
+            "Gjonaj", "Leka", "Lekaj", "Murati", "Mehmeti", "Hysi", "Gjika", "Marku", "Kola", "Kolla", "Nikolla",
+            "Hasani", "Kristi", "Luka", "Brahimi", "Sinani", "Thanasi", "Halili", "Abazi", "Dibra", "Laci", "Shkodra",
+            "Prishtina", "Delvina", "Koroveshi", "Permeti", "Frasheri", "Gegaj", "Toskaj", "Chami", "Kelmendi",
+            "Shkreli", "Berisha", "Krasniqi", "Gashi", "Kuqi", "Bardhi", "Xhaka", "Shaqiri" };
+
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
                 venezuela };
         String[] portuguese_countries = { brazil, portugal };
         String[] german_countries = { germany, austria };
+
+        int prob = CommonFunctions.getRandomNumber(100);
+
         if (nation_name.equalsIgnoreCase(england)) {
             return getName(englishNames, englishSurnames);
         } else if (Arrays.asList(german_countries).contains(nation_name)) {
@@ -946,7 +1027,6 @@ public class Catalogues {
         } else if (nation_name.equalsIgnoreCase(denmark)) {
             return getName(danishNames, danishSurnames);
         } else if (nation_name.equalsIgnoreCase(belgium)) {
-            int prob = CommonFunctions.getRandomNumber(100);
             if (prob < 59) {
                 return getName(dutchNames, dutchSurnames);
             } else {
@@ -967,7 +1047,6 @@ public class Catalogues {
         } else if (nation_name.equalsIgnoreCase(norway)) {
             return getName(norwegianNames, norwegianSurnames);
         } else if (nation_name.equalsIgnoreCase(switzerland)) {
-            int prob = CommonFunctions.getRandomNumber(100);
             if (prob < 65) {
                 return getName(germanNames, germanSurnames);
             } else if (prob < 90) {
@@ -976,25 +1055,40 @@ public class Catalogues {
                 return getName(italianNames, italianSurnames);
             }
         } else if (nation_name.equalsIgnoreCase(cyprus)) {
-            int prob = CommonFunctions.getRandomNumber(100);
             if (prob < 75) {
                 return getName(greekNames, greekSurnames);
             } else {
                 return getName(turkishNames, turkishSurnames);
             }
         } else if (nation_name.equalsIgnoreCase(romania)) {
-            int prob = CommonFunctions.getRandomNumber(100);
             if (prob < 88) {
                 return getName(romanianNames, romanianSurnames);
             } else {
                 return getName(hungarianNames, hungarianSurnames);
             }
         } else if (nation_name.equalsIgnoreCase(belarus)) {
-            int prob = CommonFunctions.getRandomNumber(100);
             if (prob < 88) {
                 return getName(belarusianNames, belarusianSurnames);
             } else {
                 return getName(russianNames, russianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(slovakia)) {
+            if (prob < 80) {
+                return getName(slovakNames, slovakSurnames);
+            } else if (prob < 90) {
+                return getName(czechNames, czechSurnames);
+            } else {
+                return getName(hungarianNames, hungarianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(slovenia)) {
+            return getName(sloveneNames, sloveneSurnames);
+        } else if (nation_name.equalsIgnoreCase(sweden)) {
+            return getName(swedishNames, swedishSurnames);
+        } else if (nation_name.equalsIgnoreCase(bulgaria)) {
+            if (prob < 85) {
+                return getName(bulgarianNames, bulgarianSurnames);
+            } else {
+                return getName(turkishNames, turkishSurnames);
             }
         } else {
             return "Player Player";

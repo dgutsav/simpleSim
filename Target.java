@@ -56,4 +56,8 @@ public class Target {
     public boolean hasMadeOfferForPlayer(String player_id) {
         return this.made_offers_for.contains(player_id);
     }
+
+    public void clearOffer() {
+        this.made_offer = false;
+    }
 }

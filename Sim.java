@@ -18,8 +18,9 @@ public class Sim {
     private static int season = 2020;
 
     public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
-    public static boolean TEST = false;
-    public static boolean SHOW_DETAILS = false;
+    public static boolean TEST = true;
+    public static boolean SHOW_DETAILS = true;
+    public static boolean USE_TRANSFER_MARKET = false;
 
     private Sim() {
     }
@@ -80,7 +81,7 @@ public class Sim {
     public static List<Nation> getNationFromContinent(String continent) {
         List<Nation> cont_nations = new ArrayList<>();
         for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
-            if (continent.equalsIgnoreCase(entry.getValue().getContinent())) {
+            if (continent.equalsIgnoreCase(entry.getValue().getContinent()) || continent.equalsIgnoreCase("all")) {
                 cont_nations.add(entry.getValue());
             }
         }
@@ -164,11 +165,9 @@ public class Sim {
             ControllerUEFA.simulateCompetitions();
             ControllerCONMEBOL.simulateCompetitions();
         }
-        if (season % 5 == 0 && !TEST) {
-            Internationals.setup();
-            Internationals.simulateNationsLeague();
+        if (USE_TRANSFER_MARKET) {
+            Market.simulate();
         }
-        Market.simulate();
         seasonEndChanges();
     }
 
@@ -435,14 +434,19 @@ public class Sim {
     }
 
     public static void showNationalTeams() {
-        for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
-            System.out.print("\n" + entry.getValue().getName() + " ");
-            entry.getValue().getNationalTeam().callup();
+        System.out.println("\nNational Teams");
+        List<NationalTeam> teams = Internationals.sortByPoints(Sim.getNationFromContinent("all"));
+        for (NationalTeam nat_team : teams) {
+            nat_team.callup();
+            System.out.println(
+                    nat_team.getName() + " " + nat_team.getSquad().getBestLineupRating() + " " + nat_team.getPoints());
         }
     }
 
     public static void main(String[] args) {
-        int num_seasons = 10;
+        TEST = false;
+        USE_TRANSFER_MARKET = false;
+        int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -459,12 +463,12 @@ public class Sim {
         for (int i = 0; i < num_seasons; i++) {
             System.out.println(i + " " + d[i] / 1000000000);
         }
-        if (Sim.SHOW_DETAILS) {
+        if (Sim.SHOW_DETAILS && !Sim.TEST) {
             showCompetitionHistories();
             showTeams();
             showPlayers();
             showNationalTeams();
+            Market.showTopTransfers();
         }
-        Market.showTopTransfers();
     }
 }

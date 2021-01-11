@@ -8,7 +8,7 @@ public class CommonFunctions {
     }
 
     public static Club getTeam(float rating, String nation_name, int nation_id, float league_rating) {
-        int reputation = Math.round(rating * league_rating);
+        int reputation = Math.round((rating + 10) * (league_rating + 10));
         Club team = new Club(CommonFunctions.getTeamNameForCountry(nation_name), nation_id, reputation);
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
         Position[] positions = CommonFunctions.getPositions(team.getSeniorSquad().getPositions(), ratings.length);
