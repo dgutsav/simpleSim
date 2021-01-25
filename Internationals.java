@@ -9,6 +9,9 @@ public class Internationals {
     private static League[] concacaf_qualifiers;
     private static League[] uefa_qualifiers;
 
+    private static League[] wc_groups;
+    private static Cup wc_knockouts;
+
     public static List<Match> setAsInternationalMatch(List<Match> matches, boolean qualifier) {
         for (int i = 0; i < matches.size(); i++) {
             matches.get(i).is_international_match = true;
@@ -39,17 +42,6 @@ public class Internationals {
             groups[i] = base;
         }
         return groups;
-    }
-
-    public static void main(String[] args) {
-        int a = 2, b = 4;
-        int[][] groups = getGroups(a, b);
-        for (int i = 0; i < a; i++) {
-            for (int j = 0; j < b; j++) {
-                System.out.print(groups[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     public static int getNumGroups(String continent) {
@@ -105,7 +97,7 @@ public class Internationals {
                 qualifiers[i].addTeam(teams.get(groups[i][j]).getId());
             }
             qualifiers[i].setFixtures(Internationals.setAsInternationalMatch(
-                    FixtureScheduler.scheduleInternationalFixtures(qualifiers[i].getTeams(), false), true));
+                    FixtureScheduler.scheduleInternationalFixtures(qualifiers[i].getTeams(), false, false), true));
             qualifiers[i].setupTable();
         }
         return qualifiers;
@@ -180,6 +172,55 @@ public class Internationals {
         qualified_teams.addAll(getQualifiersFromContinent(caf_qualifiers, "africa"));
         qualified_teams.addAll(getQualifiersFromContinent(afc_qualifiers, "asia"));
         return qualified_teams;
+    }
+
+    public static void setupWorldCup() {
+        List<String> qualifiers = getAllQualifiers();
+        List<NationalTeam> qualified_teams = new ArrayList<>();
+        for (String id : qualifiers) {
+            qualified_teams.add(Sim.getNationalTeam(id));
+        }
+        Collections.sort(qualified_teams, (NationalTeam a, NationalTeam b) -> (int) (b.getPoints() - a.getPoints()));
+        wc_groups = new League[4];
+        int[][] groups = Internationals.getGroups(4, 4);
+        for (int i = 0; i < 4; i++) {
+            wc_groups[i] = new League("WC Group " + (i + 1), 0, 0, 0, 0, 200);
+            wc_groups[i].setInternational();
+            for (int j = 0; j < 4; j++) {
+                qualified_teams.get(groups[i][j]).callup();
+                wc_groups[i].addTeam(qualified_teams.get(groups[i][j]).getId());
+            }
+            wc_groups[i].setFixtures(Internationals.setAsInternationalMatch(
+                    FixtureScheduler.scheduleInternationalFixtures(wc_groups[i].getTeams(), false, true), true));
+            wc_groups[i].setupTable();
+        }
+    }
+
+    public static void simulateWorldCupGroups() {
+        int matchdays = 3;
+        for (int i = 0; i < wc_groups.length; i++) {
+            System.out.println("\n" + wc_groups[i].getName());
+            for (int j = 1; j <= matchdays; j++) {
+                wc_groups[i].simulateMatchDay(j);
+            }
+            wc_groups[i].getTable().showLong();
+        }
+    }
+
+    public static void setupWorldCupKnockouts() {
+        wc_knockouts = new Cup("WC Knockouts", -1);
+        wc_knockouts.setInternational();
+        List<String> teams = new ArrayList<>();
+        for (int j = 1; j <= 2; j++) {
+            for (int i = 0; i < 4; i++) {
+                teams.add(wc_groups[i].getTeamAtRank(j));
+            }
+        }
+        System.out.println(teams.toString());
+        wc_knockouts.setTeams(teams);
+        wc_knockouts.simulateCup();
+        wc_knockouts.saveCompetitionHistory();
+        wc_knockouts.showCompetitionHistory();
     }
 
     public static void showAllNames(List<String> teams) {

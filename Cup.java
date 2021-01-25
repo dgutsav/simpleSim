@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Cup {
+
+    private boolean is_international = false;
+
     private Map<Integer, List<String>> teams;
     private Map<Integer, List<Match>> matches;
     private int total_teams = 0;
@@ -61,6 +64,16 @@ public class Cup {
         this.teams.put(second_round_seeding, second_round_teams);
     }
 
+    public void setTeams(List<String> teams_to_add) {
+        this.total_teams = teams_to_add.size();
+        int x = (int) (Math.log(this.total_teams) / Math.log(2));
+        this.teams.put(x, teams_to_add);
+    }
+
+    public void setInternational() {
+        this.is_international = true;
+    }
+
     public List<Match> drawRound(List<String> teamList) {
         List<Match> ties = new ArrayList<>();
         while (!teamList.isEmpty()) {
@@ -69,8 +82,14 @@ public class Cup {
             Match tie = new Match();
             tie.home_id = team1;
             tie.away_id = team2;
-            tie.home_team = Sim.getClub(team1).getName();
-            tie.away_team = Sim.getClub(team2).getName();
+            if (this.is_international) {
+                tie.is_international_match = true;
+                tie.home_team = Sim.getNationalTeam(team1).getName();
+                tie.away_team = Sim.getNationalTeam(team2).getName();
+            } else {
+                tie.home_team = Sim.getClub(team1).getName();
+                tie.away_team = Sim.getClub(team2).getName();
+            }
             ties.add(tie);
         }
         return ties;
@@ -162,17 +181,25 @@ public class Cup {
         String team_id;
         List<TeamHistory> histories = new ArrayList<>();
         team_id = this.getTeamAtRank(1);
-        histories.add(new TeamHistory(team_id, 1, Sim.getClub(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 1, getSquadRating(team_id)));
         team_id = this.getTeamAtRank(2);
-        histories.add(new TeamHistory(team_id, 2, Sim.getClub(team_id).getBestSquadRating()));
+        histories.add(new TeamHistory(team_id, 2, getSquadRating(team_id)));
         CompetitionHistory compHistory = new CompetitionHistory(Sim.getSeasonNumber(), histories);
         this.competitionHistories.add(compHistory);
+    }
+
+    public int getSquadRating(String id) {
+        if (is_international) {
+            return Sim.getNationalTeam(id).getSquad().getBestLineupRating();
+        } else {
+            return Sim.getClub(id).getBestSquadRating();
+        }
     }
 
     public void showCompetitionHistory() {
         System.out.println(this.getName());
         for (CompetitionHistory compHistory : this.competitionHistories) {
-            compHistory.show(2);
+            compHistory.show(2, is_international);
         }
     }
 

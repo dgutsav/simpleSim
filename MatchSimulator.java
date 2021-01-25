@@ -45,7 +45,6 @@ public class MatchSimulator {
         }
         MatchSimulator.postMatchChanges(home, away, result);
         if (current_match.is_international_match) {
-            System.out.println("updating elo");
             EloRankings.calculate(current_match.home_id, current_match.away_id, current_match);
         }
         return true;

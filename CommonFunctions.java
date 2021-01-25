@@ -2,14 +2,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import Models.Player;
+import Models.Position;
+import Models.PositionHelper;
+import Functions.CatalogueHelper;
+
 public class CommonFunctions {
     private CommonFunctions() {
 
     }
 
-    public static Club getTeam(float rating, String nation_name, int nation_id, float league_rating) {
+    public static Club_Team getTeam(float rating, String nation_name, int nation_id, float league_rating) {
         int reputation = Math.round((rating + 10) * (league_rating + 10));
-        Club team = new Club(CommonFunctions.getTeamNameForCountry(nation_name), nation_id, reputation);
+        Club_Team team = new Club_Team(CommonFunctions.getTeamNameForCountry(nation_name), nation_id, reputation);
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
         Position[] positions = CommonFunctions.getPositions(team.getSeniorSquad().getPositions(), ratings.length);
         for (int i = 0; i < ratings.length; i++) {
@@ -59,12 +64,12 @@ public class CommonFunctions {
 
     public static League getLeague(String nation_name, int division, int promotion, int relegation, int nation_id,
             int rating) {
-        String name = Catalogues.getDenonym(nation_name) + " League " + division;
+        String name = CatalogueHelper.getDenonym(nation_name) + " League " + division;
         return new League(name, division, promotion, relegation, nation_id, rating);
     }
 
     public static Player getPlayer(String nation_name, int nation_id, int rating, int age, Position position) {
-        String name = Catalogues.getPlayerName(nation_name);
+        String name = CatalogueHelper.getPlayerName(nation_name);
         return new Player(name, position, age, nation_id, rating, 0);
     }
 
@@ -167,7 +172,7 @@ public class CommonFunctions {
         int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
         League league = getLeague(nation_name, level, promotion, relegation, nation_id, league_rating);
         for (int i = 0; i < team_ratings.length; i++) {
-            Club team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
+            Club_Team team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
             String team_id = Sim.addClub(team);
             league.addTeam(team_id);
         }
@@ -177,14 +182,14 @@ public class CommonFunctions {
     public static String getTeamNameForCountry(String nation_name) {
         int year = CommonFunctions.getRandomNumber(110) + 1890;
         String addedendum = String.valueOf(year);
-        String team_name = Catalogues.getCity(nation_name);
-        if (CommonFunctions.getRandomNumber(100) < Catalogues.getPrefixChance(nation_name)) {
-            team_name = Catalogues.getPrefix(nation_name) + " " + team_name;
+        String team_name = CatalogueHelper.getCity(nation_name);
+        if (CommonFunctions.getRandomNumber(100) < CatalogueHelper.getPrefixChance(nation_name)) {
+            team_name = CatalogueHelper.getPrefix(nation_name) + " " + team_name;
             if (CommonFunctions.getRandomNumber(100) > 90) {
                 team_name += " " + addedendum;
             }
         } else {
-            team_name = team_name + " " + Catalogues.getSuffix(nation_name);
+            team_name = team_name + " " + CatalogueHelper.getSuffix(nation_name);
         }
         return team_name.trim();
     }
@@ -237,8 +242,8 @@ public class CommonFunctions {
         }
     }
 
-    public static List<Club> getTeams(List<String> teams_to_find) {
-        List<Club> teams = new ArrayList<>();
+    public static List<Club_Team> getTeams(List<String> teams_to_find) {
+        List<Club_Team> teams = new ArrayList<>();
         for (String team_id : teams_to_find) {
             teams.add(Sim.getClub(team_id));
         }
@@ -247,9 +252,9 @@ public class CommonFunctions {
 
     public static List<String> sortByCoefficients(List<String> teams_to_sort) {
         List<String> sorted = new ArrayList<>();
-        List<Club> teams = CommonFunctions.getTeams(teams_to_sort);
-        Collections.sort(teams, (Club a, Club b) -> (int) (b.getCoefficient() - a.getCoefficient()));
-        for (Club team : teams) {
+        List<Club_Team> teams = CommonFunctions.getTeams(teams_to_sort);
+        Collections.sort(teams, (Club_Team a, Club_Team b) -> (int) (b.getCoefficient() - a.getCoefficient()));
+        for (Club_Team team : teams) {
             sorted.add(team.getId());
         }
         return sorted;
@@ -257,9 +262,9 @@ public class CommonFunctions {
 
     public static List<String> sortByReputation(List<String> teams_to_sort) {
         List<String> sorted = new ArrayList<>();
-        List<Club> teams = CommonFunctions.getTeams(teams_to_sort);
-        Collections.sort(teams, (Club a, Club b) -> (int) (b.getReputation() - a.getReputation()));
-        for (Club team : teams) {
+        List<Club_Team> teams = CommonFunctions.getTeams(teams_to_sort);
+        Collections.sort(teams, (Club_Team a, Club_Team b) -> (int) (b.getReputation() - a.getReputation()));
+        for (Club_Team team : teams) {
             sorted.add(team.getId());
         }
         return sorted;

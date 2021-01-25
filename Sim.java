@@ -6,10 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import Models.*;
+import Functions.CatalogueHelper;
+
 public class Sim {
 
     private static Map<String, League> leagues = new HashMap<>();
-    private static Map<String, Club> clubs = new HashMap<>();
+    private static Map<String, Club_Team> clubs = new HashMap<>();
     private static Map<String, NationalTeam> national_teams = new HashMap<>();
     private static Map<Integer, Nation> nations = new HashMap<>();
     private static Map<String, Player> players = new HashMap<>();
@@ -20,12 +23,12 @@ public class Sim {
     public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
     public static boolean TEST = true;
     public static boolean SHOW_DETAILS = true;
-    public static boolean USE_TRANSFER_MARKET = false;
+    public static boolean USE_TRANSFER_MARKET = true;
 
     private Sim() {
     }
 
-    public static Map<String, Club> getAllClubs() {
+    public static Map<String, Club_Team> getAllClubs() {
         return clubs;
     }
 
@@ -33,7 +36,7 @@ public class Sim {
         return players;
     }
 
-    public static void updateClub(Club club, String id) {
+    public static void updateClub(Club_Team club, String id) {
         clubs.put(id, club);
     }
 
@@ -53,7 +56,7 @@ public class Sim {
         return Sim.season;
     }
 
-    public static Club getClub(String id) {
+    public static Club_Team getClub(String id) {
         if (clubs.containsKey(id)) {
             return clubs.get(id);
         } else {
@@ -88,8 +91,8 @@ public class Sim {
         return cont_nations;
     }
 
-    public static Club[] getClubArray(List<String> array) {
-        Club[] array_clubs = new Club[array.size()];
+    public static Club_Team[] getClubArray(List<String> array) {
+        Club_Team[] array_clubs = new Club_Team[array.size()];
         for (int i = 0; i < array.size(); i++) {
             array_clubs[i] = getClub(array.get(i));
         }
@@ -171,7 +174,7 @@ public class Sim {
         seasonEndChanges();
     }
 
-    public static String addClub(Club team) {
+    public static String addClub(Club_Team team) {
         String id = CommonFunctions.getRandomId();
         team.setId(id);
         clubs.put(id, team);
@@ -207,7 +210,7 @@ public class Sim {
     }
 
     public static void removePlayer(String player_id) {
-        Club team = Sim.getClub(Sim.findPlayerInClub(player_id));
+        Club_Team team = Sim.getClub(Sim.findPlayerInClub(player_id));
         if (team != null) {
             team.getSeniorSquad().removePlayer(player_id);
         }
@@ -218,7 +221,7 @@ public class Sim {
         players.put(player.getId(), player);
     }
 
-    public static String findTeamInLeague(Club team) {
+    public static String findTeamInLeague(Club_Team team) {
         Nation nation = Sim.getNation(team.getNationId());
         if (nation != null) {
             for (String league_id : nation.getLeagues()) {
@@ -232,7 +235,7 @@ public class Sim {
     }
 
     public static String findPlayerInClub(String player_id) {
-        for (Map.Entry<String, Club> entry : clubs.entrySet()) {
+        for (Map.Entry<String, Club_Team> entry : clubs.entrySet()) {
             if (entry.getValue().getAllPlayers().contains(player_id)) {
                 return entry.getKey();
             }
@@ -241,7 +244,7 @@ public class Sim {
     }
 
     public static String findPlayerInLeague(String player_id) {
-        Club team = Sim.getClub(Sim.findPlayerInClub(player_id));
+        Club_Team team = Sim.getClub(Sim.findPlayerInClub(player_id));
         if (team != null) {
             return Sim.findTeamInLeague(team);
         }
@@ -285,7 +288,7 @@ public class Sim {
                 String league_id = Sim.addLeague(league);
                 nation.addLeague(league_id);
             }
-            Cup cup = new Cup(Catalogues.getDenonym(nation.getName()) + " Cup", nation.getId());
+            Cup cup = new Cup(CatalogueHelper.getDenonym(nation.getName()) + " Cup", nation.getId());
             String cup_id = Sim.addCup(cup);
             nation.setCupId(cup_id);
             nation.setYouthRating(setup.youth_rating);
@@ -303,25 +306,25 @@ public class Sim {
         Market.initMarket();
     }
 
-    public static Map<String, Club> sortBySquadRating(Map<String, Club> map) {
-        List<Map.Entry<String, Club>> list = new ArrayList<>(map.entrySet());
+    public static Map<String, Club_Team> sortBySquadRating(Map<String, Club_Team> map) {
+        List<Map.Entry<String, Club_Team>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list,
-                (Map.Entry<String, Club> o1, Map.Entry<String, Club> o2) -> (int) ((o2.getValue().getBestSquadRating())
+                (Map.Entry<String, Club_Team> o1, Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getBestSquadRating())
                         - (o1.getValue().getBestSquadRating())));
-        HashMap<String, Club> temp = new LinkedHashMap<>();
-        for (Map.Entry<String, Club> aa : list) {
+        HashMap<String, Club_Team> temp = new LinkedHashMap<>();
+        for (Map.Entry<String, Club_Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
     }
 
-    public static Map<String, Club> sortByReputation(Map<String, Club> map) {
-        List<Map.Entry<String, Club>> list = new ArrayList<>(map.entrySet());
+    public static Map<String, Club_Team> sortByReputation(Map<String, Club_Team> map) {
+        List<Map.Entry<String, Club_Team>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list,
-                (Map.Entry<String, Club> o1, Map.Entry<String, Club> o2) -> (int) ((o2.getValue().getReputation())
+                (Map.Entry<String, Club_Team> o1, Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getReputation())
                         - (o1.getValue().getReputation())));
-        HashMap<String, Club> temp = new LinkedHashMap<>();
-        for (Map.Entry<String, Club> aa : list) {
+        HashMap<String, Club_Team> temp = new LinkedHashMap<>();
+        for (Map.Entry<String, Club_Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
@@ -329,9 +332,9 @@ public class Sim {
 
     public static void showTeams() {
         System.out.println("\nTeams");
-        Map<String, Club> sorted = Sim.sortByReputation(clubs);
+        Map<String, Club_Team> sorted = Sim.sortByReputation(clubs);
         int count = 1;
-        for (Map.Entry<String, Club> entry : sorted.entrySet()) {
+        for (Map.Entry<String, Club_Team> entry : sorted.entrySet()) {
             System.out.println(count + " " + entry.getValue().getPaddedName() + "\t"
                     + entry.getValue().getBestSquadRating() + "\t" + entry.getValue().getReputation());
             if (count >= 100) {
@@ -357,7 +360,7 @@ public class Sim {
         Map<String, Player> sorted = Sim.sortByRating(players);
         int count = 1;
         String team_name = "";
-        Club team;
+        Club_Team team;
         Nation nation;
         String code = "";
         for (Map.Entry<String, Player> entry : sorted.entrySet()) {
@@ -408,7 +411,7 @@ public class Sim {
             Sim.removePlayer(player);
         }
         long start = System.nanoTime();
-        for (Map.Entry<String, Club> entry : clubs.entrySet()) {
+        for (Map.Entry<String, Club_Team> entry : clubs.entrySet()) {
             entry.getValue().seasonEndPlayerPromotions();
         }
         long end = System.nanoTime();
@@ -444,8 +447,8 @@ public class Sim {
     }
 
     public static void main(String[] args) {
-        TEST = false;
-        USE_TRANSFER_MARKET = false;
+        TEST = true;
+        USE_TRANSFER_MARKET = true;
         int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();

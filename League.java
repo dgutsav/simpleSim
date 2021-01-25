@@ -4,7 +4,7 @@ import java.util.List;
 public class League {
     private String name;
     private List<String> teams;
-    private LeagueTable table;
+    private Table table;
     private int competition_level;
     private int promotion_places;
     private int relegation_places;
@@ -89,7 +89,7 @@ public class League {
     }
 
     public void setupTable() {
-        this.table = new LeagueTable(this.teams.size(), this.isInternational());
+        this.table = new Table(this.teams.size(), this.isInternational());
         this.table.startNewSeason(this.teams);
     }
 
@@ -98,7 +98,7 @@ public class League {
         this.setupTable();
     }
 
-    public LeagueTable getTable() {
+    public Table getTable() {
         return this.table;
     }
 
@@ -200,7 +200,7 @@ public class League {
     public void showCompetitionHistory() {
         System.out.println(this.getName());
         for (CompetitionHistory compHistory : this.competitionHistory) {
-            compHistory.show(3);
+            compHistory.show(3, false);
         }
     }
 

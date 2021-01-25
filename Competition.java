@@ -278,7 +278,7 @@ public class Competition {
             performances[i] = this.groups[i].getTable()
                     .getTeamPerformance(this.groups[i].getTeamAtRank(ControllerUEFA.TEAMS_PROGRESS_FROM_GROUP + 1));
         }
-        LeagueTable table = new LeagueTable(this.getTotalGroups(), false);
+        Table table = new Table(this.getTotalGroups(), false);
         table.performances = performances;
         table.sortTable();
         for (int i = 1; i <= this.getTotalGroups(); i++) {
@@ -418,7 +418,7 @@ public class Competition {
     public void showCompetitionHistory() {
         System.out.println(this.getName());
         for (CompetitionHistory compHistory : this.competitionHistories) {
-            compHistory.show(4);
+            compHistory.show(4, false);
         }
     }
 

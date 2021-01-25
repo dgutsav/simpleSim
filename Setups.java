@@ -67,7 +67,7 @@ public class Setups {
         setups.add(new Nation_Setup("Saudi Arabia", "SAU", 67, 5, 1, 18, 69, 127, "Asia"));
         setups.add(new Nation_Setup("Iran", "IRN", 29, 6, 1, 18, 69, 133, "Asia"));
         setups.add(new Nation_Setup("Qatar", "QAT", 58, 7, 1, 18, 69, 129, "Asia"));
-        setups.add(new Nation_Setup("United Arab Emirates", "UAE", 74, 8, 1, 18, 69, 127, "Asia"));
+        setups.add(new Nation_Setup("Emirates", "UAE", 74, 8, 1, 18, 69, 127, "Asia"));
         setups.add(new Nation_Setup("Australia", "AUS", 41, 9, 1, 18, 69, 136, "Asia"));
         setups.add(new Nation_Setup("Thailand", "THA", 111, 10, 1, 18, 69, 115, "Asia"));
         setups.add(new Nation_Setup("Syria", "SYR", 76, 11, 1, 18, 69, 121, "Asia"));
@@ -87,7 +87,8 @@ public class Setups {
     public static List<Nation_Setup> getTestSetup() {
         List<Nation_Setup> setups = new ArrayList<>();
         // Europe
-        setups.add(new Nation_Setup("England", "ENG", 4, 1, 1, 20, 80, 157, "Europe"));
+        setups.add(new Nation_Setup("England", "ENG", 4, 1, 2, 20, 80, 157, "Europe"));
+        setups.add(new Nation_Setup("Spain", "ESP", 4, 2, 2, 20, 80, 157, "Europe"));
         return setups;
     }
 }

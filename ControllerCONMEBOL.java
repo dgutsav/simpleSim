@@ -276,7 +276,7 @@ public class ControllerCONMEBOL {
     }
 
     public static List<String> convertTiesToTable(List<KnockoutTie> ties, List<String> teams_to_include) {
-        LeagueTable all_table = new LeagueTable(ties.size() * 2, false);
+        Table all_table = new Table(ties.size() * 2, false);
         List<String> current_teams = new ArrayList<>();
         for (KnockoutTie tie : ties) {
             current_teams.add(tie.getTeam1());

@@ -1,3 +1,6 @@
+
+import Functions.GeneratorFunctions;
+import Models.Player;
 public class Offer {
     private String buying_club_id;
     private String selling_club_id;
@@ -16,7 +19,7 @@ public class Offer {
         this.selling_club_id = seller;
         this.player_id = player;
         this.amount = amount;
-        this.id = CommonFunctions.getRandomId();
+        this.id = GeneratorFunctions.getRandomId();
         this.target_id = target_id;
     }
 
@@ -24,7 +27,7 @@ public class Offer {
         return this.selling_club_id;
     }
 
-    public Club getSellingClub() {
+    public Club_Team getSellingClub() {
         return Sim.getClub(this.selling_club_id);
     }
 
@@ -32,7 +35,7 @@ public class Offer {
         return this.buying_club_id;
     }
 
-    public Club getBuyingClub() {
+    public Club_Team getBuyingClub() {
         return Sim.getClub(this.buying_club_id);
     }
 

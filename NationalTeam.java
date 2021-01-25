@@ -4,6 +4,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import Models.*;
+import Functions.CatalogueHelper;
+
 public class NationalTeam {
     private String id;
     private int nation_id;
@@ -95,7 +98,7 @@ public class NationalTeam {
     public void setBestFormation() {
         int best_rating = 0;
         int best_id = 0;
-        for (int i = 0; i < Catalogues.numFormations(); i++) {
+        for (int i = 0; i < CatalogueHelper.numFormations(); i++) {
             this.squad.setFormation(i);
             int rating = this.squad.getBestLineupRating();
             if (rating > best_rating) {

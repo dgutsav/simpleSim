@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Models.Deal;
+import Models.Player;
+
 public class Market {
     public static final int MAX_DIGITS_PRICE = 3;
     public static final int WINDOW_LENGTH = 5;
@@ -34,7 +37,7 @@ public class Market {
         return (int) temp;
     }
 
-    public static int getPlayerValue(Player player, Club club) {
+    public static int getPlayerValue(Player player, Club_Team club) {
         int base_value = player.getBaseValue();
         if (club == null) {
             club = Sim.getClub(Sim.findPlayerInClub(player.getId()));
@@ -52,8 +55,8 @@ public class Market {
 
     public static Map<String, Target> getInitialTargets() {
         Map<String, Target> details = new HashMap<>();
-        Map<String, Club> clubs = Sim.getAllClubs();
-        for (Map.Entry<String, Club> entry : clubs.entrySet()) {
+        Map<String, Club_Team> clubs = Sim.getAllClubs();
+        for (Map.Entry<String, Club_Team> entry : clubs.entrySet()) {
             Target target = entry.getValue().getTransferTargetDetails();
             details.put(target.getId(), target);
         }
@@ -61,7 +64,7 @@ public class Market {
     }
 
     public static boolean canMakeOffer(Target target, Player player, long market_value, String club_id) {
-        Club buying_club = target.getClub();
+        Club_Team buying_club = target.getClub();
         if (target.getPosition() != player.getPosition()) {
             return false;
         }
@@ -75,7 +78,7 @@ public class Market {
         if (clubs_max_valuation < market_value || market_value > target.getPrice()) {
             return false;
         }
-        Club selling_club = Sim.getClub(club_id);
+        Club_Team selling_club = Sim.getClub(club_id);
         int rank = selling_club.getPlayerRankAtClub(player);
         if (rank != 1) {
             return true;
@@ -104,7 +107,7 @@ public class Market {
             String player_id = entry.getKey();
             Player player = entry.getValue();
             String club_id = Sim.findPlayerInClub(player.getId());
-            Club player_club = Sim.getClub(club_id);
+            Club_Team player_club = Sim.getClub(club_id);
             long asking_price = Market.getPlayerValue(player, player_club);
             List<Offer> poffers = new ArrayList<>();
             for (Map.Entry<String, Target> target_entry : targets.entrySet()) {
@@ -147,8 +150,8 @@ public class Market {
     }
 
     public static void finalizeOffer(Offer offer) {
-        Club buyer = offer.getBuyingClub();
-        Club seller = offer.getSellingClub();
+        Club_Team buyer = offer.getBuyingClub();
+        Club_Team seller = offer.getSellingClub();
         buyer.getSeniorSquad().addPlayer(offer.getPlayerId());
         seller.getSeniorSquad().removePlayer(offer.getPlayerId());
         buyer.updateBudget(offer.getAmount() * -1);

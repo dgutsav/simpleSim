@@ -41,11 +41,17 @@ public class CompetitionHistory {
         return string;
     }
 
-    public void show(int rank) {
+    public void show(int rank, boolean international) {
         System.out.print(season);
         for (int i = 1; i <= rank; i++) {
-            String team_name = Sim.getClub(this.getTeamHistory(i).getTeamId()).getName() + "("
-                    + this.getTeamHistory(i).getRating() + ")";
+            TeamHistory hist = this.getTeamHistory(i);
+            String team_name = "";
+            if (international) {
+                team_name = Sim.getNationalTeam(hist.getTeamId()).getName();
+            } else {
+                team_name = Sim.getClub(hist.getTeamId()).getName();
+            }
+            team_name += "(" + hist.getRating() + ")";
             System.out.print("\t" + CompetitionHistory.padString(team_name));
         }
         System.out.println();

@@ -1,20 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Models.*;
+
 public class Target {
     private Position position;
     private int min_rating;
     private long max_price;
-    private Club club;
+    private Club_Team club;
     private String id;
     private boolean made_offer;
     private List<String> made_offers_for;
 
-    public Target(Position position, int rating, long price, Club club) {
+    public Target(Position position, int rating, long price, Club_Team club2) {
         this.position = position;
         this.min_rating = rating;
         this.max_price = price;
-        this.club = club;
+        this.club = club2;
         this.id = CommonFunctions.getRandomId();
         this.made_offer = false;
         this.made_offers_for = new ArrayList<>();
@@ -32,7 +34,7 @@ public class Target {
         return this.max_price;
     }
 
-    public Club getClub() {
+    public Club_Team getClub() {
         return this.club;
     }
 

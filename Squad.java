@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import Models.*;
+import Functions.CatalogueHelper;
+
 public class Squad {
     private List<String> players;
     private int formation;
@@ -13,7 +16,7 @@ public class Squad {
 
     public Squad() {
         this.players = new ArrayList<>();
-        this.formation = CommonFunctions.getRandomNumber(Catalogues.numFormations());
+        this.formation = CommonFunctions.getRandomNumber(CatalogueHelper.numFormations());
         this.emergency_player_promotion = null;
         this.form = "DDDDDD";
         this.update_parent = null;
@@ -56,7 +59,7 @@ public class Squad {
     }
 
     public Position[] getPositions() {
-        return Catalogues.getFormation(this.formation);
+        return CatalogueHelper.getFormation(this.formation);
     }
 
     public void removeAllPlayers() {
