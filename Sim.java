@@ -447,7 +447,7 @@ public class Sim {
     }
 
     public static void main(String[] args) {
-        TEST = true;
+        TEST = false;
         USE_TRANSFER_MARKET = true;
         int num_seasons = 1;
         double[] d = new double[num_seasons];

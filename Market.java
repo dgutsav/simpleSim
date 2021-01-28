@@ -175,7 +175,7 @@ public class Market {
         long start = System.nanoTime();
         makeOffers();
         int diff = (int) ((System.nanoTime() - start) / 1000000000);
-        System.out.println(Sim.getSeasonNumber() + " offers made " + diff);
+        System.out.println(Sim.getSeasonNumber() + " offers made time " + diff);
     }
 
     public static void showTopTransfers() {

@@ -143,4 +143,19 @@ public class SimBettered {
         }
         return "";
     }
+
+    public static Squad[] getSquads(Match match) {
+        Squad[] squads = new Squad[2];
+        if (match.isInternational()) {
+            squads[0] = getNationalTeam(match.getHomeId()).getSquad();
+            squads[1] = getNationalTeam(match.getAwayId()).getSquad();
+        } else if (match.isYouth()) {
+            squads[0] = getClub(match.getHomeId()).getYouthSquad();
+            squads[1] = getClub(match.getAwayId()).getYouthSquad();
+        } else {
+            squads[0] = getClub(match.getHomeId()).getSeniorSquad();
+            squads[1] = getClub(match.getAwayId()).getSeniorSquad();
+        }
+        return squads;
+    }
 }

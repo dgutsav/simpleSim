@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Stages.*;
@@ -28,13 +29,22 @@ public class Competition {
     }
 
     public List<String> getTeams() {
-        if(isDomesticLeague()) {
+        if (isDomesticLeague()) {
             return stages.get(0).getTeams();
         }
         return new ArrayList<>();
     }
-    
+
     public int getReputation() {
         return this.reputation;
+    }
+
+    public void simulate(Calendar date) {
+        for (int i = 0; i < this.stages.size(); i++) {
+            if (!this.stages.get(i).hasBeenSimulated()) {
+                this.stages.get(i).simulate(date);
+                break;
+            }
+        }
     }
 }
