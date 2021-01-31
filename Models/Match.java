@@ -97,6 +97,14 @@ public class Match {
         return this.date;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(int x) {
+        this.level = x;
+    }
+
     public void simulate() {
         if (!isSimulated()) {
             Squad[] squads = SimBettered.getSquads(this);

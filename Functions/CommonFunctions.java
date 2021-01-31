@@ -159,6 +159,14 @@ public class CommonFunctions {
         }
     }
 
+    public static int[] getArrayWithValue(int size, int value) {
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = value;
+        }
+        return array;
+    }
+
     public static void main(String args[]) {
         List<Match> matches = new ArrayList<>();
         Calendar cal1 = Calendar.getInstance();

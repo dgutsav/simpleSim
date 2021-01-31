@@ -11,6 +11,25 @@ public class Competition {
     private String id;
     private CompetitionType type;
     private int reputation;
+    private int pyramid_level;
+
+    public static Competition createDomesticLeague(int reputation, int pyramid_level) {
+        Competition comp = new Competition();
+        comp.pyramid_level = pyramid_level;
+        comp.reputation = reputation;
+        comp.type = CompetitionType.DOMESTIC_LEAGUE;
+        comp.stages = new ArrayList<>();
+        comp.stages.add(new RoundRobin());
+        return comp;
+    }
+
+    public void setup(List<String> teams) {
+        stages.get(0).setup(teams);
+    }
+
+    public int getPyramidLevel() {
+        return this.pyramid_level;
+    }
 
     public void setId(String id) {
         this.id = id;

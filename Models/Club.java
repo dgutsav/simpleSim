@@ -123,8 +123,7 @@ public class Club {
         int rating = this.getAcademyRating() + CommonFunctions.getRandomInt(10);
         rating = Player.adjustRating(rating);
         int age = 17 + CommonFunctions.getRandomInt(2);
-        String nation_name = SimBettered.getNation(this.nation_id).getName();
-        Player player = GeneratorFunctions.getPlayer(nation_name, this.nation_id, rating, age, position);
+        Player player = GeneratorFunctions.getPlayer(SimBettered.getNation(this.nation_id), rating, age, position);
         String player_id = SimBettered.addPlayer(player);
         player.setId(player_id);
         return player;

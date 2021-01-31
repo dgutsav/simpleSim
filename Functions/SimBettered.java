@@ -117,7 +117,7 @@ public class SimBettered {
     public static String findTeamInLeague(Club team) {
         Nation nation = getNation(team.getNationId());
         if (nation != null) {
-            for (String league_id : nation.getLeagues()) {
+            for (String league_id : nation.getLeagues().values()) {
                 Competition league = getCompetition(league_id);
                 if (league != null && league.isDomesticLeague() && league.getTeams().contains(team.getId())) {
                     return league_id;

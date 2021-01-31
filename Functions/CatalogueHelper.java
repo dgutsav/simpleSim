@@ -8,74 +8,74 @@ import Models.*;
 
 public class CatalogueHelper {
     // Nations
-    private static String england = "England";
-    private static String spain = "Spain";
-    private static String germany = "Germany";
-    private static String france = "France";
-    private static String italy = "Italy";
-    private static String portugal = "Portugal";
-    private static String russia = "Russia";
-    private static String ukraine = "Ukraine";
-    private static String netherlands = "Netherlands";
-    private static String belgium = "Belgium";
-    private static String denmark = "Denmark";
-    private static String croatia = "Croatia";
-    private static String scotland = "Scotland";
-    private static String turkey = "Turkey";
-    private static String austria = "Austria";
-    private static String czechia = "Czechia";
-    private static String switzerland = "Switzerland";
-    private static String greece = "Greece";
-    private static String serbia = "Serbia";
-    private static String cyprus = "Cyprus";
-    private static String norway = "Norway";
-    private static String hungary = "Hungary";
-    private static String israel = "Israel";
-    private static String poland = "Poland";
-    private static String romania = "Romania";
-    private static String belarus = "Belarus";
-    private static String slovakia = "Slovakia";
-    private static String slovenia = "Slovenia";
-    private static String bulgaria = "Bulgaria";
-    private static String sweden = "Sweden";
-    private static String albania = "Albania";
+    public static String england = "England";
+    public static String spain = "Spain";
+    public static String germany = "Germany";
+    public static String france = "France";
+    public static String italy = "Italy";
+    public static String portugal = "Portugal";
+    public static String russia = "Russia";
+    public static String ukraine = "Ukraine";
+    public static String netherlands = "Netherlands";
+    public static String belgium = "Belgium";
+    public static String denmark = "Denmark";
+    public static String croatia = "Croatia";
+    public static String scotland = "Scotland";
+    public static String turkey = "Turkey";
+    public static String austria = "Austria";
+    public static String czechia = "Czechia";
+    public static String switzerland = "Switzerland";
+    public static String greece = "Greece";
+    public static String serbia = "Serbia";
+    public static String cyprus = "Cyprus";
+    public static String norway = "Norway";
+    public static String hungary = "Hungary";
+    public static String israel = "Israel";
+    public static String poland = "Poland";
+    public static String romania = "Romania";
+    public static String belarus = "Belarus";
+    public static String slovakia = "Slovakia";
+    public static String slovenia = "Slovenia";
+    public static String bulgaria = "Bulgaria";
+    public static String sweden = "Sweden";
+    public static String albania = "Albania";
 
-    private static String finland = "Finland";
-    private static String ireland = "Ireland";
-    private static String wales = "Wales";
-    private static String bosnia = "Bosnia";
-    private static String iceland = "Iceland";
+    public static String finland = "Finland";
+    public static String ireland = "Ireland";
+    public static String wales = "Wales";
+    public static String bosnia = "Bosnia";
+    public static String iceland = "Iceland";
 
-    private static String argentina = "Argentina";
-    private static String bolivia = "Bolivia";
-    private static String brazil = "Brazil";
-    private static String chile = "Chile";
-    private static String colombia = "Colombia";
-    private static String ecuador = "Ecuador";
-    private static String paraguay = "Paraguay";
-    private static String peru = "Peru";
-    private static String uruguay = "Uruguay";
-    private static String venezuela = "Venezuela";
+    public static String argentina = "Argentina";
+    public static String bolivia = "Bolivia";
+    public static String brazil = "Brazil";
+    public static String chile = "Chile";
+    public static String colombia = "Colombia";
+    public static String ecuador = "Ecuador";
+    public static String paraguay = "Paraguay";
+    public static String peru = "Peru";
+    public static String uruguay = "Uruguay";
+    public static String venezuela = "Venezuela";
 
-    private static String america = "United States";
-    private static String mexico = "Mexico";
-    private static String canada = "Canada";
-    private static String costa_rica = "Costa Rica";
-    private static String honduras = "Honduras";
-    private static String west_indies = "West Indies";
+    public static String america = "United States";
+    public static String mexico = "Mexico";
+    public static String canada = "Canada";
+    public static String costa_rica = "Costa Rica";
+    public static String honduras = "Honduras";
+    public static String west_indies = "West Indies";
 
-    private static String australia = "Australia";
-    private static String china = "China";
-    private static String emirates = "Emirates";
-    private static String iran = "Iran";
-    private static String iraq = "Iraq";
-    private static String japan = "Japan";
-    private static String korea = "Korean";
-    private static String qatar = "Qatar";
-    private static String saudi_arabia = "Saudi Arabia";
-    private static String syria = "Syria";
-    private static String thailand = "Thailand";
-    private static String uzbekistan = "Uzbekistan";
+    public static String australia = "Australia";
+    public static String china = "China";
+    public static String emirates = "Emirates";
+    public static String iran = "Iran";
+    public static String iraq = "Iraq";
+    public static String japan = "Japan";
+    public static String korea = "Korean";
+    public static String qatar = "Qatar";
+    public static String saudi_arabia = "Saudi Arabia";
+    public static String syria = "Syria";
+    public static String thailand = "Thailand";
+    public static String uzbekistan = "Uzbekistan";
 
     public static String getDenonym(String nation_name) {
         if (nation_name.equalsIgnoreCase(albania)) {
@@ -661,6 +661,21 @@ public class CatalogueHelper {
     public static int getSuffixChance(String nation_name) {
         List<String[]> data = getPrefixOrSuffixData(nation_name);
         return (data.get(1).length * 100) / (data.get(0).length + data.get(1).length);
+    }
+
+    public static String getClubName(String nation_name) {
+        int year = CommonFunctions.getRandomNumber(110) + 1890;
+        String addedendum = String.valueOf(year);
+        String team_name = CatalogueHelper.getCity(nation_name);
+        if (CommonFunctions.getRandomNumber(100) < CatalogueHelper.getPrefixChance(nation_name)) {
+            team_name = CatalogueHelper.getPrefix(nation_name) + " " + team_name;
+            if (CommonFunctions.getRandomNumber(100) > 90) {
+                team_name += " " + addedendum;
+            }
+        } else {
+            team_name = team_name + " " + CatalogueHelper.getSuffix(nation_name);
+        }
+        return team_name.trim();
     }
 
     // Formations
