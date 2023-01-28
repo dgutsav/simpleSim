@@ -40,10 +40,10 @@ public class CatalogueHelper {
     public static String sweden = "Sweden";
     public static String albania = "Albania";
 
+    public static String bosnia = "Bosnia";
     public static String finland = "Finland";
     public static String ireland = "Ireland";
     public static String wales = "Wales";
-    public static String bosnia = "Bosnia";
     public static String iceland = "Iceland";
 
     public static String argentina = "Argentina";
@@ -219,7 +219,7 @@ public class CatalogueHelper {
             "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport", "Dorset", "Chesire", "Bolton", "Blackburn",
             "Camden", "Greenwich", "Hackney", "Hammersmith", "Islington", "Chelsea", "Lambeth", "Lewisham", "Southwark",
             "Wandswoth", "Barking", "Barnet", "Bexley", "Brent", "Bromley", "Haringey", "Harrow", "Havering",
-            "Hillingdon", "Hounslow", "Kingston", "Redbridge", "Sutton", "Tottenham", "Woolwich" };
+            "Solihull", "Hillingdon", "Hounslow", "Kingston", "Redbridge", "Sutton", "Tottenham", "Woolwich" };
     private static String[] spainCities = { "Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Malaga", "Oviedo",
             "Gijon", "Elche", "Las Palmas", "Zaragoza", "Murcia", "Tenerife", "Granada", "Palma", "Vigo", "Cartagena",
             "Cadiz", "San Sebastian", "Coruna", "Valladolid", "Pamplona", "Santander", "Lleida", "Toledo", "Compostela",
@@ -359,6 +359,11 @@ public class CatalogueHelper {
             "Sodertalje", "Eskilstuna", "Halmstad", "Vaxjo", "Karlstad", "Sundsvall", "Ostersund", "Trollhattan" };
     private static String[] albaniaCities = { "Tirana", "Durres", "Vlore", "Elbasan", "Shkoder", "Kamez", "Fier",
             "Korce", "Berat", "Lushnje", "Pogradec", "Kavaje", "Gjirokaster", "Lac", "Kukes" };
+    private static String[] bosniaCities = { "Sarajevo", "Banja Luka", "Mostar", "Tuzla", "Zenica", "Bijelina",
+            "Prijedor", "Brcko", "Doboj", "Cazin", "Zvornik", "Zivinice", "Bihac", "Travnik", "Gradiska" };
+    private static String[] finlandCities = { "Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku", "Jyvaskyla",
+            "Kuopio", "Lahti", "Pori", "Kouvola", "Joensuu", "Lappeenranta", "Hameenlinna", "Vaasa", "ROvaniemi",
+            "Seinajoki", "Mariehamn" };
 
     private CatalogueHelper() {
     }
@@ -446,6 +451,10 @@ public class CatalogueHelper {
             return CommonFunctions.getRandomElement(swedenCities);
         } else if (nation_name.equalsIgnoreCase(albania)) {
             return CommonFunctions.getRandomElement(albaniaCities);
+        } else if (nation_name.equalsIgnoreCase(bosnia)) {
+            return CommonFunctions.getRandomElement(bosniaCities);
+        } else if (nation_name.equalsIgnoreCase(finland)) {
+            return CommonFunctions.getRandomElement(finlandCities);
         }
         return "Eden";
     }
@@ -539,11 +548,13 @@ public class CatalogueHelper {
     private static String[] sloveniaPrefixes = { "NK", "ND", "SD", "SNK", "NS", "MNK", "FC" };
     private static String[] sloveniaSuffixes = { "NK", "FC" };
 
-    private static String[] bulgariaPrefixes = { "Beroe", "CSKA", "Lokomotiv", "Ludogorets", "PFC", "FC", "Botev",
+    private static String[] bulgariaPrefixes = { "Beroe", "CSKA", "Lokomotiv", "Vitosha", "PFC", "FC", "Botev",
             "Slavia" };
     private static String[] bulgariaSuffixes = { "FC", "PFC" };
 
     private static String[] albaniaPrefixes = { "FC", "FK", "KS", "KF" };
+
+    private static String[] finlandPrefixes = { "IFK", "FC", "AC", "JK", "PS" };
 
     public static List<String[]> getPrefixOrSuffixData(String nation_name) {
         String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay, venezuela };
@@ -635,6 +646,18 @@ public class CatalogueHelper {
         } else if (nation_name.equalsIgnoreCase(albania)) {
             data.add(albaniaPrefixes);
             data.add(albaniaPrefixes);
+        } else if (nation_name.equalsIgnoreCase(finland)) {
+            data.add(finlandPrefixes);
+            data.add(finlandPrefixes);
+        } else if (nation_name.equalsIgnoreCase(bosnia)) {
+            int rand = CommonFunctions.getRandomNumber(100);
+            if (rand < 30) {
+                data.add(serbiaPrefixes);
+                data.add(serbiaSuffixes);
+            } else {
+                data.add(croatiaPrefixes);
+                data.add(croatiaSuffixes);
+            }
         } else {
             String[] temp = { "FC" };
             data.add(temp);
@@ -703,10 +726,14 @@ public class CatalogueHelper {
                     Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
             { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK, Position.LEFT_BACK,
                     Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                    Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER } };
+                    Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER },
+            { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
+                    Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                    Position.LEFT_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
+                    Position.STRIKER } };
 
     private static String[] formationNames = { "4-4-2", "4-3-3", "4-2-3-1 Wide", "3-4-3", "4-2-3-1", "5-2-3", "3-5-2",
-            "4-1-4-1" };
+            "4-1-4-1", "3-4-3" };
 
     public static Position[] getFormation(int formation_id) {
         return formations[formation_id];
@@ -1068,11 +1095,11 @@ public class CatalogueHelper {
 
     private static String[] swedishNames = { "Lars", "Per", "Karl", "Jan", "Hans", "Nils", "Sven", "Viktor", "Kim",
             "Carl", "Erik", "Bengt", "Bo", "Anders", "Mats", "Leif", "Ulf", "Bjorn", "Ronnie", "Fredrik", "Jonas",
-            "Rolf" };
+            "Rolf", "Gunnar" };
     private static String[] swedishSurnames = { "Johansson", "Andersson", "Karlsson", "Nilsson", "Eriksson", "Larsson",
             "Olsson", "Persson", "Svensson", "Gustafsson", "Pettersson", "Jonsson", "Jansson", "Hansson", "Bengtsson",
             "Carlsson", "Jonsson", "Petersson", "Lindberg", "Magnusson", "Gustavsson", "Olofsson", "Lindgren",
-            "Lindstrom", "Axelsson", "Kallstrom", "Lindelof" };
+            "Lindstrom", "Axelsson", "Kallstrom", "Lindelof", "Nordahl" };
 
     private static String[] albanianNames = { "Arben", "Xherdan", "Vedat", "Milot", "Agim", "Fatmir", "Enis", "Altin",
             "Petrit", "Agron", "Kujtim", "Gezim", "Besnik", "Dritan", "Edmond", "Bujar" };
@@ -1081,6 +1108,21 @@ public class CatalogueHelper {
             "Hasani", "Kristi", "Luka", "Brahimi", "Sinani", "Thanasi", "Halili", "Abazi", "Dibra", "Laci", "Shkodra",
             "Prishtina", "Delvina", "Koroveshi", "Permeti", "Frasheri", "Gegaj", "Toskaj", "Chami", "Kelmendi",
             "Shkreli", "Berisha", "Krasniqi", "Gashi", "Kuqi", "Bardhi", "Xhaka", "Shaqiri" };
+
+    private static String[] bosnianNames = { "Edin", "Eldin", "Safet", "Faruk", "Kenan", "Kemal", "Samir", "Sejad",
+            "Senan", "Senad", "Admir", "Ademir", "Alen", "Farid", "Vedad", "Vahid", "Haris", "Ibrahim", "Anel", "Amer",
+            "Miralem", "Hasan", "Izet", "Armin", "Mohamed", "Asmir", "Refik", "Muamer" };
+    private static String[] bosnianSurnames = { "Dzeko", "Pjanic", "Ibisevic", "Susic", "Salihamidzic", "Salihovic",
+            "Hajrovic", "Gojak", "Seferovic", "Halilovic", "Kodro", "Visca", "Halilhodzic", "Hodzic", "Besic",
+            "Begovic", "Bosnic", "Ibrahimovic", "Izetbegovic", "Sabanadzovic", "Tankovic", "Rahimic", "Medunjanin",
+            "Hadzibegic", "Alomerovic", "Bicakcic" };
+
+    private static String[] finnishNames = { "Matti", "Timo", "Juha", "Kari", "Pekka", "Jari", "Jukka", "Markku",
+            "Antti", "Miko", "Hannu", "Heikki", "Seppo", "Mika", "Ari", "Pentti", "Erkki", "Teemu", "Valtteri", "Kimi",
+            "Niki", "Joni", "Joona" };
+    private static String[] finnishSurnames = { "Korhonen", "Virtanen", "Nieminen", "Makinen", "Hamalainen", "Makela",
+            "Laine", "Heikkinen", "Koskinen", "Lehtonen", "Jarvinen", "Saarinen", "Salminen", "Salo", "Lehto",
+            "Toivonen", "Hakala", "Lahti", "Bottas", "Hakkinen", "Raikkonen" };
 
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
@@ -1182,6 +1224,16 @@ public class CatalogueHelper {
             }
         } else if (nation_name.equalsIgnoreCase(albania)) {
             return getName(albanianNames, albanianSurnames);
+        } else if (nation_name.equalsIgnoreCase(bosnia)) {
+            if (prob < 52) {
+                return getName(bosnianNames, bosnianSurnames);
+            } else if (prob < 83) {
+                return getName(serbianNames, serbianSurnames);
+            } else {
+                return getName(croatianNames, croatianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(finland)) {
+            return getName(finnishNames, finnishSurnames);
         } else {
             return "Player Player";
         }
