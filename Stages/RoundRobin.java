@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import Functions.FixturesHelper;
+import Functions.MatchSimulator;
 import Models.CompetitionType;
 import Models.Match;
 import Stages.Helpers.Table;
@@ -34,10 +35,15 @@ public class RoundRobin implements Stage {
         for (int i = matches_simulated; i < this.fixtures.size(); i++) {
             if (this.fixtures.get(i).getDate().before(date)) {
                 this.fixtures.get(i).simulate();
+                this.fixtures.get(i).display();
                 this.matches_simulated++;
                 if (this.matches_simulated == this.fixtures.size()) {
                     this.simulated = true;
                 }
+                this.table.updatePerformance(this.fixtures.get(i).getHomeId(), MatchSimulator.getHomeGoals(),
+                        MatchSimulator.getAwayGoals(), true);
+                this.table.updatePerformance(this.fixtures.get(i).getAwayId(), MatchSimulator.getAwayGoals(),
+                        MatchSimulator.getHomeGoals(), false);
             } else {
                 break;
             }
@@ -62,6 +68,7 @@ public class RoundRobin implements Stage {
     public void setup(List<String> teams) {
         this.teams = teams;
         this.table = new Table(this.teams.size());
+        this.table.setup(teams);
         this.fixtures = FixturesHelper.scheduleMatches(teams, CompetitionType.DOMESTIC_LEAGUE);
         if (this.international) {
             this.fixtures = FixturesHelper.setInternationalMatches(this.fixtures);

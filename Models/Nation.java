@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import Functions.SimBettered;
@@ -9,7 +10,7 @@ public class Nation {
     private String name;
     private String code;
     private String national_team;
-    private Map<Integer, String> leagues;
+    private Map<Integer, String> leagues = new HashMap<>();
     private String cup;
     private int youth_rating;
     private int league_ranking;

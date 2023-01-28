@@ -17,6 +17,20 @@ public class SetupHelper {
             } else if (parameter.equalsIgnoreCase("youth_rating")) {
                 return 158;
             }
+        } else if (nation_name.equalsIgnoreCase(CatalogueHelper.spain)) {
+            if (parameter.equalsIgnoreCase("num_divisions")) {
+                return 3;
+            } else if (parameter.equalsIgnoreCase("league_size")) {
+                return 20;
+            } else if (parameter.equalsIgnoreCase("league_ranking")) {
+                return 2;
+            } else if (parameter.equalsIgnoreCase("nation_ranking")) {
+                return 2;
+            } else if (parameter.equalsIgnoreCase("league_rating")) {
+                return 78;
+            } else if (parameter.equalsIgnoreCase("youth_rating")) {
+                return 160;
+            }
         }
         return 0;
     }
@@ -25,6 +39,10 @@ public class SetupHelper {
         if (nation_name.equalsIgnoreCase(CatalogueHelper.england)) {
             if (parameter.equalsIgnoreCase("code")) {
                 return "ENG";
+            }
+        } else if (nation_name.equalsIgnoreCase(CatalogueHelper.spain)) {
+            if (parameter.equalsIgnoreCase("code")) {
+                return "ESP";
             }
         }
         return "XYZ";
@@ -50,7 +68,7 @@ public class SetupHelper {
         return getData(nation_name, "league_rating");
     }
 
-    public static int getyouthRating(String nation_name) {
+    public static int getYouthRating(String nation_name) {
         return getData(nation_name, "youth_rating");
     }
 
@@ -59,7 +77,7 @@ public class SetupHelper {
     }
 
     public static String[] getNationsList() {
-        String[] nations = { CatalogueHelper.england };
+        String[] nations = { CatalogueHelper.england, CatalogueHelper.spain };
         return nations;
     }
 }

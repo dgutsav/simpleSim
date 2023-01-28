@@ -53,7 +53,7 @@ public class FixturesHelper {
 
         for (int i = 1; i <= (count - 1); i++) {
             // select away day
-            int away_index = CommonFunctions.getRandomNumber(away_days.length - i + 1);
+            int away_index = CommonFunctions.getRandomNumber(away_days.length - i);
             int away_day = away_days[away_index];
             away_days[away_index] = away_days[away_days.length - i];
             away_days[away_days.length - i] = away_day;
@@ -175,5 +175,24 @@ public class FixturesHelper {
             }
         });
         return matches;
+    }
+
+    public static List<int[]> getLeagueDates(int year, int num_dates) {
+        int base_year = 2018;
+        int[][] league_dates = { { 4, 8, 2018 }, { 11, 8, 2018 }, { 18, 8, 2018 }, { 22, 8, 2018 }, { 25, 8, 2018 },
+                { 1, 9, 2018 }, { 15, 9, 2018 }, { 18, 9, 2018 }, { 22, 9, 2018 }, { 29, 9, 2018 }, { 2, 10, 2018 },
+                { 6, 10, 2018 }, { 20, 10, 2018 }, { 23, 10, 2018 }, { 27, 10, 2018 }, { 3, 11, 2018 },
+                { 10, 11, 2018 }, { 24, 11, 2018 }, { 28, 11, 2018 }, { 1, 12, 2018 }, { 8, 12, 2018 },
+                { 15, 12, 2018 }, { 22, 12, 2018 }, { 26, 12, 2018 }, { 29, 12, 2018 }, { 1, 1, 2019 }, { 12, 1, 2019 },
+                { 19, 1, 2019 }, { 26, 1, 2019 }, { 2, 2, 2019 }, { 9, 2, 2019 }, { 13, 2, 2019 }, { 16, 2, 2019 },
+                { 23, 2, 2019 }, { 2, 3, 2019 }, { 9, 3, 2019 }, { 13, 3, 2019 }, { 16, 3, 2019 }, { 30, 3, 2019 },
+                { 6, 4, 2019 }, { 9, 4, 2019 }, { 13, 4, 2019 }, { 19, 4, 2019 }, { 22, 4, 2019 }, { 27, 4, 2019 },
+                { 5, 5, 2019 }, { 12, 5, 2019 }, { 18, 5, 2019 } };
+        List<int[]> dates = new ArrayList<>();
+        for (int[] date : league_dates) {
+            date[2] += (year - base_year);
+            dates.add(date);
+        }
+        return dates;
     }
 }

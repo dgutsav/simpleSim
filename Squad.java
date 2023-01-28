@@ -239,7 +239,10 @@ public class Squad {
 
     public int getProspectivePlayerRankInSquad(Player player) {
         Player best_player = this.getBestPlayerAtPosition(player.getPosition(), new ArrayList<>(), false);
-        if (best_player.getRatingForPosition(player.getPosition()) < player.getRating()) {
+        if (best_player == null) {
+            System.out.println("No player found in squad for position");
+        }
+        if (best_player != null && best_player.getRatingForPosition(player.getPosition()) < player.getRating()) {
             return 1;
         }
         return 2;

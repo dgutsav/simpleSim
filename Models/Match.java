@@ -2,6 +2,7 @@ package Models;
 
 import java.util.Calendar;
 
+import Functions.CommonFunctions;
 import Functions.MatchSimulator;
 import Functions.SimBettered;
 
@@ -87,7 +88,8 @@ public class Match {
         String home_name = SimBettered.getTeamName(this.home_team_id);
         String away_name = SimBettered.getTeamName(this.away_team_id);
         if (isSimulated()) {
-            System.out.println(home_name + " " + home_goals + "-" + away_goals + " " + away_name);
+            String matchday = CommonFunctions.getDate(this.date);
+            System.out.println(matchday + " " + home_name + " " + home_goals + "-" + away_goals + " " + away_name);
         } else {
             System.out.println(home_name + " vs " + away_name);
         }

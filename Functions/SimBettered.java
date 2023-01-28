@@ -1,16 +1,18 @@
 package Functions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import Models.*;
 
 public class SimBettered {
-    private static Map<String, Club> clubs;
-    private static Map<String, NationalTeam> national_teams;
-    private static Map<String, Player> players;
-    private static Map<Integer, Nation> nations;
-    private static Map<String, Competition> competitions;
+    private static Map<String, Club> clubs = new HashMap<>();
+    private static Map<String, NationalTeam> national_teams = new HashMap<>();
+    private static Map<String, Player> players = new HashMap<>();
+    private static Map<Integer, Nation> nations = new HashMap<>();
+    private static Map<String, Competition> competitions = new HashMap<>();
 
     private static int current_season = 2000;
 
@@ -157,5 +159,37 @@ public class SimBettered {
             squads[1] = getClub(match.getAwayId()).getSeniorSquad();
         }
         return squads;
+    }
+
+    public static void loadSetup() {
+        String[] nations_list = SetupHelper.getNationsList();
+        int count = 1;
+        for (String item : nations_list) {
+            nations.put(count, GeneratorFunctions.getNation(item, count));
+            count++;
+        }
+
+        System.out.println(nations.size());
+        System.out.println(clubs.size());
+        System.out.println(competitions.size());
+        System.out.println(players.size());
+    }
+
+    public static void simulateCompetitions() {
+        Calendar current_date = Calendar.getInstance();
+        current_date.set(current_season, Calendar.JANUARY, 1);
+        Calendar end_date = Calendar.getInstance();
+        end_date.set(current_season, Calendar.DECEMBER, 31);
+        while (current_date.before(end_date)) {
+            for (Map.Entry<String, Competition> entry : competitions.entrySet()) {
+                entry.getValue().simulate(current_date);
+            }
+            current_date.add(Calendar.DATE, 1);
+        }
+    }
+
+    public static void main(String args[]) {
+        loadSetup();
+        //simulateCompetitions();
     }
 }

@@ -55,7 +55,7 @@ public class GeneratorFunctions {
         }
         int left = length - 34;
         for (int i = 0; i < left; i++) {
-            positions[34 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
+            positions[34 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size() - 1));
         }
         return positions;
     }
@@ -168,10 +168,15 @@ public class GeneratorFunctions {
     public static Nation getNation(String nation_name, int id) {
         Nation nation = new Nation(id, nation_name, SetupHelper.getCode(nation_name));
         nation.setLeagueRanking(SetupHelper.getLeagueRanking(nation_name));
-        int rating = SetupHelper.getLeagueRating(nation_name);
-        if (i > 1) {
-            double multiplier = (Math.pow(0.9, (double) (i - 1))) * setup.league_rating;
-            rating = (int) (multiplier);
+        for (int i = 1; i <= SetupHelper.getNumberOfDivisions(nation_name); i++) {
+            int rating = SetupHelper.getLeagueRating(nation_name);
+            if (i > 1) {
+                double multiplier = (Math.pow(0.9, (double) (i - 1))) * rating;
+                rating = (int) (multiplier);
+            }
+            Competition domestic_league = getDomesticLeague(nation, i, rating, SetupHelper.getLeagueSize(nation_name));
+            String league_id = SimBettered.addCompetition(domestic_league);
+            nation.addLeague(i, league_id);
         }
         return nation;
     }

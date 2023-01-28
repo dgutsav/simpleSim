@@ -36,6 +36,10 @@ public class Sim {
         return players;
     }
 
+    public static Map<String, League> getAllLeagues() {
+        return leagues;
+    }
+
     public static void updateClub(Club_Team club, String id) {
         clubs.put(id, club);
     }
@@ -152,26 +156,26 @@ public class Sim {
     }
 
     public static void sim() {
-        for (Map.Entry<String, League> entry : leagues.entrySet()) {
-            entry.getValue().seasonStart();
-            entry.getValue().simulateSeason();
-            entry.getValue().endSeasonChanges();
-        }
+        // for (Map.Entry<String, League> entry : leagues.entrySet()) {
+        //     entry.getValue().seasonStart();
+        //     entry.getValue().simulateSeason();
+        //     entry.getValue().endSeasonChanges();
+        // }
 
-        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
-            entry.getValue().setup();
-            entry.getValue().simulateCup();
-        }
+        // for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+        //     entry.getValue().setup();
+        //     entry.getValue().simulateCup();
+        // }
 
-        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            setupContinentalCompetitions();
-            ControllerUEFA.simulateCompetitions();
-            ControllerCONMEBOL.simulateCompetitions();
-        }
+        // if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
+        //     setupContinentalCompetitions();
+        //     ControllerUEFA.simulateCompetitions();
+        //     ControllerCONMEBOL.simulateCompetitions();
+        // }
         if (USE_TRANSFER_MARKET) {
-            Market.simulate();
+            TransferMarket.simulate();
         }
-        seasonEndChanges();
+        //seasonEndChanges();
     }
 
     public static String addClub(Club_Team team) {
@@ -303,14 +307,14 @@ public class Sim {
             ControllerUEFA.initCompetitions();
             ControllerCONMEBOL.initCompetitions();
         }
-        Market.initMarket();
     }
 
     public static Map<String, Club_Team> sortBySquadRating(Map<String, Club_Team> map) {
         List<Map.Entry<String, Club_Team>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list,
-                (Map.Entry<String, Club_Team> o1, Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getBestSquadRating())
-                        - (o1.getValue().getBestSquadRating())));
+                (Map.Entry<String, Club_Team> o1,
+                        Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getBestSquadRating())
+                                - (o1.getValue().getBestSquadRating())));
         HashMap<String, Club_Team> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Club_Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
@@ -321,8 +325,9 @@ public class Sim {
     public static Map<String, Club_Team> sortByReputation(Map<String, Club_Team> map) {
         List<Map.Entry<String, Club_Team>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list,
-                (Map.Entry<String, Club_Team> o1, Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getReputation())
-                        - (o1.getValue().getReputation())));
+                (Map.Entry<String, Club_Team> o1,
+                        Map.Entry<String, Club_Team> o2) -> (int) ((o2.getValue().getReputation())
+                                - (o1.getValue().getReputation())));
         HashMap<String, Club_Team> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Club_Team> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
@@ -337,7 +342,7 @@ public class Sim {
         for (Map.Entry<String, Club_Team> entry : sorted.entrySet()) {
             System.out.println(count + " " + entry.getValue().getPaddedName() + "\t"
                     + entry.getValue().getBestSquadRating() + "\t" + entry.getValue().getReputation());
-            if (count >= 100) {
+            if (count >= 250) {
                 break;
             }
             count++;
@@ -375,7 +380,7 @@ public class Sim {
             }
             System.out.println(count + "\t" + player.getPaddedName() + code + "\t" + team_name + "\t"
                     + player.getRating() + "\t" + player.getAge() + "\t"
-                    + CommonFunctions.formatMoney(Market.getPlayerValue(player, null)));
+                    + CommonFunctions.formatMoney(MarketHelper.getPlayerValue(player, null)));
             if (count >= 300) {
                 break;
             }
@@ -449,7 +454,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 1;
+        int num_seasons = 10;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -467,11 +472,11 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            showCompetitionHistories();
-            showTeams();
-            showPlayers();
-            showNationalTeams();
-            Market.showTopTransfers();
+        //     showCompetitionHistories();
+        //     showTeams();
+        //     showPlayers();
+        //     showNationalTeams();
+            TransferMarket.showTopTransfers();
         }
     }
 }

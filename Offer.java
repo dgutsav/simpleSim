@@ -23,6 +23,14 @@ public class Offer {
         this.target_id = target_id;
     }
 
+    public Offer(String buyer, String seller, String player, long amount) {
+        this.buying_club_id = buyer;
+        this.selling_club_id = seller;
+        this.player_id = player;
+        this.amount = amount;
+        this.id = GeneratorFunctions.getRandomId();
+    }
+
     public String getSellingClubId() {
         return this.selling_club_id;
     }

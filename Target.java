@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Functions.CatalogueHelper;
 import Models.*;
 
 public class Target {
@@ -11,6 +12,9 @@ public class Target {
     private String id;
     private boolean made_offer;
     private List<String> made_offers_for;
+    private int div_level;
+
+    public static final int PREMIUM_REPUTATION_CUTOFF = 7000;
 
     public Target(Position position, int rating, long price, Club_Team club2) {
         this.position = position;
@@ -20,6 +24,7 @@ public class Target {
         this.id = CommonFunctions.getRandomId();
         this.made_offer = false;
         this.made_offers_for = new ArrayList<>();
+        this.div_level = Sim.getLeague(Sim.findTeamInLeague(club2)).getCompetitionLevel();
     }
 
     public Position getPosition() {
@@ -61,5 +66,34 @@ public class Target {
 
     public void clearOffer() {
         this.made_offer = false;
+    }
+
+    public boolean canAccessPremium() {
+        return (this.club.getReputation() > PREMIUM_REPUTATION_CUTOFF);
+    }
+
+    public int getDivLevel() {
+        return this.div_level;
+    }
+
+    public ArrayList<String> getTargetNations() {
+        String nation_name = Sim.getNation(this.club.getNationId()).getName();
+        if (this.div_level == 1) {
+            String[] arrays = CatalogueHelper.getFavourableNations(nation_name);
+            ArrayList<String> nations = new ArrayList<>();
+            boolean has_nation = false;
+            for (String nat : arrays) {
+                nations.add(nat);
+                if (nation_name.equalsIgnoreCase(nat))
+                    has_nation = true;
+            }
+            if (!has_nation)
+                nations.add(nation_name);
+            return nations;
+        } else {
+            ArrayList<String> nations = new ArrayList<>();
+            nations.add(nation_name);
+            return nations;
+        }
     }
 }

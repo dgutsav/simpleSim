@@ -39,7 +39,6 @@ public class CatalogueHelper {
     public static String bulgaria = "Bulgaria";
     public static String sweden = "Sweden";
     public static String albania = "Albania";
-
     public static String bosnia = "Bosnia";
     public static String finland = "Finland";
     public static String ireland = "Ireland";
@@ -70,16 +69,27 @@ public class CatalogueHelper {
     public static String iran = "Iran";
     public static String iraq = "Iraq";
     public static String japan = "Japan";
-    public static String korea = "Korean";
+    public static String korea = "Korea";
     public static String qatar = "Qatar";
     public static String saudi_arabia = "Saudi Arabia";
     public static String syria = "Syria";
     public static String thailand = "Thailand";
     public static String uzbekistan = "Uzbekistan";
 
+    public static String nigeria = "Nigeria";
+    public static String egypt = "Egypt";
+    public static String algeria = "Algeria";
+    public static String tunisia = "Tunisia";
+    public static String morocco = "Morocco";
+    public static String senegal = "Senegal";
+    public static String ivory_coast = "Ivory Coast";
+    public static String ghana = "Ghana";
+
     public static String getDenonym(String nation_name) {
         if (nation_name.equalsIgnoreCase(albania)) {
             return "Albanian";
+        } else if (nation_name.equalsIgnoreCase(algeria)) {
+            return "Algerian";
         } else if (nation_name.equalsIgnoreCase(argentina)) {
             return "Argentine";
         } else if (nation_name.equalsIgnoreCase(america)) {
@@ -120,6 +130,8 @@ public class CatalogueHelper {
             return "Danish";
         } else if (nation_name.equalsIgnoreCase(ecuador)) {
             return "Ecuadorian";
+        } else if (nation_name.equalsIgnoreCase(egypt)) {
+            return "Egyptian";
         } else if (nation_name.equalsIgnoreCase(emirates)) {
             return "Emirati";
         } else if (nation_name.equalsIgnoreCase(england)) {
@@ -130,6 +142,8 @@ public class CatalogueHelper {
             return "French";
         } else if (nation_name.equalsIgnoreCase(germany)) {
             return "German";
+        } else if (nation_name.equalsIgnoreCase(ghana)) {
+            return "Ghanaian";
         } else if (nation_name.equalsIgnoreCase(greece)) {
             return "Greek";
         } else if (nation_name.equalsIgnoreCase(honduras)) {
@@ -148,14 +162,20 @@ public class CatalogueHelper {
             return "Israeli";
         } else if (nation_name.equalsIgnoreCase(italy)) {
             return "Italian";
+        } else if (nation_name.equalsIgnoreCase(ivory_coast)) {
+            return "Ivorian";
         } else if (nation_name.equalsIgnoreCase(japan)) {
             return "Japanese";
         } else if (nation_name.equalsIgnoreCase(korea)) {
             return "Korean";
         } else if (nation_name.equalsIgnoreCase(mexico)) {
             return "Mexican";
+        } else if (nation_name.equalsIgnoreCase(morocco)) {
+            return "Moroccan";
         } else if (nation_name.equalsIgnoreCase(netherlands)) {
             return "Dutch";
+        } else if (nation_name.equalsIgnoreCase(nigeria)) {
+            return "Nigerian";
         } else if (nation_name.equalsIgnoreCase(norway)) {
             return "Norwegian";
         } else if (nation_name.equalsIgnoreCase(paraguay)) {
@@ -176,6 +196,8 @@ public class CatalogueHelper {
             return "Saudi";
         } else if (nation_name.equalsIgnoreCase(scotland)) {
             return "Scottish";
+        } else if (nation_name.equalsIgnoreCase(senegal)) {
+            return "Senegalese";
         } else if (nation_name.equalsIgnoreCase(serbia)) {
             return "Serbian";
         } else if (nation_name.equalsIgnoreCase(slovakia)) {
@@ -192,6 +214,8 @@ public class CatalogueHelper {
             return "Syrian";
         } else if (nation_name.equalsIgnoreCase(thailand)) {
             return "Thai";
+        } else if (nation_name.equalsIgnoreCase(tunisia)) {
+            return "Tunisian";
         } else if (nation_name.equalsIgnoreCase(turkey)) {
             return "Turkish";
         } else if (nation_name.equalsIgnoreCase(ukraine)) {
@@ -310,11 +334,11 @@ public class CatalogueHelper {
 
     private static String[] argentinaCities = { "Buenos Aires", "Cordoba", "Rosario", "La Plata", "Mar del Plata",
             "Salta", "Tucuman", "San Juan", "Resistencia", "Santiago del Estero", "Corrientes", "Mendoza", "Posadas",
-            "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomía", "Almagro", "Balvanera", "Barracas",
-            "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales", "Constitución", "Flores",
+            "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomia", "Almagro", "Balvanera", "Barracas",
+            "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales", "Constitucion", "Flores",
             "Floresta", "La Boca", "La Paternal", "Liniers", "Mataderos", "Monte Castro", "Monserrat", "Nueva Pompeya",
-            "Núñez", "Palermo", "Avellaneda", "Chacabuco", "Chas", "Patricios", "Puerto Madero", "Recoleta", "Retiro",
-            "Saavedra", "San Cristóbal", "San Nicolás", "San Telmo", "Vélez Sársfield", "Versalles", "Crespo", "Devoto",
+            "Nuñez", "Palermo", "Avellaneda", "Chacabuco", "Chas", "Patricios", "Puerto Madero", "Recoleta", "Retiro",
+            "Saavedra", "San Cristobal", "San Nicolas", "San Telmo", "Velez Sarsfield", "Versalles", "Crespo", "Devoto",
             "Lugano", "Luro", "Mitre", "Ortuzar", "Pueyrredon", "Villa Real", "Riachuelo", "Santa Rita", "Soldati",
             "Urquiza" };
     private static String[] brazilCities = { "Sao Paulo", "Belo Horizonte", "Manaus", "Curitiba", "Rio de Janeiro",
@@ -326,13 +350,13 @@ public class CatalogueHelper {
     private static String[] colombiaCities = { "Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Cucuta",
             "Soledad", "Ibague", "Bucaramanga", "Soacha", "Villavicencio", "Santa Marta", "Valledupar", "Bello",
             "Pereira", "Monteria", "Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira", "Armenia", "Riohacha",
-            "Sincelejo", "Popayán", "Itagüí" };
+            "Sincelejo", "Popayan", "Itagüi" };
     private static String[] ecuadorCities = { "Guayaquil", "Quito", "Cuenca", "Santo Domingo", "Machala", "Duran",
             "Manta", "Portoviejo", "Ibarra", "Quevedo", "Loja", "Ambato", "Esmeraldas", "Riobamba", "Milagro",
             "Latacunga", "La Libertad", "Babahoyo" };
     private static String[] boliviaCities = { "Santa Cruz", "El Alto", "La Paz", "Cochabamba", "Oruro", "Sucre",
-            "Tarija", "Potosí", "Sacaba", "Quillacollo", "Montero", "Trinidad", "Riberalta", "Warnes", "La Guardia",
-            "Villazón" };
+            "Tarija", "Potosi", "Sacaba", "Quillacollo", "Montero", "Trinidad", "Riberalta", "Warnes", "La Guardia",
+            "Villazon" };
     private static String[] peruCities = { "Lima", "Callao", "Arequiba", "Trujillo", "Chiclayo", "Huancayo", "Iquitos",
             "Piura", "Cuzco", "Chimbote", "Tacna", "Juliaca", "Ica", "Cajamarca", "Pucallpa", "Sullana", "Ayacucho",
             "Chincha Alta", "Huanuco", "Tarapoto", "Puno" };
@@ -343,8 +367,8 @@ public class CatalogueHelper {
             "Tacuarembo", "Melo", "Mercedes", "Artigas", "Minas", "San Jose", "Durazno", "Florida", "Barros Blancos",
             "San Carlos", "Colonia Sacramento", "Pando" };
     private static String[] venezuelaCities = { "Caracas", "Maracaibo", "Barquisimeto", "Valencia", "Ciudad Guayana",
-            "Maturín", "Barcelona", "Cumaná", "Petare", "Turmero", "Mérida", "Ciudad Bolívar", "Barinas", "Los Teques",
-            "Punto Fijo", "La Guaira", "El Vigía", "San Cristóbal" };
+            "Maturin", "Barcelona", "Cumana", "Petare", "Turmero", "Merida", "Ciudad Bolivar", "Barinas", "Los Teques",
+            "Punto Fijo", "La Guaira", "El Vigia", "San Cristobal" };
     private static String[] slovakiaCities = { "Bratislava", "Kosice", "Presov", "Zilina", "Banska Bystrica", "Nitra",
             "Trnava", "Trencin", "Martin", "Poprad", "Prievidza", "Zvolen", "Michalovce", "Levice", "Bardejov",
             "Ruzomberok", "Piestany" };
@@ -364,98 +388,129 @@ public class CatalogueHelper {
     private static String[] finlandCities = { "Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku", "Jyvaskyla",
             "Kuopio", "Lahti", "Pori", "Kouvola", "Joensuu", "Lappeenranta", "Hameenlinna", "Vaasa", "ROvaniemi",
             "Seinajoki", "Mariehamn" };
+    private static String[] irelandCities = { "Dublin", "Cork", "Limerick", "Galway", "Waterford", "Drogheda",
+            "Kilkenny", "Wexford", "Sligo", "Clonmel", "Dundalk", "Bray", "Navan", "Ennis", "Tralee", "Carlow", "Naas",
+            "Athlone", "Letterkenny", "Tullamore" };
+    private static String[] icelandCities = { "Reykjavik", "Kopavogur", "Hafnarfjordur", "Akureyri", "Keflavik",
+            "Gardabaer", "Akranes", "Selfoss", "isafjordur", "Hofn", "Egilsstadir", "Borgarnes", "Saudarkrokur" };
+    private static String[] walesCities = { "Cardiff", "Swansea", "Newport", "Wrexham", "Bangor", "St Asaph",
+            "St Davids", "Caerdydd", "Abertawe", "Casnewydd", "Wrecsam", "Llanelwy", "Tyddewi" };
+
+    private static String[] japanCities = { "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Fukuoka", "Kawasaki",
+            "Kobe", "Kyoto", "Saitama", "Hiroshima", "Sendai", "Chiba", "Kitakyushu", "Setagaya", "Sakai", "Niigata",
+            "Nerima", "Kumamoto", "Sagamihara", "Okayama", "Oda", "Shizuoka", "Hamamatsu", "Edogawa", "Adachi",
+            "Kagoshima", "Funabashi", "Hachioji", "Kawaguchi", "Himeji", "Suginami", "Itabashi", "Matsuyama",
+            "Higashiosaka", "Utsunomiya" };
+    private static String[] chinaCities = { "Shanghai", "Guangzhou", "Beijing", "Shenzhen", "Chengdu", "Baoding",
+            "Tianjin", "Linyi", "Shijiazhuang", "Zhengzhou", "Nanyang", "Wuhan", "Handan", "Weifang", "Zhoukou",
+            "Ganzhou", "Tongshan", "Heze", "Chongqing", "Fuyang", "Changsha", "Dongguan", "Jining", "Jinan", "Foshan",
+            "Nanjing", "Changchun", "Tangshan", "Cangzhou", "Hefei", "Shaoyang", "Zhanjiang", "Shangqiu", "Nantong",
+            "Yancheng", "Nanning", "Hengyang", "Zhumadian", "Shenyang", "Xingtai", "Yantai", "Luoyang",
+            "Kunming", "Shangrao", "Hangzhou", "Bijie", "Quanzhou", "Wuxi", "Huanggang", "Maoming", "Nanchong", "Zunyi",
+            "Qujing", "Xinyang", "Jieyang", "Yulin", "Changde", "Liaocheng", "Qingdao", "Nangandao", "Xiangyang",
+            "Zhaotong", "Yichun", "Dezhou", "Nanchang", "Dazhou", "Yongzhou", "Suihua", "Qiqihar",
+            "Suzhou", "Shantou", "Weinan" };
 
     private CatalogueHelper() {
     }
 
     public static String getCity(String nation_name) {
-        if (nation_name.equalsIgnoreCase(england)) {
+        if (nation_name.equalsIgnoreCase(england))
             return CommonFunctions.getRandomElement(englandCities);
-        } else if (nation_name.equalsIgnoreCase(spain)) {
+        else if (nation_name.equalsIgnoreCase(spain))
             return CommonFunctions.getRandomElement(spainCities);
-        } else if (nation_name.equalsIgnoreCase(germany)) {
+        else if (nation_name.equalsIgnoreCase(germany))
             return CommonFunctions.getRandomElement(germanyCities);
-        } else if (nation_name.equalsIgnoreCase(france)) {
+        else if (nation_name.equalsIgnoreCase(france))
             return CommonFunctions.getRandomElement(franceCities);
-        } else if (nation_name.equalsIgnoreCase(italy)) {
+        else if (nation_name.equalsIgnoreCase(italy))
             return CommonFunctions.getRandomElement(italyCities);
-        } else if (nation_name.equalsIgnoreCase(portugal)) {
+        else if (nation_name.equalsIgnoreCase(portugal))
             return CommonFunctions.getRandomElement(portugalCities);
-        } else if (nation_name.equalsIgnoreCase(belgium)) {
+        else if (nation_name.equalsIgnoreCase(belgium))
             return CommonFunctions.getRandomElement(belgiumCities);
-        } else if (nation_name.equalsIgnoreCase(netherlands)) {
+        else if (nation_name.equalsIgnoreCase(netherlands))
             return CommonFunctions.getRandomElement(netherlandsCities);
-        } else if (nation_name.equalsIgnoreCase(russia)) {
+        else if (nation_name.equalsIgnoreCase(russia))
             return CommonFunctions.getRandomElement(russiaCities);
-        } else if (nation_name.equalsIgnoreCase(ukraine)) {
+        else if (nation_name.equalsIgnoreCase(ukraine))
             return CommonFunctions.getRandomElement(ukraineCities);
-        } else if (nation_name.equalsIgnoreCase(austria)) {
+        else if (nation_name.equalsIgnoreCase(austria))
             return CommonFunctions.getRandomElement(austriaCities);
-        } else if (nation_name.equalsIgnoreCase(scotland)) {
+        else if (nation_name.equalsIgnoreCase(scotland))
             return CommonFunctions.getRandomElement(scotlandCities);
-        } else if (nation_name.equalsIgnoreCase(turkey)) {
+        else if (nation_name.equalsIgnoreCase(turkey))
             return CommonFunctions.getRandomElement(turkeyCities);
-        } else if (nation_name.equalsIgnoreCase(croatia)) {
+        else if (nation_name.equalsIgnoreCase(croatia))
             return CommonFunctions.getRandomElement(croatiaCities);
-        } else if (nation_name.equalsIgnoreCase(denmark)) {
+        else if (nation_name.equalsIgnoreCase(denmark))
             return CommonFunctions.getRandomElement(denmarkCities);
-        } else if (nation_name.equalsIgnoreCase(czechia)) {
+        else if (nation_name.equalsIgnoreCase(czechia))
             return CommonFunctions.getRandomElement(czechiaCities);
-        } else if (nation_name.equalsIgnoreCase(greece)) {
+        else if (nation_name.equalsIgnoreCase(greece))
             return CommonFunctions.getRandomElement(greeceCities);
-        } else if (nation_name.equalsIgnoreCase(switzerland)) {
+        else if (nation_name.equalsIgnoreCase(switzerland))
             return CommonFunctions.getRandomElement(switzerlandCities);
-        } else if (nation_name.equalsIgnoreCase(cyprus)) {
+        else if (nation_name.equalsIgnoreCase(cyprus))
             return CommonFunctions.getRandomElement(cyprusCities);
-        } else if (nation_name.equalsIgnoreCase(serbia)) {
+        else if (nation_name.equalsIgnoreCase(serbia))
             return CommonFunctions.getRandomElement(serbiaCities);
-        } else if (nation_name.equalsIgnoreCase(norway)) {
+        else if (nation_name.equalsIgnoreCase(norway))
             return CommonFunctions.getRandomElement(norwayCities);
-        } else if (nation_name.equalsIgnoreCase(romania)) {
+        else if (nation_name.equalsIgnoreCase(romania))
             return CommonFunctions.getRandomElement(romaniaCities);
-        } else if (nation_name.equalsIgnoreCase(israel)) {
+        else if (nation_name.equalsIgnoreCase(israel))
             return CommonFunctions.getRandomElement(israelCities);
-        } else if (nation_name.equalsIgnoreCase(poland)) {
+        else if (nation_name.equalsIgnoreCase(poland))
             return CommonFunctions.getRandomElement(polandCities);
-        } else if (nation_name.equalsIgnoreCase(hungary)) {
+        else if (nation_name.equalsIgnoreCase(hungary))
             return CommonFunctions.getRandomElement(hungaryCities);
-        } else if (nation_name.equalsIgnoreCase(argentina)) {
+        else if (nation_name.equalsIgnoreCase(argentina))
             return CommonFunctions.getRandomElement(argentinaCities);
-        } else if (nation_name.equalsIgnoreCase(brazil)) {
+        else if (nation_name.equalsIgnoreCase(brazil))
             return CommonFunctions.getRandomElement(brazilCities);
-        } else if (nation_name.equalsIgnoreCase(chile)) {
+        else if (nation_name.equalsIgnoreCase(chile))
             return CommonFunctions.getRandomElement(chileCities);
-        } else if (nation_name.equalsIgnoreCase(colombia)) {
+        else if (nation_name.equalsIgnoreCase(colombia))
             return CommonFunctions.getRandomElement(colombiaCities);
-        } else if (nation_name.equalsIgnoreCase(venezuela)) {
+        else if (nation_name.equalsIgnoreCase(venezuela))
             return CommonFunctions.getRandomElement(venezuelaCities);
-        } else if (nation_name.equalsIgnoreCase(bolivia)) {
+        else if (nation_name.equalsIgnoreCase(bolivia))
             return CommonFunctions.getRandomElement(boliviaCities);
-        } else if (nation_name.equalsIgnoreCase(paraguay)) {
+        else if (nation_name.equalsIgnoreCase(paraguay))
             return CommonFunctions.getRandomElement(paraguayCities);
-        } else if (nation_name.equalsIgnoreCase(uruguay)) {
+        else if (nation_name.equalsIgnoreCase(uruguay))
             return CommonFunctions.getRandomElement(uruguayCities);
-        } else if (nation_name.equalsIgnoreCase(ecuador)) {
+        else if (nation_name.equalsIgnoreCase(ecuador))
             return CommonFunctions.getRandomElement(ecuadorCities);
-        } else if (nation_name.equalsIgnoreCase(peru)) {
+        else if (nation_name.equalsIgnoreCase(peru))
             return CommonFunctions.getRandomElement(peruCities);
-        } else if (nation_name.equalsIgnoreCase(belarus)) {
+        else if (nation_name.equalsIgnoreCase(belarus))
             return CommonFunctions.getRandomElement(belarusCities);
-        } else if (nation_name.equalsIgnoreCase(slovakia)) {
+        else if (nation_name.equalsIgnoreCase(slovakia))
             return CommonFunctions.getRandomElement(slovakiaCities);
-        } else if (nation_name.equalsIgnoreCase(slovenia)) {
+        else if (nation_name.equalsIgnoreCase(slovenia))
             return CommonFunctions.getRandomElement(sloveniaCities);
-        } else if (nation_name.equalsIgnoreCase(bulgaria)) {
+        else if (nation_name.equalsIgnoreCase(bulgaria))
             return CommonFunctions.getRandomElement(bulgariaCities);
-        } else if (nation_name.equalsIgnoreCase(sweden)) {
+        else if (nation_name.equalsIgnoreCase(sweden))
             return CommonFunctions.getRandomElement(swedenCities);
-        } else if (nation_name.equalsIgnoreCase(albania)) {
+        else if (nation_name.equalsIgnoreCase(albania))
             return CommonFunctions.getRandomElement(albaniaCities);
-        } else if (nation_name.equalsIgnoreCase(bosnia)) {
+        else if (nation_name.equalsIgnoreCase(bosnia))
             return CommonFunctions.getRandomElement(bosniaCities);
-        } else if (nation_name.equalsIgnoreCase(finland)) {
+        else if (nation_name.equalsIgnoreCase(finland))
             return CommonFunctions.getRandomElement(finlandCities);
-        }
+        else if (nation_name.equalsIgnoreCase(ireland))
+            return CommonFunctions.getRandomElement(irelandCities);
+        else if (nation_name.equalsIgnoreCase(iceland))
+            return CommonFunctions.getRandomElement(icelandCities);
+        else if (nation_name.equalsIgnoreCase(wales))
+            return CommonFunctions.getRandomElement(walesCities);
+        else if (nation_name.equalsIgnoreCase(japan))
+            return CommonFunctions.getRandomElement(japanCities);
+        else if (nation_name.equalsIgnoreCase(china))
+            return CommonFunctions.getRandomElement(chinaCities);
         return "Eden";
     }
 
@@ -745,6 +800,82 @@ public class CatalogueHelper {
 
     public static int numFormations() {
         return formationNames.length;
+    }
+
+    public static Position[] allPositions = {
+            Position.GOALKEEPER,
+            Position.CENTRE_BACK,
+            Position.RIGHT_BACK,
+            Position.LEFT_BACK,
+            Position.DEFENSIVE_MIDFIELDER,
+            Position.CENTRAL_MIDFIELDER,
+            Position.ATTACKING_MIDFIELDER,
+            Position.RIGHT_MIDFIELDER,
+            Position.LEFT_MIDFIELDER,
+            Position.RIGHT_WINGER,
+            Position.LEFT_WINGER,
+            Position.STRIKER
+    };
+
+    public static Position[] getAllPositions() {
+        return allPositions;
+    }
+
+    public static String getPositionName(Position pos) {
+        if (pos == Position.GOALKEEPER)
+            return "GK";
+        else if (pos == Position.CENTRE_BACK)
+            return "CB";
+        else if (pos == Position.RIGHT_BACK)
+            return "RB";
+        else if (pos == Position.LEFT_BACK)
+            return "LB";
+        else if (pos == Position.DEFENSIVE_MIDFIELDER)
+            return "DM";
+        else if (pos == Position.CENTRAL_MIDFIELDER)
+            return "CM";
+        else if (pos == Position.ATTACKING_MIDFIELDER)
+            return "AM";
+        else if (pos == Position.RIGHT_MIDFIELDER)
+            return "RM";
+        else if (pos == Position.LEFT_MIDFIELDER)
+            return "LM";
+        else if (pos == Position.RIGHT_WINGER)
+            return "RW";
+        else if (pos == Position.LEFT_WINGER)
+            return "LW";
+        else if (pos == Position.STRIKER)
+            return "ST";
+        return null;
+    }
+
+    public static Position getPosition(String pos) {
+        if (pos.equalsIgnoreCase("GK"))
+            return Position.GOALKEEPER;
+        else if (pos.equalsIgnoreCase("CB"))
+            return Position.CENTRE_BACK;
+        else if (pos.equalsIgnoreCase("RB"))
+            return Position.RIGHT_BACK;
+        else if (pos.equalsIgnoreCase("LB"))
+            return Position.LEFT_BACK;
+        else if (pos.equalsIgnoreCase("DM"))
+            return Position.DEFENSIVE_MIDFIELDER;
+        else if (pos.equalsIgnoreCase("CM"))
+            return Position.CENTRAL_MIDFIELDER;
+        else if (pos.equalsIgnoreCase("AM"))
+            return Position.ATTACKING_MIDFIELDER;
+        else if (pos.equalsIgnoreCase("RM"))
+            return Position.RIGHT_MIDFIELDER;
+        else if (pos.equalsIgnoreCase("LM"))
+            return Position.LEFT_MIDFIELDER;
+        else if (pos.equalsIgnoreCase("RW"))
+            return Position.RIGHT_WINGER;
+        else if (pos.equalsIgnoreCase("LW"))
+            return Position.LEFT_WINGER;
+        else if (pos.equalsIgnoreCase("ST"))
+            return Position.STRIKER;
+        else
+            return Position.GOALKEEPER;
     }
 
     // Names
@@ -1124,9 +1255,46 @@ public class CatalogueHelper {
             "Laine", "Heikkinen", "Koskinen", "Lehtonen", "Jarvinen", "Saarinen", "Salminen", "Salo", "Lehto",
             "Toivonen", "Hakala", "Lahti", "Bottas", "Hakkinen", "Raikkonen" };
 
+    private static String[] icelandicNames = { "Jon", "Sigurdur", "Gudmundur", "Gunnar", "Einar", "Olafur", "Johann",
+            "Kristjan", "Stefan", "Magnus", "Bjorn", "Arni", "Helgi", "Petur", "Halldor", "Arnar", "Bjarni", "Kristinn",
+            "Ragnar", "Gisli", "Sveinn", "Karl", "Gudjon", "Pall", "David", "Birgir", "Thorsteinn", "Andri", "Atli",
+            "Daniel", "Johannes", "Kjartan", "Oskar", "Haukur", "Fridrik", "Agust", "Ingi", "Haraldur", "Jonas",
+            "Tomas", "Aron", "Asgeir", "Runar", "Brynjar", "Eirikur", "Baldur",
+    };
+    private static String[] icelandicSurnames = { "Jonsson", "Gudmundsson", "Sigurdsson", "Gunnarsson", "Olafsson",
+            "Magnusson", "Einarsson", "Kristjansson", "Stefansson", "Johannsson", "Bjornsson", "Arnason", "Halldorsson",
+            "Helgason", "Sveinsson", "Kristinsson", "Palsson", "Karlsson", "Gudjonsson", "Petursson", "Gislason",
+            "Thorsteinsson" };
+
+    private static String[] japaneseNames = { "Kenji", "Hiroshi", "Toshio", "Yoshio", "Kazuo", "Akira", "Masao",
+            "Kiyoshi", "Takashi", "Yukio", "Hideo", "Koichi", "Koji", "Takeshi", "Tadashi", "Ko", "Shoji", "Masami",
+            "Mitsuo", "Yasuo", "Hiroyuki", "Shigeo", "Susumu", "Akio", "Isamu", "Kenichi", "Masahiro", "Shinichi",
+            "Shoichi", "Jitsu", "Osamu", "Masayuki", "Takeo", "Takao", "Tsutomu", "Yoshiaki", "Yuki", "Yuji", "Haruo",
+            "Atsushi", "Kachi", "Tetsuo", "Yoshihiro", "Kunio", "Yutaka", "Tatsuo", "Tadao" };
+    private static String[] japaneseSurnames = { "Sato", "Suzuki", "Tanaka", "Watanabe", "Takahashi", "Ito", "Yamamoto",
+            "Nakamura", "Kobayashi", "Saito", "Kato", "Yoshida", "Yamada", "Sasaki", "Matsumoto", "Yamaguchi", "Inoue",
+            "Kimura", "Shimizu", "Hayashi", "Abe", "Ono", "Mori", "Nakajima", "Hashimoto", "Ikeda", "Yamazaki",
+            "Ishikawa", "Yamashita", "Ogawa", "Ishii", "Sakamoto", "Goto", "Maeda", "Okada", "Hasegawa", "Fujita",
+            "Kondo", "Sakai", "Murakami", "Ota", "Kikuchi", "Ueda", "Arai", "Endo", "Aoki", "Takeuchi", "Nakano",
+            "Fujii", "Fukuda", "Kaneko", "Nishimura", "Okamoto", "Nakagawa", "Fujiwara", "Miura", "Harada", "Matsuda",
+            "Kojima", "Morita", "Tamura", "Nakayama", "Ishida", "Wada", "Shibata", "Masuda", "Hara", "Ando"
+    };
+
+    private static String[] chineseNames = { "Nushi", "Wei", "Yan", "Li", "Ying", "Hui", "Lei", "Hong", "Yu", "Min",
+            "Xin", "Bin", "Ping", "Lin", "Yong", "Ming", "Ling", "Qing", "Peng", "Qiang", "Yun", "Jin", "Rong", "Chao",
+            "Gang", "Yue", "Jianhua", "Xiaoyan", "Na", "Liping", "Mei", "Ning", "Zhen", "Chen", "Kai", "Cheng", "Xiang",
+            "Haiyan", "Jianping", "Lihua", "Nan", "Xiaohong", "Zhiqiang", "Lan", "Kun", "Lijun", "Xiaoli", "Jianguo",
+            "Jianjun", "Xiaoping" };
+    private static String[] chineseSurnames = {
+            "Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Huang", "Wu", "Xu", "Zhao", "Zhou", "Lu", "Zhu", "Sun", "He",
+            "Ma", "Yu", "Hu", "Lin", "Jiang", "Guo", "Luo", "Gao", "Zheng", "Liang", "Tang", "Wei", "Shi", "Xie",
+            "Song", "Feng", "Yan", "Deng", "Han", "Cao", "Tan", "Ceng", "Peng", "Xiao", "Yuan", "Pan", "Cai", "Cheng",
+            "Fan", "Tian", "Dong", "Fu", "Ye", "Su", "Du"
+    };
+
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
-                venezuela };
+                venezuela, mexico, costa_rica };
         String[] portuguese_countries = { brazil, portugal };
         String[] german_countries = { germany, austria };
 
@@ -1234,6 +1402,16 @@ public class CatalogueHelper {
             }
         } else if (nation_name.equalsIgnoreCase(finland)) {
             return getName(finnishNames, finnishSurnames);
+        } else if (nation_name.equalsIgnoreCase(iceland)) {
+            return getName(icelandicNames, icelandicSurnames);
+        } else if (nation_name.equalsIgnoreCase(wales)) {
+            return getName(englishNames, englishSurnames);
+        } else if (nation_name.equalsIgnoreCase(ireland)) {
+            return getName(englishNames, englishSurnames);
+        } else if (nation_name.equalsIgnoreCase(japan)) {
+            return getName(japaneseNames, japaneseSurnames);
+        } else if (nation_name.equalsIgnoreCase(china)) {
+            return getName(chineseNames, chineseSurnames);
         } else {
             return "Player Player";
         }
@@ -1241,5 +1419,54 @@ public class CatalogueHelper {
 
     public static String getName(String[] names, String[] surnames) {
         return CommonFunctions.getRandomElement(names) + " " + CommonFunctions.getRandomElement(surnames);
+    }
+
+    public static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland" };
+    public static String[] italyTarget = { "Poland", "Germany", "Argentina" };
+    public static String[] englandTarget = { "France", "Netherlands", "Scotland", "Ireland", "Wales" };
+    public static String[] spainTarget = { "Germany", "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
+    public static String[] argentinaTarget = { "Paraguay", "Uruguay", "Mexico", "Brazil" };
+    public static String[] brazilTarget = { "Argentina" };
+    public static String[] franceTarget = { "Belgium", "Germany", "Italy", "Portugal", "Algeria", "Tunisia", "Senegal",
+            "Ivory Coast" };
+    public static String[] netherlandsTarget = { "Denmark", "Sweden", "Finland", "Norway", "England", "France",
+            "Brazil", "Belgium", "Germany" };
+    public static String[] portugalTarget = { "Brazil", "Argentina", "Serbia", "England", "Mexico" };
+    public static String[] belgiumTarget = { "France", "Netherlands", "Nigeria", "Bosnia", "Croatia", "Slovakia",
+            "Serbia", "Ukraine" };
+    public static String[] croatiaTarget = { "Bosnia", "Serbia", "Slovenia", "Albania" };
+    public static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
+    public static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel", "Portugal",
+            "Spain", "Czechia", "Slovakia" };
+
+    public static String[] getFavourableNations(String nation_name) {
+        String[] default_country = { nation_name };
+        if (nation_name.equalsIgnoreCase(germany)) {
+            return germanyTarget;
+        } else if (nation_name.equalsIgnoreCase(italy)) {
+            return italyTarget;
+        } else if (nation_name.equalsIgnoreCase(england))
+            return englandTarget;
+        else if (nation_name.equalsIgnoreCase(spain))
+            return spainTarget;
+        else if (nation_name.equalsIgnoreCase(argentina))
+            return argentinaTarget;
+        else if (nation_name.equalsIgnoreCase(brazil))
+            return brazilTarget;
+        else if (nation_name.equalsIgnoreCase(france))
+            return franceTarget;
+        else if (nation_name.equalsIgnoreCase(netherlands))
+            return netherlandsTarget;
+        else if (nation_name.equalsIgnoreCase(portugal))
+            return portugalTarget;
+        else if (nation_name.equalsIgnoreCase(belgium))
+            return belgiumTarget;
+        else if (nation_name.equalsIgnoreCase(croatia))
+            return croatiaTarget;
+        else if (nation_name.equalsIgnoreCase(switzerland))
+            return switzerlandTarget;
+        else if (nation_name.equalsIgnoreCase(poland))
+            return polandTarget;
+        return default_country;
     }
 }

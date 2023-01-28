@@ -23,6 +23,14 @@ public class Competition {
         return comp;
     }
 
+    public static Competition createDomesticCup(int reputation) {
+        Competition comp = new Competition();
+        comp.reputation = reputation;
+        comp.type = CompetitionType.DOMESTIC_CUP;
+        comp.stages = new ArrayList<>();
+        return comp;
+    }
+
     public void setup(List<String> teams) {
         stages.get(0).setup(teams);
     }

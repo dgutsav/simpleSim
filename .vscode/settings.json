@@ -8,5 +8,8 @@
         "**/.project": true,
         "**/.settings": true,
         "**/.factorypath": true
-    }
+    },
+    "java.project.sourcePaths": [
+        ""
+    ]
 }

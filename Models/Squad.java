@@ -17,7 +17,7 @@ public class Squad {
 
     public Squad() {
         this.players = new ArrayList<>();
-        this.formation = CommonFunctions.getRandomNumber(CatalogueHelper.numFormations());
+        this.formation = CommonFunctions.getRandomNumber(CatalogueHelper.numFormations() - 1);
         this.emergency_player_promotion = null;
         this.form = "DDDDDD";
         this.update_parent = null;
