@@ -139,11 +139,10 @@ public class GeneratorFunctions {
     public static int[] getStrongVariation(int[] distribution, int majors) {
         int[] diffs = new int[majors];
         for (int i = 0; i < majors; i++) {
-            diffs[i] = CommonFunctions.getRandomRange(5, 13);
+            diffs[i] = CommonFunctions.getRandomRange(2, 6);
         }
-        for (int i = 0; i < distribution.length; i++) {
-            distribution[i] += diffs[i % majors];
-            diffs[i % majors] -= getDecrease();
+        for (int i = 0; i < diffs.length; i++) {
+            distribution[i] += diffs[i];
         }
         return distribution;
     }

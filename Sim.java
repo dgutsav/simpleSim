@@ -95,6 +95,10 @@ public class Sim {
         return cont_nations;
     }
 
+    public static Map<Integer, Nation> getAllNations() {
+        return nations;
+    }
+
     public static Club_Team[] getClubArray(List<String> array) {
         Club_Team[] array_clubs = new Club_Team[array.size()];
         for (int i = 0; i < array.size(); i++) {
@@ -156,26 +160,26 @@ public class Sim {
     }
 
     public static void sim() {
-        // for (Map.Entry<String, League> entry : leagues.entrySet()) {
-        //     entry.getValue().seasonStart();
-        //     entry.getValue().simulateSeason();
-        //     entry.getValue().endSeasonChanges();
-        // }
+        for (Map.Entry<String, League> entry : leagues.entrySet()) {
+            entry.getValue().seasonStart();
+            entry.getValue().simulateSeason();
+            entry.getValue().endSeasonChanges();
+        }
 
-        // for (Map.Entry<String, Cup> entry : cups.entrySet()) {
-        //     entry.getValue().setup();
-        //     entry.getValue().simulateCup();
-        // }
+        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+            entry.getValue().setup();
+            entry.getValue().simulateCup();
+        }
 
-        // if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-        //     setupContinentalCompetitions();
-        //     ControllerUEFA.simulateCompetitions();
-        //     ControllerCONMEBOL.simulateCompetitions();
-        // }
+        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
+            setupContinentalCompetitions();
+            ControllerUEFA.simulateCompetitions();
+            ControllerCONMEBOL.simulateCompetitions();
+        }
         if (USE_TRANSFER_MARKET) {
             TransferMarket.simulate();
         }
-        //seasonEndChanges();
+        seasonEndChanges();
     }
 
     public static String addClub(Club_Team team) {
@@ -454,7 +458,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 10;
+        int num_seasons = 12;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -472,11 +476,12 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-        //     showCompetitionHistories();
-        //     showTeams();
-        //     showPlayers();
-        //     showNationalTeams();
+            showCompetitionHistories();
+            showTeams();
+            showPlayers();
+            showNationalTeams();
             TransferMarket.showTopTransfers();
+            TransferMarket.showTransferStats();
         }
     }
 }

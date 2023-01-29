@@ -2,7 +2,9 @@ package Functions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Models.*;
 
@@ -410,6 +412,55 @@ public class CatalogueHelper {
             "Qujing", "Xinyang", "Jieyang", "Yulin", "Changde", "Liaocheng", "Qingdao", "Nangandao", "Xiangyang",
             "Zhaotong", "Yichun", "Dezhou", "Nanchang", "Dazhou", "Yongzhou", "Suihua", "Qiqihar",
             "Suzhou", "Shantou", "Weinan" };
+    private static String[] iranCities = { "Tehran", "Mashhad", "Tabriz", "Karaj", "Isfahan", "Shiraz", "Ahvaz", "Sari",
+            "Urmia", "Kerman", "Rasht", "Zahedan", "Kermanshah", "Khorramabad", "Hamadan", "Gorgan", "Sanandaj",
+            "Bandar Abbas", "Arak", "Ardabil", "Qazvin", "Qom", "Yazd", "Zanjan", "Bushehr", "Bojnurd", "Yasuj",
+            "Birjand", "Semnan", "Ilam", "Eslamshahr", "Nishapur", "Maragheh", "Fardis", "Kashan", "Marvdasht",
+            "Dezful", "Babol", "Khoy", "Sirjan", "Zabol", "Borujerd", "Malayer", "Saghez", "Minab", "Saveh", "Parsabad",
+            "Alvand", "Qanavat", "Meybod", "Abhar", "Borazjan", "Borujen", "Shirvan", "Dogonbadan", "Ghayen", "Shahrud",
+            "Dehloran", "Shahriar", "Sabzevar", "Marand", "Kamalshahr", "Khomeyni Shahr", "Jahrom", "Abadan", "Amol",
+            "Bukan", "Rafsanjan", "Lahijan", "Iran Shahr", "Javanrud", "Dorud", "Nahavand", "Bandar Torkaman",
+            "Marivan", "Qeshm", "Khomein", "Meshkinshahr", "Mohammadiyeh", "Jafariyeh", "Ardakan", "Khorramdareh",
+            "Bandar Ganaveh", "Lordegan", "Esfarayen", "Dehdasht", "Tabas", "Damghan", "Eyvan", "Ahar", "Nazarabad",
+            "Najafabad", "Fasa", "Mahshahr" };
+    private static String[] koreaCities = { "Seoul", "Busan", "Incheon", "Daegu", "Daejeon", "Suwon", "Ulsan", "Yongin",
+            "Goyang", "Changwon", "Seongnam", "Hwaseong", "Cheongju", "Bucheon", "Ansan", "Namyangju", "Cheonan",
+            "Jeonju", "Gimhae", "Pyeongtaek", "Anyang", "Siheung", "Pohang", "Jeju", "Uijeongbu", "Gimpo", "Paju",
+            "Gumi", "Gwangju", "Sejong", "Wonju", "Jinju", "Yangsan", "Asan", "Pyongyang", "Hamhung", "Chongjin",
+            "Nampo", "Wonsan", "Sinuiju", "Tanchon", "Kaechon", "Kaesong", "Sariwon" };
+    private static String[] saudiArabiaCities = { "Riyadh", "Jeddah", "Mecca", "Medina", "Dammam", "Abha", "Ranyah",
+            "Hofuf", "Al-Mubarraz", "Sakakah", "Taif", "Jubail", "Buraydah", "Tabuk", "Najran", "Qatif", "Khobar",
+            "Al Bahah", "Hafr Al-Batin", "Jizan", "Qurayyat", "Al Qunfudhah", "Yanbu", "Buqaa", "Unaizah" };
+    private static String[] iraqCities = { "Baghdad", "Mosul", "Basra", "Nasiriyah", "Hillah", "Suleymaniyah", "Erbil",
+            "Ramadi", "Baqubah", "Kirkuk", "Tikrit", "Najaf", "Kut", "Dohuk", "Diwaniyah", "Karbala", "Zakho", "Amarah",
+            "Samawah", "Samarra", "Fallujah", "Halabja", "Kufa", "Khanaqin", "Tal Afar" };
+    private static String[] syriaCities = { "Aleppo", "Damascus", "Homs", "Latakia", "Hama", "Raqqa", "Deir ez-Zor",
+            "Al-Hasakah", "Qamishli", "Tartus", "Douma", "Manbij", "Idlib", "Daraa", "Darayya", "As-Suwayda",
+            "Al-Thawrah", "Salamiyah", "Al-Safira", "Al-Bab", "Maarat al-Numaan", "Jableh", "Tadmur" };
+    private static String[] emiratesCities = { "Dubai", "Abu Dhabi", "Sharjah", "Al Ain", "Ajman", "Ras Al Khaimah",
+            "Fujairah", "Umm al-Quwain", "Dibba Al-Fujairah", "Khor Fakkan", "Kalba", "Jebel Ali", "Madinat Zayed",
+            "Ruwais", "Liwa", "Dhaid", "Ghayathi", "Ar-Rams", "Dibba Al-Hisn", "Hatta", "Al Madam",
+            "Al Jazirah Al Hamra" };
+    private static String[] qatarCities = { "Doha", "Al Wakrah", "Al-Rayyan", "Al-Shahaniya", "Mesaieed",
+            "Madinat Khalifa", "Umm Ghuwailina", "Najma", "Fereej Bin Mahmoud", "Mushayrib", "Rawdat Al Khail",
+            "Al Thumama", "Al Karaana", "Al Sadd", "Ad Dawhah al Jadidah", "Onaiza", "Dukhan", "Mebaireek", "Al Hilal",
+            "Fereej Abdel Aziz" };
+    private static String[] australiaCities = { "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast",
+            "Newcastle", "Canberra", "Sunshine Coast", "Central Coast", "Wollongong", "Geelong", "Hobart", "Townsville",
+            "Cairns", "Toowoomba", "Darwin", "Ballarat", "Bendigo", "Albury" };
+    private static String[] thailandCities = { "Bangkok", "Amnat Charoen", "Ang Thong", "Bueng Kan", "Buriram",
+            "Chachoengsao", "Chai Nat", "Chaiyaphum", "Chanthaburi", "Chiang Mai", "Chiang Rai", "Chonburi", "Chumphon",
+            "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Lampang", "Lamphun", "Loei", "Lopburi",
+            "Mae Hong Son", "Maha Sarakham", "Mukdahan", "Nayok", "Pathom", "Phanom", "Ratchasima", "Sawan",
+            "Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lamphu", "Nong Khai", "Nonthaburi", "Pathum Thani",
+            "Pattani", "Phang Nga", "Phatthalung", "Phayao", "Phetchabun", "Phetchaburi", "Phichit", "Phitsanulok",
+            "Phra Si Ayutthaya", "Phrae", "Phuket", "Prachinburi", "Prachuap Khiri Khan", "Ranong", "Ratchaburi",
+            "Rayong", "Roi Et", "Sa Kaeo", "Sakon", "Prakan", "Sakhon", "Songkhram", "Saraburi", "Satun", "Sing Buri",
+            "Sisaket", "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang", "Trat",
+            "Ubon Ratchathani", "Udon Thani", "Uthai Thani", "Uttaradit", "Yala", "Yasothon" };
+    private static String[] uzbekistanCities = { "Tashkent", "Samarkand", "Namangan", "Andijan", "Nukus", "Fergana",
+            "Bukhara", "Qarshi", "Kokand", "Margilan", "Termez", "Jizzakh", "Angren", "Chirchiq", "Navoiy", "Urgench",
+            "Shahrisabz", "Olmaliq", "Bekobod" };
 
     private CatalogueHelper() {
     }
@@ -511,6 +562,27 @@ public class CatalogueHelper {
             return CommonFunctions.getRandomElement(japanCities);
         else if (nation_name.equalsIgnoreCase(china))
             return CommonFunctions.getRandomElement(chinaCities);
+        else if (nation_name.equalsIgnoreCase(iran))
+            return CommonFunctions.getRandomElement(iranCities);
+        else if (nation_name.equalsIgnoreCase(korea))
+            return CommonFunctions.getRandomElement(koreaCities);
+        else if (nation_name.equalsIgnoreCase(saudi_arabia))
+            return CommonFunctions.getRandomElement(saudiArabiaCities);
+        else if (nation_name.equalsIgnoreCase(qatar))
+            return CommonFunctions.getRandomElement(qatarCities);
+        else if (nation_name.equalsIgnoreCase(emirates))
+            return CommonFunctions.getRandomElement(emiratesCities);
+        else if (nation_name.equalsIgnoreCase(iraq))
+            return CommonFunctions.getRandomElement(iraqCities);
+        else if (nation_name.equalsIgnoreCase(syria))
+            return CommonFunctions.getRandomElement(syriaCities);
+        else if (nation_name.equalsIgnoreCase(australia))
+            return CommonFunctions.getRandomElement(australiaCities);
+        else if (nation_name.equalsIgnoreCase(thailand))
+            return CommonFunctions.getRandomElement(thailandCities);
+        else if (nation_name.equalsIgnoreCase(uzbekistan))
+            return CommonFunctions.getRandomElement(uzbekistanCities);
+
         return "Eden";
     }
 
@@ -1285,18 +1357,91 @@ public class CatalogueHelper {
             "Gang", "Yue", "Jianhua", "Xiaoyan", "Na", "Liping", "Mei", "Ning", "Zhen", "Chen", "Kai", "Cheng", "Xiang",
             "Haiyan", "Jianping", "Lihua", "Nan", "Xiaohong", "Zhiqiang", "Lan", "Kun", "Lijun", "Xiaoli", "Jianguo",
             "Jianjun", "Xiaoping" };
-    private static String[] chineseSurnames = {
-            "Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Huang", "Wu", "Xu", "Zhao", "Zhou", "Lu", "Zhu", "Sun", "He",
-            "Ma", "Yu", "Hu", "Lin", "Jiang", "Guo", "Luo", "Gao", "Zheng", "Liang", "Tang", "Wei", "Shi", "Xie",
-            "Song", "Feng", "Yan", "Deng", "Han", "Cao", "Tan", "Ceng", "Peng", "Xiao", "Yuan", "Pan", "Cai", "Cheng",
-            "Fan", "Tian", "Dong", "Fu", "Ye", "Su", "Du"
-    };
+    private static String[] chineseSurnames = { "Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Huang", "Wu", "Xu",
+            "Zhao", "Zhou", "Lu", "Zhu", "Sun", "He", "Ma", "Yu", "Hu", "Lin", "Jiang", "Guo", "Luo", "Gao", "Zheng",
+            "Liang", "Tang", "Wei", "Shi", "Xie", "Song", "Feng", "Yan", "Deng", "Han", "Cao", "Tan", "Ceng", "Peng",
+            "Xiao", "Yuan", "Pan", "Cai", "Cheng", "Fan", "Tian", "Dong", "Fu", "Ye", "Su", "Du" };
+
+    private static String[] koreanNames = { "Min-Jun", "Seo-Jun", "Ju-Won", "Ye-jun", "Si-U", "Do-Yun", "Yeon-u",
+            "Ji-Hu", "Seo-Jin", "Ji-Ho", "Ha-Jun", "Jun-Seo", "Jun-U", "Hyeon-u", "Su-Hyeon", "Do-Hyeon", "Ji-Hun",
+            "Geon-u", "U-Jin", "Si-Yun", "Seon-U", "Min-Jae", "Hyeon-jun", "Eun-u", "Seung-Hyeon", "Jeong-U", "Yu-Jun",
+            "Jun-Hyeok", "Seung-U", "Ji-Hwan", "Seung-Min", "Min-Seong", "Yu-Chan", "Jun-Yeong", "Si-hu", "Yun-u",
+            "Si-On", "Jin-U", "Jeong-Min", "Ha-Ram", "Ha-Jin", "Si-Won", "Jae-Yun", "Dong-Hyeon", "Jae-Won", "Tae-Yun",
+            "Han-Gyeol", "Jun-Hui", "Min-Gyu", "Jae-Min", "Yul", "Eun-chan", "Min-U", "Ha-rang", "I-An", "Eun-Seong",
+            "Yun-Ho", "Min-Chan", "Seong-Min", "Seong-Hyeon", "Jeong-Hyeon", "Su-Ho", "Jun", "Seung-Jun", "Jun-Ho",
+            "Ha-Min", "Ye-Seong" };
+    private static String[] koreanSurnames = { "Kim", "Pak", "Chong", "Choe", "Cho", "Kang", "Yu", "Yun", "Chang",
+            "Im", "Sin", "Song", "Chon", "So", "Han", "Hwang", "Kwon", "An", "Hong", "Yang", "Son", "Ko", "Mun",
+            "Pae", "Paek", "Ho", "No", "Chu", "Nam" };
+
+    private static String[] iranianNames = { "Habib", "Hamid Reza", "Milad", "Behrooz", "Behzad", "Sadegh", "Mohammad",
+            "Ali", "Seyyed", "Hossein", "Mahdi", "Reza", "Hassan", "Ahmad", "Saeed", "Alireza", "Mohsen", "Hamid",
+            "Amir", "Majid", "Abbas", "Somayeh", "Morteza", "Ebrahim", "Mostafa", "Javad", "Mahmoud", "Rasool",
+            "Mohammad Reza", "Mojtaba", "Hadi", "Masoud", "Vahid", "Ehsan", "Esmaeil", "Omid", "Rooh", "Akbar", "Hamed",
+            "Nasser", "Davood", "Gholam Reza", "Amin", "Sajjad", "Azam", "Abolfazl", "Jafar", "Yousef", "Akram",
+            "Meysam", "Asghar", "Farhad", "Qasem", "Mansour" };
+    private static String[] iranianSurnames = { "Mohammadi", "Hosseini", "Ahmadi", "Ali", "Moradi", "Heydari", "Karimi",
+            "Mousavi", "Jafari", "Mohammad", "Pour", "Ghasemi", "Rahimi", "Ebrahimi", "Sadeghi", "Abbasi", "Gholami",
+            "Akbari", "Asadi", "Zare", "Mahmoudi", "Ghorbani", "Bagheri", "Amiri", "Kazemi", "Zarei", "Haji", "Hashemi",
+            "Nouri", "Yousefi", "Alizadeh", "Esmaeili", "Rezaei", "Salehi", "Nazari", "Mir", "Razaee", "Norouzi",
+            "Shah", "Soleimani", "Sharifi", "Karami", "Rahmani", "Azizi", "Rostami", "Najafi", "Safari", "Amini",
+            "Soltani", "Taheri", "Ramezani", "Razaie", "Khosravi" };
+
+    private static String[] arabNames = { "Ali", "Mohamed", "Ahmed", "Hussein", "Mostafa", "Haidar", "Hassan", "Abbas",
+            "Omar", "Alaa", "Abdullah", "Saad", "Nasr", "Karrar", "Sajjad", "Saif", "Ibrahim", "Jassim", "Ammar",
+            "Khaled", "Mahmoud", "Ibtisam", "Qasim", "Kazem", "Wissam", "Yousef", "Mortada", "Muhannad", "Yasser",
+            "Sabah", "Karim", "Adel", "Emad", "Raad", "Waleed", "Fadel", "Azhar", "Mahdi", "Adnan", "Amir", "Amer",
+            "Hossam", "Hamid", "Laith", "Anwar", "Dia", "Basim", "Iyad", "Salah", "Abdel", "Hamza", "Firas", "Salam",
+            "Naima", "Sadiq", "Raed", "Jaafar", "Jabbar", "Majed", "Aqeel", "Abdel Rahman", "Mohsen", "Montazer",
+            "Akhlas", "Osama", "Salman", "Khalil", "Ismail", "Nabil", "Ayman", "Ashruf", "Sharif", "Hany", "Tarek",
+            "Essam", "Abdul", "Mido", "Shahid", "Salim", "Nadim", "Ziyad", "Zinedine", "Ramy", "Navid", "Arshad",
+            "Malik", "Ramzi", "Sajid", "Atif", "Sulaiman", "Jamal", "Mousa", "Anas", "Bilal", "Faisal", "Younes" };
+
+    private static String[] thaiNames = { "Somchai", "Prasoet", "Sombun", "Somsak", "Narong", "Prasit", "Somphon",
+            "Sombat", "Udom", "Wichian", "Thawi", "Charoen", "Samran", "Wichai", "Sawat", "Chan", "Somphong", "Pricha",
+            "Wirat", "Somnuek", "Sunthon", "Anan", "Wanchai", "Somkiat", "Suwit", "Wirot", "Saman", "Somkhit", "Amnuai",
+            "Winai", "Sommai", "Arun", "Suthep", "Wira", "Prayun", "Chaloem", "Surin", "Mongkhon", "Suchat", "Bunloet",
+            "Phaibun", "Bunsong", "Phairot", "Suwan", "Thongchai", "Wichit", "Ari", "Phonchai", "Manit", "Banchong",
+            "Sunphon", "Charun", "Chatchai", "Suphot", "Pradit", "Sanit", "Uthai", "Chamlong", "Sompong", "Kasem",
+            "Thawatchai", "Phongsak", "Kamon" };
+    private static String[] thaiSurnames = { "Adulyadej", "Ayutthaya", "A-wut", "Boonmee", "Bun Ma ", "Chaidee ",
+            "Chaichana ", "Chaiya ", "Chakrii", "Charoen ", "Charoensuk ", "Krungthep ", "Makok ", "Ngam", "Noi",
+            "Ratanaporn", "Rattanakosin", "Saengkaew", "Shinawatra ", "Soikham ", "Somsri", "Srisuwan ", "Suwannarat ",
+            "Tham-boon ", "Thong Di", "Senamuang", "Dangda", "Arjvirai", "Kraisom", "Promsrikaew", "Pomphan", "Panya" };
+
+    private static String[] uzbekNames = { "Timur", "Rustam", "Alisher", "Aziz", "Sherzod", "Anvar", "Dilshod",
+            "Sardor", "Akmal", "Shukhrat", "Alyeksandr", "Ulugbek", "Ravshan", "Umid", "Syergyei", "Azamat", "Otabek",
+            "Shavkat", "Bekzod", "Oybek", "Bobur", "Zafar", "Farrukh", "Nodir", "Vladimir", "Muzaffar", "Sergey",
+            "Azizbek", "Sanjar", "Farkhod", "Bakhodir", "Davron", "Jasur", "Jamshid", "Erkin", "Ilkhom", "Aleksandr",
+            "Yurii", "Dilmurod", "Firdavs", "Abror", "Akbar", "Andryei", "Ruslan" };
+    private static String[] uzbekSurnames = { "Karimov", "Yusupov", "Abdullayev", "Ibragimov", "Rakhimov", "Umarov",
+            "Akhmyedov", "Usmanov", "Sultanov", "Sharipov", "Yuldashyev", "Khasanov", "Tursunov", "Makhmudov", "Saidov",
+            "Ismailov", "Alimov", "Rasulov", "Azimov", "Khakimov", "Mirzayev", "Yunusov", "Kurbanov", "Yakubov",
+            "Pulatov", "Muminov", "Rustamov", "Abdurakhmanov", "Abdullaev", "Sabirov", "Djurayev", "Zakirov", "Azizov",
+            "Ergashyev", "Akbarov", "Kadyrov", "Rakhmanov", "Gafurov", "Khamidov", "Jurayev", "Yuldashev", "Safarov",
+            "Khaidarov", "Khalilov", "Kodirov", "Sadykov", "Kasimov", "Kadirov", "Rakhmatov", "Khodjayev" };
+
+    private static String[] alegrianSurnames = { "Saidi", "Slimani", "Touati", "Mansouri", "Brahimi", "Messaoudi",
+            "Haddad", "Yahiaoui", "Rahmani", "Dahmani", "Sahraoui", "Benaissa", "Moussaoui", "Bouziane", "Salhi",
+            "Saadi", "Aissaoui", "Benyahia", "Amara", "Belhadj", "Mokhtari", "Merabet", "Abbas", "Taleb", "Bouzid",
+            "Mebarki", "Khaldi", "Bouzidi", "Hadji", "Hamdi", "Hamidi", "Zitouni", "Cherifi", "Talbi", "Kadri",
+            "Bouras", "Abed", "Belaid", "Toumi", "Benali" };
+    private static String[] moroccanSurnames = { "Ait", "Alaoui", "Alami", "Bennani", "Idrissi", "Berrada", "Lahlou",
+            "Tazi", "El Idrissi", "Benjelloun", "Hassan", "Saidi", "Tahiri", "Aziz", "Mohamed", "Filali", "El Mostafa",
+            "Amrani", "Cherkaoui", "Daoudi", "El Alaoui", "Naji", "El Mehdi", "Ben", "Bennis", "Karim", "Chakir",
+            "Naciri", "Amine", "Khalil", "El Alami", "Hajji", "Salhi", "En Nessyri", "Bounou", "Ziyech", "Hakimi" };
+    private static String[] tunisianSurnames = { "Trabelsi", "Gharbi", "Hammami", "Mohamed", "Dridi", "Ayari", "Cherif",
+            "Sassi", "Allah", "Ammar", "Hamdi", "Mejri", "Ali", "Al Trabelsi", "Ayadi", "Riahi", "Arfaoui", "Abidi",
+            "El Hadi", "Salem", "Saidi", "Ahmed", "Oueslati", "Mansour", "Nasri", "Ben Ali", "Chebbi", "Ben Amor",
+            "Amri", "Abid", "Al Hamami", "Aloui", "Kamoun", "Ben Abdallah", "Farhat", "Amara", "Souissi", "Mabrouk",
+            "Tlili", "Omar" };
 
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
                 venezuela, mexico, costa_rica };
         String[] portuguese_countries = { brazil, portugal };
         String[] german_countries = { germany, austria };
+        String[] arab_countries = { iraq, qatar, saudi_arabia, syria, egypt, emirates };
 
         int prob = CommonFunctions.getRandomNumber(100);
 
@@ -1412,6 +1557,34 @@ public class CatalogueHelper {
             return getName(japaneseNames, japaneseSurnames);
         } else if (nation_name.equalsIgnoreCase(china)) {
             return getName(chineseNames, chineseSurnames);
+        } else if (nation_name.equalsIgnoreCase(korea)) {
+            return getName(koreanNames, koreanSurnames);
+        } else if (nation_name.equalsIgnoreCase(iran)) {
+            return getName(iranianNames, iranianSurnames);
+        } else if (Arrays.asList(arab_countries).contains(nation_name)) {
+            return getName(arabNames, arabNames);
+        } else if (nation_name.equalsIgnoreCase(australia)) {
+            return getName(englishNames, englishSurnames);
+        } else if (nation_name.equalsIgnoreCase(thailand)) {
+            return getName(thaiNames, thaiSurnames);
+        } else if (nation_name.equalsIgnoreCase(uzbekistan)) {
+            return getName(uzbekNames, uzbekSurnames);
+        } else if (nation_name.equalsIgnoreCase(morocco)) {
+            return getName(arabNames, moroccanSurnames);
+        } else if (nation_name.equalsIgnoreCase(algeria)) {
+            return getName(arabNames, alegrianSurnames);
+        } else if (nation_name.equalsIgnoreCase(tunisia)) {
+            return getName(arabNames, tunisianSurnames);
+        } else if (nation_name.equalsIgnoreCase(america) || nation_name.equalsIgnoreCase(canada)) {
+            if (prob < 40) {
+                return getName(englishNames, englishSurnames);
+            } else if (prob < 60) {
+                return getName(englishNames, germanSurnames);
+            } else if (prob < 85) {
+                return getName(englishNames, spanishSurnames);
+            } else {
+                return getName(spanishNames, spanishSurnames);
+            }
         } else {
             return "Player Player";
         }
@@ -1421,7 +1594,8 @@ public class CatalogueHelper {
         return CommonFunctions.getRandomElement(names) + " " + CommonFunctions.getRandomElement(surnames);
     }
 
-    public static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland" };
+    public static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland",
+            "United States" };
     public static String[] italyTarget = { "Poland", "Germany", "Argentina" };
     public static String[] englandTarget = { "France", "Netherlands", "Scotland", "Ireland", "Wales" };
     public static String[] spainTarget = { "Germany", "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
@@ -1438,35 +1612,42 @@ public class CatalogueHelper {
     public static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
     public static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel", "Portugal",
             "Spain", "Czechia", "Slovakia" };
+    public static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
+            "Uzbekistan" };
+    public static String[] turkeyTarget = { "France", "Germany", "Spain", "Belgium" };
+    public static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria" };
+    public static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary" };
+    public static String[] ukraineTarget = { "Argentina", "Brazil", "Denmark", "Sweden", "Norway", "Poland",
+            "Russia" };
+    public static String[] greeceTarget = { "Spain", "Italy", "Cyprus", "Portugal", "Argentina" };
 
     public static String[] getFavourableNations(String nation_name) {
-        String[] default_country = { nation_name };
-        if (nation_name.equalsIgnoreCase(germany)) {
-            return germanyTarget;
-        } else if (nation_name.equalsIgnoreCase(italy)) {
-            return italyTarget;
-        } else if (nation_name.equalsIgnoreCase(england))
-            return englandTarget;
-        else if (nation_name.equalsIgnoreCase(spain))
-            return spainTarget;
-        else if (nation_name.equalsIgnoreCase(argentina))
-            return argentinaTarget;
-        else if (nation_name.equalsIgnoreCase(brazil))
-            return brazilTarget;
-        else if (nation_name.equalsIgnoreCase(france))
-            return franceTarget;
-        else if (nation_name.equalsIgnoreCase(netherlands))
-            return netherlandsTarget;
-        else if (nation_name.equalsIgnoreCase(portugal))
-            return portugalTarget;
-        else if (nation_name.equalsIgnoreCase(belgium))
-            return belgiumTarget;
-        else if (nation_name.equalsIgnoreCase(croatia))
-            return croatiaTarget;
-        else if (nation_name.equalsIgnoreCase(switzerland))
-            return switzerlandTarget;
-        else if (nation_name.equalsIgnoreCase(poland))
-            return polandTarget;
-        return default_country;
+        Map<String, String[]> fav_nations = new HashMap<>();
+        fav_nations.put(england, englandTarget);
+        fav_nations.put(germany, germanyTarget);
+        fav_nations.put(portugal, portugalTarget);
+        fav_nations.put(belgium, belgiumTarget);
+        fav_nations.put(spain, spainTarget);
+        fav_nations.put(france, franceTarget);
+        fav_nations.put(italy, italyTarget);
+        fav_nations.put(argentina, argentinaTarget);
+        fav_nations.put(spain, spainTarget);
+        fav_nations.put(brazil, brazilTarget);
+        fav_nations.put(croatia, croatiaTarget);
+        fav_nations.put(netherlands, netherlandsTarget);
+        fav_nations.put(switzerland, switzerlandTarget);
+        fav_nations.put(poland, polandTarget);
+        fav_nations.put(russia, russiaTarget);
+        fav_nations.put(turkey, turkeyTarget);
+        fav_nations.put(serbia, serbiaTarget);
+        fav_nations.put(romania, romaniaTarget);
+        fav_nations.put(ukraine, ukraineTarget);
+        fav_nations.put(greece, greeceTarget);
+        if (fav_nations.containsKey(nation_name)) {
+            return fav_nations.get(nation_name);
+        } else {
+            String[] def = { nation_name };
+            return def;
+        }
     }
 }
