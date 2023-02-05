@@ -49,15 +49,14 @@ public class CommonFunctions {
             positions[i] = formation[i];
         }
         List<Position> all_positions = PositionHelper.getAllPositions();
-        all_positions.addAll(PositionHelper.getAllPositions());
         int count = 0;
         for (Position position : all_positions) {
             positions[11 + count] = position;
             count++;
         }
-        int left = length - 34;
-        for (int i = 0; i < left; i++) {
-            positions[34 + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
+        int assigned = formation.length + all_positions.size();
+        for (int i = 0; i < length - assigned; i++) {
+            positions[assigned + i] = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
         }
         return positions;
     }
@@ -74,13 +73,15 @@ public class CommonFunctions {
     }
 
     public static int[] getPlayerDistribution(int rating) {
-        int totalPlayers = 35 + CommonFunctions.getRandomNumber(10);
+        int totalPlayers = 25 + CommonFunctions.getRandomNumber(5);
         int[] ratings = new int[totalPlayers];
         for (int i = 0; i < totalPlayers; i++) {
             if (i < 11) {
-                ratings[i] = rating + CommonFunctions.getRandomInt(5);
-            } else {
+                ratings[i] = rating + CommonFunctions.getRandomInt(3);
+            } else if (i < 20){
                 ratings[i] = ((int) ((double) rating * 0.75)) + CommonFunctions.getRandomNumber(5);
+            } else {
+                ratings[i] = ((int) ((double) rating * 0.6)) + CommonFunctions.getRandomNumber(7);
             }
             ratings[i] = Player.adjustRating(ratings[i]);
         }

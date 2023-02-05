@@ -153,8 +153,6 @@ public class Sim {
     }
 
     public static void setupContinentalCompetitions() {
-        ControllerUEFA.setupCompetitions();
-        ControllerUEFA.getTeams();
         ControllerCONMEBOL.setupCompetitions();
         ControllerCONMEBOL.getTeams();
     }
@@ -172,9 +170,9 @@ public class Sim {
         }
 
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            setupContinentalCompetitions();
-            ControllerUEFA.simulateCompetitions();
-            ControllerCONMEBOL.simulateCompetitions();
+            //setupContinentalCompetitions();
+            //ControllerCONMEBOL.simulateCompetitions();
+            ControllerEurope.simulate();
         }
         if (USE_TRANSFER_MARKET) {
             TransferMarket.simulate();
@@ -308,8 +306,8 @@ public class Sim {
             count++;
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            ControllerUEFA.initCompetitions();
-            ControllerCONMEBOL.initCompetitions();
+            //ControllerCONMEBOL.initCompetitions();
+            ControllerEurope.initCoefficientsCalculations();
         }
     }
 
@@ -405,8 +403,8 @@ public class Sim {
             updateCup(entry.getValue(), entry.getKey());
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            ControllerUEFA.saveCompetitionHistory();
-            ControllerCONMEBOL.saveCompetitionHistory();
+            //ControllerUEFA.saveCompetitionHistory();
+            //ControllerCONMEBOL.saveCompetitionHistory();
         }
         List<String> retired_players = new ArrayList<>();
         for (Map.Entry<String, Player> entry : players.entrySet()) {
@@ -440,8 +438,8 @@ public class Sim {
             entry.getValue().showCompetitionHistory();
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            ControllerUEFA.showCompetitionHistory();
-            ControllerCONMEBOL.showCompetitionHistory();
+            //ControllerUEFA.showCompetitionHistory();
+            //ControllerCONMEBOL.showCompetitionHistory();
         }
     }
 
@@ -458,7 +456,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 12;
+        int num_seasons = 16;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -482,6 +480,7 @@ public class Sim {
             showNationalTeams();
             TransferMarket.showTopTransfers();
             TransferMarket.showTransferStats();
+            ControllerEurope.getLeagueRankingsForSeason(Sim.getSeasonNumber());
         }
     }
 }

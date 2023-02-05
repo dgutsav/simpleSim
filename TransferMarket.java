@@ -43,6 +43,22 @@ public class TransferMarket {
         return Sim.getNation(league.getNationId()).getName() + "_" + league.getCompetitionLevel();
     }
 
+    public static Map<Integer, List<Target>> groupTargetsByNation() {
+        Map<Integer, List<Target>> league_targets = new HashMap<>();
+        Map<Integer, Nation> nations = Sim.getAllNations();
+        for (Nation nation : nations.values()) {
+            List<Target> targets_d = new ArrayList<>();
+            for (String league_id : nation.getLeagues()) {
+                League league = Sim.getLeague(league_id);
+                for (String club_id : league.getTeams()) {
+                    targets_d.add(targets.get(club_id));
+                }
+            }
+            league_targets.put(nation.getId(), targets_d);
+        }
+        return league_targets;
+    }
+
     public static Map<League, List<Target>> groupTargets() {
         Map<League, List<Target>> league_targets = new HashMap<>();
         Map<String, League> all_leagues = Sim.getAllLeagues();
@@ -102,13 +118,35 @@ public class TransferMarket {
             fav_nations = new ArrayList<>();
         }
         fav_nations.add(nation_name);
-        //List<String> first_div_lists = key_list.get("div1");
+        // List<String> first_div_lists = key_list.get("div1");
         for (String fav_nation : fav_nations) {
             List<String> list_names = key_list.get(fav_nation);
             if (list_names == null)
                 System.out.println("No lists found for country " + fav_nation);
             for (String list_name : list_names) {
-                //if (!fav_nation.equalsIgnoreCase(nation_name) && !first_div_lists.contains(list_name)) continue;
+                // if (!fav_nation.equalsIgnoreCase(nation_name) &&
+                // !first_div_lists.contains(list_name)) continue;
+                List<Player> league_list = lists.get(list_name);
+                if (league_list == null)
+                    System.out.println("No List found for name " + list_name);
+                players.addAll(league_list);
+            }
+        }
+        return players;
+    }
+
+    public static List<Player> getPlayersList(int nation_id) {
+        Nation nat = Sim.getNation(nation_id);
+        List<Player> players = new ArrayList<>();
+        ArrayList<String> fav_nations = new ArrayList<>();
+        fav_nations.addAll(Arrays.asList(CatalogueHelper.getFavourableNations(nat.getName())));
+        if (fav_nations.contains(nat.getName()))
+            fav_nations.add(nat.getName());
+        for (String fav_nation : fav_nations) {
+            List<String> list_names = key_list.get(fav_nation);
+            if (list_names == null)
+                System.out.println("No lists found for country " + fav_nation);
+            for (String list_name : list_names) {
                 List<Player> league_list = lists.get(list_name);
                 if (league_list == null)
                     System.out.println("No List found for name " + list_name);
@@ -122,15 +160,14 @@ public class TransferMarket {
         int max_size = 0;
         String max_key = "";
         Map<String, ArrayList<Offer>> offers = new HashMap<>();
-        Map<League, List<Target>> targets = groupTargets();
-        for (Map.Entry<League, List<Target>> entry : targets.entrySet()) {
-            long start = System.nanoTime();
-            League league = entry.getKey();
+        Map<Integer, List<Target>> targets = groupTargetsByNation();
+        for (Map.Entry<Integer, List<Target>> entry : targets.entrySet()) {
+            int nation_id = entry.getKey();
             List<Target> league_targets = entry.getValue();
-            List<Player> players = getPlayersList(league);
+            List<Player> players = getPlayersList(nation_id);
             if (max_size < players.size()) {
                 max_size = players.size();
-                max_key = getLeagueKey(league);
+                max_key = Sim.getNation(nation_id).getName();
             }
             int targets_met = 0;
             int players_searched = 0;
@@ -158,13 +195,20 @@ public class TransferMarket {
                 if (targets_met >= league_targets.size())
                     break;
             }
-            long diff = (System.nanoTime() - start);
-            double sec_diff = diff / 1000000.0;
-            double search_ratio = players_searched / (double) players.size();
-            if (search_ratio > 0.5)
-                System.out.println("League: " + league.getName() + " Time: " + sec_diff + "ms Targets: "
-                        + league_targets.size() + " Players: " + players.size() + " Searched: " + players_searched
-                        + " Ratio: " + search_ratio);
+            if (players_searched == players.size()) {
+                System.out.println("Nation: " + Sim.getNation(nation_id).getName() + " targets not met: "
+                        + (league_targets.size() - targets_met));
+                // for (Target target : league_targets) {
+                //     if (!target.hasMadeOffer()) {
+                //         System.out.print("Target Rating: " + target.getRating());
+                //         System.out.print(" Position: " + target.getPosition());
+                //         System.out.print(" Price: " + target.getPrice());
+                //         System.out.print(" Club: " + target.getClub().getName());
+                //         System.out.print(" Club Rating: " + target.getClub().getBestSquadRating());
+                //         System.out.println(" Level: " + target.getDivLevel());
+                //     }
+                // }
+            }
         }
         ArrayList<Offer> finalizedOffers = new ArrayList<>();
         for (Map.Entry<String, ArrayList<Offer>> offer_Entry : offers.entrySet()) {

@@ -46,6 +46,18 @@ public class CatalogueHelper {
     public static String ireland = "Ireland";
     public static String wales = "Wales";
     public static String iceland = "Iceland";
+    private static String moldova = "Moldova";
+    private static String kazakhstan = "Kazakhstan";
+    private static String georgia = "Georgia";
+    private static String armenia = "Armenia";
+    private static String azerbaijan = "Azerbaijan";
+    private static String lithuania = "Lithuania";
+    private static String latvia = "Latvia";
+    private static String estonia = "Estonia";
+    private static String macedonia = "North Macedonia";
+    private static String montenegro = "Montenegro";
+    private static String kosovo = "Kosovo";
+    private static String n_ireland = "Northern Ireland";
 
     public static String argentina = "Argentina";
     public static String bolivia = "Bolivia";
@@ -232,6 +244,30 @@ public class CatalogueHelper {
             return "Welsh";
         } else if (nation_name.equalsIgnoreCase(west_indies)) {
             return "West Indian";
+        } else if (nation_name.equalsIgnoreCase(moldova)) {
+            return "Moldovan";
+        } else if (nation_name.equalsIgnoreCase(kazakhstan)) {
+            return "Kazakh";
+        } else if (nation_name.equalsIgnoreCase(georgia)) {
+            return "Georgia";
+        } else if (nation_name.equalsIgnoreCase(armenia)) {
+            return "Armenian";
+        } else if (nation_name.equalsIgnoreCase(azerbaijan)) {
+            return "Azeri";
+        } else if (nation_name.equalsIgnoreCase(lithuania)) {
+            return "Lithuanian";
+        } else if (nation_name.equalsIgnoreCase(latvia)) {
+            return "Latvian";
+        } else if (nation_name.equalsIgnoreCase(estonia)) {
+            return "Estonian";
+        } else if (nation_name.equalsIgnoreCase(macedonia)) {
+            return "North Macedonian";
+        } else if (nation_name.equalsIgnoreCase(montenegro)) {
+            return "Montenegrin";
+        } else if (nation_name.equalsIgnoreCase(kosovo)) {
+            return "Kosovar";
+        } else if (nation_name.equalsIgnoreCase(n_ireland)) {
+            return "Northern Irish";
         } else {
             return "Edener";
         }
@@ -397,6 +433,33 @@ public class CatalogueHelper {
             "Gardabaer", "Akranes", "Selfoss", "isafjordur", "Hofn", "Egilsstadir", "Borgarnes", "Saudarkrokur" };
     private static String[] walesCities = { "Cardiff", "Swansea", "Newport", "Wrexham", "Bangor", "St Asaph",
             "St Davids", "Caerdydd", "Abertawe", "Casnewydd", "Wrecsam", "Llanelwy", "Tyddewi" };
+    private static String[] moldovaCities = { "Chisinau", "Balti", "Tiraspol", "Bender", "Ribnita", "Ungheni", "Cahul",
+            "Soroca", "Orhei", "Comrat", "Dubasari", "Straseni", "Ceadar-Lunga", "Causeni", "Drochia", "Edinet",
+            "Vulcanesti", "Durlesti", "Hincesti", "Ialoveni", "Falesti", "Calarasi", "Codru", "Taraclia" };
+    private static String[] kazakhstanCities = { "Almaty", "Shymkent", "Karaganda", "Taraz", "Astana", "Pavlodar",
+            "Oskemen", "Semey", "Aktobe", "Oral", "Kostanay", "Petropavl", "Kyzylorda", "Aktau", "Temirtau", "Atyrau",
+            "Ekibastuz", "Kokshetau", "Taldykorgan", "Jezkazgan", "Turkistan" };
+    private static String[] georgiaCities = { "Tbilisi", "Batumi", "Kutaisi", "Rustavi", "Gori", "Zugdidi", "Poti",
+            "Kobuleti", "Khashuri", "Samtredia", "Sukhumi", "Gagra", "Tskhinvali", "Senaki", "Zestafoni" };
+    private static String[] armeniaCities = { "Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Abovyan", "Kapan",
+            "Hrazdan", "Armavir", "Masis", "Goris", "Charentsavan", "Ararat", "Ijevan" };
+    private static String[] azerbaijanCities = { "Baku", "Sumgait", "Ganja", "Xirdalan", "Mingachevir", "Nakhchivan",
+            "Lankaran", "Shirvan", "Shaki", "Yevlakh", "Tovuz", "Astara", "Qabala", "Agdam", "Jalilabad", "Masally",
+            "Khachmaz" };
+    private static String[] lithuaniaCities = { "Vilnius", "Kaunas", "Klaipeda", "Siauliai", "Panevezys", "Alytus",
+            "Marijampole", "Mazeikiai", "Jonava", "Utena", "Kedainiai", "Taurage", "Telsiai", "Ukmerge" };
+    private static String[] latviaCities = { "Daugavpils", "Jelgava", "Jurmala", "Liepaja", "Rezekne", "Riga",
+            "Ventspils", "Ogre", "Valmiera", "Jekabpils", "Marupe", "Salaspils" };
+    private static String[] estoniaCities = { "Tallinn", "Tartu", "Narva", "Parnu", "Kohtla-Jarve", "Viljandi",
+            "Rakvere", "Maardu", "Kuressaare", "Sillamae", "Valga", "Voru", "Johvi" };
+    private static String[] macedoniaCities = { "Skopje", "Bitola", "Kumanovo", "Prilep", "Tetovo", "Veles", "Stip",
+            "Ohrid", "Gostivar", "Strumica" };
+    private static String[] montenegroCities = { "Podgorica", "Niksic", "Herceg Novi", "Pljevlja", "Bar",
+            "Bijelo Polje", "Cetinje", "Budva", "Kotor", "Berane", "Ulcinj", "Tivat", "Rozaje" };
+    private static String[] kosovoCities = { "Pristina", "Prizren", "Gjilan", "Peja", "Mitrovica", "Ferizaj", "Gjakova",
+            "Vushtrri", "Podujeva", "Fushe Kosove", "Rahovec" };
+    private static String[] n_irelandCities = { "Belfast", "Derry", "Newtownabbey", "Craigavon", "Bangor",
+            "Castlereagh", "Lisburn", "Ballymena", "Newtownards", "Carrickfergus", "Newry" };
 
     private static String[] japanCities = { "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Fukuoka", "Kawasaki",
             "Kobe", "Kyoto", "Saitama", "Hiroshima", "Sendai", "Chiba", "Kitakyushu", "Setagaya", "Sakai", "Niigata",
@@ -461,6 +524,24 @@ public class CatalogueHelper {
     private static String[] uzbekistanCities = { "Tashkent", "Samarkand", "Namangan", "Andijan", "Nukus", "Fergana",
             "Bukhara", "Qarshi", "Kokand", "Margilan", "Termez", "Jizzakh", "Angren", "Chirchiq", "Navoiy", "Urgench",
             "Shahrisabz", "Olmaliq", "Bekobod" };
+
+    private static String[] usaCities = { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+            "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus",
+            "Indianapolis", "Charlotte", "San Francisco", "Seattle", "Denver", "Oklahoma City", "Nashville", "El Paso",
+            "Washington", "Boston", "Las Vegas", "Portland", "Detroit", "Louisville", "Memphis", "Baltimore",
+            "Milwaukee", "Albuquerque", "Fresno", "Tucson", "Sacramento", "Mesa", "Kansas City", "Atlanta", "Omaha",
+            "Colorado Springs", "Raleigh", "Virginia Beach", "Long Beach", "Miami", "Oakland", "Minneapolis", "Tulsa",
+            "Bakersfield", "Wichita", "Arlington", "Aurora", "Tampa", "New Orleans", "Cleveland", "Anaheim", "Honolulu",
+            "Henderson", "Stockton", "Lexington", "Corpus Christi", "Riverside", "Santa Ana", "Orlando" };
+    private static String[] canadaCities = { "Toronto", "Quebec", "Montreal", "Vancouver", "Ottawa", "Winnipeg",
+            "Edmonton", "Calgary", "Halifax", "Victoria", "St. John's", "Saskatoon", "Regina", "Hamilton", "Kelowna",
+            "Abbotsford", "Windsor", "Fredericton", "Thunder Bay", "Kingston", "Whitehorse", "Charlottetown", "Moncton",
+            "Trois-Rivieres" };
+    private static String[] mexicoCities = { "Ciudad Mexico", "Tijuana", "Ecatepec", "León", "Puebla", "Ciudad Juárez",
+            "Guadalajara", "Zapopan", "Monterrey", "Nezahualcoyotl", "Chihuahua", "Mérida", "Naucalpan", "Toluca",
+            "Cancún", "Saltillo", "Aguascalientes", "Hermosillo", "Mexicali", "San Luis Potosí", "Culiacán",
+            "Querétaro", "Morelia", "Chimalhuacán", "Reynosa", "Torreón", "Tlalnepantla", "Acapulco", "Tlaquepaque",
+            "Guadalupe" };
 
     private CatalogueHelper() {
     }
@@ -582,7 +663,36 @@ public class CatalogueHelper {
             return CommonFunctions.getRandomElement(thailandCities);
         else if (nation_name.equalsIgnoreCase(uzbekistan))
             return CommonFunctions.getRandomElement(uzbekistanCities);
-
+        else if (nation_name.equalsIgnoreCase(america))
+            return CommonFunctions.getRandomElement(usaCities);
+        else if (nation_name.equalsIgnoreCase(canada))
+            return CommonFunctions.getRandomElement(canadaCities);
+        else if (nation_name.equalsIgnoreCase(mexico))
+            return CommonFunctions.getRandomElement(mexicoCities);
+        else if (nation_name.equalsIgnoreCase(moldova))
+            return CommonFunctions.getRandomElement(moldovaCities);
+        else if (nation_name.equalsIgnoreCase(kazakhstan))
+            return CommonFunctions.getRandomElement(kazakhstanCities);
+        else if (nation_name.equalsIgnoreCase(georgia))
+            return CommonFunctions.getRandomElement(georgiaCities);
+        else if (nation_name.equalsIgnoreCase(armenia))
+            return CommonFunctions.getRandomElement(armeniaCities);
+        else if (nation_name.equalsIgnoreCase(azerbaijan))
+            return CommonFunctions.getRandomElement(azerbaijanCities);
+        else if (nation_name.equalsIgnoreCase(lithuania))
+            return CommonFunctions.getRandomElement(lithuaniaCities);
+        else if (nation_name.equalsIgnoreCase(latvia))
+            return CommonFunctions.getRandomElement(latviaCities);
+        else if (nation_name.equalsIgnoreCase(estonia))
+            return CommonFunctions.getRandomElement(estoniaCities);
+        else if (nation_name.equalsIgnoreCase(macedonia))
+            return CommonFunctions.getRandomElement(macedoniaCities);
+        else if (nation_name.equalsIgnoreCase(montenegro))
+            return CommonFunctions.getRandomElement(montenegroCities);
+        else if (nation_name.equalsIgnoreCase(kosovo))
+            return CommonFunctions.getRandomElement(kosovoCities);
+        else if (nation_name.equalsIgnoreCase(n_ireland))
+            return CommonFunctions.getRandomElement(n_irelandCities);
         return "Eden";
     }
 
@@ -1436,6 +1546,61 @@ public class CatalogueHelper {
             "Amri", "Abid", "Al Hamami", "Aloui", "Kamoun", "Ben Abdallah", "Farhat", "Amara", "Souissi", "Mabrouk",
             "Tlili", "Omar" };
 
+    private static String[] georgianNames = { "Giorgi", "Davit", "Aleqsandre", "Irakli", "Zurab", "Levan", "Nikoloz",
+            "Mikheil", "Gocha", "Givi", "Mamuka", "Daviti", "Lasa", "Zaza", "Shota", "Kvicha", "Nika", "Saba", "Jaba",
+            "Beka", "Valeri", "Kakha" };
+    private static String[] georgianSurnames = { "Beridze", "Kapanadze", "Gelashvili", "Maisuradze", "Giorgadze",
+            "Tsiklauri", "Lomidze", "Tskhoidze", "Nozadze", "Bolqvadze", "Chikhladze", "Khachishvili", "Abuladze",
+            "Miqeladze", "Tabatadze", "Medolishvili", "Shengelia", "Gogoladze", "Diasamidze", "Makharadze", "Dolidze",
+            "Maruashvili", "Dzavashvili", "Kvaratskhelia" };
+
+    private static String[] armenianNames = { "Armen", "Artur", "Samvel", "Gevorg", "Ashot", "Arman", "Gagik", "Vardan",
+            "Hayk", "Tigran", "Hovhannes", "Arsen", "Aram", "Davit", "Andranik", "Artak", "Sargis", "Levon", "Edgar",
+            "Harutyun", "Hakob", "Suren", "Narek", "Alvard", "Grigor", "Robert" };
+    private static String[] armenianSurnames = { "Grigoryan", "Sargsyan", "Harutyunyan", "Hovhannisyan", "Khachatryan",
+            "Hakobyan", "Petrosyan", "Vardanyan", "Gevorgyan", "Karapetyan", "Mkrtchyan", "Manukyan", "Ghazaryan",
+            "Avetisyan", "Martirosyan", "Poghosyan", "Sahakyan", "Margaryan", "Arakelyan", "Davtyan", "Simonyan",
+            "Stepanyan", "Galstyan", "Hayrapetyan", "Muradyan", "Gasparyan", "Avagyan", "Baghdasaryan", "Abrahamyan",
+            "Asatryan", "Hovsepyan", "Melkonyan", "Minasyan", "Kirakosyan", "Mkhitaryan" };
+
+    private static String[] azeriNames = { "Ali", "Elnur", "Vuqar", "Samir", "Elsan", "Ilqar", "Elvin", "Samire",
+            "Tural", "Zaur", "Azar", "Vusal", "Ilham", "Rovsan", "Rasad", "Orxan", "Matanat", "Ruslan", "Emin", "Ramil",
+            "Ramin", "Ceyhun" };
+    private static String[] azeriSurnames = { "Mammadov", "Aliyev", "Huseynov", "Hasanov", "Quliyev", "Ismayilov",
+            "Ahmadov", "Abdullayev", "Abbasov", "Cafarov", "Qasimov", "Agayev", "Karimov", "Babayev", "Ibrahimov",
+            "Haciyev", "Bayramov", "Qurbanov", "Mustafayev", "Rzayev", "Mirzayev", "Musayev", "Zeynalov", "Valiyev",
+            "Safarov", "Asgarov", "Suleymanov", "Rahimov" };
+
+    private static String[] lithuanianNames = { "Jonas", "Vytautas", "Antanas", "Juozas", "Petras", "Algirdas",
+            "Kestutis", "Stasys", "Saulius", "Rimantas", "Algimantas", "Arunas", "Mindaugas", "Darius", "Tomas",
+            "Andrius", "Gintaras", "Romualdas", "Gintautas", "Stanislovas", "Arturas", "Arvydas", "Gediminas",
+            "Egidijus", "Alvydas", "Pranas", "Sigitas", "Valdas", "Vidmantas", "Audrius", "Rolandas", "Alfonsas" };
+    private static String[] lithuanianSurnames = { "Petrauskas", "Jankauskas", "Kazlauskas", "Stankevicius",
+            "Vasiliauskas", "Butkus", "Urbonas", "Stankevic", "Kavaliauskas", "Zukauskas", "Ramanauskas", "Paulauskas",
+            "Navickas", "Rimkus", "Simkus", "Pocius", "Balciūnas", "Savickas", "Zilinskas", "Sakalauskas", "Adomaitis",
+            "Petraitis", "Mikalauskas", "Kaminskas", "Baranauskas", "Vaitkevicius" };
+
+    private static String[] latvianNames = { "Janis", "Aleksandrs", "Vladimirs", "Nikolajs", "Juris", "Viktors",
+            "Andris", "Peteris", "Ivans", "Sergejs", "Anatolijs", "Aivars", "Jurijs", "Andrejs", "Mihails", "Edgars",
+            "Valerijs", "Vasilijs", "Gunars", "Valdis", "Igors", "Maris", "Karlis", "Imants", "Jevgenijs", "Arturs",
+            "Aleksejs", "Ivars", "Antons", "Uldis", "Stanislavs", "Arvids" };
+    private static String[] latvianSurnames = { "Berzins", "Ozols", "Kalnins", "Ivanovs", "Ozolins", "Dreimanis",
+            "Jansons", "Vasiljevs", "Liepins", "Krumins", "Smirnovs", "Petersons", "Balodis", "Karklins", "Petrovs",
+            "Vanags", "Zarins", "Zvirbulis", "Eglitis", "Vitols", "Mihailovs", "Grinbergs", "Silins", "Fjodorovs" };
+
+    private static String[] estonianNames = { "Andres", "Toomas", "Margus", "Martin", "Indrek", "Peeter", "Priit",
+            "Marko", "Juri", "Urmas", "Tarmo", "Rein", "Jaan", "Aivar", "Andrus", "Meelis", "Tiit", "Jaanus",
+            "Kristjan", "Janek", "Timo", "Erko", "Taijo", "Markus", "Ragnar" };
+    private static String[] estonianSurnames = { "Tamm", "Saar", "Sepp", "Kask", "Magi", "Kukk", "Rebane", "Koppel",
+            "Karu", "Ilves", "Lepik", "Oja", "Kuusk", "Kaasik", "Luik", "Raudsepp", "Vaher", "Kallas", "Lepp", "Laur",
+            "Parn", "Kuusik", "Kivi", "Ots", "Liiv", "Peterson", "Teder", "Mets", "Poder" };
+
+    private static String[] macedonianNames = { "Stole", "Risto", "Goran", "Todor", "Stefan", "Kire", "Nikola", "Bojan",
+            "Darko", "Damian", "Kristijan", "Boban", "Stojan", "Ilija", "Dejan", "Gjoko" };
+    private static String[] macedonianSurnames = { "Stojanovski", "Jovanovski", "Nikolovski", "Trajkovski", "Stojanov",
+            "Krstevski", "Jovanov", "Atanasov", "Ristovski", "Nikolov", "Petrovski", "Gjorgjievski", "Cvetkovski",
+            "Spasovski", "Ilievski", "Petkovski", "Ristov", "Dimovski", "Gjorgjiev" };
+
     public static String getPlayerName(String nation_name) {
         String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador, uruguay,
                 venezuela, mexico, costa_rica };
@@ -1535,7 +1700,7 @@ public class CatalogueHelper {
             } else {
                 return getName(turkishNames, turkishSurnames);
             }
-        } else if (nation_name.equalsIgnoreCase(albania)) {
+        } else if (nation_name.equalsIgnoreCase(albania) || nation_name.equalsIgnoreCase(kosovo)) {
             return getName(albanianNames, albanianSurnames);
         } else if (nation_name.equalsIgnoreCase(bosnia)) {
             if (prob < 52) {
@@ -1552,6 +1717,8 @@ public class CatalogueHelper {
         } else if (nation_name.equalsIgnoreCase(wales)) {
             return getName(englishNames, englishSurnames);
         } else if (nation_name.equalsIgnoreCase(ireland)) {
+            return getName(englishNames, englishSurnames);
+        } else if (nation_name.equalsIgnoreCase(n_ireland)) {
             return getName(englishNames, englishSurnames);
         } else if (nation_name.equalsIgnoreCase(japan)) {
             return getName(japaneseNames, japaneseSurnames);
@@ -1585,6 +1752,52 @@ public class CatalogueHelper {
             } else {
                 return getName(spanishNames, spanishSurnames);
             }
+        } else if (nation_name.equalsIgnoreCase(moldova)) {
+            if (prob < 85) {
+                return getName(romanianNames, romanianSurnames);
+            } else if (prob < 94) {
+                return getName(ukrainianNames, ukrainianSurnames);
+            } else {
+                return getName(russianNames, russianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(georgia)) {
+            return getName(georgianNames, georgianSurnames);
+        } else if (nation_name.equalsIgnoreCase(armenia)) {
+            return getName(armenianNames, armenianSurnames);
+        } else if (nation_name.equalsIgnoreCase(azerbaijan)) {
+            return getName(azeriNames, azeriSurnames);
+        } else if (nation_name.equalsIgnoreCase(lithuania)) {
+            return getName(lithuanianNames, lithuanianSurnames);
+        } else if (nation_name.equalsIgnoreCase(latvia)) {
+            return getName(latvianNames, latvianSurnames);
+        } else if (nation_name.equalsIgnoreCase(estonia)) {
+            if (prob < 74) {
+                return getName(estonianNames, estonianSurnames);
+            } else {
+                return getName(russianNames, russianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(kazakhstan)) {
+            if (prob < 79) {
+                return getName(uzbekNames, uzbekSurnames);
+            } else {
+                return getName(russianNames, russianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(montenegro)) {
+            if (prob < 82) {
+                return getName(serbianNames, serbianSurnames);
+            } else if (prob < 92) {
+                return getName(bosnianNames, bosnianSurnames);
+            } else {
+                return getName(albanianNames, albanianSurnames);
+            }
+        } else if (nation_name.equalsIgnoreCase(macedonia)) {
+            if (prob < 70) {
+                return getName(macedonianNames, macedonianSurnames);
+            } else if (prob < 90) {
+                return getName(albanianNames, albanianSurnames);
+            } else {
+                return getName(turkishNames, turkishSurnames);
+            }
         } else {
             return "Player Player";
         }
@@ -1611,15 +1824,15 @@ public class CatalogueHelper {
     public static String[] croatiaTarget = { "Bosnia", "Serbia", "Slovenia", "Albania" };
     public static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
     public static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel", "Portugal",
-            "Spain", "Czechia", "Slovakia" };
+            "Spain", "Czechia", "Slovakia", "Lithuania" };
     public static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
             "Uzbekistan" };
-    public static String[] turkeyTarget = { "France", "Germany", "Spain", "Belgium" };
+    public static String[] turkeyTarget = { "France", "Germany", "Spain", "Belgium", "Moldova" };
     public static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria" };
-    public static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary" };
+    public static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary", "Moldova" };
     public static String[] ukraineTarget = { "Argentina", "Brazil", "Denmark", "Sweden", "Norway", "Poland",
-            "Russia" };
-    public static String[] greeceTarget = { "Spain", "Italy", "Cyprus", "Portugal", "Argentina" };
+            "Russia", "Moldova" };
+    public static String[] greeceTarget = { "Spain", "Italy", "Cyprus", "Portugal", "Argentina", "North Macedonia" };
 
     public static String[] getFavourableNations(String nation_name) {
         Map<String, String[]> fav_nations = new HashMap<>();

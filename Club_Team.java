@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Functions.CatalogueHelper;
 import Models.Player;
 import Models.Position;
 import Models.PositionHelper;
@@ -18,6 +19,7 @@ public class Club_Team {
     private long budget;
 
     private static final int MAX_YOUTH_AGE = 19;
+    private static final int MAX_SQUAD_SIZE = 40;
 
     public Club_Team(String name, int nation_id, int starting_reputation) {
         this.name = name;
@@ -144,9 +146,11 @@ public class Club_Team {
 
     public void seasonEndPlayerPromotions() {
         List<Position> all_positions = PositionHelper.getAllPositions();
+        int formation = this.senior_squad.getFormationId();
+        Position[] form_pos = CatalogueHelper.getFormation(formation);
         List<Player> promoted_players = new ArrayList<>();
         int promoted_from_youth_squad = 0;
-        for (Position position : all_positions) {
+        for (Position position : form_pos) {
             if (this.senior_squad.countPlayers(position) == 0) {
                 if (this.has_youth_squad) {
                     promoted_players.add(this.promoteFromYouthSquad(position));
@@ -165,7 +169,10 @@ public class Club_Team {
                 }
             }
         } else {
-            int promote_players = CommonFunctions.getRandomNumber(5) + 5;
+            int squad_size = this.senior_squad.getPlayerIds().size();
+            int promote_players = CommonFunctions.getRandomNumber(3);
+            if ((squad_size + promote_players) >= MAX_SQUAD_SIZE)
+                promote_players = MAX_SQUAD_SIZE - squad_size;
             for (int i = 0; i < promote_players; i++) {
                 Position position = all_positions.get(CommonFunctions.getRandomNumber(all_positions.size()));
                 promoted_players.add(this.promoteAcademyPlayer(position));

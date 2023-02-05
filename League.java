@@ -252,4 +252,8 @@ public class League {
             Sim.getClub(this.getTeamAtRank(i)).updateBudget((long) change);
         }
     }
+
+    public List<Match> getFixtures() {
+        return this.fixtures;
+    }
 }

@@ -69,6 +69,10 @@ public class NationalTeam {
         } else {
             List<Player> players = new ArrayList<>();
             players.add(player);
+            if (position == null) {
+                System.out.println("Player position is null, Nation: " + Sim.getNation(this.nation_id).getName());
+                return;
+            }
             this.pool.put(position, players);
         }
     }
@@ -129,7 +133,7 @@ public class NationalTeam {
         this.fillPool();
         this.fillSquad();
         this.setBestFormation();
-        //this.showBestLineup();
+        // this.showBestLineup();
         this.update();
     }
 
