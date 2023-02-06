@@ -481,6 +481,7 @@ public class Sim {
             TransferMarket.showTopTransfers();
             TransferMarket.showTransferStats();
             ControllerEurope.getLeagueRankingsForSeason(Sim.getSeasonNumber());
+            ControllerEurope.getClubRankingsForSeason(Sim.getSeasonNumber());
         }
     }
 }

@@ -1324,6 +1324,31 @@ public class ControllerEurope {
         return temp;
     }
 
+    public static void getClubRankingsForSeason(int season) {
+        int start = season - 5, end = season - 1;
+        Map<String, Double> points = new HashMap<>();
+        for (int year = start; year <= end; year++) {
+            Map<String, Double> year_map = club_coefficients.get(year);
+            for(Map.Entry<String, Double> entry: year_map.entrySet()) {
+                double point = 0.0;
+                String team = entry.getKey();
+                if (points.containsKey(team)) {
+                    point = points.get(team);
+                }
+                point += entry.getValue();
+                points.put(team, entry.getValue());
+            }
+        }
+        List<Map.Entry<String, Double>> list = new ArrayList<>(points.entrySet());
+        Collections.sort(list, (Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
+        int count = 1;
+        for (Map.Entry<String, Double> aa : list) {
+            System.out.println("Rank: " + count + " " + getTeamName(aa.getKey()) + " " + aa.getValue());
+            count++;
+            if (count > 50) break;
+        }
+    }
+
     private static double getCoefficientForTeam(String team, int season) {
         int start = season - 5, end = season - 1;
         double points = 0;
