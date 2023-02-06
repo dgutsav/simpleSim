@@ -456,7 +456,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 16;
+        int num_seasons = 35;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -474,14 +474,13 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            showCompetitionHistories();
-            showTeams();
-            showPlayers();
-            showNationalTeams();
+            //showCompetitionHistories();
+            //showTeams();
+            //showPlayers();
+            //showNationalTeams();
             TransferMarket.showTopTransfers();
             TransferMarket.showTransferStats();
-            ControllerEurope.getLeagueRankingsForSeason(Sim.getSeasonNumber());
-            ControllerEurope.getClubRankingsForSeason(Sim.getSeasonNumber());
+            ControllerEurope.showLeagueRankings();
         }
     }
 }

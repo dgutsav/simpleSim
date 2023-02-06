@@ -1072,6 +1072,11 @@ public class ControllerEurope {
         return Sim.getClub(t).getName() + "(" + Sim.getNation(team_nations.get(t)).getCode() + ")";
     }
 
+    private static String getTeamNameRankings(String t) {
+        Club_Team team = Sim.getClub(t);
+        return team.getName() + "(" + Sim.getNation(team.getNationId()).getCode() + ")";
+    }
+
     private static Map<String, Double> club_points = new HashMap<>();
     private static Map<Integer, Double> nation_points = new HashMap<>();
 
@@ -1318,16 +1323,38 @@ public class ControllerEurope {
         HashMap<Integer, Integer> temp = new LinkedHashMap<>();
         for (Map.Entry<Nation, Double> aa : list) {
             temp.put(aa.getKey().getId(), count);
-            System.out.println("Rank: " + count + " " + aa.getKey().getName() + " " + aa.getValue());
             count++;
         }
         return temp;
     }
 
+    public static void showLeagueRankings() {
+        Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
+        System.out.print(CommonFunctions.getPaddedString("Country", 25));
+        for(int year = 2020; year <= Sim.getSeasonNumber(); year++) {
+            Map<Integer, Integer> ymap = getLeagueRankingsForSeason(year);
+            map.put(year, ymap);
+            System.out.print(CommonFunctions.getPaddedString(String.valueOf(year), 7));
+        }
+        System.out.println();
+        List<Nation> nations = Sim.getNationFromContinent("Europe");
+        for(Nation nation: nations) {
+            System.out.print(CommonFunctions.getPaddedString(nation.getName(), 25));
+            for(int year = 2020; year <= Sim.getSeasonNumber(); year ++) {
+                System.out.print(CommonFunctions.getPaddedString(String.valueOf(map.get(year).get(nation.getId())), 7));
+            }
+            System.out.println();
+        }
+    }
+
     public static void getClubRankingsForSeason(int season) {
+        System.out.println("\nClub Rankings");
         int start = season - 5, end = season - 1;
         Map<String, Double> points = new HashMap<>();
         for (int year = start; year <= end; year++) {
+            if (!club_coefficients.containsKey(year)) {
+                continue;
+            }
             Map<String, Double> year_map = club_coefficients.get(year);
             for(Map.Entry<String, Double> entry: year_map.entrySet()) {
                 double point = 0.0;
@@ -1340,10 +1367,12 @@ public class ControllerEurope {
             }
         }
         List<Map.Entry<String, Double>> list = new ArrayList<>(points.entrySet());
+        if(list.size() < 2) return;
         Collections.sort(list, (Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
         int count = 1;
         for (Map.Entry<String, Double> aa : list) {
-            System.out.println("Rank: " + count + " " + getTeamName(aa.getKey()) + " " + aa.getValue());
+            String name = getTeamNameRankings(aa.getKey());
+            System.out.println("Rank: " + count + " " + name + " " + aa.getValue());
             count++;
             if (count > 50) break;
         }
