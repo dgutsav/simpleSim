@@ -30,9 +30,16 @@ public class Club_Team {
             return this.promoteAcademyPlayer(pos);
         });
         this.coefficient = 0;
-        this.recruitment_level = 15 + CommonFunctions.getRandomInt(3);
+        this.recruitment_level = getStartingRecruitmentLevel(starting_reputation);
         this.reputation = starting_reputation;
-        this.budget = starting_reputation * 1000 * 10;
+        this.budget = starting_reputation * 1000 * 10 * 2;
+    }
+
+    private int getStartingRecruitmentLevel(int reputation) {
+        float base = reputation / 1000.0f;
+        base += CommonFunctions.getRandomInt(3);
+        base = base > 20 ? 20 : base;
+        return Math.round(base);
     }
 
     public double getCoefficient() {
@@ -115,7 +122,7 @@ public class Club_Team {
         float num = (float) (this.recruitment_level * Sim.getNation(this.nation_id).getYouthRating() * 100);
         float den = 200.0f * 20.0f;
         double q = num / den;
-        q *= 0.839;
+        q *= 0.75;
         return (int) (Math.round(q));
     }
 

@@ -789,14 +789,36 @@ public class CatalogueHelper {
             "Slavia" };
     private static String[] bulgariaSuffixes = { "FC", "PFC" };
 
-    private static String[] albaniaPrefixes = { "FC", "FK", "KS", "KF" };
+    private static String[] albaniaPrefixes = { "FC", "FK", "KS", "KF", "Dinamo" };
 
     private static String[] finlandPrefixes = { "IFK", "FC", "AC", "JK", "PS" };
+
+    private static String[] macedoniaPrefixes = { "KF", "FK", "Vardar", "GFK" };
+    
+    private static String[] georgiaPrefixes = { "Dila", "Dinamo", "Torpedo", "FC", "Locomotive" };
+    private static String[] georgiaSuffixes = { "FC", "City" }; 
+
+    private static String[] armeniaPrefixes = { "Armenia", "Ararat", "Lokomotiv", "FC", "Pyunik" };
+    private static String[] armeniaSuffixes = { "FC", "SC" };
+    
+    private static String[] azeriPrefixes = { "PFK", "FC", "FK" };
+
+    private static String[] kazakhstanPrefixes = { "FC", "Shakhtyor", "Spartak", "Traktor" };
+    private static String[] kazakhstanSuffixes = { "FC" };
+
+    private static String[] lithuaniaPrefixes = { "FK", "FC", "DFK", "Ekranas", "Suduva", "Zalgiris", "FBK", "KSS" };
+    private static String[] lithuaniaSuffixes = { "FC" };
+
+    private static String[] latviaPrefixes = { "RFK", "ASK", "RFS", "Olimpia", "Skonto", "Spartaks" };
+    private static String[] latviaSuffixes = { "FC", "FK" };
+
+    private static String[] estoniaPrefixes = { "FC", "FCI" };
+    private static String[] estoniaSuffixes = { "FC" };
 
     public static List<String[]> getPrefixOrSuffixData(String nation_name) {
         String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay, venezuela };
         List<String[]> data = new ArrayList<>();
-        if (nation_name.equalsIgnoreCase(england) || nation_name.equalsIgnoreCase(scotland)) {
+        if (nation_name.equalsIgnoreCase(england) || nation_name.equalsIgnoreCase(scotland) || nation_name.equalsIgnoreCase(ireland) || nation_name.equalsIgnoreCase(n_ireland)) {
             data.add(englandPrefixes);
             data.add(englandSuffixes);
         } else if (nation_name.equalsIgnoreCase(spain)) {
@@ -847,7 +869,7 @@ public class CatalogueHelper {
         } else if (nation_name.equalsIgnoreCase(greece) || nation_name.equalsIgnoreCase(cyprus)) {
             data.add(greecePrefixes);
             data.add(czechiaSuffixes);
-        } else if (nation_name.equalsIgnoreCase(serbia)) {
+        } else if (nation_name.equalsIgnoreCase(serbia) || nation_name.equalsIgnoreCase(montenegro)) {
             data.add(serbiaPrefixes);
             data.add(serbiaSuffixes);
         } else if (nation_name.equalsIgnoreCase(norway)) {
@@ -895,6 +917,30 @@ public class CatalogueHelper {
                 data.add(croatiaPrefixes);
                 data.add(croatiaSuffixes);
             }
+        } else if (nation_name.equalsIgnoreCase(macedonia)) {
+            data.add(macedoniaPrefixes);
+            data.add(macedoniaPrefixes);
+        } else if (nation_name.equalsIgnoreCase(armenia)) {
+            data.add(armeniaPrefixes);
+            data.add(armeniaSuffixes);
+        } else if (nation_name.equalsIgnoreCase(georgia)) {
+            data.add(georgiaPrefixes);
+            data.add(georgiaSuffixes);
+        } else if (nation_name.equalsIgnoreCase(azerbaijan)) {
+            data.add(azeriPrefixes);
+            data.add(azeriPrefixes);
+        } else if (nation_name.equalsIgnoreCase(kazakhstan)) {
+            data.add(kazakhstanPrefixes);
+            data.add(kazakhstanSuffixes);
+        } else if (nation_name.equalsIgnoreCase(latvia)) {
+            data.add(latviaPrefixes);
+            data.add(latviaSuffixes);
+        } else if (nation_name.equalsIgnoreCase(lithuania)) {
+            data.add(lithuaniaPrefixes);
+            data.add(lithuaniaSuffixes);
+        } else if (nation_name.equalsIgnoreCase(estonia)) {
+            data.add(estoniaPrefixes);
+            data.add(estoniaSuffixes);
         } else {
             String[] temp = { "FC" };
             data.add(temp);
@@ -1807,32 +1853,49 @@ public class CatalogueHelper {
         return CommonFunctions.getRandomElement(names) + " " + CommonFunctions.getRandomElement(surnames);
     }
 
-    public static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland",
+    private static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland",
             "United States" };
-    public static String[] italyTarget = { "Poland", "Germany", "Argentina" };
-    public static String[] englandTarget = { "France", "Netherlands", "Scotland", "Ireland", "Wales" };
-    public static String[] spainTarget = { "Germany", "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
-    public static String[] argentinaTarget = { "Paraguay", "Uruguay", "Mexico", "Brazil" };
-    public static String[] brazilTarget = { "Argentina" };
-    public static String[] franceTarget = { "Belgium", "Germany", "Italy", "Portugal", "Algeria", "Tunisia", "Senegal",
+    private static String[] italyTarget = { "Poland", "Germany", "Argentina" };
+    private static String[] englandTarget = { "France", "Netherlands", "Scotland", "Ireland", "Wales" };
+    private static String[] spainTarget = { "Germany", "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
+    private static String[] argentinaTarget = { "Paraguay", "Uruguay", "Mexico", "Brazil", "Chile", "Colombia" };
+    private static String[] brazilTarget = { "Argentina" };
+    private static String[] franceTarget = { "Belgium", "Germany", "Italy", "Portugal", "Algeria", "Tunisia", "Senegal",
             "Ivory Coast" };
-    public static String[] netherlandsTarget = { "Denmark", "Sweden", "Finland", "Norway", "England", "France",
+    private static String[] netherlandsTarget = { "Denmark", "Sweden", "Finland", "Norway", "France",
             "Brazil", "Belgium", "Germany" };
-    public static String[] portugalTarget = { "Brazil", "Argentina", "Serbia", "England", "Mexico" };
-    public static String[] belgiumTarget = { "France", "Netherlands", "Nigeria", "Bosnia", "Croatia", "Slovakia",
+    private static String[] portugalTarget = { "Brazil", "Argentina", "Serbia", "England", "Mexico" };
+    private static String[] belgiumTarget = { "France", "Netherlands", "Nigeria", "Bosnia", "Croatia", "Slovakia",
             "Serbia", "Ukraine" };
-    public static String[] croatiaTarget = { "Bosnia", "Serbia", "Slovenia", "Albania" };
-    public static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
-    public static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel", "Portugal",
+    private static String[] croatiaTarget = { "Bosnia", "Serbia", "Slovenia", "Albania" };
+    private static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
+    private static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel", "Portugal",
             "Spain", "Czechia", "Slovakia", "Lithuania" };
-    public static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
-            "Uzbekistan" };
-    public static String[] turkeyTarget = { "France", "Germany", "Spain", "Belgium", "Moldova" };
-    public static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria" };
-    public static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary", "Moldova" };
-    public static String[] ukraineTarget = { "Argentina", "Brazil", "Denmark", "Sweden", "Norway", "Poland",
+    private static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
+            "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova" };
+    private static String[] turkeyTarget = { "Germany", "Belgium", "Moldova", "Albania", "Azerbaijan", "China",
+            "Saudi Arabia" };
+    private static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria", "Kosovo",
+            "North Macedonia", "Montenegro" };
+    private static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary", "Moldova" };
+    private static String[] ukraineTarget = { "Argentina", "Brazil", "Denmark", "Sweden", "Norway", "Poland",
             "Russia", "Moldova" };
-    public static String[] greeceTarget = { "Spain", "Italy", "Cyprus", "Portugal", "Argentina", "North Macedonia" };
+    private static String[] greeceTarget = { "Spain", "Italy", "Cyprus", "Portugal", "Argentina", "North Macedonia",
+            "Peru", "Brazil" };
+    private static String[] estoniaTarget = { "Finland", "Russia", "Latvia", "Lithuania" };
+    private static String[] lithuaniaTarget = { "Poland", "Latvia", "Estonia" };
+    private static String[] latviaTarget = { "Lithuania", "Estonia" };
+    private static String[] georgiaTarget = { "Armenia", "Azerbaijan", "Iran", "Nigeria" };
+    private static String[] czechiaTarget = { "Slovakia" };
+    private static String[] cyprusTarget = { "Greece", "Turkey", "Sweden", "Portugal" };
+    private static String[] denmarkTarget = { "Sweden", "Norway", "Iceland", "Finland" };
+    private static String[] colombiaTarget = { "Venezuela", "Argentina", "Bolivia", "Ecuador", "Peru", "Paraguay" };
+    private static String[] americaTarget = { "Mexico", "Ecuador", "Canada", "West Indies", "Costa Rica", "Honduras" };
+    private static String[] japanTarget = { "Korea", "Brazil", "Thailand" };
+    private static String[] chinaTarget = { "Australia", "Korea", "Brazil", "Uzbekistan" };
+    private static String[] koreaTarget = { "Japan", "China", "Brazil" };
+    private static String[] saudiTarget = { "Emirates", "Qatar", "Iraq", "Syria", "Egypt", "Morocco", "Algeria",
+            "Tunisia" };
 
     public static String[] getFavourableNations(String nation_name) {
         Map<String, String[]> fav_nations = new HashMap<>();
@@ -1856,11 +1919,58 @@ public class CatalogueHelper {
         fav_nations.put(romania, romaniaTarget);
         fav_nations.put(ukraine, ukraineTarget);
         fav_nations.put(greece, greeceTarget);
+        fav_nations.put(estonia, estoniaTarget);
+        fav_nations.put(latvia, latviaTarget);
+        fav_nations.put(lithuania, lithuaniaTarget);
+        fav_nations.put(georgia, georgiaTarget);
+        fav_nations.put(czechia, czechiaTarget);
+        fav_nations.put(cyprus, cyprusTarget);
+        fav_nations.put(denmark, denmarkTarget);
+        fav_nations.put(colombia, colombiaTarget);
+        fav_nations.put(japan, japanTarget);
+        fav_nations.put(saudi_arabia, saudiTarget);
+        fav_nations.put(china, chinaTarget);
+        fav_nations.put(korea, koreaTarget);
+        fav_nations.put(america, americaTarget);
+
         if (fav_nations.containsKey(nation_name)) {
             return fav_nations.get(nation_name);
         } else {
             String[] def = { nation_name };
             return def;
         }
+    }
+
+    private static String[] region_britain = { "England", "Wales", "Northern Ireland", "Scotland", "Ireland" };
+    private static String[] region_scandinavia = { "Finland", "Denmark", "Iceland", "Sweden", "Norway" };
+    private static String[] region_europe_south = { "Portugal", "Spain", "Italy", "Greece", "Cyprus", "Turkey" };
+    private static String[] region_balkans = { "Slovenia", "Croatia", "Kosovo", "Serbia", "Bulgaria", "Bosnia",
+            "Montenegro", "North Macedonia", "Albania" };
+    private static String[] region_west_europe = { "France", "Netherlands", "Germany", "Belgium", "Switzerland",
+            "Austria" };
+    private static String[] region_east_europe = { "Czechia", "Slovakia", "Hungary", "Romania", "Poland" };
+    private static String[] region_soviet = { "Russia", "Ukraine", "Belarus", "Moldova", "Georgia", "Azerbaijan",
+            "Armenia", "Kazakhstan", "Estonia", "Lithuania", "Latvia", "Uzbekistan", "Tajikstan", "Turkmenistan",
+            "Kyrgyzstan" };
+    private static String[] region_levant = { "Syria", "Iraq", "Palestine", "Lebanon", "Jordan", "Israel" };
+
+    public static String getRegion(String nation) {
+        if (Arrays.asList(region_balkans).contains(nation))
+            return "Balkans";
+        else if (Arrays.asList(region_britain).contains(nation))
+            return "Britain";
+        else if (Arrays.asList(region_scandinavia).contains(nation))
+            return "Scandiavia";
+        else if (Arrays.asList(region_europe_south).contains(nation))
+            return "South_Europe";
+        else if (Arrays.asList(region_west_europe).contains(nation))
+            return "West_Europe";
+        else if (Arrays.asList(region_east_europe).contains(nation))
+            return "East_Europe";
+        else if (Arrays.asList(region_soviet).contains(nation))
+            return "Soviet";
+        else if (Arrays.asList(region_levant).contains(nation))
+            return "Levant";
+        return null;
     }
 }

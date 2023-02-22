@@ -1,4 +1,3 @@
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,72 +28,72 @@ public class ControllerEurope {
     }
 
     private enum Stage {
-        CL_FINAL("Champions League Final", CCType.StageType.KNOCKOUT, CCType.CompType.CHAMPIONS_LEAGUE, false, false),
-        CL_SEMI_FINAL("Champions League Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, false, false),
-        CL_QUARTER_FINAL("Champions League Quarter-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, false, false),
-        CL_R16("Champions League Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CHAMPIONS_LEAGUE,
+        CL_FINAL("Champions League Final", CCType.StageType.KNOCKOUT, CCType.CompType.UCL, false, false),
+        CL_SF("Champions League Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT,
+                CCType.CompType.UCL, false, false),
+        CL_QF("Champions League Quarter-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT,
+                CCType.CompType.UCL, false, false),
+        CL_R16("Champions League Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UCL,
                 true, false),
-        CL_GROUP("CL Group Stage", CCType.StageType.GROUPS, CCType.CompType.CHAMPIONS_LEAGUE, true, false),
-        CL_Q4_CP("CL Play-off Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CHAMPIONS_LEAGUE,
+        CL_GROUP("CL Group Stage", CCType.StageType.GROUPS, CCType.CompType.UCL, true, false),
+        CL_Q4_CP("CL Play-off Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UCL,
                 true, true),
-        CL_Q4_MP("CL Play-off Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CHAMPIONS_LEAGUE, true,
+        CL_Q4_MP("CL Play-off Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UCL, true,
                 true),
         CL_Q3_CP("CL Third Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, true, true),
+                CCType.CompType.UCL, true, true),
         CL_Q3_MP("CL Third Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, true, true),
+                CCType.CompType.UCL, true, true),
         CL_Q2_CP("CL Second Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, true, true),
+                CCType.CompType.UCL, true, true),
         CL_Q2_MP("CL Second Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CHAMPIONS_LEAGUE, true, true),
+                CCType.CompType.UCL, true, true),
         CL_Q1_CP("CL First Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.EUROPA_LEAGUE, true, true),
+                CCType.CompType.UEL, true, true),
         EL_Q3_MP("EL Third Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.EUROPA_LEAGUE, true, true),
+                CCType.CompType.UEL, true, true),
         EL_Q3_CP("EL Third Qualifying Round Chaampions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.EUROPA_LEAGUE, true, true),
-        EL_Q4_MP("EL Play-off Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.EUROPA_LEAGUE,
+                CCType.CompType.UEL, true, true),
+        EL_Q4_MP("EL Play-off Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL,
                 true, true),
         EL_Q4_CP("EL Play-off Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.EUROPA_LEAGUE, true, true),
-        EL_GROUP("EL Group Stage", CCType.StageType.GROUPS, CCType.CompType.EUROPA_LEAGUE, true, false),
-        EL_KO_PO("Europa League Knockout Play-off", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.EUROPA_LEAGUE,
+                CCType.CompType.UEL, true, true),
+        EL_GROUP("EL Group Stage", CCType.StageType.GROUPS, CCType.CompType.UEL, true, false),
+        EL_KO_PO("Europa League Knockout Play-off", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL,
                 true, false),
-        EL_R16("Europa League Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.EUROPA_LEAGUE, true,
+        EL_R16("Europa League Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL, true,
                 false),
         EL_QUARTER_FINAL("Europa League Quarter-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.EUROPA_LEAGUE, false, false),
-        EL_SEMI_FINAL("Europa League Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.EUROPA_LEAGUE,
+                CCType.CompType.UEL, false, false),
+        EL_SEMI_FINAL("Europa League Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL,
                 false, false),
-        EL_FINAL("Europa League Final", CCType.StageType.KNOCKOUT, CCType.CompType.EUROPA_LEAGUE, false, false),
-        ECL_FINAL("Europa Conference League Final", CCType.StageType.KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE, false,
+        EL_FINAL("Europa League Final", CCType.StageType.KNOCKOUT, CCType.CompType.UEL, false, false),
+        ECL_FINAL("Europa Conference League Final", CCType.StageType.KNOCKOUT, CCType.CompType.UECL, false,
                 false),
-        ECL_SEMI_FINAL("ECL Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE, false,
+        ECL_SF("ECL Semi-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UECL, false,
                 false),
-        ECL_QUARTER_FINAL("ECL Quarter-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE,
+        ECL_QF("ECL Quarter-Final", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UECL,
                 false, false),
-        ECL_R16("ECL Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE, true,
+        ECL_R16("ECL Round of 16", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UECL, true,
                 false),
-        ECL_KO_PO("ECL Knockout Play-off", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE,
+        ECL_KO_PO("ECL Knockout Play-off", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UECL,
                 true, false),
-        ECL_GROUP("ECL Group Stage", CCType.StageType.GROUPS, CCType.CompType.CONFERENCE_LEAGUE, true, false),
-        ECL_Q1_MP("ECL First Qualifying Round", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.CONFERENCE_LEAGUE,
+        ECL_GROUP("ECL Group Stage", CCType.StageType.GROUPS, CCType.CompType.UECL, true, false),
+        ECL_Q1_MP("ECL First Qualifying Round", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UECL,
                 true, true),
         ECL_Q2_MP("ECL Second Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
+                CCType.CompType.UECL, true, true),
         ECL_Q2_CP("ECL Second Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
+                CCType.CompType.UECL, true, true),
         ECL_Q3_MP("ECL Third Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
+                CCType.CompType.UECL, true, true),
         ECL_Q3_CP("ECL Third Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
+                CCType.CompType.UECL, true, true),
         ECL_Q4_MP("ECL Play-off Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
+                CCType.CompType.UECL, true, true),
         ECL_Q4_CP("ECL Play-off Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.CONFERENCE_LEAGUE, true, true),
-        DEFAULT("Default", CCType.StageType.KNOCKOUT, CCType.CompType.CHAMPIONS_LEAGUE, false, false);
+                CCType.CompType.UECL, true, true),
+        DEFAULT("Default", CCType.StageType.KNOCKOUT, CCType.CompType.UCL, false, false);
 
         private final String stage_name;
         private final CCType.StageType stage_type;
@@ -143,7 +142,7 @@ public class ControllerEurope {
 
     private static int getPlaces(CCType.CompType type, int rank) {
         switch (type) {
-            case CHAMPIONS_LEAGUE:
+            case UCL:
                 if (rank <= 4)
                     return 4;
                 else if (rank <= 6)
@@ -152,29 +151,30 @@ public class ControllerEurope {
                     return 2;
                 else
                     return 1;
-            case EUROPA_LEAGUE:
+            case UEL:
                 if (rank <= 5)
                     return 2;
                 else if (rank <= 15)
                     return 1;
                 else
                     return 0;
-            case CONFERENCE_LEAGUE:
+            case UECL:
                 if (rank <= 5)
                     return 1;
                 else if (rank <= 15)
                     return 2;
                 else
                     return 3;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     private static Map<CCType.CompType, List<String>> getTeams(Nation nation, int ranking) {
         List<String> teams = new ArrayList<>();
-        int cl_places = getPlaces(CCType.CompType.CHAMPIONS_LEAGUE, ranking);
-        int el_places = getPlaces(CCType.CompType.EUROPA_LEAGUE, ranking);
-        int ecl_places = getPlaces(CCType.CompType.CONFERENCE_LEAGUE, ranking);
+        int cl_places = getPlaces(CCType.CompType.UCL, ranking);
+        int el_places = getPlaces(CCType.CompType.UEL, ranking);
+        int ecl_places = getPlaces(CCType.CompType.UECL, ranking);
         for (int i = 1; i <= cl_places + el_places + ecl_places; i++) {
             teams.add(nation.getLeague(1).getTeamAtRank(i));
         }
@@ -185,16 +185,16 @@ public class ControllerEurope {
         }
 
         Map<CCType.CompType, List<String>> map = new HashMap<>();
-        map.put(CCType.CompType.CHAMPIONS_LEAGUE, teams.subList(0, cl_places));
-        map.put(CCType.CompType.EUROPA_LEAGUE, teams.subList(cl_places, cl_places + el_places));
-        map.put(CCType.CompType.CONFERENCE_LEAGUE,
+        map.put(CCType.CompType.UCL, teams.subList(0, cl_places));
+        map.put(CCType.CompType.UEL, teams.subList(cl_places, cl_places + el_places));
+        map.put(CCType.CompType.UECL,
                 teams.subList(cl_places + el_places, cl_places + el_places + ecl_places));
         return map;
     }
 
     private static SeedingType getSeeding(CCType.CompType type, int league_rank, int rank) {
         switch (type) {
-            case CHAMPIONS_LEAGUE:
+            case UCL:
                 if (league_rank <= 4 && rank <= 4)
                     return SeedingType.CL_GROUP;
                 else if (league_rank <= 6) {
@@ -228,14 +228,14 @@ public class ControllerEurope {
                     return SeedingType.CL_Q2_CP;
                 else if (league_rank <= 48 && rank <= 1)
                     return SeedingType.CL_Q1_CP;
-            case EUROPA_LEAGUE:
+            case UEL:
                 if (league_rank <= 9)
                     return SeedingType.EL_GROUP;
                 else if (league_rank <= 12)
                     return SeedingType.EL_Q4_MP;
                 else if (league_rank <= 15)
                     return SeedingType.EL_Q3_MP;
-            case CONFERENCE_LEAGUE:
+            case UECL:
                 if (league_rank <= 5)
                     return SeedingType.ECL_Q4;
                 else if (league_rank <= 10 && rank <= 1)
@@ -254,8 +254,9 @@ public class ControllerEurope {
                     return SeedingType.ECL_Q2;
                 else
                     return SeedingType.ECL_Q1;
+            default:
+                return SeedingType.DEFAULT;
         }
-        return SeedingType.DEFAULT;
     }
 
     private static void setSeedings() {
@@ -272,7 +273,7 @@ public class ControllerEurope {
                     SeedingType seeding = getSeeding(type, ranking, rank);
                     seedings.put(nat_teams.get(i), seeding);
                     team_nations.put(nat_teams.get(i), nation.getId());
-                    if (rank == 1 && ranking <= 8 && type == CCType.CompType.CHAMPIONS_LEAGUE) {
+                    if (rank == 1 && ranking <= 8 && type == CCType.CompType.UCL) {
                         top_dom_champions.add(nat_teams.get(i));
                     }
                 }
@@ -350,32 +351,32 @@ public class ControllerEurope {
                 stages.add(Stage.ECL_Q4_CP);
                 stages.add(Stage.ECL_Q4_MP);
                 break;
-            case CL_QUARTER_FINAL:
+            case CL_QF:
                 stages.add(Stage.CL_R16);
                 break;
             case EL_QUARTER_FINAL:
                 stages.add(Stage.EL_R16);
                 break;
-            case ECL_QUARTER_FINAL:
+            case ECL_QF:
                 stages.add(Stage.ECL_R16);
                 break;
-            case CL_SEMI_FINAL:
-                stages.add(Stage.CL_QUARTER_FINAL);
+            case CL_SF:
+                stages.add(Stage.CL_QF);
                 break;
             case EL_SEMI_FINAL:
                 stages.add(Stage.EL_QUARTER_FINAL);
                 break;
-            case ECL_SEMI_FINAL:
-                stages.add(Stage.ECL_QUARTER_FINAL);
+            case ECL_SF:
+                stages.add(Stage.ECL_QF);
                 break;
             case CL_FINAL:
-                stages.add(Stage.CL_SEMI_FINAL);
+                stages.add(Stage.CL_SF);
                 break;
             case EL_FINAL:
                 stages.add(Stage.EL_SEMI_FINAL);
                 break;
             case ECL_FINAL:
-                stages.add(Stage.ECL_SEMI_FINAL);
+                stages.add(Stage.ECL_SF);
                 break;
             default:
                 break;
@@ -419,84 +420,6 @@ public class ControllerEurope {
         return stages;
     }
 
-    private static Stage getNextStage(Stage type, boolean winner) {
-        switch (type) {
-            case CL_FINAL:
-                return Stage.DEFAULT;
-            case CL_SEMI_FINAL:
-                return winner ? Stage.CL_FINAL : Stage.DEFAULT;
-            case CL_QUARTER_FINAL:
-                return winner ? Stage.CL_SEMI_FINAL : Stage.DEFAULT;
-            case CL_R16:
-                return winner ? Stage.CL_QUARTER_FINAL : Stage.DEFAULT;
-            case CL_GROUP:
-                return winner ? Stage.CL_R16 : Stage.DEFAULT;
-            case CL_Q4_CP:
-                return winner ? Stage.CL_GROUP : Stage.EL_GROUP;
-            case CL_Q4_MP:
-                return winner ? Stage.CL_GROUP : Stage.EL_GROUP;
-            case CL_Q3_CP:
-                return winner ? Stage.CL_Q4_CP : Stage.EL_Q4_CP;
-            case CL_Q3_MP:
-                return winner ? Stage.CL_Q4_MP : Stage.EL_GROUP;
-            case CL_Q2_CP:
-                return winner ? Stage.CL_Q3_CP : Stage.EL_Q3_CP;
-            case CL_Q2_MP:
-                return winner ? Stage.CL_Q3_MP : Stage.EL_Q3_MP;
-            case CL_Q1_CP:
-                return winner ? Stage.CL_Q2_CP : Stage.ECL_Q2_CP; // 2 will be given byes
-            case EL_Q3_MP:
-                return winner ? Stage.EL_Q4_MP : Stage.ECL_Q4_MP;
-            case EL_Q3_CP:
-                return winner ? Stage.EL_Q4_CP : Stage.ECL_Q4_CP;
-            case EL_Q4_MP:
-                return winner ? Stage.EL_GROUP : Stage.ECL_GROUP;
-            case EL_Q4_CP:
-                return winner ? Stage.EL_GROUP : Stage.ECL_GROUP;
-            case EL_GROUP:
-                return winner ? Stage.EL_KO_PO : Stage.DEFAULT;
-            case EL_KO_PO:
-                return winner ? Stage.EL_R16 : Stage.DEFAULT;
-            case EL_R16:
-                return winner ? Stage.EL_QUARTER_FINAL : Stage.DEFAULT;
-            case EL_QUARTER_FINAL:
-                return winner ? Stage.EL_SEMI_FINAL : Stage.DEFAULT;
-            case EL_SEMI_FINAL:
-                return winner ? Stage.EL_FINAL : Stage.DEFAULT;
-            case EL_FINAL:
-                return Stage.DEFAULT;
-            case ECL_FINAL:
-                return Stage.DEFAULT;
-            case ECL_SEMI_FINAL:
-                return winner ? Stage.ECL_FINAL : Stage.DEFAULT;
-            case ECL_QUARTER_FINAL:
-                return winner ? Stage.ECL_SEMI_FINAL : Stage.DEFAULT;
-            case ECL_R16:
-                return winner ? Stage.ECL_QUARTER_FINAL : Stage.DEFAULT;
-            case ECL_KO_PO:
-                return winner ? Stage.ECL_R16 : Stage.DEFAULT;
-            case ECL_GROUP:
-                return winner ? Stage.ECL_KO_PO : Stage.DEFAULT;
-            case ECL_Q1_MP:
-                return winner ? Stage.ECL_Q2_MP : Stage.DEFAULT;
-            case ECL_Q2_MP:
-                return winner ? Stage.ECL_Q3_MP : Stage.DEFAULT;
-            case ECL_Q2_CP:
-                return winner ? Stage.ECL_Q3_CP : Stage.DEFAULT;
-            case ECL_Q3_MP:
-                return winner ? Stage.ECL_Q4_MP : Stage.DEFAULT;
-            case ECL_Q3_CP:
-                return winner ? Stage.ECL_Q4_CP : Stage.DEFAULT;
-            case ECL_Q4_MP:
-                return winner ? Stage.ECL_GROUP : Stage.DEFAULT;
-            case ECL_Q4_CP:
-                return winner ? Stage.ECL_GROUP : Stage.DEFAULT;
-            case DEFAULT:
-                return Stage.DEFAULT;
-        }
-        return Stage.DEFAULT;
-    }
-
     private static SeedingType getSeedingTypeForStage(Stage stage) {
         switch (stage) {
             case CL_GROUP:
@@ -531,14 +454,6 @@ public class ControllerEurope {
                 break;
         }
         return SeedingType.DEFAULT;
-    }
-
-    private static boolean isStageKOPO(Stage stage) {
-        return (stage == Stage.EL_KO_PO || stage == Stage.ECL_KO_PO);
-    }
-
-    private static boolean isStageR16(Stage stage) {
-        return (stage == Stage.EL_R16 || stage == Stage.ECL_R16 || stage == Stage.CL_R16);
     }
 
     private static boolean isStageGroup(Stage stage) {
@@ -958,22 +873,6 @@ public class ControllerEurope {
         setSeedings();
     }
 
-    // private static void dispStages() {
-    // for (Map.Entry<Stage, List<KnockoutTie>> entry : stages.entrySet()) {
-    // List<KnockoutTie> ties = entry.getValue();
-    // int same_count = 0;
-    // for (KnockoutTie tie : ties) {
-    // System.out.println(getTeamName(tie.getTeam1()) + " v " +
-    // getTeamName(tie.getTeam2()));
-    // if (team_nations.get(tie.getTeam1()) == team_nations.get(tie.getTeam2())) {
-    // System.out.println("Same nation");
-    // same_count++;
-    // }
-    // }
-    // System.out.println("Same count for stage: " + same_count);
-    // }
-    // }
-
     private static void setKnockouts1() {
         setKOPO_R16Stage(Stage.ECL_KO_PO);
         setKOPO_R16Stage(Stage.EL_KO_PO);
@@ -997,27 +896,27 @@ public class ControllerEurope {
     }
 
     private static void setQuarterFinals() {
-        setStage(Stage.CL_QUARTER_FINAL);
+        setStage(Stage.CL_QF);
         setStage(Stage.EL_QUARTER_FINAL);
-        setStage(Stage.ECL_QUARTER_FINAL);
+        setStage(Stage.ECL_QF);
     }
 
     private static void simulateQuarterFinals() {
-        simulateStage(Stage.CL_QUARTER_FINAL);
+        simulateStage(Stage.CL_QF);
         simulateStage(Stage.EL_QUARTER_FINAL);
-        simulateStage(Stage.ECL_QUARTER_FINAL);
+        simulateStage(Stage.ECL_QF);
     }
 
     private static void setSemiFinals() {
-        setStage(Stage.CL_SEMI_FINAL);
+        setStage(Stage.CL_SF);
         setStage(Stage.EL_SEMI_FINAL);
-        setStage(Stage.ECL_SEMI_FINAL);
+        setStage(Stage.ECL_SF);
     }
 
     private static void simulateSemiFinals() {
-        simulateStage(Stage.CL_SEMI_FINAL);
+        simulateStage(Stage.CL_SF);
         simulateStage(Stage.EL_SEMI_FINAL);
-        simulateStage(Stage.ECL_SEMI_FINAL);
+        simulateStage(Stage.ECL_SF);
     }
 
     private static void setFinal() {
@@ -1077,6 +976,7 @@ public class ControllerEurope {
         return team.getName() + "(" + Sim.getNation(team.getNationId()).getCode() + ")";
     }
 
+    // #region Coefficients
     private static Map<String, Double> club_points = new HashMap<>();
     private static Map<Integer, Double> nation_points = new HashMap<>();
 
@@ -1184,11 +1084,11 @@ public class ControllerEurope {
         }
         // Stage Bonus Points
         setStageBonusPoints(Stage.EL_R16);
-        setStageBonusPoints(Stage.CL_QUARTER_FINAL);
+        setStageBonusPoints(Stage.CL_QF);
         setStageBonusPoints(Stage.EL_QUARTER_FINAL);
-        setStageBonusPoints(Stage.CL_SEMI_FINAL);
+        setStageBonusPoints(Stage.CL_SF);
         setStageBonusPoints(Stage.EL_SEMI_FINAL);
-        setStageBonusPoints(Stage.ECL_SEMI_FINAL);
+        setStageBonusPoints(Stage.ECL_SF);
         setStageBonusPoints(Stage.CL_FINAL);
         setStageBonusPoints(Stage.EL_FINAL);
         setStageBonusPoints(Stage.ECL_FINAL);
@@ -1279,8 +1179,8 @@ public class ControllerEurope {
         initCoefficients();
         updateCoefficients();
         normalizeNationCoefficients();
-        //showNationsCoefficients();
-        //showClubCoefficients();
+        updateCompetitionHistory();
+        distributePrizeMoney();
     }
 
     private static Map<Integer, Map<Integer, Double>> nation_coefficients = new HashMap<>();
@@ -1318,7 +1218,8 @@ public class ControllerEurope {
             points.put(nation, point);
         }
         List<Map.Entry<Nation, Double>> list = new ArrayList<>(points.entrySet());
-        Collections.sort(list, (Map.Entry<Nation, Double> o1, Map.Entry<Nation, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
+        Collections.sort(list,
+                (Map.Entry<Nation, Double> o1, Map.Entry<Nation, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
         int count = 1;
         HashMap<Integer, Integer> temp = new LinkedHashMap<>();
         for (Map.Entry<Nation, Double> aa : list) {
@@ -1331,16 +1232,16 @@ public class ControllerEurope {
     public static void showLeagueRankings() {
         Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
         System.out.print(CommonFunctions.getPaddedString("Country", 25));
-        for(int year = 2020; year <= Sim.getSeasonNumber(); year++) {
+        for (int year = 2020; year <= Sim.getSeasonNumber(); year++) {
             Map<Integer, Integer> ymap = getLeagueRankingsForSeason(year);
             map.put(year, ymap);
             System.out.print(CommonFunctions.getPaddedString(String.valueOf(year), 7));
         }
         System.out.println();
         List<Nation> nations = Sim.getNationFromContinent("Europe");
-        for(Nation nation: nations) {
+        for (Nation nation : nations) {
             System.out.print(CommonFunctions.getPaddedString(nation.getName(), 25));
-            for(int year = 2020; year <= Sim.getSeasonNumber(); year ++) {
+            for (int year = 2020; year <= Sim.getSeasonNumber(); year++) {
                 System.out.print(CommonFunctions.getPaddedString(String.valueOf(map.get(year).get(nation.getId())), 7));
             }
             System.out.println();
@@ -1356,32 +1257,32 @@ public class ControllerEurope {
                 continue;
             }
             Map<String, Double> year_map = club_coefficients.get(year);
-            for(Map.Entry<String, Double> entry: year_map.entrySet()) {
-                double point = 0.0;
+            for (Map.Entry<String, Double> entry : year_map.entrySet()) {
                 String team = entry.getKey();
-                if (points.containsKey(team)) {
-                    point = points.get(team);
-                }
+                double point = points.containsKey(team) ? points.get(team) : 0.0;
                 point += entry.getValue();
-                points.put(team, entry.getValue());
+                points.put(team, point);
             }
         }
         List<Map.Entry<String, Double>> list = new ArrayList<>(points.entrySet());
-        if(list.size() < 2) return;
-        Collections.sort(list, (Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
+        if (list.size() < 2)
+            return;
+        Collections.sort(list,
+                (Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
         int count = 1;
         for (Map.Entry<String, Double> aa : list) {
             String name = getTeamNameRankings(aa.getKey());
             System.out.println("Rank: " + count + " " + name + " " + aa.getValue());
             count++;
-            if (count > 50) break;
+            if (count > 50)
+                break;
         }
     }
 
     private static double getCoefficientForTeam(String team, int season) {
         int start = season - 5, end = season - 1;
         double points = 0;
-        for(int year = start; year <= end; year++) {
+        for (int year = start; year <= end; year++) {
             if (club_coefficients.containsKey(year)) {
                 Map<String, Double> map = club_coefficients.get(year);
                 if (map.containsKey(team)) {
@@ -1394,7 +1295,205 @@ public class ControllerEurope {
 
     public static List<String> sortByCoefficients(List<String> teams_to_sort) {
         int season = Sim.getSeasonNumber();
-        Collections.sort(teams_to_sort, (String a, String b) -> (int) (getCoefficientForTeam(b, season) -getCoefficientForTeam(b, season) ));
+        Collections.sort(teams_to_sort,
+                (String a, String b) -> (int) (getCoefficientForTeam(b, season) - getCoefficientForTeam(b, season)));
         return teams_to_sort;
+    }
+    // #endregion Coefficients
+
+    // #region CompetitionHistory
+    private static Map<CCType.CompType, List<CompetitionHistory>> history = new HashMap<>();
+
+    private static void updateHistory(CCType.CompType type) {
+        Stage stageFinal = type == CCType.CompType.UCL ? Stage.CL_FINAL
+                : type == CCType.CompType.UEL ? Stage.EL_FINAL : Stage.ECL_FINAL;
+        List<TeamHistory> tHistory = new ArrayList<>();
+        KnockoutTie tie = stages.get(stageFinal).get(0);
+        tHistory.add(new TeamHistory(tie.getWinner(), 1, Sim.getClub(tie.getWinner()).getBestSquadRating()));
+        tHistory.add(new TeamHistory(tie.getLoser(), 2, Sim.getClub(tie.getLoser()).getBestSquadRating()));
+        List<CompetitionHistory> chistory;
+        if (history.containsKey(type)) {
+            chistory = history.get(type);
+        } else {
+            chistory = new ArrayList<>();
+        }
+        CompetitionHistory cHist = new CompetitionHistory(Sim.getSeasonNumber(), tHistory);
+        chistory.add(cHist);
+        history.put(type, chistory);
+    }
+
+    private static void updateCompetitionHistory() {
+        updateHistory(CCType.CompType.UCL);
+        updateHistory(CCType.CompType.UEL);
+        updateHistory(CCType.CompType.UECL);
+    }
+
+    private static void showHistory(CCType.CompType type) {
+        List<CompetitionHistory> cHist = history.get(type);
+        for (CompetitionHistory compHistory : cHist) {
+            compHistory.show(2, false);
+        }
+    }
+
+    public static void showCompetitionHistory() {
+        showHistory(CCType.CompType.UCL);
+        showHistory(CCType.CompType.UEL);
+        showHistory(CCType.CompType.UECL);
+    }
+    // #endregion CompetitionHistory
+
+    // #region PrizeMoney
+    private static long getPrizeMoneyForStage(Stage stage) {
+        double millions = 0.0;
+        switch (stage) {
+            case CL_FINAL:
+                millions = 90;
+                break;
+            case CL_SF:
+                millions = 75;
+                break;
+            case CL_QF:
+                millions = 60;
+                break;
+            case CL_R16:
+                millions = 45;
+                break;
+            case EL_FINAL:
+                millions = 13.5;
+                break;
+            case EL_SEMI_FINAL:
+                millions = 11.25;
+                break;
+            case EL_QUARTER_FINAL:
+                millions = 9;
+                break;
+            case EL_R16:
+                millions = 6;
+                break;
+            case EL_KO_PO:
+                millions = 5;
+                break;
+            case ECL_FINAL:
+                millions = 9;
+                break;
+            case ECL_SF:
+                millions = 7.5;
+                break;
+            case ECL_QF:
+                millions = 6;
+                break;
+            case ECL_R16:
+                millions = 4.5;
+                break;
+            case ECL_KO_PO:
+                millions = 3.5;
+                break;
+            case ECL_Q4_CP:
+            case ECL_Q4_MP:
+                millions = 1;
+                break;
+            case ECL_Q3_CP:
+            case ECL_Q3_MP:
+                millions = 0.75;
+                break;
+            case ECL_Q2_CP:
+            case ECL_Q2_MP:
+                millions = 0.6;
+                break;
+            case ECL_Q1_MP:
+                millions = 0.5;
+                break;
+            default:
+                millions = 0;
+        }
+
+        return (long) (millions * 1000 * 1000);
+    }
+
+    private static long getWinnerPrizeMoney(CCType.CompType type) {
+        switch (type) {
+            case UCL:
+                return 100 * 1000 * 1000;
+            case UEL:
+                return 15 * 1000 * 1000;
+            case UECL:
+                return 11 * 1000 * 1000;
+            default:
+                return 0;
+        }
+    }
+
+    private static long getGroupStageParticipationPrize(CCType.CompType type) {
+        switch (type) {
+            case UCL:
+                return 15 * 1000 * 1000;
+            case UEL:
+                return 5 * 1000 * 1000;
+            case UECL:
+                return 3 * 1000 * 1000;
+            default:
+                return 0;
+        }
+    }
+
+    private static long getGroupStageWinPrize(CCType.CompType type) {
+        switch (type) {
+            case UCL:
+                return 2 * 1000 * 1000;
+            case UEL:
+                return 600 * 1000;
+            case UECL:
+                return 200 * 1000;
+            default:
+                return 0;
+        }
+    }
+
+    private static long getGroupStageDrawPrize(CCType.CompType type) {
+        switch (type) {
+            case UCL:
+                return 750 * 1000;
+            case UEL:
+                return 200 * 1000;
+            case UECL:
+                return 100 * 1000;
+            default:
+                return 0;
+        }
+    }
+
+    private static void distributePrizeMoney() {
+        for (Map.Entry<Stage, List<KnockoutTie>> entry : stages.entrySet()) {
+            Stage stage = entry.getKey();
+            if (stage == Stage.CL_FINAL || stage == Stage.EL_FINAL || stage == Stage.ECL_FINAL) {
+                for (KnockoutTie tie : entry.getValue()) {
+                    Sim.getClub(tie.getWinner()).updateBudget(getWinnerPrizeMoney(stage.competition()));
+                }
+            }
+            for (KnockoutTie tie : entry.getValue()) {
+                long amount = getPrizeMoneyForStage(stage);
+                if (amount > 0) {
+                    Sim.getClub(tie.getLoser()).updateBudget(amount);
+                }
+            }
+        }
+        for (Map.Entry<Stage, League[]> entry : groups.entrySet()) {
+            CCType.CompType comp = entry.getKey().competition();
+            for (League league : entry.getValue()) {
+                for (String team : league.getTeams()) {
+                    TeamPerformance perf = league.getTable().getTeamPerformance(team);
+                    long amount = getGroupStageParticipationPrize(comp)
+                            + (getGroupStageWinPrize(comp) * perf.matchesWon())
+                            + (getGroupStageDrawPrize(comp) * perf.matchesDrawn());
+                    Sim.getClub(team).updateBudget(amount);
+                }
+            }
+        }
+    }
+    // #endregion PrizeMoney
+
+    public static void showCoefficients() {
+        showClubCoefficients();
+        showNationsCoefficients();
     }
 }

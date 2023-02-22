@@ -222,7 +222,7 @@ public class League {
     }
 
     public void updateTeamReputations() {
-        int reputation_steps = this.reputation / this.teams.size();
+        int reputation_steps = (this.reputation / this.teams.size()) * 10;
         List<String> sorted_teams = CommonFunctions.sortByReputation(this.teams);
         for (int i = 0; i < this.teams.size(); i++) {
             String team = sorted_teams.get(i);
@@ -239,7 +239,7 @@ public class League {
     }
 
     public void distributePrizeMoney() {
-        long prize_money = this.reputation * 200000;
+        long prize_money = this.reputation * 500000;
         int size = this.teams.size();
         float[] shares = new float[size];
         for (int i = 0; i < size / 2; i++) {

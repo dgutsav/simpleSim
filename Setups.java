@@ -95,6 +95,14 @@ public class Setups {
         setups.add(new Nation_Setup("Ivory Coast", "CIV", 61, 6, 1, 18, 57, 128, "Africa"));
         setups.add(new Nation_Setup("Ghana", "GHA", 52, 7, 1, 18, 58, 128, "Africa"));
         setups.add(new Nation_Setup("Nigeria", "NIG", 35, 8, 1, 18, 62, 135, "Africa"));
+        setups.add(new Nation_Setup("Cameroon", "CAM", 33, 9, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Mali", "MLI", 45, 10, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Burkina Faso", "BFA", 50, 11, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("South Africa", "RSA", 67, 12, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Congo DR", "DRC", 75, 13, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Zambia", "ZAM", 50, 14, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Gabon", "GAB", 67, 15, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Kenya", "KEN", 75, 16, 1, 12, 54, 124, "Africa"));
         return setups;
     }
 

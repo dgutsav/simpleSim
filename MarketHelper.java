@@ -1,27 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import Models.Deal;
 import Models.Player;
-import Models.Position;
 
 public class MarketHelper {
     public static final int MAX_DIGITS_PRICE = 3;
-    public static final int WINDOW_LENGTH = 5;
-
-    public static Map<String, Player> players;
-    public static Map<String, Target> targets;
-    public static List<Deal> completed_transfers = new ArrayList<>();
-    public static ArrayList<String> transferred_players;
-
-    public static Map<String, Map<String, Player>> player_lists = new HashMap<>();
-    public static Map<String, ArrayList<String>> list_keys = new HashMap<>();
-    public static Map<Position, ArrayList<String>> position_keys = new HashMap<>();
-    public static Map<Integer, ArrayList<String>> rating_keys = new HashMap<>();
-    public static Map<Integer, ArrayList<String>> div_keys = new HashMap<>();
-    public static Map<String, ArrayList<String>> nation_keys = new HashMap<>();
 
     public static int fixPriceToMaxDigits(int value) {
         String amount = String.valueOf(value);

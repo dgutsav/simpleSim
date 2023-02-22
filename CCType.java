@@ -5,9 +5,12 @@ public class CCType {
     }
 
     public enum CompType {
-        CHAMPIONS_LEAGUE(1, "Champions League", "CL", Continent.EUROPE),
-        EUROPA_LEAGUE(2, "Europa League", "EL", Continent.EUROPE),
-        CONFERENCE_LEAGUE(3, "Europa Conference League", "ECL", Continent.EUROPE);
+        UCL(1, "Champions League", "CL", Continent.EUROPE),
+        UEL(2, "Europa League", "EL", Continent.EUROPE),
+        UECL(3, "Europa Conference League", "ECL", Continent.EUROPE),
+
+        LIB(1, "Copa Libertadores", "LIB", Continent.SOUTH_AMERICA),
+        SUD(1, "Copa Sudamericana", "SUD", Continent.SOUTH_AMERICA);
 
         private final int level;
         private final String title;

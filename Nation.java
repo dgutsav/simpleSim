@@ -62,35 +62,6 @@ public class Nation {
         return this.youth_rating;
     }
 
-    public void getContinentalTeams(int continental_competition) {
-        int start_rank = 1;
-        int end_rank = 1;
-        switch (continental_competition) {
-            case 1:
-                start_rank = 1;
-                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking);
-                break;
-            case 2:
-                start_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking) + 1;
-                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
-                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking);
-                break;
-            case 3:
-                start_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
-                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking) + 1;
-                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking)
-                        + ControllerUEFA.getPlacesForCompetition(2, this.league_ranking)
-                        + ControllerUEFA.getPlacesForCompetition(3, this.league_ranking);
-                break;
-            default:
-                start_rank = 1;
-                end_rank = ControllerUEFA.getPlacesForCompetition(1, this.league_ranking);
-        }
-        for (int i = start_rank; i <= end_rank; i++) {
-            ControllerUEFA.addTeams(continental_competition, this.id, i, this.getLeague(1).getTeamAtRank(i));
-        }
-    }
-
     public void promotionDemotion() {
         if (this.leagues.size() <= 1) {
             return;

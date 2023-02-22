@@ -82,7 +82,26 @@ public class TransferMarket {
         key_list.put(desc, temp);
     }
 
-    public static void setupLists() {
+    private static void setupLists() {
+        setupPremiumList();
+        setupNationLists();
+    }
+
+    private static void setupPremiumList() {
+        String key = "PREMIUM";
+        int rating_cutoff = 84;
+        Map<String, Player> players = Sim.sortByRating(Sim.getAllPlayers());
+        List<Player> prem_players = new ArrayList<>();
+        for(Map.Entry<String, Player> entry: players.entrySet()) {
+            Player player = entry.getValue();
+            if(player.getRating() < rating_cutoff) break;
+            prem_players.add(player);
+            player_list_map.put(entry.getKey(), key);
+        }
+        lists.put(key, prem_players);
+    }
+
+    public static void setupNationLists() {
         int max_size = 0;
         String max_key = "";
         Map<String, League> all_leagues = Sim.getAllLeagues();
@@ -93,6 +112,7 @@ public class TransferMarket {
             for (String club_id : league.getTeams()) {
                 Club_Team club = Sim.getClub(club_id);
                 for (String player_id : club.getSeniorPlayers()) {
+                    if (player_list_map.containsKey(player_id)) continue;
                     players.add(Sim.getPlayer(player_id));
                     player_list_map.put(player_id, key);
                 }
@@ -110,6 +130,7 @@ public class TransferMarket {
 
     public static List<Player> getPlayersList(League league) {
         List<Player> players = new ArrayList<>();
+        players.addAll(lists.get("PREMIUM"));
         String nation_name = Sim.getNation(league.getNationId()).getName();
         String[] nations_list = CatalogueHelper.getFavourableNations(nation_name);
         ArrayList<String> fav_nations = new ArrayList<>();

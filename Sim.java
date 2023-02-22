@@ -152,11 +152,6 @@ public class Sim {
         return array_leagues;
     }
 
-    public static void setupContinentalCompetitions() {
-        ControllerCONMEBOL.setupCompetitions();
-        ControllerCONMEBOL.getTeams();
-    }
-
     public static void sim() {
         for (Map.Entry<String, League> entry : leagues.entrySet()) {
             entry.getValue().seasonStart();
@@ -170,14 +165,14 @@ public class Sim {
         }
 
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //setupContinentalCompetitions();
-            //ControllerCONMEBOL.simulateCompetitions();
+            ControllerSAmerica.simulate();
             ControllerEurope.simulate();
         }
+        //seasonEndChanges();
         if (USE_TRANSFER_MARKET) {
-            TransferMarket.simulate();
+            //TransferMarket.simulate();
         }
-        seasonEndChanges();
+        season++;
     }
 
     public static String addClub(Club_Team team) {
@@ -306,7 +301,6 @@ public class Sim {
             count++;
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerCONMEBOL.initCompetitions();
             ControllerEurope.initCoefficientsCalculations();
         }
     }
@@ -335,6 +329,13 @@ public class Sim {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
+    }
+
+    public static List<String> sortByReputation(List<String> teams) {
+        Map<String, Club_Team> map = new HashMap<>();
+        for(String team: teams) map.put(team, clubs.get(team));
+        map = sortByReputation(map);
+        return new ArrayList<>(map.keySet());
     }
 
     public static void showTeams() {
@@ -381,9 +382,10 @@ public class Sim {
                 code = nation.getCode();
             }
             System.out.println(count + "\t" + player.getPaddedName() + code + "\t" + team_name + "\t"
+                    + CatalogueHelper.getPositionName(player.getPosition()) + "\t"
                     + player.getRating() + "\t" + player.getAge() + "\t"
                     + CommonFunctions.formatMoney(MarketHelper.getPlayerValue(player, null)));
-            if (count >= 300) {
+            if (count >= 100) {
                 break;
             }
             count++;
@@ -402,10 +404,6 @@ public class Sim {
             entry.getValue().saveCompetitionHistory();
             updateCup(entry.getValue(), entry.getKey());
         }
-        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerUEFA.saveCompetitionHistory();
-            //ControllerCONMEBOL.saveCompetitionHistory();
-        }
         List<String> retired_players = new ArrayList<>();
         for (Map.Entry<String, Player> entry : players.entrySet()) {
             entry.getValue().seasonEndChanges();
@@ -417,17 +415,10 @@ public class Sim {
         for (String player : retired_players) {
             Sim.removePlayer(player);
         }
-        long start = System.nanoTime();
         for (Map.Entry<String, Club_Team> entry : clubs.entrySet()) {
             entry.getValue().seasonEndPlayerPromotions();
         }
-        long end = System.nanoTime();
-        long diff = end - start;
-        double diff_s = diff / (1000.0 * 1000 * 1000);
-        double per_player = (double) diff / retired_players.size();
-        System.out.println(diff_s + " " + per_player);
         System.out.println("season end changes done");
-        season++;
     }
 
     public static void showCompetitionHistories() {
@@ -438,8 +429,8 @@ public class Sim {
             entry.getValue().showCompetitionHistory();
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerUEFA.showCompetitionHistory();
-            //ControllerCONMEBOL.showCompetitionHistory();
+            ControllerEurope.showCompetitionHistory();
+            ControllerSAmerica.showCompetitionHistory();
         }
     }
 
@@ -456,7 +447,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 35;
+        int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -478,9 +469,9 @@ public class Sim {
             //showTeams();
             //showPlayers();
             //showNationalTeams();
-            TransferMarket.showTopTransfers();
-            TransferMarket.showTransferStats();
-            ControllerEurope.showLeagueRankings();
+            //TransferMarket.showTopTransfers();
+            //TransferMarket.showTransferStats();
+            //ControllerEurope.showLeagueRankings();
         }
     }
 }
