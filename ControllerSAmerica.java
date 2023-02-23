@@ -142,6 +142,7 @@ public class ControllerSAmerica {
         }
         seedings.put(lib_champion, SeedingType.LIB_GROUP);
         seedings.put(sud_champion, SeedingType.LIB_GROUP);
+        int lib_group_seed_count = 2;
         List<Nation> nations = Sim.getNationFromContinent("South America");
         for (Nation nation : nations) {
             Map<CCType.CompType, List<String>> teams = getTeams(nation, nation.getLeagueRanking());
@@ -151,6 +152,7 @@ public class ControllerSAmerica {
                 for (int i = 0; i < nat_teams.size(); i++) {
                     int rank = i + 1;
                     SeedingType seeding = getSeeding(type, nation.getLeagueRanking(), rank);
+                    if (seeding == SeedingType.LIB_GROUP) lib_group_seed_count++;
                     seedings.put(nat_teams.get(i), seeding);
                 }
             }
@@ -164,18 +166,16 @@ public class ControllerSAmerica {
         List<String> teams = new ArrayList<>();
         League league = nation.getLeague(1);
         int rank = 1;
-        for (int i = 1; i <= lib_places + sud_places; i++) {
+        while (teams.size() < (lib_places + sud_places)) {
             String team = league.getTeamAtRank(rank);
-            if (team.equalsIgnoreCase(lib_champion) || team.equalsIgnoreCase(sud_champion)) {
-                System.out.println("Champion: " + team + " at rank " + rank);
-                rank++;
+            if (!team.equalsIgnoreCase(lib_champion) && !team.equalsIgnoreCase(sud_champion)) {
+                teams.add(team);
             }
-            teams.add(league.getTeamAtRank(rank));
             rank++;
         }
         String cw = nation.getCupWinner();
-        if (!teams.contains(cw))
-            teams.add(0, nation.getCupWinner());
+        if (!teams.contains(cw) && !cw.equalsIgnoreCase(lib_champion) && !cw.equalsIgnoreCase(sud_champion))
+            teams.add(0, cw);
         map.put(CCType.CompType.LIB, teams.subList(0, lib_places));
         map.put(CCType.CompType.SUD, teams.subList(lib_places, lib_places + sud_places));
         return map;
@@ -257,8 +257,9 @@ public class ControllerSAmerica {
                 return SeedingType.SUD_GROUP;
             case SUD_Q1:
                 return SeedingType.SUD_Q1;
+            default:
+                return SeedingType.DEFAULT;
         }
-        return SeedingType.DEFAULT;
     }
 
     private static boolean isStageGroup(Stage stage) {
@@ -573,6 +574,7 @@ public class ControllerSAmerica {
     }
 
     private static void showHistory(CCType.CompType type) {
+        System.out.println(type.title());
         List<CompetitionHistory> cHist = history.get(type);
         for (CompetitionHistory compHistory : cHist) {
             compHistory.show(2, false);
@@ -587,7 +589,7 @@ public class ControllerSAmerica {
 
     private static void count() {
         int count = 0;
-        for(Map.Entry<String, SeedingType> entry: seedings.entrySet()) {
+        for (Map.Entry<String, SeedingType> entry : seedings.entrySet()) {
             if (entry.getValue() == SeedingType.LIB_GROUP)
                 count++;
         }
