@@ -1329,6 +1329,7 @@ public class ControllerEurope {
     }
 
     private static void showHistory(CCType.CompType type) {
+        System.out.println(type.title());
         List<CompetitionHistory> cHist = history.get(type);
         for (CompetitionHistory compHistory : cHist) {
             compHistory.show(2, false);

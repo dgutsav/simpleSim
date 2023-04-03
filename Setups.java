@@ -6,11 +6,11 @@ import java.util.Map;
 public class Setups {
     public static List<Nation_Setup> getNormalSetup() {
         List<Nation_Setup> setups = new ArrayList<>();
-        // setups.addAll(getUEFASetups());
-         setups.addAll(getCONMEBOLSetups());
-        // setups.addAll(getCONCACAFSetups());
-        // setups.addAll(getAFCSetups());
-        // setups.addAll(getCAFSetups());
+        setups.addAll(getUEFASetups());
+        setups.addAll(getCONMEBOLSetups());
+        setups.addAll(getCONCACAFSetups());
+        setups.addAll(getAFCSetups());
+        setups.addAll(getCAFSetups());
         return setups;
     }
 

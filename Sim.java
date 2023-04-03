@@ -166,11 +166,11 @@ public class Sim {
 
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerSAmerica.simulate();
-            //ControllerEurope.simulate();
+            ControllerEurope.simulate();
         }
-        //seasonEndChanges();
+        seasonEndChanges();
         if (USE_TRANSFER_MARKET) {
-            //TransferMarket.simulate();
+            TransferMarket.simulate();
         }
         season++;
     }
@@ -301,7 +301,7 @@ public class Sim {
             count++;
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerEurope.initCoefficientsCalculations();
+            ControllerEurope.initCoefficientsCalculations();
         }
     }
 
@@ -429,7 +429,7 @@ public class Sim {
             entry.getValue().showCompetitionHistory();
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerEurope.showCompetitionHistory();
+            ControllerEurope.showCompetitionHistory();
             ControllerSAmerica.showCompetitionHistory();
         }
     }
@@ -466,12 +466,12 @@ public class Sim {
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
             showCompetitionHistories();
-            //showTeams();
-            //showPlayers();
-            //showNationalTeams();
-            //TransferMarket.showTopTransfers();
-            //TransferMarket.showTransferStats();
-            //ControllerEurope.showLeagueRankings();
+            showTeams();
+            showPlayers();
+            showNationalTeams();
+            TransferMarket.showTopTransfers();
+            TransferMarket.showTransferStats();
+            ControllerEurope.showLeagueRankings();
         }
     }
 }
