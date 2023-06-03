@@ -221,22 +221,22 @@ public class Setups {
 
     public static List<Nation_Setup> getCAFSetups() {
         List<Nation_Setup> setups = new ArrayList<>();
-        setups.add(new Nation_Setup("Egypt", "EGY", 49, 1, 1, 18, 59, 133, "Africa"));
-        setups.add(new Nation_Setup("Tunisia", "TUN", 26, 2, 1, 18, 59, 130, "Africa"));
-        setups.add(new Nation_Setup("Algeria", "ALG", 31, 3, 1, 18, 59, 131, "Africa"));
-        setups.add(new Nation_Setup("Morocco", "MOR", 35, 4, 1, 18, 62, 131, "Africa"));
-        setups.add(new Nation_Setup("Senegal", "SEN", 20, 5, 1, 18, 57, 130, "Africa"));
-        setups.add(new Nation_Setup("Ivory Coast", "CIV", 61, 6, 1, 18, 57, 128, "Africa"));
-        setups.add(new Nation_Setup("Ghana", "GHA", 52, 7, 1, 18, 58, 128, "Africa"));
-        setups.add(new Nation_Setup("Nigeria", "NIG", 35, 8, 1, 18, 62, 135, "Africa"));
-        setups.add(new Nation_Setup("Cameroon", "CAM", 33, 9, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Mali", "MLI", 45, 10, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Burkina Faso", "BFA", 50, 11, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("South Africa", "RSA", 67, 12, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Congo DR", "DRC", 75, 13, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Zambia", "ZAM", 50, 14, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Gabon", "GAB", 67, 15, 1, 12, 54, 124, "Africa"));
-        setups.add(new Nation_Setup("Kenya", "KEN", 75, 16, 1, 12, 54, 124, "Africa"));
+        setups.add(new Nation_Setup("Morocco", "MAR", 35, 1, 1, 14, 66, 131, "Africa"));
+        setups.add(new Nation_Setup("Egypt", "EGY", 49, 2, 1, 14, 64, 133, "Africa"));
+        setups.add(new Nation_Setup("Algeria", "ALG", 31, 3, 1, 14, 61, 131, "Africa"));
+        setups.add(new Nation_Setup("Tunisia", "TUN", 26, 4, 1, 14, 60, 130, "Africa"));
+        setups.add(new Nation_Setup("South Africa", "RSA", 67, 5, 1, 12, 59, 130, "Africa"));
+        setups.add(new Nation_Setup("Congo DR", "DRC", 75, 6, 1, 12, 58, 127, "Africa"));
+        setups.add(new Nation_Setup("Angola", "ANG", 50, 7, 1, 12, 56, 124, "Africa"));
+        setups.add(new Nation_Setup("Sudan", "SUD", 67, 8, 1, 12, 56, 124, "Africa"));
+        setups.add(new Nation_Setup("Guinea", "GUI", 75, 9, 1, 12, 57, 124, "Africa"));
+        setups.add(new Nation_Setup("Nigeria", "NIG", 35, 10, 1, 14, 58, 135, "Africa"));
+        setups.add(new Nation_Setup("Zambia", "ZAM", 50, 11, 1, 12, 55, 124, "Africa"));
+        setups.add(new Nation_Setup("Cameroon", "CAM", 33, 12, 1, 12, 55, 124, "Africa"));
+        setups.add(new Nation_Setup("Senegal", "SEN", 20, 13, 1, 14, 56, 130, "Africa"));
+        setups.add(new Nation_Setup("Ivory Coast", "CIV", 61, 14, 1, 14, 56, 128, "Africa"));
+        setups.add(new Nation_Setup("Ghana", "GHA", 52, 15, 1, 14, 55, 128, "Africa"));
+        setups.add(new Nation_Setup("Mali", "MLI", 45, 16, 1, 12, 54, 124, "Africa"));
         return setups;
     }
 

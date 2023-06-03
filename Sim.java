@@ -170,6 +170,7 @@ public class Sim {
             ControllerEurope.simulate();
             ControllerAsia.simulate();
             ControllerNAmerica.simulate();
+            ControllerAfrica.simulate();
         }
         seasonEndChanges();
         if (USE_TRANSFER_MARKET) {
@@ -441,6 +442,7 @@ public class Sim {
             ControllerSAmerica.showCompetitionHistory();
             ControllerAsia.showCompetitionHistory();
             ControllerNAmerica.showCompetitionHistory();
+            ControllerAfrica.showCompetitionHistory();
         }
     }
 
@@ -456,7 +458,7 @@ public class Sim {
 
     public static void main(String[] args) {
         TEST = false;
-        USE_TRANSFER_MARKET = true;
+        USE_TRANSFER_MARKET = false;
         int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();
@@ -474,14 +476,14 @@ public class Sim {
         for (int i = 0; i < num_seasons; i++) {
             System.out.println(i + " " + d[i] / 1000000000);
         }
-        if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            showCompetitionHistories();
-            showTeams();
-            showPlayers();
-            showNationalTeams();
-            TransferMarket.showTopTransfers();
-            TransferMarket.showTransferStats();
-            ControllerEurope.showLeagueRankings();
-        }
+        // if (Sim.SHOW_DETAILS && !Sim.TEST) {
+        //     showCompetitionHistories();
+        //     showTeams();
+        //     showPlayers();
+        //     showNationalTeams();
+        //     TransferMarket.showTopTransfers();
+        //     TransferMarket.showTransferStats();
+        //     ControllerEurope.showLeagueRankings();
+        // }
     }
 }

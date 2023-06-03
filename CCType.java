@@ -20,7 +20,7 @@ public class CCType {
 
         NACL(1, "North American Champions League", "NACL", Continent.NORTH_AMERICA),
 
-        AFCL(1, "African Champions League", "AFCL", Continent.AFRICA),
+        ACC(1, "African Champions Cup", "ACC", Continent.AFRICA),
 
         DEFAULT(1, "DEFAULT", "DEF", Continent.DEFAULT);
 
