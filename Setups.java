@@ -194,11 +194,11 @@ public class Setups {
     public static List<Nation_Setup> getCONCACAFSetups() {
         List<Nation_Setup> setups = new ArrayList<>();
         setups.add(new Nation_Setup("Mexico", "MEX", 9, 1, 2, 18, 76, 145, "North America"));
-        setups.add(new Nation_Setup("United States", "USA", 22, 2, 1, 24, 72, 136, "North America"));
-        setups.add(new Nation_Setup("Canada", "CAN", 72, 3, 1, 10, 64, 135, "North America"));
-        setups.add(new Nation_Setup("Costa Rica", "CRC", 51, 4, 2, 18, 67, 135, "North America"));
-        setups.add(new Nation_Setup("West Indies", "WIN", 47, 5, 1, 16, 59, 120, "North America"));
-        setups.add(new Nation_Setup("Honduras", "HON", 64, 6, 2, 14, 62, 126, "North America"));
+        setups.add(new Nation_Setup("United States", "USA", 22, 2, 1, 24, 75, 136, "North America"));
+        setups.add(new Nation_Setup("Canada", "CAN", 72, 4, 1, 10, 69, 135, "North America"));
+        setups.add(new Nation_Setup("Costa Rica", "CRC", 51, 3, 2, 18, 66, 135, "North America"));
+        setups.add(new Nation_Setup("West Indies", "WIN", 47, 6, 1, 16, 59, 120, "North America"));
+        setups.add(new Nation_Setup("Honduras", "HON", 64, 5, 2, 14, 62, 126, "North America"));
         return setups;
     }
 

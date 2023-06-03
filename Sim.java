@@ -169,6 +169,7 @@ public class Sim {
             ControllerSAmerica.simulate();
             ControllerEurope.simulate();
             ControllerAsia.simulate();
+            ControllerNAmerica.simulate();
         }
         seasonEndChanges();
         if (USE_TRANSFER_MARKET) {
@@ -439,6 +440,7 @@ public class Sim {
             ControllerEurope.showCompetitionHistory();
             ControllerSAmerica.showCompetitionHistory();
             ControllerAsia.showCompetitionHistory();
+            ControllerNAmerica.showCompetitionHistory();
         }
     }
 

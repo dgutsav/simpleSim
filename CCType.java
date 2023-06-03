@@ -18,6 +18,10 @@ public class CCType {
 
         ACL(1, "Asian Champions League", "ACL", Continent.ASIA),
 
+        NACL(1, "North American Champions League", "NACL", Continent.NORTH_AMERICA),
+
+        AFCL(1, "African Champions League", "AFCL", Continent.AFRICA),
+
         DEFAULT(1, "DEFAULT", "DEF", Continent.DEFAULT);
 
         private final int level;
