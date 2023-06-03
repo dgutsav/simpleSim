@@ -32,14 +32,10 @@ public class ControllerSAmerica {
 
         private final String stage_name;
         private final CCType.StageType stage_type;
-        private final CCType.CompType competition;
-        private final boolean qualifying;
 
         Stage(String stage_name, CCType.StageType stage_type, CCType.CompType competition, boolean qualifying) {
             this.stage_name = stage_name;
             this.stage_type = stage_type;
-            this.competition = competition;
-            this.qualifying = qualifying;
         }
 
         public String stage_name() {
@@ -48,14 +44,6 @@ public class ControllerSAmerica {
 
         public CCType.StageType stage_type() {
             return this.stage_type;
-        }
-
-        public CCType.CompType competition() {
-            return this.competition;
-        }
-
-        public boolean qualifying() {
-            return this.qualifying;
         }
     }
 
@@ -142,7 +130,6 @@ public class ControllerSAmerica {
         }
         seedings.put(lib_champion, SeedingType.LIB_GROUP);
         seedings.put(sud_champion, SeedingType.LIB_GROUP);
-        int lib_group_seed_count = 2;
         List<Nation> nations = Sim.getNationFromContinent("South America");
         for (Nation nation : nations) {
             Map<CCType.CompType, List<String>> teams = getTeams(nation, nation.getLeagueRanking());
@@ -152,7 +139,6 @@ public class ControllerSAmerica {
                 for (int i = 0; i < nat_teams.size(); i++) {
                     int rank = i + 1;
                     SeedingType seeding = getSeeding(type, nation.getLeagueRanking(), rank);
-                    if (seeding == SeedingType.LIB_GROUP) lib_group_seed_count++;
                     seedings.put(nat_teams.get(i), seeding);
                 }
             }
@@ -529,7 +515,6 @@ public class ControllerSAmerica {
         stages = new HashMap<>();
         groups = new HashMap<>();
         setSeedings();
-        count();
         qualifiers();
         setGroups();
         simulateGroupStage();
@@ -586,14 +571,4 @@ public class ControllerSAmerica {
         showHistory(CCType.CompType.SUD);
     }
     // #endregion CompetitionHistory
-
-    private static void count() {
-        int count = 0;
-        for (Map.Entry<String, SeedingType> entry : seedings.entrySet()) {
-            if (entry.getValue() == SeedingType.LIB_GROUP)
-                count++;
-        }
-
-        System.out.println("Seedings LIB GROUP: " + count);
-    }
 }

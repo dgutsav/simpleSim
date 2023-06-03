@@ -1,7 +1,11 @@
 public class CCType {
     public enum Continent {
         EUROPE,
-        SOUTH_AMERICA
+        SOUTH_AMERICA,
+        ASIA,
+        AFRICA,
+        NORTH_AMERICA,
+        DEFAULT
     }
 
     public enum CompType {
@@ -10,7 +14,11 @@ public class CCType {
         UECL(3, "Europa Conference League", "ECL", Continent.EUROPE),
 
         LIB(1, "Copa Libertadores", "LIB", Continent.SOUTH_AMERICA),
-        SUD(1, "Copa Sudamericana", "SUD", Continent.SOUTH_AMERICA);
+        SUD(1, "Copa Sudamericana", "SUD", Continent.SOUTH_AMERICA),
+
+        ACL(1, "Asian Champions League", "ACL", Continent.ASIA),
+
+        DEFAULT(1, "DEFAULT", "DEF", Continent.DEFAULT);
 
         private final int level;
         private final String title;

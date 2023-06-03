@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 //import java.util.LinkedList;
@@ -167,6 +168,7 @@ public class Sim {
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerSAmerica.simulate();
             ControllerEurope.simulate();
+            ControllerAsia.simulate();
         }
         seasonEndChanges();
         if (USE_TRANSFER_MARKET) {
@@ -363,6 +365,11 @@ public class Sim {
         return temp;
     }
 
+    public static List<Player> sortByRating(List<Player> players) {
+        Collections.sort(players, Comparator.comparingInt(Player::getRating).reversed());
+        return players;
+    }
+
     public static void showPlayers() {
         System.out.println("\nPlayers");
         Map<String, Player> sorted = Sim.sortByRating(players);
@@ -431,6 +438,7 @@ public class Sim {
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerEurope.showCompetitionHistory();
             ControllerSAmerica.showCompetitionHistory();
+            ControllerAsia.showCompetitionHistory();
         }
     }
 
@@ -447,7 +455,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = true;
-        int num_seasons = 100;
+        int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();
         try {
