@@ -522,6 +522,10 @@ public class ControllerAsia {
     public static void showCompetitionHistory() {
         showHistory(CCType.CompType.ACL);
     }
+
+    public static Map<CCType.CompType, List<CompetitionHistory>> getHistory() {
+        return history;
+    }
     // #endregion CompetitionHistory
 
 }

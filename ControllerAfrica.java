@@ -369,7 +369,7 @@ public class ControllerAfrica {
     }
 
     private static void updateCompetitionHistory() {
-        updateHistory(CCType.CompType.ACL);
+        updateHistory(CCType.CompType.ACC);
     }
 
     private static void showHistory(CCType.CompType type) {
@@ -381,7 +381,11 @@ public class ControllerAfrica {
     }
 
     public static void showCompetitionHistory() {
-        showHistory(CCType.CompType.ACL);
+        showHistory(CCType.CompType.ACC);
+    }
+
+    public static Map<CCType.CompType, List<CompetitionHistory>> getHistory() {
+        return history;
     }
     // #endregion CompetitionHistory
 

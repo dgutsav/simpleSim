@@ -1341,6 +1341,10 @@ public class ControllerEurope {
         showHistory(CCType.CompType.UEL);
         showHistory(CCType.CompType.UECL);
     }
+
+    public static Map<CCType.CompType, List<CompetitionHistory>> getHistory() {
+        return history;
+    }
     // #endregion CompetitionHistory
 
     // #region PrizeMoney

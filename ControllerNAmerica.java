@@ -224,6 +224,10 @@ public class ControllerNAmerica {
     public static void showCompetitionHistory() {
         showHistory(CCType.CompType.NACL);
     }
+
+    public static Map<CCType.CompType, List<CompetitionHistory>> getHistory() {
+        return history;
+    }
     // #endregion CompetitionHistory
 
 }

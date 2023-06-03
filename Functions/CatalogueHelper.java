@@ -98,179 +98,113 @@ public class CatalogueHelper {
     public static String senegal = "Senegal";
     public static String ivory_coast = "Ivory Coast";
     public static String ghana = "Ghana";
+    public static String zambia = "Zambia";
+    public static String sudan = "Sudan";
+    public static String mali = "Mali";
+    public static String congo = "Congo DR";
+    public static String south_africa = "South Africa";
+    public static String angola = "Angola";
+    public static String cameroon = "Cameroon";
+    public static String guinea = "Guinea";
 
     public static String getDenonym(String nation_name) {
-        if (nation_name.equalsIgnoreCase(albania)) {
-            return "Albanian";
-        } else if (nation_name.equalsIgnoreCase(algeria)) {
-            return "Algerian";
-        } else if (nation_name.equalsIgnoreCase(argentina)) {
-            return "Argentine";
-        } else if (nation_name.equalsIgnoreCase(america)) {
-            return "American";
-        } else if (nation_name.equalsIgnoreCase(australia)) {
-            return "Australian";
-        } else if (nation_name.equalsIgnoreCase(austria)) {
-            return "Austrian";
-        } else if (nation_name.equalsIgnoreCase(belarus)) {
-            return "Belarussian";
-        } else if (nation_name.equalsIgnoreCase(belgium)) {
-            return "Belgian";
-        } else if (nation_name.equalsIgnoreCase(bolivia)) {
-            return "Bolivian";
-        } else if (nation_name.equalsIgnoreCase(bosnia)) {
-            return "Bosnian";
-        } else if (nation_name.equalsIgnoreCase(brazil)) {
-            return "Brazilian";
-        } else if (nation_name.equalsIgnoreCase(bulgaria)) {
-            return "Bulgarian";
-        } else if (nation_name.equalsIgnoreCase(canada)) {
-            return "Canadian";
-        } else if (nation_name.equalsIgnoreCase(chile)) {
-            return "Chilean";
-        } else if (nation_name.equalsIgnoreCase(china)) {
-            return "Chinese";
-        } else if (nation_name.equalsIgnoreCase(colombia)) {
-            return "Colombian";
-        } else if (nation_name.equalsIgnoreCase(costa_rica)) {
-            return "Costa Rican";
-        } else if (nation_name.equalsIgnoreCase(croatia)) {
-            return "Croatian";
-        } else if (nation_name.equalsIgnoreCase(cyprus)) {
-            return "Cypriot";
-        } else if (nation_name.equalsIgnoreCase(czechia)) {
-            return "Czech";
-        } else if (nation_name.equalsIgnoreCase(denmark)) {
-            return "Danish";
-        } else if (nation_name.equalsIgnoreCase(ecuador)) {
-            return "Ecuadorian";
-        } else if (nation_name.equalsIgnoreCase(egypt)) {
-            return "Egyptian";
-        } else if (nation_name.equalsIgnoreCase(emirates)) {
-            return "Emirati";
-        } else if (nation_name.equalsIgnoreCase(england)) {
-            return "English";
-        } else if (nation_name.equalsIgnoreCase(finland)) {
-            return "Finnish";
-        } else if (nation_name.equalsIgnoreCase(france)) {
-            return "French";
-        } else if (nation_name.equalsIgnoreCase(germany)) {
-            return "German";
-        } else if (nation_name.equalsIgnoreCase(ghana)) {
-            return "Ghanaian";
-        } else if (nation_name.equalsIgnoreCase(greece)) {
-            return "Greek";
-        } else if (nation_name.equalsIgnoreCase(honduras)) {
-            return "Honduran";
-        } else if (nation_name.equalsIgnoreCase(hungary)) {
-            return "Hungarian";
-        } else if (nation_name.equalsIgnoreCase(iceland)) {
-            return "Icelandic";
-        } else if (nation_name.equalsIgnoreCase(iran)) {
-            return "Iranian";
-        } else if (nation_name.equalsIgnoreCase(iraq)) {
-            return "Iraqi";
-        } else if (nation_name.equalsIgnoreCase(ireland)) {
-            return "Irish";
-        } else if (nation_name.equalsIgnoreCase(israel)) {
-            return "Israeli";
-        } else if (nation_name.equalsIgnoreCase(italy)) {
-            return "Italian";
-        } else if (nation_name.equalsIgnoreCase(ivory_coast)) {
-            return "Ivorian";
-        } else if (nation_name.equalsIgnoreCase(japan)) {
-            return "Japanese";
-        } else if (nation_name.equalsIgnoreCase(korea)) {
-            return "Korean";
-        } else if (nation_name.equalsIgnoreCase(mexico)) {
-            return "Mexican";
-        } else if (nation_name.equalsIgnoreCase(morocco)) {
-            return "Moroccan";
-        } else if (nation_name.equalsIgnoreCase(netherlands)) {
-            return "Dutch";
-        } else if (nation_name.equalsIgnoreCase(nigeria)) {
-            return "Nigerian";
-        } else if (nation_name.equalsIgnoreCase(norway)) {
-            return "Norwegian";
-        } else if (nation_name.equalsIgnoreCase(paraguay)) {
-            return "Paraguayan";
-        } else if (nation_name.equalsIgnoreCase(peru)) {
-            return "Peruvian";
-        } else if (nation_name.equalsIgnoreCase(poland)) {
-            return "Polish";
-        } else if (nation_name.equalsIgnoreCase(portugal)) {
-            return "Portuguese";
-        } else if (nation_name.equalsIgnoreCase(qatar)) {
-            return "Qatari";
-        } else if (nation_name.equalsIgnoreCase(romania)) {
-            return "Romanian";
-        } else if (nation_name.equalsIgnoreCase(russia)) {
-            return "Russian";
-        } else if (nation_name.equalsIgnoreCase(saudi_arabia)) {
-            return "Saudi";
-        } else if (nation_name.equalsIgnoreCase(scotland)) {
-            return "Scottish";
-        } else if (nation_name.equalsIgnoreCase(senegal)) {
-            return "Senegalese";
-        } else if (nation_name.equalsIgnoreCase(serbia)) {
-            return "Serbian";
-        } else if (nation_name.equalsIgnoreCase(slovakia)) {
-            return "Slovakian";
-        } else if (nation_name.equalsIgnoreCase(slovenia)) {
-            return "Slovenian";
-        } else if (nation_name.equalsIgnoreCase(spain)) {
-            return "Spanish";
-        } else if (nation_name.equalsIgnoreCase(sweden)) {
-            return "Swedish";
-        } else if (nation_name.equalsIgnoreCase(switzerland)) {
-            return "Swiss";
-        } else if (nation_name.equalsIgnoreCase(syria)) {
-            return "Syrian";
-        } else if (nation_name.equalsIgnoreCase(thailand)) {
-            return "Thai";
-        } else if (nation_name.equalsIgnoreCase(tunisia)) {
-            return "Tunisian";
-        } else if (nation_name.equalsIgnoreCase(turkey)) {
-            return "Turkish";
-        } else if (nation_name.equalsIgnoreCase(ukraine)) {
-            return "Ukrainian";
-        } else if (nation_name.equalsIgnoreCase(uruguay)) {
-            return "Uruguayan";
-        } else if (nation_name.equalsIgnoreCase(uzbekistan)) {
-            return "Uzbek";
-        } else if (nation_name.equalsIgnoreCase(venezuela)) {
-            return "Venezuelan";
-        } else if (nation_name.equalsIgnoreCase(wales)) {
-            return "Welsh";
-        } else if (nation_name.equalsIgnoreCase(west_indies)) {
-            return "West Indian";
-        } else if (nation_name.equalsIgnoreCase(moldova)) {
-            return "Moldovan";
-        } else if (nation_name.equalsIgnoreCase(kazakhstan)) {
-            return "Kazakh";
-        } else if (nation_name.equalsIgnoreCase(georgia)) {
-            return "Georgia";
-        } else if (nation_name.equalsIgnoreCase(armenia)) {
-            return "Armenian";
-        } else if (nation_name.equalsIgnoreCase(azerbaijan)) {
-            return "Azeri";
-        } else if (nation_name.equalsIgnoreCase(lithuania)) {
-            return "Lithuanian";
-        } else if (nation_name.equalsIgnoreCase(latvia)) {
-            return "Latvian";
-        } else if (nation_name.equalsIgnoreCase(estonia)) {
-            return "Estonian";
-        } else if (nation_name.equalsIgnoreCase(macedonia)) {
-            return "North Macedonian";
-        } else if (nation_name.equalsIgnoreCase(montenegro)) {
-            return "Montenegrin";
-        } else if (nation_name.equalsIgnoreCase(kosovo)) {
-            return "Kosovar";
-        } else if (nation_name.equalsIgnoreCase(n_ireland)) {
-            return "Northern Irish";
-        } else {
+        Map<String, String> denonyms = new HashMap<>();
+        denonyms.put(albania, "Albanian");
+        denonyms.put(algeria, "Algerian");
+        denonyms.put(argentina, "Argentine");
+        denonyms.put(america, "American");
+        denonyms.put(australia, "Australian");
+        denonyms.put(austria, "Austrian");
+        denonyms.put(belarus, "Belarussian");
+        denonyms.put(belgium, "Belgian");
+        denonyms.put(bolivia, "Bolivian");
+        denonyms.put(bosnia, "Bosnian");
+        denonyms.put(brazil, "Brazilian");
+        denonyms.put(bulgaria, "Bulgarian");
+        denonyms.put(canada, "Canadian");
+        denonyms.put(chile, "Chilean");
+        denonyms.put(china, "Chinese");
+        denonyms.put(colombia, "Colombian");
+        denonyms.put(costa_rica, "Costa Rican");
+        denonyms.put(croatia, "Croatian");
+        denonyms.put(cyprus, "Cypriot");
+        denonyms.put(czechia, "Czech");
+        denonyms.put(denmark, "Danish");
+        denonyms.put(ecuador, "Ecuadorian");
+        denonyms.put(egypt, "Egyptian");
+        denonyms.put(emirates, "Emirati");
+        denonyms.put(england, "English");
+        denonyms.put(finland, "Finnish");
+        denonyms.put(france, "French");
+        denonyms.put(germany, "German");
+        denonyms.put(ghana, "Ghanaian");
+        denonyms.put(greece, "Greek");
+        denonyms.put(honduras, "Honduran");
+        denonyms.put(hungary, "Hungarian");
+        denonyms.put(iceland, "Icelandic");
+        denonyms.put(iran, "Iranian");
+        denonyms.put(iraq, "Iraqi");
+        denonyms.put(ireland, "Irish");
+        denonyms.put(israel, "Israeli");
+        denonyms.put(italy, "Italian");
+        denonyms.put(ivory_coast, "Ivorian");
+        denonyms.put(japan, "Japanese");
+        denonyms.put(korea, "Korean");
+        denonyms.put(mexico, "Mexican");
+        denonyms.put(morocco, "Moroccan");
+        denonyms.put(netherlands, "Dutch");
+        denonyms.put(nigeria, "Nigerian");
+        denonyms.put(norway, "Norwegian");
+        denonyms.put(paraguay, "Paraguayan");
+        denonyms.put(peru, "Peruvian");
+        denonyms.put(poland, "Polish");
+        denonyms.put(portugal, "Portuguese");
+        denonyms.put(qatar, "Qatari");
+        denonyms.put(romania, "Romanian");
+        denonyms.put(russia, "Russian");
+        denonyms.put(saudi_arabia, "Saudi");
+        denonyms.put(scotland, "Scottish");
+        denonyms.put(senegal, "Senegalese");
+        denonyms.put(serbia, "Serbian");
+        denonyms.put(slovakia, "Slovakian");
+        denonyms.put(slovenia, "Slovenian");
+        denonyms.put(spain, "Spanish");
+        denonyms.put(sweden, "Swedish");
+        denonyms.put(switzerland, "Swiss");
+        denonyms.put(syria, "Syrian");
+        denonyms.put(thailand, "Thai");
+        denonyms.put(tunisia, "Tunisian");
+        denonyms.put(turkey, "Turkish");
+        denonyms.put(ukraine, "Ukrainian");
+        denonyms.put(uruguay, "Uruguayan");
+        denonyms.put(uzbekistan, "Uzbek");
+        denonyms.put(venezuela, "Venezuelan");
+        denonyms.put(wales, "Welsh");
+        denonyms.put(west_indies, "West Indian");
+        denonyms.put(moldova, "Moldovan");
+        denonyms.put(kazakhstan, "Kazakh");
+        denonyms.put(georgia, "Georgia");
+        denonyms.put(armenia, "Armenian");
+        denonyms.put(azerbaijan, "Azeri");
+        denonyms.put(lithuania, "Lithuanian");
+        denonyms.put(latvia, "Latvian");
+        denonyms.put(estonia, "Estonian");
+        denonyms.put(macedonia, "North Macedonian");
+        denonyms.put(montenegro, "Montenegrin");
+        denonyms.put(kosovo, "Kosovar");
+        denonyms.put(n_ireland, "Northern Irish");
+        denonyms.put(zambia, "Zambian");
+        denonyms.put(sudan, "Sudanese");
+        denonyms.put(mali, "Malian");
+        denonyms.put(congo, "Congolese");
+        denonyms.put(south_africa, "South African");
+        denonyms.put(angola, "Angolan");
+        denonyms.put(cameroon, "Cameroonian");
+        denonyms.put(guinea, "Guinean");
+        if (denonyms.containsKey(nation_name))
+            return denonyms.get(nation_name);
+        else
             return "Edener";
-        }
     }
 
     // Cities
@@ -543,157 +477,129 @@ public class CatalogueHelper {
             "Querétaro", "Morelia", "Chimalhuacán", "Reynosa", "Torreón", "Tlalnepantla", "Acapulco", "Tlaquepaque",
             "Guadalupe" };
 
+    private static String[] algeriaCities = { "Algiers", "Oran", "Constantine", "Setif", "Tlemcen", "Chlef", "Blida" };
+    private static String[] angolaCities = { "Luanda", "Lubango", "Cabinda", "Benguela", "Huambo", "Malanje",
+            "Lobito" };
+    private static String[] cameroonCities = { "Yaounde", "Douala", "Bamenda", "Garoua", "Kousseri", "Mokolo" };
+    private static String[] ivoryCoastCities = { "Abidjan", "Yamoussoukro", "Daloa", "Bouake", "Divo", "Man" };
+    private static String[] congoCities = { "Kinshasa", "Mbuji-Mayi", "Lubumbashi", "Kananga", "Kisangani", "Bukavu",
+            "Tshikapa", "Bunia" };
+    private static String[] egyptCities = { "Cairo", "Giza", "Alexandria", "Shubra el-Kheima", "Port Said", "Suez",
+            "Luxor", "Aswan" };
+    private static String[] ghanaCities = { "Accra", "Kumasi", "Tamale", "Sekondi-Takoradi", "Ashaiman", "Cape Coast",
+            "Ashanti" };
+    private static String[] guineaCities = { "Conakry", "Nzerekore", "Kankan", "Maneah", "Dubreka" };
+    private static String[] maliCities = { "Bamako", "Sikasso", "Timbaktu", "Kalabancoro", "Koutiala", "Segou" };
+    private static String[] moroccoCities = { "Casablanca", "Rabat", "Tangier", "Fez", "Marrakesh", "Agadir" };
+    private static String[] nigeriaCities = { "Lagos", "Kano", "Ibadan", "Abuja", "Port Harcourt", "Benin City",
+            "Onitsha", "Uyo", "Nnewi", "Kaduna", "Aba", "Ikorodu", "Ilorin", "Owerri", "Warri", "Jos", "Umuahia",
+            "Maiduguri", "Enugu", "Lokoja" };
+    private static String[] southAfricaCities = { "Johannesburg", "Cape Town", "Ekurhuleni", "Durban", "Pretoria",
+            "Port Elizabeth", "Vereeniging", "Gauteng", "Bloemfontein", "Pietermaritzburg" };
+    private static String[] sudanCities = { "Khartoum", "Omdurman", "Nyala" };
+    private static String[] tunisiaCities = { "Tunis", "Sfax", "Sousse", "Ettadhamen", "Kairouan", "Gabes", "Bizerte" };
+    private static String[] senegalCities = { "Dakar", "Touba", "Thies", "Rufisque", "Kaolack", "Ziguinchour",
+            "Tambacounda" };
+    private static String[] zambiaCities = { "Lusaka", "Kitwe", "Ndola", "Kabwe" };
+
     private CatalogueHelper() {
     }
 
     public static String getCity(String nation_name) {
-        if (nation_name.equalsIgnoreCase(england))
-            return CommonFunctions.getRandomElement(englandCities);
-        else if (nation_name.equalsIgnoreCase(spain))
-            return CommonFunctions.getRandomElement(spainCities);
-        else if (nation_name.equalsIgnoreCase(germany))
-            return CommonFunctions.getRandomElement(germanyCities);
-        else if (nation_name.equalsIgnoreCase(france))
-            return CommonFunctions.getRandomElement(franceCities);
-        else if (nation_name.equalsIgnoreCase(italy))
-            return CommonFunctions.getRandomElement(italyCities);
-        else if (nation_name.equalsIgnoreCase(portugal))
-            return CommonFunctions.getRandomElement(portugalCities);
-        else if (nation_name.equalsIgnoreCase(belgium))
-            return CommonFunctions.getRandomElement(belgiumCities);
-        else if (nation_name.equalsIgnoreCase(netherlands))
-            return CommonFunctions.getRandomElement(netherlandsCities);
-        else if (nation_name.equalsIgnoreCase(russia))
-            return CommonFunctions.getRandomElement(russiaCities);
-        else if (nation_name.equalsIgnoreCase(ukraine))
-            return CommonFunctions.getRandomElement(ukraineCities);
-        else if (nation_name.equalsIgnoreCase(austria))
-            return CommonFunctions.getRandomElement(austriaCities);
-        else if (nation_name.equalsIgnoreCase(scotland))
-            return CommonFunctions.getRandomElement(scotlandCities);
-        else if (nation_name.equalsIgnoreCase(turkey))
-            return CommonFunctions.getRandomElement(turkeyCities);
-        else if (nation_name.equalsIgnoreCase(croatia))
-            return CommonFunctions.getRandomElement(croatiaCities);
-        else if (nation_name.equalsIgnoreCase(denmark))
-            return CommonFunctions.getRandomElement(denmarkCities);
-        else if (nation_name.equalsIgnoreCase(czechia))
-            return CommonFunctions.getRandomElement(czechiaCities);
-        else if (nation_name.equalsIgnoreCase(greece))
-            return CommonFunctions.getRandomElement(greeceCities);
-        else if (nation_name.equalsIgnoreCase(switzerland))
-            return CommonFunctions.getRandomElement(switzerlandCities);
-        else if (nation_name.equalsIgnoreCase(cyprus))
-            return CommonFunctions.getRandomElement(cyprusCities);
-        else if (nation_name.equalsIgnoreCase(serbia))
-            return CommonFunctions.getRandomElement(serbiaCities);
-        else if (nation_name.equalsIgnoreCase(norway))
-            return CommonFunctions.getRandomElement(norwayCities);
-        else if (nation_name.equalsIgnoreCase(romania))
-            return CommonFunctions.getRandomElement(romaniaCities);
-        else if (nation_name.equalsIgnoreCase(israel))
-            return CommonFunctions.getRandomElement(israelCities);
-        else if (nation_name.equalsIgnoreCase(poland))
-            return CommonFunctions.getRandomElement(polandCities);
-        else if (nation_name.equalsIgnoreCase(hungary))
-            return CommonFunctions.getRandomElement(hungaryCities);
-        else if (nation_name.equalsIgnoreCase(argentina))
-            return CommonFunctions.getRandomElement(argentinaCities);
-        else if (nation_name.equalsIgnoreCase(brazil))
-            return CommonFunctions.getRandomElement(brazilCities);
-        else if (nation_name.equalsIgnoreCase(chile))
-            return CommonFunctions.getRandomElement(chileCities);
-        else if (nation_name.equalsIgnoreCase(colombia))
-            return CommonFunctions.getRandomElement(colombiaCities);
-        else if (nation_name.equalsIgnoreCase(venezuela))
-            return CommonFunctions.getRandomElement(venezuelaCities);
-        else if (nation_name.equalsIgnoreCase(bolivia))
-            return CommonFunctions.getRandomElement(boliviaCities);
-        else if (nation_name.equalsIgnoreCase(paraguay))
-            return CommonFunctions.getRandomElement(paraguayCities);
-        else if (nation_name.equalsIgnoreCase(uruguay))
-            return CommonFunctions.getRandomElement(uruguayCities);
-        else if (nation_name.equalsIgnoreCase(ecuador))
-            return CommonFunctions.getRandomElement(ecuadorCities);
-        else if (nation_name.equalsIgnoreCase(peru))
-            return CommonFunctions.getRandomElement(peruCities);
-        else if (nation_name.equalsIgnoreCase(belarus))
-            return CommonFunctions.getRandomElement(belarusCities);
-        else if (nation_name.equalsIgnoreCase(slovakia))
-            return CommonFunctions.getRandomElement(slovakiaCities);
-        else if (nation_name.equalsIgnoreCase(slovenia))
-            return CommonFunctions.getRandomElement(sloveniaCities);
-        else if (nation_name.equalsIgnoreCase(bulgaria))
-            return CommonFunctions.getRandomElement(bulgariaCities);
-        else if (nation_name.equalsIgnoreCase(sweden))
-            return CommonFunctions.getRandomElement(swedenCities);
-        else if (nation_name.equalsIgnoreCase(albania))
-            return CommonFunctions.getRandomElement(albaniaCities);
-        else if (nation_name.equalsIgnoreCase(bosnia))
-            return CommonFunctions.getRandomElement(bosniaCities);
-        else if (nation_name.equalsIgnoreCase(finland))
-            return CommonFunctions.getRandomElement(finlandCities);
-        else if (nation_name.equalsIgnoreCase(ireland))
-            return CommonFunctions.getRandomElement(irelandCities);
-        else if (nation_name.equalsIgnoreCase(iceland))
-            return CommonFunctions.getRandomElement(icelandCities);
-        else if (nation_name.equalsIgnoreCase(wales))
-            return CommonFunctions.getRandomElement(walesCities);
-        else if (nation_name.equalsIgnoreCase(japan))
-            return CommonFunctions.getRandomElement(japanCities);
-        else if (nation_name.equalsIgnoreCase(china))
-            return CommonFunctions.getRandomElement(chinaCities);
-        else if (nation_name.equalsIgnoreCase(iran))
-            return CommonFunctions.getRandomElement(iranCities);
-        else if (nation_name.equalsIgnoreCase(korea))
-            return CommonFunctions.getRandomElement(koreaCities);
-        else if (nation_name.equalsIgnoreCase(saudi_arabia))
-            return CommonFunctions.getRandomElement(saudiArabiaCities);
-        else if (nation_name.equalsIgnoreCase(qatar))
-            return CommonFunctions.getRandomElement(qatarCities);
-        else if (nation_name.equalsIgnoreCase(emirates))
-            return CommonFunctions.getRandomElement(emiratesCities);
-        else if (nation_name.equalsIgnoreCase(iraq))
-            return CommonFunctions.getRandomElement(iraqCities);
-        else if (nation_name.equalsIgnoreCase(syria))
-            return CommonFunctions.getRandomElement(syriaCities);
-        else if (nation_name.equalsIgnoreCase(australia))
-            return CommonFunctions.getRandomElement(australiaCities);
-        else if (nation_name.equalsIgnoreCase(thailand))
-            return CommonFunctions.getRandomElement(thailandCities);
-        else if (nation_name.equalsIgnoreCase(uzbekistan))
-            return CommonFunctions.getRandomElement(uzbekistanCities);
-        else if (nation_name.equalsIgnoreCase(america))
-            return CommonFunctions.getRandomElement(usaCities);
-        else if (nation_name.equalsIgnoreCase(canada))
-            return CommonFunctions.getRandomElement(canadaCities);
-        else if (nation_name.equalsIgnoreCase(mexico))
-            return CommonFunctions.getRandomElement(mexicoCities);
-        else if (nation_name.equalsIgnoreCase(moldova))
-            return CommonFunctions.getRandomElement(moldovaCities);
-        else if (nation_name.equalsIgnoreCase(kazakhstan))
-            return CommonFunctions.getRandomElement(kazakhstanCities);
-        else if (nation_name.equalsIgnoreCase(georgia))
-            return CommonFunctions.getRandomElement(georgiaCities);
-        else if (nation_name.equalsIgnoreCase(armenia))
-            return CommonFunctions.getRandomElement(armeniaCities);
-        else if (nation_name.equalsIgnoreCase(azerbaijan))
-            return CommonFunctions.getRandomElement(azerbaijanCities);
-        else if (nation_name.equalsIgnoreCase(lithuania))
-            return CommonFunctions.getRandomElement(lithuaniaCities);
-        else if (nation_name.equalsIgnoreCase(latvia))
-            return CommonFunctions.getRandomElement(latviaCities);
-        else if (nation_name.equalsIgnoreCase(estonia))
-            return CommonFunctions.getRandomElement(estoniaCities);
-        else if (nation_name.equalsIgnoreCase(macedonia))
-            return CommonFunctions.getRandomElement(macedoniaCities);
-        else if (nation_name.equalsIgnoreCase(montenegro))
-            return CommonFunctions.getRandomElement(montenegroCities);
-        else if (nation_name.equalsIgnoreCase(kosovo))
-            return CommonFunctions.getRandomElement(kosovoCities);
-        else if (nation_name.equalsIgnoreCase(n_ireland))
-            return CommonFunctions.getRandomElement(n_irelandCities);
-        return "Eden";
+        Map<String, String[]> cities = new HashMap<>();
+        cities.put(england, englandCities);
+        cities.put(spain, spainCities);
+        cities.put(germany, germanyCities);
+        cities.put(france, franceCities);
+        cities.put(italy, italyCities);
+        cities.put(portugal, portugalCities);
+        cities.put(belgium, belgiumCities);
+        cities.put(netherlands, netherlandsCities);
+        cities.put(russia, russiaCities);
+        cities.put(ukraine, ukraineCities);
+        cities.put(austria, austriaCities);
+        cities.put(scotland, scotlandCities);
+        cities.put(turkey, turkeyCities);
+        cities.put(croatia, croatiaCities);
+        cities.put(denmark, denmarkCities);
+        cities.put(czechia, czechiaCities);
+        cities.put(greece, greeceCities);
+        cities.put(switzerland, switzerlandCities);
+        cities.put(cyprus, cyprusCities);
+        cities.put(serbia, serbiaCities);
+        cities.put(norway, norwayCities);
+        cities.put(romania, romaniaCities);
+        cities.put(israel, israelCities);
+        cities.put(poland, polandCities);
+        cities.put(hungary, hungaryCities);
+        cities.put(argentina, argentinaCities);
+        cities.put(brazil, brazilCities);
+        cities.put(chile, chileCities);
+        cities.put(colombia, colombiaCities);
+        cities.put(venezuela, venezuelaCities);
+        cities.put(bolivia, boliviaCities);
+        cities.put(paraguay, paraguayCities);
+        cities.put(uruguay, uruguayCities);
+        cities.put(ecuador, ecuadorCities);
+        cities.put(peru, peruCities);
+        cities.put(belarus, belarusCities);
+        cities.put(slovakia, slovakiaCities);
+        cities.put(slovenia, sloveniaCities);
+        cities.put(bulgaria, bulgariaCities);
+        cities.put(sweden, swedenCities);
+        cities.put(albania, albaniaCities);
+        cities.put(bosnia, bosniaCities);
+        cities.put(finland, finlandCities);
+        cities.put(ireland, irelandCities);
+        cities.put(iceland, icelandCities);
+        cities.put(wales, walesCities);
+        cities.put(japan, japanCities);
+        cities.put(china, chinaCities);
+        cities.put(iran, iranCities);
+        cities.put(korea, koreaCities);
+        cities.put(saudi_arabia, saudiArabiaCities);
+        cities.put(qatar, qatarCities);
+        cities.put(emirates, emiratesCities);
+        cities.put(iraq, iraqCities);
+        cities.put(syria, syriaCities);
+        cities.put(australia, australiaCities);
+        cities.put(thailand, thailandCities);
+        cities.put(uzbekistan, uzbekistanCities);
+        cities.put(america, usaCities);
+        cities.put(canada, canadaCities);
+        cities.put(mexico, mexicoCities);
+        cities.put(moldova, moldovaCities);
+        cities.put(kazakhstan, kazakhstanCities);
+        cities.put(georgia, georgiaCities);
+        cities.put(armenia, armeniaCities);
+        cities.put(azerbaijan, azerbaijanCities);
+        cities.put(lithuania, lithuaniaCities);
+        cities.put(latvia, latviaCities);
+        cities.put(estonia, estoniaCities);
+        cities.put(macedonia, macedoniaCities);
+        cities.put(montenegro, montenegroCities);
+        cities.put(kosovo, kosovoCities);
+        cities.put(n_ireland, n_irelandCities);
+        cities.put(algeria, algeriaCities);
+        cities.put(angola, angolaCities);
+        cities.put(cameroon, cameroonCities);
+        cities.put(ivory_coast, ivoryCoastCities);
+        cities.put(congo, congoCities);
+        cities.put(egypt, egyptCities);
+        cities.put(ghana, ghanaCities);
+        cities.put(guinea, guineaCities);
+        cities.put(mali, maliCities);
+        cities.put(morocco, moroccoCities);
+        cities.put(nigeria, nigeriaCities);
+        cities.put(south_africa, southAfricaCities);
+        cities.put(sudan, sudanCities);
+        cities.put(tunisia, tunisiaCities);
+        cities.put(senegal, senegalCities);
+        cities.put(zambia, zambiaCities);
+        if (cities.containsKey(nation_name))
+            return CommonFunctions.getRandomElement(cities.get(nation_name));
+        else
+            return "Eden";
     }
 
     // Prefixes and Suffixes
@@ -794,13 +700,13 @@ public class CatalogueHelper {
     private static String[] finlandPrefixes = { "IFK", "FC", "AC", "JK", "PS" };
 
     private static String[] macedoniaPrefixes = { "KF", "FK", "Vardar", "GFK" };
-    
+
     private static String[] georgiaPrefixes = { "Dila", "Dinamo", "Torpedo", "FC", "Locomotive" };
-    private static String[] georgiaSuffixes = { "FC", "City" }; 
+    private static String[] georgiaSuffixes = { "FC", "City" };
 
     private static String[] armeniaPrefixes = { "Armenia", "Ararat", "Lokomotiv", "FC", "Pyunik" };
     private static String[] armeniaSuffixes = { "FC", "SC" };
-    
+
     private static String[] azeriPrefixes = { "PFK", "FC", "FK" };
 
     private static String[] kazakhstanPrefixes = { "FC", "Shakhtyor", "Spartak", "Traktor" };
@@ -818,7 +724,8 @@ public class CatalogueHelper {
     public static List<String[]> getPrefixOrSuffixData(String nation_name) {
         String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay, venezuela };
         List<String[]> data = new ArrayList<>();
-        if (nation_name.equalsIgnoreCase(england) || nation_name.equalsIgnoreCase(scotland) || nation_name.equalsIgnoreCase(ireland) || nation_name.equalsIgnoreCase(n_ireland)) {
+        if (nation_name.equalsIgnoreCase(england) || nation_name.equalsIgnoreCase(scotland)
+                || nation_name.equalsIgnoreCase(ireland) || nation_name.equalsIgnoreCase(n_ireland)) {
             data.add(englandPrefixes);
             data.add(englandSuffixes);
         } else if (nation_name.equalsIgnoreCase(spain)) {

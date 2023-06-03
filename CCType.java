@@ -5,6 +5,7 @@ public class CCType {
         ASIA,
         AFRICA,
         NORTH_AMERICA,
+        WORLD,
         DEFAULT
     }
 
@@ -21,6 +22,8 @@ public class CCType {
         NACL(1, "North American Champions League", "NACL", Continent.NORTH_AMERICA),
 
         ACC(1, "African Champions Cup", "ACC", Continent.AFRICA),
+
+        CWC(1, "Club World Championship", "CWC", Continent.WORLD),
 
         DEFAULT(1, "DEFAULT", "DEF", Continent.DEFAULT);
 

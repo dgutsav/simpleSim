@@ -570,5 +570,9 @@ public class ControllerSAmerica {
         showHistory(CCType.CompType.LIB);
         showHistory(CCType.CompType.SUD);
     }
+
+    public static Map<CCType.CompType, List<CompetitionHistory>> getHistory() {
+        return history;
+    }
     // #endregion CompetitionHistory
 }
