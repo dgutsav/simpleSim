@@ -16,19 +16,9 @@ public class ControllerNAmerica {
         FINAL("North American Champions League Final", CCType.StageType.KNOCKOUT, CCType.CompType.NACL, false);
 
         private final String stage_name;
-        private final CCType.StageType stage_type;
 
         Stage(String stage_name, CCType.StageType stage_type, CCType.CompType competition, boolean qualifying) {
             this.stage_name = stage_name;
-            this.stage_type = stage_type;
-        }
-
-        public String stage_name() {
-            return this.stage_name;
-        }
-
-        public CCType.StageType stage_type() {
-            return this.stage_type;
         }
     }
 

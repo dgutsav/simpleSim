@@ -168,9 +168,9 @@ public class Sim {
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerSAmerica.simulate();
             ControllerEurope.simulate();
-            ControllerAsia.simulate();
             ControllerNAmerica.simulate();
             ControllerAfrica.simulate();
+            ControllerAsia.simulate();
             ControllerCWC.simulate();
         }
         seasonEndChanges();

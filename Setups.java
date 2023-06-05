@@ -209,13 +209,19 @@ public class Setups {
         setups.add(new Nation_Setup("Korea", "KOR", 38, 3, 1, 18, 66, 139, "Asia"));
         setups.add(new Nation_Setup("Uzbekistan", "UZB", 85, 4, 1, 18, 60, 130, "Asia"));
         setups.add(new Nation_Setup("Saudi Arabia", "SAU", 67, 5, 1, 18, 64, 127, "Asia"));
-        setups.add(new Nation_Setup("Iran", "IRN", 29, 6, 1, 18, 65, 133, "Asia"));
-        setups.add(new Nation_Setup("Qatar", "QAT", 58, 7, 1, 18, 63, 129, "Asia"));
-        setups.add(new Nation_Setup("Emirates", "UAE", 74, 8, 1, 18, 63, 127, "Asia"));
-        setups.add(new Nation_Setup("Australia", "AUS", 41, 9, 1, 18, 67, 136, "Asia"));
-        setups.add(new Nation_Setup("Thailand", "THA", 111, 10, 1, 18, 60, 115, "Asia"));
-        setups.add(new Nation_Setup("Syria", "SYR", 76, 11, 1, 18, 57, 121, "Asia"));
-        setups.add(new Nation_Setup("Iraq", "IRQ", 69, 12, 1, 18, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("Iran", "IRN", 29, 6, 1, 20, 65, 133, "Asia"));
+        setups.add(new Nation_Setup("Qatar", "QAT", 58, 7, 1, 10, 63, 129, "Asia"));
+        setups.add(new Nation_Setup("Emirates", "UAE", 74, 8, 1, 10, 63, 127, "Asia"));
+        setups.add(new Nation_Setup("Australia", "AUS", 41, 9, 1, 8, 67, 136, "Asia"));
+        setups.add(new Nation_Setup("Thailand", "THA", 111, 10, 1, 12, 60, 115, "Asia"));
+        setups.add(new Nation_Setup("Syria", "SYR", 76, 18, 1, 10, 57, 121, "Asia"));
+        setups.add(new Nation_Setup("Iraq", "IRQ", 69, 17, 1, 10, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("India", "IND", 69, 12, 1, 16, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("New Zealand", "NZL", 69, 16, 1, 8, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("Malaysia", "MAS", 69, 14, 1, 18, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("Indonesia", "IDN", 69, 15, 1, 14, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("Jordan", "JOR", 69, 16, 1, 10, 59, 122, "Asia"));
+        setups.add(new Nation_Setup("Vietnam", "VIE", 69, 13, 1, 14, 59, 122, "Asia"));
         return setups;
     }
 

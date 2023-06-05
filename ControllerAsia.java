@@ -15,19 +15,33 @@ public class ControllerAsia {
 
     private enum SeedingType {
         WEST_GROUP,
-        WEST_QUALIFIER,
+        WEST_QUALIFIER_CH,
+        WEST_QUALIFIER_NC_1,
+        WEST_QUALIFIER_NC_2,
         EAST_GROUP,
-        EAST_QUALIFIER,
+        EAST_QUALIFIER_CH,
+        EAST_QUALIFIER_NC_1,
+        EAST_QUALIFIER_NC_2,
         DEFAULT
     }
 
     private enum Stage {
-        Q_EAST("ACL East Zone Qualifying Round", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, true),
+        Q_EAST_CH("ACL East Zone Qualifying Round Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, true),
+        Q1_EAST_NC("ACL East Zone First Qualifying Round Non-Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL,
+                true),
+        Q2_EAST_NC("ACL East Zone Second Qualifying Round Non-Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL,
+                true),
         GROUP_EAST("ACL East Zone Group Stage", CCType.StageType.GROUPS, CCType.CompType.ACL, false),
+        QF_EAST("ACL East Zone Quarter Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
         SF_EAST("ACL East Zone Semi Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
         FINAL_EAST("ACL East Zone Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
-        Q_WEST("ACL West Zone Qualifying Round", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, true),
+        Q_WEST_CH("ACL West Zone Qualifying Round Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, true),
+        Q1_WEST_NC("ACL West Zone First Qualifying Round Non-Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL,
+                true),
+        Q2_WEST_NC("ACL West Zone Second Qualifying Round Non-Champion", CCType.StageType.KNOCKOUT, CCType.CompType.ACL,
+                true),
         GROUP_WEST("ACL West Zone Group Stage", CCType.StageType.GROUPS, CCType.CompType.ACL, false),
+        QF_WEST("ACL West Zone Quarter Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
         SF_WEST("ACL West Zone Semi Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
         FINAL_WEST("ACL West Zone Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false),
         FINAL("Asian Champions League Grand Final", CCType.StageType.KNOCKOUT, CCType.CompType.ACL, false);
@@ -64,12 +78,18 @@ public class ControllerAsia {
             case "Uzbekistan":
             case "Emirates":
             case "Qatar":
+            case "India":
+            case "Jordan":
                 return Zone.WEST;
             case "Korea":
             case "Japan":
             case "China":
             case "Thailand":
             case "Australia":
+            case "New Zealand":
+            case "Malaysia":
+            case "Vietnam":
+            case "Indonesia":
                 return Zone.EAST;
         }
         return Zone.DEFAULT;
@@ -96,49 +116,59 @@ public class ControllerAsia {
 
     private static int getPlaces(Nation nation) {
         int ranking = getZonalRanking(nation);
-        if (getZone(nation) == Zone.EAST) {
-            if (ranking <= 2)
-                return 3;
-            else if (ranking <= 4)
-                return 2;
-            else
-                return 1;
-        } else if (getZone(nation) == Zone.WEST) {
-            if (ranking <= 4)
-                return 2;
-            else
-                return 1;
-        }
+        if (ranking <= 2)
+            return 4;
+        else if (ranking <= 4)
+            return 3;
+        else if (ranking <= 6)
+            return 2;
+        else if (ranking <= 9)
+            return 1;
         return 0;
     }
 
     private static SeedingType getSeeding(Nation nation, int rank) {
         Zone zone = getZone(nation);
         int zone_rank = getZonalRanking(nation);
+        int seed = 0;
+        if (zone_rank <= 2) {
+            if (rank <= 3)
+                seed = 1;
+            else
+                seed = 2;
+        } else if (zone_rank <= 4) {
+            if (rank <= 2)
+                seed = 1;
+            else
+                seed = 3;
+        } else if (zone_rank <= 6) {
+            if (rank == 1)
+                seed = 1;
+            else
+                seed = 3;
+        } else if (zone_rank <= 7 && rank == 1)
+            seed = 1;
+        else if (zone_rank <= 9 && rank == 1)
+            seed = 4;
         switch (zone) {
             case EAST:
-                if (zone_rank <= 2) {
-                    if (rank <= 2)
-                        return SeedingType.EAST_GROUP;
-                    else
-                        return SeedingType.EAST_QUALIFIER;
-                } else if (zone_rank <= 4) {
-                    if (rank == 1)
-                        return SeedingType.EAST_GROUP;
-                    else
-                        return SeedingType.EAST_QUALIFIER;
-                } else if (zone_rank <= 5 && rank == 1)
+                if (seed == 1)
                     return SeedingType.EAST_GROUP;
+                else if (seed == 2)
+                    return SeedingType.EAST_QUALIFIER_NC_1;
+                else if (seed == 3)
+                    return SeedingType.EAST_QUALIFIER_NC_2;
+                else if (seed == 4)
+                    return SeedingType.EAST_QUALIFIER_CH;
             case WEST:
-                if (zone_rank <= 4) {
-                    if (rank == 1)
-                        return SeedingType.WEST_GROUP;
-                    else
-                        return SeedingType.WEST_QUALIFIER;
-                } else if (zone_rank <= 7 && rank == 1)
+                if (seed == 1)
                     return SeedingType.WEST_GROUP;
-            case DEFAULT:
-                return SeedingType.DEFAULT;
+                else if (seed == 2)
+                    return SeedingType.WEST_QUALIFIER_NC_1;
+                else if (seed == 3)
+                    return SeedingType.WEST_QUALIFIER_NC_2;
+                else if (seed == 4)
+                    return SeedingType.WEST_QUALIFIER_CH;
         }
         return SeedingType.DEFAULT;
     }
@@ -169,22 +199,20 @@ public class ControllerAsia {
         switch (stage) {
             case GROUP_EAST:
                 return SeedingType.EAST_GROUP;
+            case Q_EAST_CH:
+                return SeedingType.EAST_QUALIFIER_CH;
+            case Q1_EAST_NC:
+                return SeedingType.EAST_QUALIFIER_NC_1;
+            case Q2_EAST_NC:
+                return SeedingType.EAST_QUALIFIER_NC_2;
             case GROUP_WEST:
                 return SeedingType.WEST_GROUP;
-            case Q_EAST:
-                return SeedingType.EAST_QUALIFIER;
-            case Q_WEST:
-                return SeedingType.WEST_QUALIFIER;
-            case FINAL:
-                break;
-            case FINAL_EAST:
-                break;
-            case FINAL_WEST:
-                break;
-            case SF_EAST:
-                break;
-            case SF_WEST:
-                break;
+            case Q_WEST_CH:
+                return SeedingType.WEST_QUALIFIER_CH;
+            case Q1_WEST_NC:
+                return SeedingType.WEST_QUALIFIER_NC_1;
+            case Q2_WEST_NC:
+                return SeedingType.WEST_QUALIFIER_NC_2;
             default:
                 break;
         }
@@ -210,22 +238,28 @@ public class ControllerAsia {
             case FINAL_EAST:
                 stages.add(Stage.SF_EAST);
                 break;
+            case SF_EAST:
+                stages.add(Stage.QF_EAST);
+                break;
+            case SF_WEST:
+                stages.add(Stage.QF_WEST);
+                break;
             case GROUP_EAST:
-                stages.add(Stage.Q_EAST);
+                stages.add(Stage.Q2_EAST_NC);
+                stages.add(Stage.Q_EAST_CH);
                 break;
             case FINAL_WEST:
                 stages.add(Stage.SF_WEST);
                 break;
             case GROUP_WEST:
-                stages.add(Stage.Q_WEST);
+                stages.add(Stage.Q2_WEST_NC);
+                stages.add(Stage.Q_WEST_CH);
                 break;
-            case Q_EAST:
+            case Q2_WEST_NC:
+                stages.add(Stage.Q1_WEST_NC);
                 break;
-            case Q_WEST:
-                break;
-            case SF_EAST:
-                break;
-            case SF_WEST:
+            case Q2_EAST_NC:
+                stages.add(Stage.Q1_EAST_NC);
                 break;
             default:
                 break;
@@ -259,7 +293,7 @@ public class ControllerAsia {
     }
 
     private static int NUM_POTS = 4;
-    private static int NUM_GROUPS = 2;
+    private static int NUM_GROUPS = 4;
 
     private static String[][] divideIntoPots(List<String> teams) {
         String[][] pots = new String[NUM_POTS][NUM_GROUPS];
@@ -407,10 +441,10 @@ public class ControllerAsia {
         ArrayList<String> seeded = new ArrayList<>();
         ArrayList<String> unseeded = new ArrayList<>();
 
-        if (stage == Stage.SF_EAST) {
+        if (stage == Stage.QF_EAST) {
             seeded.addAll(getGroupTeamsAtRank(Stage.GROUP_EAST, 1));
             unseeded.addAll(getGroupTeamsAtRank(Stage.GROUP_EAST, 2));
-        } else if (stage == Stage.SF_WEST) {
+        } else if (stage == Stage.QF_WEST) {
             seeded.addAll(getGroupTeamsAtRank(Stage.GROUP_WEST, 1));
             unseeded.addAll(getGroupTeamsAtRank(Stage.GROUP_WEST, 2));
         }
@@ -429,10 +463,18 @@ public class ControllerAsia {
     }
 
     private static void qualifiers() {
-        setStage(Stage.Q_EAST);
-        simulateStage(Stage.Q_EAST);
-        setStage(Stage.Q_WEST);
-        simulateStage(Stage.Q_WEST);
+        setStage(Stage.Q1_EAST_NC);
+        simulateStage(Stage.Q1_EAST_NC);
+        setStage(Stage.Q1_WEST_NC);
+        simulateStage(Stage.Q1_WEST_NC);
+        setStage(Stage.Q2_EAST_NC);
+        simulateStage(Stage.Q2_EAST_NC);
+        setStage(Stage.Q2_WEST_NC);
+        simulateStage(Stage.Q2_WEST_NC);
+        setStage(Stage.Q_WEST_CH);
+        simulateStage(Stage.Q_WEST_CH);
+        setStage(Stage.Q_EAST_CH);
+        simulateStage(Stage.Q_EAST_CH);
     }
 
     private static void setGroups() {
@@ -440,9 +482,19 @@ public class ControllerAsia {
         setStage(Stage.GROUP_WEST);
     }
 
+    private static void setQFStage() {
+        setSFStage(Stage.QF_EAST);
+        setSFStage(Stage.QF_WEST);
+    }
+
+    private static void simulateQFStage() {
+        simulateStage(Stage.QF_EAST);
+        simulateStage(Stage.QF_WEST);
+    }
+
     private static void setSFStage() {
-        setSFStage(Stage.SF_EAST);
-        setSFStage(Stage.SF_WEST);
+        setStage(Stage.SF_EAST);
+        setStage(Stage.SF_WEST);
     }
 
     private static void simulateSFStage() {
@@ -478,6 +530,8 @@ public class ControllerAsia {
         qualifiers();
         setGroups();
         simulateGroupStage();
+        setQFStage();
+        simulateQFStage();
         setSFStage();
         simulateSFStage();
         setZoneFinals();
