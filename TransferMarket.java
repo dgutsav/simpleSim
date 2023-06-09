@@ -92,9 +92,10 @@ public class TransferMarket {
         int rating_cutoff = 84;
         Map<String, Player> players = Sim.sortByRating(Sim.getAllPlayers());
         List<Player> prem_players = new ArrayList<>();
-        for(Map.Entry<String, Player> entry: players.entrySet()) {
+        for (Map.Entry<String, Player> entry : players.entrySet()) {
             Player player = entry.getValue();
-            if(player.getRating() < rating_cutoff) break;
+            if (player.getRating() < rating_cutoff)
+                break;
             prem_players.add(player);
             player_list_map.put(entry.getKey(), key);
         }
@@ -112,7 +113,8 @@ public class TransferMarket {
             for (String club_id : league.getTeams()) {
                 Club_Team club = Sim.getClub(club_id);
                 for (String player_id : club.getSeniorPlayers()) {
-                    if (player_list_map.containsKey(player_id)) continue;
+                    if (player_list_map.containsKey(player_id))
+                        continue;
                     players.add(Sim.getPlayer(player_id));
                     player_list_map.put(player_id, key);
                 }
@@ -161,19 +163,22 @@ public class TransferMarket {
         List<Player> players = new ArrayList<>();
         ArrayList<String> fav_nations = new ArrayList<>();
         fav_nations.addAll(Arrays.asList(CatalogueHelper.getFavourableNations(nat.getName())));
-        if (fav_nations.contains(nat.getName()))
+        if (!fav_nations.contains(nat.getName()))
             fav_nations.add(nat.getName());
         for (String fav_nation : fav_nations) {
             List<String> list_names = key_list.get(fav_nation);
             if (list_names == null)
                 System.out.println("No lists found for country " + fav_nation);
-            for (String list_name : list_names) {
-                List<Player> league_list = lists.get(list_name);
-                if (league_list == null)
-                    System.out.println("No List found for name " + list_name);
-                players.addAll(league_list);
+            else {
+                for (String list_name : list_names) {
+                    List<Player> league_list = lists.get(list_name);
+                    if (league_list == null)
+                        System.out.println("No List found for name " + list_name);
+                    players.addAll(league_list);
+                }
             }
         }
+        players = Sim.sortByRating(players);
         return players;
     }
 
@@ -218,17 +223,17 @@ public class TransferMarket {
             }
             if (players_searched == players.size()) {
                 System.out.println("Nation: " + Sim.getNation(nation_id).getName() + " targets not met: "
-                        + (league_targets.size() - targets_met));
-                // for (Target target : league_targets) {
-                //     if (!target.hasMadeOffer()) {
-                //         System.out.print("Target Rating: " + target.getRating());
-                //         System.out.print(" Position: " + target.getPosition());
-                //         System.out.print(" Price: " + target.getPrice());
-                //         System.out.print(" Club: " + target.getClub().getName());
-                //         System.out.print(" Club Rating: " + target.getClub().getBestSquadRating());
-                //         System.out.println(" Level: " + target.getDivLevel());
-                //     }
-                // }
+                        + (league_targets.size() - targets_met) + " out of " + players.size() + " players");
+                for (Target target : league_targets) {
+                    if (!target.hasMadeOffer()) {
+                        System.out.print("Target Rating: " + target.getRating());
+                        System.out.print(" Position: " + target.getPosition());
+                        System.out.print(" Price: " + CommonFunctions.formatMoney(target.getPrice()));
+                        System.out.print(" Club: " + target.getClub().getName());
+                        System.out.print(" Club Rating: " + target.getClub().getBestSquadRating());
+                        System.out.println(" Level: " + target.getDivLevel());
+                    }
+                }
             }
         }
         ArrayList<Offer> finalizedOffers = new ArrayList<>();

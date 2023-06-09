@@ -17,8 +17,8 @@ public class Setups {
     public static List<Nation_Setup> getTestSetup() {
         List<Nation_Setup> setups = new ArrayList<>();
         // Europe
-        setups.add(new Nation_Setup("England", "ENG", 4, 1, 2, 20, 80, 157, "Europe"));
-        setups.add(new Nation_Setup("Spain", "ESP", 4, 2, 2, 20, 80, 157, "Europe"));
+        setups.add(new Nation_Setup("England", "ENG", 4, 1, 1, 4, 80, 157, "Europe"));
+        //setups.add(new Nation_Setup("Spain", "ESP", 4, 2, 2, 20, 80, 157, "Europe"));
         return setups;
     }
 

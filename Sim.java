@@ -460,8 +460,8 @@ public class Sim {
 
     public static void main(String[] args) {
         TEST = false;
-        USE_TRANSFER_MARKET = false;
-        int num_seasons = 1;
+        USE_TRANSFER_MARKET = true;
+        int num_seasons = 10;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -478,14 +478,14 @@ public class Sim {
         for (int i = 0; i < num_seasons; i++) {
             System.out.println(i + " " + d[i] / 1000000000);
         }
-        // if (Sim.SHOW_DETAILS && !Sim.TEST) {
-        //     showCompetitionHistories();
-        //     showTeams();
-        //     showPlayers();
-        //     showNationalTeams();
-        //     TransferMarket.showTopTransfers();
-        //     TransferMarket.showTransferStats();
-        //     ControllerEurope.showLeagueRankings();
-        // }
+        if (Sim.SHOW_DETAILS && !Sim.TEST) {
+            showCompetitionHistories();
+            showTeams();
+            showPlayers();
+            showNationalTeams();
+            TransferMarket.showTopTransfers();
+            TransferMarket.showTransferStats();
+            ControllerEurope.showLeagueRankings();
+        }
     }
 }

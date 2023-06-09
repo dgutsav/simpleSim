@@ -41,28 +41,43 @@ public class MarketHelper {
             return false;
         }
         long clubs_max_valuation = (long) (getPlayerValue(player, buying_club) * 1.1);
-        if (clubs_max_valuation < market_value || market_value > target.getPrice()) {
+        log(buying_club.getName() + " " + player.getName() + " MV: " + CommonFunctions.formatMoney(market_value)
+                + " CV: " + CommonFunctions.formatMoney(clubs_max_valuation) + " TP: "
+                + CommonFunctions.formatMoney(target.getPrice()));
+        if (clubs_max_valuation > target.getPrice()) {
+            log("Asking Price too high");
             return false;
         }
         Club_Team selling_club = Sim.getClub(club_id);
         int rank = selling_club.getPlayerRankAtClub(player);
         if (rank != 1) {
+            log(buying_club.getName() + " to make offer for " + player.getName() + " of " + selling_club.getName());
             return true;
         }
         int rep_diff = selling_club.getReputation() - buying_club.getReputation();
         int abs_diff = (int) (Math.abs(rep_diff));
         if (Sim.findTeamInLeague(buying_club).equalsIgnoreCase(Sim.findTeamInLeague(selling_club))) {
             if (abs_diff <= 200) {
+                log("Clubs of same strature");
                 return false;
             }
         } else {
             if (abs_diff <= 100) {
+                log("Clubs of same strature");
                 return false;
             }
         }
         if (buying_club.getPlayerRankAtClub(player) > rank && rep_diff < 500) {
+            log("Not promising project");
             return false;
         }
+        log(buying_club.getName() + " to make offer for " + player.getName() + " of " + selling_club.getName());
         return true;
+    }
+
+    private static void log(String str) {
+        boolean DEBUG = false;
+        if (DEBUG)
+            System.out.println(str);
     }
 }

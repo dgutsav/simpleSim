@@ -134,6 +134,9 @@ public class ControllerCWC {
     }
 
     public static void simulate() {
+        teams = new ArrayList<>();
+        stages = new HashMap<>();
+        groups = new HashMap<>();
         getTeams();
         setGroups();
         simulateGroupStage();

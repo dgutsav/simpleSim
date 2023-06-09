@@ -169,6 +169,8 @@ public class ControllerAsia {
                     return SeedingType.WEST_QUALIFIER_NC_2;
                 else if (seed == 4)
                     return SeedingType.WEST_QUALIFIER_CH;
+            default:
+                break;
         }
         return SeedingType.DEFAULT;
     }
