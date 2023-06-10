@@ -118,4 +118,14 @@ public class KnockoutTie {
         // this.second_leg.display();
         this.showAggregate();
     }
+
+    public void showContinental() {
+        Club_Team t1 = Sim.getClub(this.first_leg.away_id);
+        String st1 = t1.getName() + "(" + Sim.getNation(t1.getNationId()).getCode() + ")";
+        Club_Team t2 = Sim.getClub(this.first_leg.home_id);
+        String st2 = t2.getName() + "(" + Sim.getNation(t2.getNationId()).getCode() + ")";
+        String agg = st1 + " " + this.getTeam1Goals() + "-" + this.getTeam2Goals() + " " + st2;
+        if (this.after_extra_time) agg += " (a.e.t.)";
+        System.out.println(agg);
+    }
 }

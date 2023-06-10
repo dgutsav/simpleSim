@@ -395,7 +395,7 @@ public class ControllerAsia {
         for (int i = 0; i < ties.size(); i++) {
             ties.get(i).simulate();
             System.out.print("Match " + (i + 1) + ": ");
-            ties.get(i).show();
+            ties.get(i).showContinental();
         }
         stages.put(stage, ties);
     }
@@ -415,7 +415,7 @@ public class ControllerAsia {
         for (int i = 0; i < gLeagues.length; i++) {
             char ch = (char) (65 + i);
             System.out.println("Group " + ch);
-            gLeagues[i].getTable().showLong();
+            gLeagues[i].getTable().showLongContinental();
         }
     }
 

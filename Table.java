@@ -91,6 +91,14 @@ public class Table {
         }
     }
 
+    public void showLongContinental() {
+        sortTable();
+        for (int i = 0; i < performances.length; i++) {
+            System.out.println((i + 1) + " " + performances[i].displayLongContinental());
+        }
+        System.out.println();
+    }
+
     public void showShort() {
         sortTable();
         for (int i = 0; i < performances.length; i++) {
