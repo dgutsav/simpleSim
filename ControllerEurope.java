@@ -228,21 +228,21 @@ public class ControllerEurope {
                         return SeedingType.CL_Q3_CP;
                     else if (rank <= 2)
                         return SeedingType.CL_Q2_MP;
-                } else if (league_rank <= 18 && rank <= 1)
+                } else if (league_rank <= 16 && rank <= 1)
                     return SeedingType.CL_Q3_CP;
-                else if (league_rank <= 20 && rank <= 1)
+                else if (league_rank <= 22 && rank <= 1)
                     return SeedingType.CL_Q2_CP;
-                else if (league_rank <= 48 && rank <= 1)
+                else if (league_rank <= 50 && rank <= 1)
                     return SeedingType.CL_Q1_CP;
             case UEL:
-                if (league_rank <= 9)
+                if (league_rank <= 7)
                     return SeedingType.EL_GROUP;
-                else if (league_rank <= 12)
+                else if (league_rank <= 14)
                     return SeedingType.EL_Q4_MP;
                 else if (league_rank <= 15)
                     return SeedingType.EL_Q3_MP;
             case UECL:
-                if (league_rank <= 5)
+                if (league_rank <= 4)
                     return SeedingType.ECL_Q4;
                 else if (league_rank <= 10 && rank <= 1)
                     return SeedingType.ECL_Q4;
