@@ -18,7 +18,7 @@ public class Setups {
         List<Nation_Setup> setups = new ArrayList<>();
         // Europe
         setups.add(new Nation_Setup("England", "ENG", 4, 1, 1, 4, 80, 157, "Europe"));
-        //setups.add(new Nation_Setup("Spain", "ESP", 4, 2, 2, 20, 80, 157, "Europe"));
+        // setups.add(new Nation_Setup("Spain", "ESP", 4, 2, 2, 20, 80, 157, "Europe"));
         return setups;
     }
 
@@ -72,6 +72,8 @@ public class Setups {
         Double[] WAL_COEFF = { 0.5, 1.0, 1.0, 1.5, 1.5 };
         Double[] MKD_COEFF = { 3.125, 1.0, 0.5, 1.75, 0.625 };
         Double[] MNE_COEFF = { 1.125, 0.375, 1.0, 1.625, 0.75 };
+        Double[] LUX_COEFF = { 2.625, 3.0, 1.0, 1.625, 1.25 };
+        Double[] FRO_COEFF = { 1.125, 1.125, 2.750, 1.500, 2.250 };
         coeff.put("ENG", ENG_COEFF);
         coeff.put("ESP", ESP_COEFF);
         coeff.put("GER", GER_COEFF);
@@ -120,16 +122,18 @@ public class Setups {
         coeff.put("WAL", WAL_COEFF);
         coeff.put("MKD", MKD_COEFF);
         coeff.put("MNE", MNE_COEFF);
+        coeff.put("LUX", LUX_COEFF);
+        coeff.put("FRO", FRO_COEFF);
         return coeff;
     }
 
     public static List<Nation_Setup> getUEFASetups() {
         List<Nation_Setup> setups = new ArrayList<>();
-        setups.add(new Nation_Setup("England", "ENG", 4, 1, 4, 20, 81, 157, "Europe"));
-        setups.add(new Nation_Setup("Spain", "ESP", 6, 2, 2, 20, 79, 163, "Europe"));
+        setups.add(new Nation_Setup("England", "ENG", 4, 1, 4, 20, 82, 157, "Europe"));
+        setups.add(new Nation_Setup("Spain", "ESP", 6, 2, 2, 20, 80, 163, "Europe"));
         setups.add(new Nation_Setup("Germany", "GER", 13, 3, 3, 18, 80, 162, "Europe"));
-        setups.add(new Nation_Setup("Italy", "ITA", 10, 4, 2, 20, 79, 156, "Europe"));
-        setups.add(new Nation_Setup("France", "FRA", 2, 5, 2, 20, 77, 165, "Europe"));
+        setups.add(new Nation_Setup("Italy", "ITA", 10, 4, 2, 20, 80, 156, "Europe"));
+        setups.add(new Nation_Setup("France", "FRA", 2, 5, 2, 20, 76, 165, "Europe"));
         setups.add(new Nation_Setup("Russia", "RUS", 39, 6, 3, 16, 72, 139, "Europe"));
         setups.add(new Nation_Setup("Portugal", "POR", 5, 7, 2, 18, 74, 159, "Europe"));
         setups.add(new Nation_Setup("Belgium", "BEL", 1, 8, 2, 16, 74, 160, "Europe"));
@@ -161,7 +165,7 @@ public class Setups {
         setups.add(new Nation_Setup("Bosnia", "BIH", 55, 34, 2, 10, 62, 133, "Europe"));
         setups.add(new Nation_Setup("Wales", "WAL", 18, 35, 1, 10, 60, 139, "Europe"));
         setups.add(new Nation_Setup("Iceland", "ISL", 46, 36, 2, 10, 62, 131, "Europe"));
-        setups.add(new Nation_Setup("Moldova", "MDA", 46, 37, 2, 12, 62, 131, "Europe"));
+        setups.add(new Nation_Setup("Moldova", "MDA", 46, 37, 2, 8, 62, 131, "Europe"));
         setups.add(new Nation_Setup("Kazakhstan", "KAZ", 46, 38, 2, 10, 62, 131, "Europe"));
         setups.add(new Nation_Setup("Georgia", "GEO", 46, 39, 2, 10, 62, 131, "Europe"));
         setups.add(new Nation_Setup("Armenia", "ARM", 46, 40, 2, 10, 62, 131, "Europe"));
@@ -173,6 +177,8 @@ public class Setups {
         setups.add(new Nation_Setup("Montenegro", "MNE", 46, 46, 1, 10, 62, 131, "Europe"));
         setups.add(new Nation_Setup("Kosovo", "KVX", 46, 47, 1, 10, 62, 131, "Europe"));
         setups.add(new Nation_Setup("Northern Ireland", "NIR", 46, 48, 1, 10, 62, 131, "Europe"));
+        setups.add(new Nation_Setup("Luxembourg", "LUX", 46, 49, 1, 10, 62, 131, "Europe"));
+        setups.add(new Nation_Setup("Faroe Islands", "FRO", 46, 50, 1, 10, 62, 131, "Europe"));
         return setups;
     }
 

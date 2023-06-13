@@ -46,18 +46,20 @@ public class CatalogueHelper {
         public static String ireland = "Ireland";
         public static String wales = "Wales";
         public static String iceland = "Iceland";
-        private static String moldova = "Moldova";
-        private static String kazakhstan = "Kazakhstan";
-        private static String georgia = "Georgia";
-        private static String armenia = "Armenia";
-        private static String azerbaijan = "Azerbaijan";
-        private static String lithuania = "Lithuania";
-        private static String latvia = "Latvia";
-        private static String estonia = "Estonia";
-        private static String macedonia = "North Macedonia";
-        private static String montenegro = "Montenegro";
-        private static String kosovo = "Kosovo";
-        private static String n_ireland = "Northern Ireland";
+        public static String moldova = "Moldova";
+        public static String kazakhstan = "Kazakhstan";
+        public static String georgia = "Georgia";
+        public static String armenia = "Armenia";
+        public static String azerbaijan = "Azerbaijan";
+        public static String lithuania = "Lithuania";
+        public static String latvia = "Latvia";
+        public static String estonia = "Estonia";
+        public static String macedonia = "North Macedonia";
+        public static String montenegro = "Montenegro";
+        public static String kosovo = "Kosovo";
+        public static String n_ireland = "Northern Ireland";
+        public static String luxembourg = "Luxembourg";
+        public static String faroe_islands = "Faroe Islands";
 
         public static String argentina = "Argentina";
         public static String bolivia = "Bolivia";
@@ -214,6 +216,8 @@ public class CatalogueHelper {
                 denonyms.put(vietnam, "Vietnamese");
                 denonyms.put(malaysia, "Malaysian");
                 denonyms.put(indonesia, "Indonesian");
+                denonyms.put(luxembourg, "Luxembourgish");
+                denonyms.put(faroe_islands, "Faroese");
                 if (denonyms.containsKey(nation_name))
                         return denonyms.get(nation_name);
                 else
@@ -223,260 +227,187 @@ public class CatalogueHelper {
         // Cities
         private static String[] englandCities = { "London", "Liverpool", "Manchester", "Birmingham", "Sheffield",
                         "Southampton", "Newcastle", "Leeds", "Bradford", "Bristol", "Leicester", "Wakefield",
-                        "Coventry",
-                        "Nottingham", "Sunderland", "Brighton", "Hull", "Plymouth", "Wolverhampton", "Stoke", "Derby",
-                        "Salford",
-                        "Westminster", "Portsmouth", "York", "Oxford", "Cambridge", "Cornwall", "Buckingham", "Durham",
-                        "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport", "Dorset", "Chesire", "Bolton",
-                        "Blackburn",
-                        "Camden", "Greenwich", "Hackney", "Hammersmith", "Islington", "Chelsea", "Lambeth", "Lewisham",
-                        "Southwark",
-                        "Wandswoth", "Barking", "Barnet", "Bexley", "Brent", "Bromley", "Haringey", "Harrow",
-                        "Havering",
-                        "Solihull", "Hillingdon", "Hounslow", "Kingston", "Redbridge", "Sutton", "Tottenham",
-                        "Woolwich" };
+                        "Coventry", "Nottingham", "Sunderland", "Brighton", "Hull", "Plymouth", "Wolverhampton",
+                        "Stoke", "Derby", "Salford", "Westminster", "Portsmouth", "York", "Oxford", "Cambridge",
+                        "Cornwall", "Buckingham", "Durham", "Bournemouth", "Croydon", "Ealing", "Enfield", "Stockport",
+                        "Dorset", "Chesire", "Bolton", "Blackburn", "Camden", "Greenwich", "Hackney", "Hammersmith",
+                        "Islington", "Chelsea", "Lambeth", "Lewisham", "Southwark", "Wandswoth", "Barking", "Barnet",
+                        "Bexley", "Brent", "Bromley", "Haringey", "Harrow", "Havering", "Solihull", "Hillingdon",
+                        "Hounslow", "Kingston", "Redbridge", "Sutton", "Tottenham", "Woolwich" };
         private static String[] spainCities = { "Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Malaga",
-                        "Oviedo",
-                        "Gijon", "Elche", "Las Palmas", "Zaragoza", "Murcia", "Tenerife", "Granada", "Palma", "Vigo",
-                        "Cartagena",
-                        "Cadiz", "San Sebastian", "Coruna", "Valladolid", "Pamplona", "Santander", "Lleida", "Toledo",
-                        "Compostela",
-                        "Huelva", "Salamanca", "Xerez" };
+                        "Oviedo", "Gijon", "Elche", "Las Palmas", "Zaragoza", "Murcia", "Tenerife", "Granada", "Palma",
+                        "Vigo", "Cartagena", "Cadiz", "San Sebastian", "Coruna", "Valladolid", "Pamplona", "Santander",
+                        "Lleida", "Toledo", "Compostela", "Huelva", "Salamanca", "Xerez" };
         private static String[] germanyCities = { "Berlin", "Hamburg", "Munchen", "Koln", "Frankfurt", "Stuttgart",
                         "Dusseldorf", "Dortmund", "Essen", "Leipzig", "Bremen", "Dresden", "Hannover", "Nurnberg",
-                        "Duisburg",
-                        "Bochum", "Wuppertal", "Bielefeld", "Bonn", "Munster", "Karlsruhe", "Mannheim", "Augsburg",
-                        "Wiesbaden",
-                        "Gelsenkirchen", "Potsdam", "Rostock", "Mainz", "Saarbrucken", "Halle", "Magdeburg", "Kiel",
-                        "Erfurt" };
+                        "Duisburg", "Bochum", "Wuppertal", "Bielefeld", "Bonn", "Munster", "Karlsruhe", "Mannheim",
+                        "Augsburg", "Wiesbaden", "Gelsenkirchen", "Potsdam", "Rostock", "Mainz", "Saarbrucken", "Halle",
+                        "Magdeburg", "Kiel", "Erfurt" };
         private static String[] franceCities = { "Lyon", "Saint-Etienne", "Grenoble", "Dijon", "Rennes", "Brest",
-                        "Tours",
-                        "Ajaccio", "Strasbourg", "Reims", "Metz", "Nancy", "Lille", "Amiens", "Paris", "Saint Denis",
-                        "Bordeaux",
-                        "Limoges", "Le Havre", "Rouen", "Caen", "Toulouse", "Montpellier", "Nimes", "Nantes", "Angers",
-                        "Le Mans",
-                        "Marseille", "Nice", "Toulon", "Villerbaunne" };
+                        "Tours", "Ajaccio", "Strasbourg", "Reims", "Metz", "Nancy", "Lille", "Amiens", "Paris",
+                        "Saint Denis", "Bordeaux", "Limoges", "Le Havre", "Rouen", "Caen", "Toulouse", "Montpellier",
+                        "Nimes", "Nantes", "Angers", "Le Mans", "Marseille", "Nice", "Toulon", "Villerbaunne" };
         private static String[] italyCities = { "Roma", "Milano", "Napoli", "Genova", "Bari", "Palermo", "Firenze",
                         "Torino", "Bologna", "Catania", "Verona", "Venezia", "Messina", "Padova", "Trieste", "Brescia",
-                        "Parma",
-                        "Prato", "Taranto", "Modena", "Perugia", "Ravenna", "Livorno", "Cagliari", "Foggia", "Monza",
-                        "Trento",
-                        "Udine", "Pescara", "Calabria", "Bergamo", "Bolzano" };
+                        "Parma", "Prato", "Taranto", "Modena", "Perugia", "Ravenna", "Livorno", "Cagliari", "Foggia",
+                        "Monza", "Trento", "Udine", "Pescara", "Calabria", "Bergamo", "Bolzano" };
         private static String[] portugalCities = { "Lisboa", "Porto", "Vila Nova", "Amadora", "Braga", "Coimbra",
-                        "Funchal",
-                        "Almada", "Setubal", "Agualva-Cacem", "Queluz", "Aveiro", "Guimaraes", "Viseu", "Rio Tinto",
-                        "Odilevas",
-                        "Leiria", "Azores" };
+                        "Funchal", "Almada", "Setubal", "Agualva-Cacem", "Queluz", "Aveiro", "Guimaraes", "Viseu",
+                        "Rio Tinto", "Odilevas", "Leiria", "Azores" };
         private static String[] belgiumCities = { "Brussels", "Antwerp", "Gent", "Leuven", "Hasselt", "Brugge", "Mons",
                         "Liege", "Arlon", "Namur", "Wavre", "Charleroi", "Mechelen", "Genk", "Mouscron", "Kortrijk",
-                        "Aalst",
-                        "La Louviere", "Oostende" };
+                        "Aalst", "La Louviere", "Oostende" };
         private static String[] netherlandsCities = { "Assen", "Emmen", "Lelystad", "Almere", "Leeuwarden", "Arnhem",
                         "Nijmegen", "Groningen", "Maastricht", "Eindhoven", "Hertogenbosch", "Haarlem", "Amsterdam",
-                        "Zwolle",
-                        "Enschede", "Hague", "Rotterdam", "Utrecht", "Middelburg", "Breda", "Apeldoorn", "Tilburg",
-                        "Dordrecht",
-                        "Leiden", "Amersfoort", "Hoofddorp", "Delft" };
+                        "Zwolle", "Enschede", "Hague", "Rotterdam", "Utrecht", "Middelburg", "Breda", "Apeldoorn",
+                        "Tilburg", "Dordrecht", "Leiden", "Amersfoort", "Hoofddorp", "Delft" };
         private static String[] russiaCities = { "Moskva", "Sankt-Peterburg", "Novosibirsk", "Ekaterinburg", "Kazan",
                         "Nizhniy Novgorod", "Chelyabinsk", "Samara", "Omsk", "Rostov", "Ufa", "Krasnoyarsk", "Voronezh",
-                        "Perm",
-                        "Volgograd", "Krasnodar", "Saratov", "Tyumen", "Izhevsk", "Barnaul", "Irkutsk", "Groznyy",
-                        "Vladivostok",
-                        "Makhachkala", "Orenburg", "Sochi" };
+                        "Perm", "Volgograd", "Krasnodar", "Saratov", "Tyumen", "Izhevsk", "Barnaul", "Irkutsk",
+                        "Groznyy", "Vladivostok", "Makhachkala", "Orenburg", "Sochi" };
         private static String[] ukraineCities = { "Kyiv", "Kharkiv", "Odesa", "Dnipro", "Donetsk", "Zaporizhzhia",
-                        "Lviv",
-                        "Kryvyi Rih", "Mykolaiv", "Mariupol", "Luhansk", "Sevastopol", "Vinnytsia", "Makiivka",
-                        "Simferopol",
-                        "Kherson", "Poltava", "Chernigiv", "Cherkasy" };
+                        "Lviv", "Kryvyi Rih", "Mykolaiv", "Mariupol", "Luhansk", "Sevastopol", "Vinnytsia", "Makiivka",
+                        "Simferopol", "Kherson", "Poltava", "Chernigiv", "Cherkasy" };
         private static String[] austriaCities = { "Vienna", "Graz", "Linz", "Salzburg", "Innsbruck", "Klagenfurt",
                         "Villach", "Wels", "Sankt Polten", "Wiener Neustadt", "Bregenz", "Feldkirch" };
         private static String[] scotlandCities = { "Glasgow", "Edinburgh", "Aberdeen", "Dundee", "Paisley",
-                        "Livingston",
-                        "Hamilton", "Dunfermline", "Ayr", "Kilmarnock" };
+                        "Livingston", "Hamilton", "Dunfermline", "Ayr", "Kilmarnock" };
         private static String[] turkeyCities = { "Istanbul", "Ankara", "Izmir", "Bursa", "Adana", "Gaziantep", "Konya",
                         "Antalya", "Keyseri", "Mersin", "Eskisehir", "Diyarbakir", "Samsun", "Trabzon", "Denizli" };
         private static String[] croatiaCities = { "Zagreb", "Split", "Rijeka", "Osijek", "Zadar", "Velika Gorica",
                         "Slavonski Brod", "Pula", "Karlovac", "Sisak", "Varazdin", "Sibenik", "Dubrovnik", "Bjelovar",
-                        "Kastela",
-                        "Samobor", "Vinkovci", "Koprivnica", "Dakovo", "Vukovar", "Cakovec", "Pozega", "Zapresic",
-                        "Sinj",
-                        "Petrinja" };
+                        "Kastela", "Samobor", "Vinkovci", "Koprivnica", "Dakovo", "Vukovar", "Cakovec", "Pozega",
+                        "Zapresic", "Sinj", "Petrinja" };
         private static String[] denmarkCities = { "Kobenhavn", "Aarhus", "Odense", "Aalborg", "Esbjerg", "Randers",
                         "Kolding", "Horsens", "Vejle", "Roskilde", "Herning", "Horsholm", "Elsinore", "Silkeborg",
-                        "Naestved",
-                        "Fredericia", "Viborg", "Koge", "Holstebro", "Taastrup" };
+                        "Naestved", "Fredericia", "Viborg", "Koge", "Holstebro", "Taastrup" };
         private static String[] czechiaCities = { "Praha", "Brno", "Ostrava", "Plzen", "Olomouc", "Usti nad Labem",
                         "Hradec Kralove", "Ceske Budejovice", "Pardubice", "Havirov", "Zlin", "Kladno", "Most",
-                        "Karvina",
-                        "Frydek-Mistek", "Opava", "Karlovy Vary", "Teplice", "Decin", "Jihlava", "Chomutov", "Prerov",
-                        "Mlada Boleslav", "Prostejov", "Tachov", "Morava" };
+                        "Karvina", "Frydek-Mistek", "Opava", "Karlovy Vary", "Teplice", "Decin", "Jihlava", "Chomutov",
+                        "Prerov", "Mlada Boleslav", "Prostejov", "Tachov", "Morava" };
         private static String[] greeceCities = { "Athina", "Thessaloniki", "Patras", "Piraeus", "Larissa", "Iraklis",
                         "Peristeri", "Kallithea", "Acharnes", "Kalamaria", "Nikaia", "Glyfada", "Volos", "Ilio",
-                        "Ilioupoli",
-                        "Keratsini", "Evosmos", "Chalandri", "Nea Smyrni", "Marousi", "Agios Dimitrios", "Zografou",
-                        "Egaleo",
-                        "Nea Ionia", "Ioannina", "Palaio Faliro", "Korydallos", "Trikala", "Vyronas", "Agia Paraskevi",
-                        "Galatsi",
-                        "Agrinio", "Chalcis", "Petroupoli", "Serres", "Alexandroupoli", "Lamia" };
+                        "Ilioupoli", "Keratsini", "Evosmos", "Chalandri", "Nea Smyrni", "Marousi", "Agios Dimitrios",
+                        "Zografou", "Egaleo", "Nea Ionia", "Ioannina", "Palaio Faliro", "Korydallos", "Trikala",
+                        "Vyronas", "Agia Paraskevi", "Galatsi", "Agrinio", "Chalcis", "Petroupoli", "Serres",
+                        "Alexandroupoli", "Lamia" };
         private static String[] switzerlandCities = { "Zurich", "Geneva", "Basel", "Lausanne", "Bern", "Winterthur",
                         "Lucerne", "St. Gallen", "Lugano", "Biel/Bienne", "Thun", "Bellinzona", "Koniz", "Fribourg",
                         "La Chaux-de-Fonds", "Schaffhausen", "Chur", "Vernier", "Uster", "Sion" };
         private static String[] serbiaCities = { "Belgrade", "Novi Sad", "Nis", "Kragujevac", "Leskovac", "Subotica",
                         "Krusevac", "Kraljevo", "Pancevo", "Zrenjanin", "Sabac", "Cacak", "Smederevo", "Novi Pazar",
-                        "Valjevo",
-                        "Sombor", "Vranje", "Sremska Mitrovica", "Loznica", "Uzice", "Pozarevac", "Jagodina",
-                        "Stara Pazova",
-                        "Zajecar", "Kikinda", "Pirot", "Backa Palanka", "Ruma", "Paracin", "Vrsac", "Aleksinac",
-                        "Smederevska Palanka", "Bor", "Indija", "Arandelovac", "Prokuplje", "Gornji Milanovac",
-                        "Bujanovac", "Kula",
-                        "Trstenik" };
+                        "Valjevo", "Sombor", "Vranje", "Sremska Mitrovica", "Loznica", "Uzice", "Pozarevac", "Jagodina",
+                        "Stara Pazova", "Zajecar", "Kikinda", "Pirot", "Backa Palanka", "Ruma", "Paracin", "Vrsac",
+                        "Aleksinac", "Smederevska Palanka", "Bor", "Indija", "Arandelovac", "Prokuplje",
+                        "Gornji Milanovac", "Bujanovac", "Kula", "Trstenik" };
         private static String[] cyprusCities = { "Famagusta", "Nicosia", "Pafos", "Larnaka", "Limassol", "Kyrenia",
                         "Strovolos", "Lakatamia", "Kato Polemidhia", "Aglandjia", "Lefkosa", "Gonyeli", "Degirmenlik",
-                        "Gazimagusa",
-                        "Sehitler", "Gecitkale", "Tatlisu", "Akdogan", "Girne", "Lapta", "Alsancak", "Guzelyurt",
-                        "Iskele",
-                        "Lefke" };
+                        "Gazimagusa", "Sehitler", "Gecitkale", "Tatlisu", "Akdogan", "Girne", "Lapta", "Alsancak",
+                        "Guzelyurt", "Iskele", "Lefke" };
         private static String[] norwayCities = { "Oslo", "Bergen", "Stavanger", "Trondheim", "Drammen", "Sarpsborg",
                         "Skien", "Kristiansund", "Alesund", "Tonsberg", "Moss", "Haugesund", "Sandefjord", "Arendal",
-                        "Bodo",
-                        "Tromso", "Hamar", "Halden", "Larvik", "Askoy" };
+                        "Bodo", "Tromso", "Hamar", "Halden", "Larvik", "Askoy" };
         private static String[] israelCities = { "Jerusalem", "Tel Aviv", "Haifa", "Rishon LeZion", "Petah Tikva",
-                        "Ashdod",
-                        "Netanya", "Beersheba", "Bnei Brak", "Holon", "Ramat Gan", "Rehvovot", "Ashkelon", "Bat Yam",
-                        "Beit Shemesh", "Kfar Saba", "Herzliya", "Hadera", "Nazareth" };
+                        "Ashdod", "Netanya", "Beersheba", "Bnei Brak", "Holon", "Ramat Gan", "Rehvovot", "Ashkelon",
+                        "Bat Yam", "Beit Shemesh", "Kfar Saba", "Herzliya", "Hadera", "Nazareth" };
         private static String[] polandCities = { "Warszawa", "Krakow", "Lodz", "Wroclaw", "Poznan", "Gdansk",
-                        "Szczesin",
-                        "Bydgoszcz", "Lunlin", "Bialystok", "Katowice", "Gdynia", "Czestochowa", "Radom", "Torun",
-                        "Sosnowiec",
-                        "Rzeszow", "Kielce", "Gliwice", "Olsztyn", "Zabrze", "Bytom", "Zielona Gora", "Opole", "Gorzow",
-                        "Tarnow",
-                        "Chorzow", "Tychy" };
+                        "Szczesin", "Bydgoszcz", "Lunlin", "Bialystok", "Katowice", "Gdynia", "Czestochowa", "Radom",
+                        "Torun", "Sosnowiec", "Rzeszow", "Kielce", "Gliwice", "Olsztyn", "Zabrze", "Bytom",
+                        "Zielona Gora", "Opole", "Gorzow", "Tarnow", "Chorzow", "Tychy" };
         private static String[] hungaryCities = { "Budapest", "Debrecen", "Szeged", "Miskolc", "Pecs", "Gyor",
                         "Nyiregyhaza", "Kecskemet", "Szekesfehervar", "Szombathely", "Szolnok", "Erd", "Tatabanya",
-                        "Sopron",
-                        "Kaposvar", "Veszprem", "Bekescsaba", "Zalaegerszeg", "Eger", "Cegled" };
+                        "Sopron", "Kaposvar", "Veszprem", "Bekescsaba", "Zalaegerszeg", "Eger", "Cegled" };
         private static String[] romaniaCities = { "Bucuresti", "Cluj", "Timisoara", "Iasi", "Constanta", "Craiova",
                         "Brasov", "Galati", "Ploiesti", "Oradea", "Braila", "Arad", "Sibiu", "Pitesti", "Bacau",
-                        "Targu Mures",
-                        "Baia Mare", "Buzau", "Botosani", "Ramnicu Valcea", "Severin", "Suceava", "Neamt", "Targu Jiu",
-                        "Targoviste", "Focsani", "Bistrita", "Tulcea", "Restita", "Slatina", "Giurgiu" };
+                        "Targu Mures", "Baia Mare", "Buzau", "Botosani", "Ramnicu Valcea", "Severin", "Suceava",
+                        "Neamt", "Targu Jiu", "Targoviste", "Focsani", "Bistrita", "Tulcea", "Restita", "Slatina",
+                        "Giurgiu" };
         private static String[] belarusCities = { "Minsk", "Brest", "Gomel", "Grodno", "Mogilev", "Vitebsk",
-                        "Baranavichi",
-                        "Pinsk", "Kobryn", "Mazyr", "Zhlobin", "Lida", "Bobriusk", "Borisov", "Salihorsk", "Orsha",
-                        "Polotsk" };
+                        "Baranavichi", "Pinsk", "Kobryn", "Mazyr", "Zhlobin", "Lida", "Bobriusk", "Borisov",
+                        "Salihorsk", "Orsha", "Polotsk" };
 
         private static String[] argentinaCities = { "Buenos Aires", "Cordoba", "Rosario", "La Plata", "Mar del Plata",
                         "Salta", "Tucuman", "San Juan", "Resistencia", "Santiago del Estero", "Corrientes", "Mendoza",
-                        "Posadas",
-                        "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomia", "Almagro", "Balvanera",
-                        "Barracas",
-                        "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales", "Constitucion",
-                        "Flores",
-                        "Floresta", "La Boca", "La Paternal", "Liniers", "Mataderos", "Monte Castro", "Monserrat",
-                        "Nueva Pompeya",
-                        "Nuñez", "Palermo", "Avellaneda", "Chacabuco", "Chas", "Patricios", "Puerto Madero", "Recoleta",
-                        "Retiro",
-                        "Saavedra", "San Cristobal", "San Nicolas", "San Telmo", "Velez Sarsfield", "Versalles",
-                        "Crespo", "Devoto",
-                        "Lugano", "Luro", "Mitre", "Ortuzar", "Pueyrredon", "Villa Real", "Riachuelo", "Santa Rita",
-                        "Soldati",
+                        "Posadas", "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomia", "Almagro",
+                        "Balvanera", "Barracas", "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales",
+                        "Constitucion", "Flores", "Floresta", "La Boca", "La Paternal", "Liniers", "Mataderos",
+                        "Monte Castro", "Monserrat", "Nueva Pompeya", "Nuñez", "Palermo", "Avellaneda", "Chacabuco",
+                        "Chas", "Patricios", "Puerto Madero", "Recoleta", "Retiro", "Saavedra", "San Cristobal",
+                        "San Nicolas", "San Telmo", "Velez Sarsfield", "Versalles", "Crespo", "Devoto", "Lugano",
+                        "Luro", "Mitre", "Ortuzar", "Pueyrredon", "Villa Real", "Riachuelo", "Santa Rita", "Soldati",
                         "Urquiza" };
         private static String[] brazilCities = { "Sao Paulo", "Belo Horizonte", "Manaus", "Curitiba", "Rio de Janeiro",
                         "Salvador", "Brasilia", "Fortaleza", "Recife", "Porto Alegre", "Belem", "Goiania", "Guarulhos",
-                        "Campinas",
-                        "Sao Luis", "Sao Gonncalo", "Maceio", "Caxias", "Natal", "Teresina", "Ignacu" };
+                        "Campinas", "Sao Luis", "Sao Gonncalo", "Maceio", "Caxias", "Natal", "Teresina", "Ignacu" };
         private static String[] chileCities = { "Santiago", "Puente Alto", "Iquique", "Valparaiso", "Antofagasta",
                         "Copiapo", "La Serena", "Arica", "Rancagua", "Talca", "Chilan", "Concepcion", "Temuco",
-                        "Valdivia",
-                        "Puerto Montt", "Coyhaique" };
+                        "Valdivia", "Puerto Montt", "Coyhaique" };
         private static String[] colombiaCities = { "Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Cucuta",
                         "Soledad", "Ibague", "Bucaramanga", "Soacha", "Villavicencio", "Santa Marta", "Valledupar",
-                        "Bello",
-                        "Pereira", "Monteria", "Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira", "Armenia",
-                        "Riohacha",
-                        "Sincelejo", "Popayan", "Itagüi" };
+                        "Bello", "Pereira", "Monteria", "Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira",
+                        "Armenia", "Riohacha", "Sincelejo", "Popayan", "Itagüi" };
         private static String[] ecuadorCities = { "Guayaquil", "Quito", "Cuenca", "Santo Domingo", "Machala", "Duran",
                         "Manta", "Portoviejo", "Ibarra", "Quevedo", "Loja", "Ambato", "Esmeraldas", "Riobamba",
-                        "Milagro",
-                        "Latacunga", "La Libertad", "Babahoyo" };
+                        "Milagro", "Latacunga", "La Libertad", "Babahoyo" };
         private static String[] boliviaCities = { "Santa Cruz", "El Alto", "La Paz", "Cochabamba", "Oruro", "Sucre",
                         "Tarija", "Potosi", "Sacaba", "Quillacollo", "Montero", "Trinidad", "Riberalta", "Warnes",
-                        "La Guardia",
-                        "Villazon" };
+                        "La Guardia", "Villazon" };
         private static String[] peruCities = { "Lima", "Callao", "Arequiba", "Trujillo", "Chiclayo", "Huancayo",
-                        "Iquitos",
-                        "Piura", "Cuzco", "Chimbote", "Tacna", "Juliaca", "Ica", "Cajamarca", "Pucallpa", "Sullana",
-                        "Ayacucho",
-                        "Chincha Alta", "Huanuco", "Tarapoto", "Puno" };
+                        "Iquitos", "Piura", "Cuzco", "Chimbote", "Tacna", "Juliaca", "Ica", "Cajamarca", "Pucallpa",
+                        "Sullana", "Ayacucho", "Chincha Alta", "Huanuco", "Tarapoto", "Puno" };
         private static String[] paraguayCities = { "Asuncion", "Ciudad del Este", "San Lorenzo", "Luque", "Capiata",
                         "Lambare", "Limpio", "Nemby", "Encarnacion", "Villa Elisa", "Caaguazu", "Coronel Oviedo",
-                        "Hernandarias",
-                        "Itaugua", "Concepcion", "Villarrica", "San Antonio", "Pilar", "Caacupe", "Ita" };
+                        "Hernandarias", "Itaugua", "Concepcion", "Villarrica", "San Antonio", "Pilar", "Caacupe",
+                        "Ita" };
         private static String[] uruguayCities = { "Montevideo", "Salto", "Paysandu", "Las Piedras", "Rivera",
-                        "Maldonado",
-                        "Tacuarembo", "Melo", "Mercedes", "Artigas", "Minas", "San Jose", "Durazno", "Florida",
-                        "Barros Blancos",
-                        "San Carlos", "Colonia Sacramento", "Pando" };
+                        "Maldonado", "Tacuarembo", "Melo", "Mercedes", "Artigas", "Minas", "San Jose", "Durazno",
+                        "Florida", "Barros Blancos", "San Carlos", "Colonia Sacramento", "Pando" };
         private static String[] venezuelaCities = { "Caracas", "Maracaibo", "Barquisimeto", "Valencia",
-                        "Ciudad Guayana",
-                        "Maturin", "Barcelona", "Cumana", "Petare", "Turmero", "Merida", "Ciudad Bolivar", "Barinas",
-                        "Los Teques",
-                        "Punto Fijo", "La Guaira", "El Vigia", "San Cristobal" };
+                        "Ciudad Guayana", "Maturin", "Barcelona", "Cumana", "Petare", "Turmero", "Merida",
+                        "Ciudad Bolivar", "Barinas", "Los Teques", "Punto Fijo", "La Guaira", "El Vigia",
+                        "San Cristobal" };
         private static String[] slovakiaCities = { "Bratislava", "Kosice", "Presov", "Zilina", "Banska Bystrica",
-                        "Nitra",
-                        "Trnava", "Trencin", "Martin", "Poprad", "Prievidza", "Zvolen", "Michalovce", "Levice",
-                        "Bardejov",
-                        "Ruzomberok", "Piestany" };
+                        "Nitra", "Trnava", "Trencin", "Martin", "Poprad", "Prievidza", "Zvolen", "Michalovce", "Levice",
+                        "Bardejov", "Ruzomberok", "Piestany" };
         private static String[] sloveniaCities = { "Ljubljana", "Maribor", "Celje", "Kranj", "Koper", "Velenje",
                         "Novo Mesto", "Ptuj", "Trbovlje", "Kamnik", "Nova Gorica", "Jesenice", "Domzale", "Skofja Loka",
-                        "Izola",
-                        "Murska Sobota" };
+                        "Izola", "Murska Sobota" };
         private static String[] bulgariaCities = { "Sofia", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora",
-                        "Pleven",
-                        "Silven", "Dobrich", "Shumen", "Pernik", "Haskovo", "Yambol", "Pazardzhik", "Blagoevgrad",
-                        "Veliko Tarnovo",
-                        "Vratsa", "Gabrovo", "Lovech" };
+                        "Pleven", "Silven", "Dobrich", "Shumen", "Pernik", "Haskovo", "Yambol", "Pazardzhik",
+                        "Blagoevgrad", "Veliko Tarnovo", "Vratsa", "Gabrovo", "Lovech" };
         private static String[] swedenCities = { "Stockholm", "Goteborg", "Malmo", "Uppsala", "Sollentuna", "Västerås",
                         "Örebro", "Linkoping", "Helsingborg", "Jonkoping", "Norrkoping", "Lund", "Umea", "Gavle",
-                        "Boras",
-                        "Sodertalje", "Eskilstuna", "Halmstad", "Vaxjo", "Karlstad", "Sundsvall", "Ostersund",
+                        "Boras", "Sodertalje", "Eskilstuna", "Halmstad", "Vaxjo", "Karlstad", "Sundsvall", "Ostersund",
                         "Trollhattan" };
         private static String[] albaniaCities = { "Tirana", "Durres", "Vlore", "Elbasan", "Shkoder", "Kamez", "Fier",
                         "Korce", "Berat", "Lushnje", "Pogradec", "Kavaje", "Gjirokaster", "Lac", "Kukes" };
         private static String[] bosniaCities = { "Sarajevo", "Banja Luka", "Mostar", "Tuzla", "Zenica", "Bijelina",
                         "Prijedor", "Brcko", "Doboj", "Cazin", "Zvornik", "Zivinice", "Bihac", "Travnik", "Gradiska" };
         private static String[] finlandCities = { "Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku",
-                        "Jyvaskyla",
-                        "Kuopio", "Lahti", "Pori", "Kouvola", "Joensuu", "Lappeenranta", "Hameenlinna", "Vaasa",
-                        "ROvaniemi",
-                        "Seinajoki", "Mariehamn" };
+                        "Jyvaskyla", "Kuopio", "Lahti", "Pori", "Kouvola", "Joensuu", "Lappeenranta", "Hameenlinna",
+                        "Vaasa", "ROvaniemi", "Seinajoki", "Mariehamn" };
         private static String[] irelandCities = { "Dublin", "Cork", "Limerick", "Galway", "Waterford", "Drogheda",
                         "Kilkenny", "Wexford", "Sligo", "Clonmel", "Dundalk", "Bray", "Navan", "Ennis", "Tralee",
-                        "Carlow", "Naas",
-                        "Athlone", "Letterkenny", "Tullamore" };
+                        "Carlow", "Naas", "Athlone", "Letterkenny", "Tullamore" };
         private static String[] icelandCities = { "Reykjavik", "Kopavogur", "Hafnarfjordur", "Akureyri", "Keflavik",
                         "Gardabaer", "Akranes", "Selfoss", "isafjordur", "Hofn", "Egilsstadir", "Borgarnes",
                         "Saudarkrokur" };
         private static String[] walesCities = { "Cardiff", "Swansea", "Newport", "Wrexham", "Bangor", "St Asaph",
                         "St Davids", "Caerdydd", "Abertawe", "Casnewydd", "Wrecsam", "Llanelwy", "Tyddewi" };
         private static String[] moldovaCities = { "Chisinau", "Balti", "Tiraspol", "Bender", "Ribnita", "Ungheni",
-                        "Cahul",
-                        "Soroca", "Orhei", "Comrat", "Dubasari", "Straseni", "Ceadar-Lunga", "Causeni", "Drochia",
-                        "Edinet",
-                        "Vulcanesti", "Durlesti", "Hincesti", "Ialoveni", "Falesti", "Calarasi", "Codru", "Taraclia" };
+                        "Cahul", "Soroca", "Orhei", "Comrat", "Dubasari", "Straseni", "Ceadar-Lunga", "Causeni",
+                        "Drochia", "Edinet", "Vulcanesti", "Durlesti", "Hincesti", "Ialoveni", "Falesti", "Calarasi",
+                        "Codru", "Taraclia" };
         private static String[] kazakhstanCities = { "Almaty", "Shymkent", "Karaganda", "Taraz", "Astana", "Pavlodar",
                         "Oskemen", "Semey", "Aktobe", "Oral", "Kostanay", "Petropavl", "Kyzylorda", "Aktau", "Temirtau",
-                        "Atyrau",
-                        "Ekibastuz", "Kokshetau", "Taldykorgan", "Jezkazgan", "Turkistan" };
+                        "Atyrau", "Ekibastuz", "Kokshetau", "Taldykorgan", "Jezkazgan", "Turkistan" };
         private static String[] georgiaCities = { "Tbilisi", "Batumi", "Kutaisi", "Rustavi", "Gori", "Zugdidi", "Poti",
                         "Kobuleti", "Khashuri", "Samtredia", "Sukhumi", "Gagra", "Tskhinvali", "Senaki", "Zestafoni" };
         private static String[] armeniaCities = { "Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Abovyan", "Kapan",
                         "Hrazdan", "Armavir", "Masis", "Goris", "Charentsavan", "Ararat", "Ijevan" };
         private static String[] azerbaijanCities = { "Baku", "Sumgait", "Ganja", "Xirdalan", "Mingachevir",
-                        "Nakhchivan",
-                        "Lankaran", "Shirvan", "Shaki", "Yevlakh", "Tovuz", "Astara", "Qabala", "Agdam", "Jalilabad",
-                        "Masally",
-                        "Khachmaz" };
+                        "Nakhchivan", "Lankaran", "Shirvan", "Shaki", "Yevlakh", "Tovuz", "Astara", "Qabala", "Agdam",
+                        "Jalilabad", "Masally", "Khachmaz" };
         private static String[] lithuaniaCities = { "Vilnius", "Kaunas", "Klaipeda", "Siauliai", "Panevezys", "Alytus",
                         "Marijampole", "Mazeikiai", "Jonava", "Utena", "Kedainiai", "Taurage", "Telsiai", "Ukmerge" };
         private static String[] latviaCities = { "Daugavpils", "Jelgava", "Jurmala", "Liepaja", "Rezekne", "Riga",
@@ -488,144 +419,100 @@ public class CatalogueHelper {
         private static String[] montenegroCities = { "Podgorica", "Niksic", "Herceg Novi", "Pljevlja", "Bar",
                         "Bijelo Polje", "Cetinje", "Budva", "Kotor", "Berane", "Ulcinj", "Tivat", "Rozaje" };
         private static String[] kosovoCities = { "Pristina", "Prizren", "Gjilan", "Peja", "Mitrovica", "Ferizaj",
-                        "Gjakova",
-                        "Vushtrri", "Podujeva", "Fushe Kosove", "Rahovec" };
+                        "Gjakova", "Vushtrri", "Podujeva", "Fushe Kosove", "Rahovec" };
         private static String[] n_irelandCities = { "Belfast", "Derry", "Newtownabbey", "Craigavon", "Bangor",
                         "Castlereagh", "Lisburn", "Ballymena", "Newtownards", "Carrickfergus", "Newry" };
 
         private static String[] japanCities = { "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Fukuoka",
-                        "Kawasaki",
-                        "Kobe", "Kyoto", "Saitama", "Hiroshima", "Sendai", "Chiba", "Kitakyushu", "Setagaya", "Sakai",
-                        "Niigata",
-                        "Nerima", "Kumamoto", "Sagamihara", "Okayama", "Oda", "Shizuoka", "Hamamatsu", "Edogawa",
-                        "Adachi",
-                        "Kagoshima", "Funabashi", "Hachioji", "Kawaguchi", "Himeji", "Suginami", "Itabashi",
-                        "Matsuyama",
-                        "Higashiosaka", "Utsunomiya" };
+                        "Kawasaki", "Kobe", "Kyoto", "Saitama", "Hiroshima", "Sendai", "Chiba", "Kitakyushu",
+                        "Setagaya", "Sakai", "Niigata", "Nerima", "Kumamoto", "Sagamihara", "Okayama", "Oda",
+                        "Shizuoka", "Hamamatsu", "Edogawa", "Adachi", "Kagoshima", "Funabashi", "Hachioji", "Kawaguchi",
+                        "Himeji", "Suginami", "Itabashi", "Matsuyama", "Higashiosaka", "Utsunomiya" };
         private static String[] chinaCities = { "Shanghai", "Guangzhou", "Beijing", "Shenzhen", "Chengdu", "Baoding",
                         "Tianjin", "Linyi", "Shijiazhuang", "Zhengzhou", "Nanyang", "Wuhan", "Handan", "Weifang",
-                        "Zhoukou",
-                        "Ganzhou", "Tongshan", "Heze", "Chongqing", "Fuyang", "Changsha", "Dongguan", "Jining", "Jinan",
-                        "Foshan",
-                        "Nanjing", "Changchun", "Tangshan", "Cangzhou", "Hefei", "Shaoyang", "Zhanjiang", "Shangqiu",
-                        "Nantong",
-                        "Yancheng", "Nanning", "Hengyang", "Zhumadian", "Shenyang", "Xingtai", "Yantai", "Luoyang",
-                        "Kunming", "Shangrao", "Hangzhou", "Bijie", "Quanzhou", "Wuxi", "Huanggang", "Maoming",
-                        "Nanchong", "Zunyi",
-                        "Qujing", "Xinyang", "Jieyang", "Yulin", "Changde", "Liaocheng", "Qingdao", "Nangandao",
-                        "Xiangyang",
-                        "Zhaotong", "Yichun", "Dezhou", "Nanchang", "Dazhou", "Yongzhou", "Suihua", "Qiqihar",
-                        "Suzhou", "Shantou", "Weinan" };
+                        "Zhoukou", "Ganzhou", "Tongshan", "Heze", "Chongqing", "Fuyang", "Changsha", "Dongguan",
+                        "Jining", "Jinan", "Foshan", "Nanjing", "Changchun", "Tangshan", "Cangzhou", "Hefei",
+                        "Shaoyang", "Zhanjiang", "Shangqiu", "Nantong", "Yancheng", "Nanning", "Hengyang", "Zhumadian",
+                        "Shenyang", "Xingtai", "Yantai", "Luoyang", "Kunming", "Shangrao", "Hangzhou", "Bijie",
+                        "Quanzhou", "Wuxi", "Huanggang", "Maoming", "Nanchong", "Zunyi", "Qujing", "Xinyang", "Jieyang",
+                        "Yulin", "Changde", "Liaocheng", "Qingdao", "Nangandao", "Xiangyang", "Zhaotong", "Yichun",
+                        "Dezhou", "Nanchang", "Dazhou", "Yongzhou", "Suihua", "Qiqihar", "Suzhou", "Shantou",
+                        "Weinan" };
         private static String[] iranCities = { "Tehran", "Mashhad", "Tabriz", "Karaj", "Isfahan", "Shiraz", "Ahvaz",
-                        "Sari",
-                        "Urmia", "Kerman", "Rasht", "Zahedan", "Kermanshah", "Khorramabad", "Hamadan", "Gorgan",
-                        "Sanandaj",
-                        "Bandar Abbas", "Arak", "Ardabil", "Qazvin", "Qom", "Yazd", "Zanjan", "Bushehr", "Bojnurd",
-                        "Yasuj",
-                        "Birjand", "Semnan", "Ilam", "Eslamshahr", "Nishapur", "Maragheh", "Fardis", "Kashan",
-                        "Marvdasht",
-                        "Dezful", "Babol", "Khoy", "Sirjan", "Zabol", "Borujerd", "Malayer", "Saghez", "Minab", "Saveh",
-                        "Parsabad",
-                        "Alvand", "Qanavat", "Meybod", "Abhar", "Borazjan", "Borujen", "Shirvan", "Dogonbadan",
-                        "Ghayen", "Shahrud",
-                        "Dehloran", "Shahriar", "Sabzevar", "Marand", "Kamalshahr", "Khomeyni Shahr", "Jahrom",
-                        "Abadan", "Amol",
-                        "Bukan", "Rafsanjan", "Lahijan", "Iran Shahr", "Javanrud", "Dorud", "Nahavand",
-                        "Bandar Torkaman",
-                        "Marivan", "Qeshm", "Khomein", "Meshkinshahr", "Mohammadiyeh", "Jafariyeh", "Ardakan",
-                        "Khorramdareh",
+                        "Sari", "Urmia", "Kerman", "Rasht", "Zahedan", "Kermanshah", "Khorramabad", "Hamadan", "Gorgan",
+                        "Sanandaj", "Bandar Abbas", "Arak", "Ardabil", "Qazvin", "Qom", "Yazd", "Zanjan", "Bushehr",
+                        "Bojnurd", "Yasuj", "Birjand", "Semnan", "Ilam", "Eslamshahr", "Nishapur", "Maragheh", "Fardis",
+                        "Kashan", "Marvdasht", "Dezful", "Babol", "Khoy", "Sirjan", "Zabol", "Borujerd", "Malayer",
+                        "Saghez", "Minab", "Saveh", "Parsabad", "Alvand", "Qanavat", "Meybod", "Abhar", "Borazjan",
+                        "Borujen", "Shirvan", "Dogonbadan", "Ghayen", "Shahrud", "Dehloran", "Shahriar", "Sabzevar",
+                        "Marand", "Kamalshahr", "Khomeyni Shahr", "Jahrom", "Abadan", "Amol", "Bukan", "Rafsanjan",
+                        "Lahijan", "Iran Shahr", "Javanrud", "Dorud", "Nahavand", "Bandar Torkaman", "Marivan", "Qeshm",
+                        "Khomein", "Meshkinshahr", "Mohammadiyeh", "Jafariyeh", "Ardakan", "Khorramdareh",
                         "Bandar Ganaveh", "Lordegan", "Esfarayen", "Dehdasht", "Tabas", "Damghan", "Eyvan", "Ahar",
-                        "Nazarabad",
-                        "Najafabad", "Fasa", "Mahshahr" };
+                        "Nazarabad", "Najafabad", "Fasa", "Mahshahr" };
         private static String[] koreaCities = { "Seoul", "Busan", "Incheon", "Daegu", "Daejeon", "Suwon", "Ulsan",
-                        "Yongin",
-                        "Goyang", "Changwon", "Seongnam", "Hwaseong", "Cheongju", "Bucheon", "Ansan", "Namyangju",
-                        "Cheonan",
-                        "Jeonju", "Gimhae", "Pyeongtaek", "Anyang", "Siheung", "Pohang", "Jeju", "Uijeongbu", "Gimpo",
-                        "Paju",
-                        "Gumi", "Gwangju", "Sejong", "Wonju", "Jinju", "Yangsan", "Asan", "Pyongyang", "Hamhung",
-                        "Chongjin",
-                        "Nampo", "Wonsan", "Sinuiju", "Tanchon", "Kaechon", "Kaesong", "Sariwon" };
+                        "Yongin", "Goyang", "Changwon", "Seongnam", "Hwaseong", "Cheongju", "Bucheon", "Ansan",
+                        "Namyangju", "Cheonan", "Jeonju", "Gimhae", "Pyeongtaek", "Anyang", "Siheung", "Pohang", "Jeju",
+                        "Uijeongbu", "Gimpo", "Paju", "Gumi", "Gwangju", "Sejong", "Wonju", "Jinju", "Yangsan", "Asan",
+                        "Pyongyang", "Hamhung", "Chongjin", "Nampo", "Wonsan", "Sinuiju", "Tanchon", "Kaechon",
+                        "Kaesong", "Sariwon" };
         private static String[] saudiArabiaCities = { "Riyadh", "Jeddah", "Mecca", "Medina", "Dammam", "Abha", "Ranyah",
                         "Hofuf", "Al-Mubarraz", "Sakakah", "Taif", "Jubail", "Buraydah", "Tabuk", "Najran", "Qatif",
-                        "Khobar",
-                        "Al Bahah", "Hafr Al-Batin", "Jizan", "Qurayyat", "Al Qunfudhah", "Yanbu", "Buqaa", "Unaizah" };
+                        "Khobar", "Al Bahah", "Hafr Al-Batin", "Jizan", "Qurayyat", "Al Qunfudhah", "Yanbu", "Buqaa",
+                        "Unaizah" };
         private static String[] iraqCities = { "Baghdad", "Mosul", "Basra", "Nasiriyah", "Hillah", "Suleymaniyah",
-                        "Erbil",
-                        "Ramadi", "Baqubah", "Kirkuk", "Tikrit", "Najaf", "Kut", "Dohuk", "Diwaniyah", "Karbala",
-                        "Zakho", "Amarah",
-                        "Samawah", "Samarra", "Fallujah", "Halabja", "Kufa", "Khanaqin", "Tal Afar" };
+                        "Erbil", "Ramadi", "Baqubah", "Kirkuk", "Tikrit", "Najaf", "Kut", "Dohuk", "Diwaniyah",
+                        "Karbala", "Zakho", "Amarah", "Samawah", "Samarra", "Fallujah", "Halabja", "Kufa", "Khanaqin",
+                        "Tal Afar" };
         private static String[] syriaCities = { "Aleppo", "Damascus", "Homs", "Latakia", "Hama", "Raqqa", "Deir ez-Zor",
                         "Al-Hasakah", "Qamishli", "Tartus", "Douma", "Manbij", "Idlib", "Daraa", "Darayya",
-                        "As-Suwayda",
-                        "Al-Thawrah", "Salamiyah", "Al-Safira", "Al-Bab", "Maarat al-Numaan", "Jableh", "Tadmur" };
+                        "As-Suwayda", "Al-Thawrah", "Salamiyah", "Al-Safira", "Al-Bab", "Maarat al-Numaan", "Jableh",
+                        "Tadmur" };
         private static String[] emiratesCities = { "Dubai", "Abu Dhabi", "Sharjah", "Al Ain", "Ajman", "Ras Al Khaimah",
                         "Fujairah", "Umm al-Quwain", "Dibba Al-Fujairah", "Khor Fakkan", "Kalba", "Jebel Ali",
-                        "Madinat Zayed",
-                        "Ruwais", "Liwa", "Dhaid", "Ghayathi", "Ar-Rams", "Dibba Al-Hisn", "Hatta", "Al Madam",
-                        "Al Jazirah Al Hamra" };
+                        "Madinat Zayed", "Ruwais", "Liwa", "Dhaid", "Ghayathi", "Ar-Rams", "Dibba Al-Hisn", "Hatta",
+                        "Al Madam", "Al Jazirah Al Hamra" };
         private static String[] qatarCities = { "Doha", "Al Wakrah", "Al-Rayyan", "Al-Shahaniya", "Mesaieed",
                         "Madinat Khalifa", "Umm Ghuwailina", "Najma", "Fereej Bin Mahmoud", "Mushayrib",
-                        "Rawdat Al Khail",
-                        "Al Thumama", "Al Karaana", "Al Sadd", "Ad Dawhah al Jadidah", "Onaiza", "Dukhan", "Mebaireek",
-                        "Al Hilal",
-                        "Fereej Abdel Aziz" };
+                        "Rawdat Al Khail", "Al Thumama", "Al Karaana", "Al Sadd", "Ad Dawhah al Jadidah", "Onaiza",
+                        "Dukhan", "Mebaireek", "Al Hilal", "Fereej Abdel Aziz" };
         private static String[] australiaCities = { "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide",
-                        "Gold Coast",
-                        "Newcastle", "Canberra", "Sunshine Coast", "Central Coast", "Wollongong", "Geelong", "Hobart",
-                        "Townsville",
-                        "Cairns", "Toowoomba", "Darwin", "Ballarat", "Bendigo", "Albury" };
+                        "Gold Coast", "Newcastle", "Canberra", "Sunshine Coast", "Central Coast", "Wollongong",
+                        "Geelong", "Hobart", "Townsville", "Cairns", "Toowoomba", "Darwin", "Ballarat", "Bendigo",
+                        "Albury" };
         private static String[] thailandCities = { "Bangkok", "Amnat Charoen", "Ang Thong", "Bueng Kan", "Buriram",
                         "Chachoengsao", "Chai Nat", "Chaiyaphum", "Chanthaburi", "Chiang Mai", "Chiang Rai", "Chonburi",
-                        "Chumphon",
-                        "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Lampang", "Lamphun", "Loei",
-                        "Lopburi",
-                        "Mae Hong Son", "Maha Sarakham", "Mukdahan", "Nayok", "Pathom", "Phanom", "Ratchasima", "Sawan",
-                        "Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lamphu", "Nong Khai", "Nonthaburi",
-                        "Pathum Thani",
-                        "Pattani", "Phang Nga", "Phatthalung", "Phayao", "Phetchabun", "Phetchaburi", "Phichit",
-                        "Phitsanulok",
-                        "Phra Si Ayutthaya", "Phrae", "Phuket", "Prachinburi", "Prachuap Khiri Khan", "Ranong",
-                        "Ratchaburi",
-                        "Rayong", "Roi Et", "Sa Kaeo", "Sakon", "Prakan", "Sakhon", "Songkhram", "Saraburi", "Satun",
-                        "Sing Buri",
-                        "Sisaket", "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang",
-                        "Trat",
+                        "Chumphon", "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Lampang",
+                        "Lamphun", "Loei", "Lopburi", "Mae Hong Son", "Maha Sarakham", "Mukdahan", "Nayok", "Pathom",
+                        "Phanom", "Ratchasima", "Sawan", "Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lamphu",
+                        "Nong Khai", "Nonthaburi", "Pathum Thani", "Pattani", "Phang Nga", "Phatthalung", "Phayao",
+                        "Phetchabun", "Phetchaburi", "Phichit", "Phitsanulok", "Phra Si Ayutthaya", "Phrae", "Phuket",
+                        "Prachinburi", "Prachuap Khiri Khan", "Ranong", "Ratchaburi", "Rayong", "Roi Et", "Sa Kaeo",
+                        "Sakon", "Prakan", "Sakhon", "Songkhram", "Saraburi", "Satun", "Sing Buri", "Sisaket",
+                        "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang", "Trat",
                         "Ubon Ratchathani", "Udon Thani", "Uthai Thani", "Uttaradit", "Yala", "Yasothon" };
         private static String[] uzbekistanCities = { "Tashkent", "Samarkand", "Namangan", "Andijan", "Nukus", "Fergana",
                         "Bukhara", "Qarshi", "Kokand", "Margilan", "Termez", "Jizzakh", "Angren", "Chirchiq", "Navoiy",
-                        "Urgench",
-                        "Shahrisabz", "Olmaliq", "Bekobod" };
+                        "Urgench", "Shahrisabz", "Olmaliq", "Bekobod" };
 
         private static String[] usaCities = { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix",
-                        "Philadelphia",
-                        "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth",
-                        "Columbus",
-                        "Indianapolis", "Charlotte", "San Francisco", "Seattle", "Denver", "Oklahoma City", "Nashville",
-                        "El Paso",
-                        "Washington", "Boston", "Las Vegas", "Portland", "Detroit", "Louisville", "Memphis",
-                        "Baltimore",
-                        "Milwaukee", "Albuquerque", "Fresno", "Tucson", "Sacramento", "Mesa", "Kansas City", "Atlanta",
-                        "Omaha",
-                        "Colorado Springs", "Raleigh", "Virginia Beach", "Long Beach", "Miami", "Oakland",
-                        "Minneapolis", "Tulsa",
-                        "Bakersfield", "Wichita", "Arlington", "Aurora", "Tampa", "New Orleans", "Cleveland", "Anaheim",
-                        "Honolulu",
+                        "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+                        "Fort Worth", "Columbus", "Indianapolis", "Charlotte", "San Francisco", "Seattle", "Denver",
+                        "Oklahoma City", "Nashville", "El Paso", "Washington", "Boston", "Las Vegas", "Portland",
+                        "Detroit", "Louisville", "Memphis", "Baltimore", "Milwaukee", "Albuquerque", "Fresno", "Tucson",
+                        "Sacramento", "Mesa", "Kansas City", "Atlanta", "Omaha", "Colorado Springs", "Raleigh",
+                        "Virginia Beach", "Long Beach", "Miami", "Oakland", "Minneapolis", "Tulsa", "Bakersfield",
+                        "Wichita", "Arlington", "Aurora", "Tampa", "New Orleans", "Cleveland", "Anaheim", "Honolulu",
                         "Henderson", "Stockton", "Lexington", "Corpus Christi", "Riverside", "Santa Ana", "Orlando" };
         private static String[] canadaCities = { "Toronto", "Quebec", "Montreal", "Vancouver", "Ottawa", "Winnipeg",
                         "Edmonton", "Calgary", "Halifax", "Victoria", "St. John's", "Saskatoon", "Regina", "Hamilton",
-                        "Kelowna",
-                        "Abbotsford", "Windsor", "Fredericton", "Thunder Bay", "Kingston", "Whitehorse",
-                        "Charlottetown", "Moncton",
-                        "Trois-Rivieres" };
+                        "Kelowna", "Abbotsford", "Windsor", "Fredericton", "Thunder Bay", "Kingston", "Whitehorse",
+                        "Charlottetown", "Moncton", "Trois-Rivieres" };
         private static String[] mexicoCities = { "Ciudad Mexico", "Tijuana", "Ecatepec", "León", "Puebla",
-                        "Ciudad Juárez",
-                        "Guadalajara", "Zapopan", "Monterrey", "Nezahualcoyotl", "Chihuahua", "Mérida", "Naucalpan",
-                        "Toluca",
-                        "Cancún", "Saltillo", "Aguascalientes", "Hermosillo", "Mexicali", "San Luis Potosí", "Culiacán",
-                        "Querétaro", "Morelia", "Chimalhuacán", "Reynosa", "Torreón", "Tlalnepantla", "Acapulco",
-                        "Tlaquepaque",
-                        "Guadalupe" };
+                        "Ciudad Juárez", "Guadalajara", "Zapopan", "Monterrey", "Nezahualcoyotl", "Chihuahua", "Mérida",
+                        "Naucalpan", "Toluca", "Cancún", "Saltillo", "Aguascalientes", "Hermosillo", "Mexicali",
+                        "San Luis Potosí", "Culiacán", "Querétaro", "Morelia", "Chimalhuacán", "Reynosa", "Torreón",
+                        "Tlalnepantla", "Acapulco", "Tlaquepaque", "Guadalupe" };
 
         private static String[] algeriaCities = { "Algiers", "Oran", "Constantine", "Setif", "Tlemcen", "Chlef",
                         "Blida" };
@@ -634,20 +521,17 @@ public class CatalogueHelper {
         private static String[] cameroonCities = { "Yaounde", "Douala", "Bamenda", "Garoua", "Kousseri", "Mokolo" };
         private static String[] ivoryCoastCities = { "Abidjan", "Yamoussoukro", "Daloa", "Bouake", "Divo", "Man" };
         private static String[] congoCities = { "Kinshasa", "Mbuji-Mayi", "Lubumbashi", "Kananga", "Kisangani",
-                        "Bukavu",
-                        "Tshikapa", "Bunia" };
+                        "Bukavu", "Tshikapa", "Bunia" };
         private static String[] egyptCities = { "Cairo", "Giza", "Alexandria", "Shubra el-Kheima", "Port Said", "Suez",
                         "Luxor", "Aswan" };
         private static String[] ghanaCities = { "Accra", "Kumasi", "Tamale", "Sekondi-Takoradi", "Ashaiman",
-                        "Cape Coast",
-                        "Ashanti" };
+                        "Cape Coast", "Ashanti" };
         private static String[] guineaCities = { "Conakry", "Nzerekore", "Kankan", "Maneah", "Dubreka" };
         private static String[] maliCities = { "Bamako", "Sikasso", "Timbaktu", "Kalabancoro", "Koutiala", "Segou" };
         private static String[] moroccoCities = { "Casablanca", "Rabat", "Tangier", "Fez", "Marrakesh", "Agadir" };
         private static String[] nigeriaCities = { "Lagos", "Kano", "Ibadan", "Abuja", "Port Harcourt", "Benin City",
                         "Onitsha", "Uyo", "Nnewi", "Kaduna", "Aba", "Ikorodu", "Ilorin", "Owerri", "Warri", "Jos",
-                        "Umuahia",
-                        "Maiduguri", "Enugu", "Lokoja" };
+                        "Umuahia", "Maiduguri", "Enugu", "Lokoja" };
         private static String[] southAfricaCities = { "Johannesburg", "Cape Town", "Ekurhuleni", "Durban", "Pretoria",
                         "Port Elizabeth", "Vereeniging", "Gauteng", "Bloemfontein", "Pietermaritzburg" };
         private static String[] sudanCities = { "Khartoum", "Omdurman", "Nyala" };
@@ -675,6 +559,10 @@ public class CatalogueHelper {
                         "Palembang", "Yogyakarta", "Malang", "Batam", "Denpasar", "Pekanbaru", "Surakarta", "Jambi",
                         "Cirebon", "Samarinda", "Bandar Lampung", "Banjarmasin", "Padang", "Serang", "Tasikmalaya",
                         "Balikpapan", "Cilegon" };
+        private static String[] luxembourgCities = { "Esch", "Esch-sur-Alzette", "Hesperange", "Niederkorn",
+                        "Dudelange", "Ettelbruck", "Strassen", "Petange", "Luxembourg", "Diekirch", "Wiltz" };
+        private static String[] faroeIslandsCities = { "Torshavn", "Klaksvik", "Hoyvik", "Argir", "Fuglafjordur",
+                        "Vagur", "Vestmanna", "Tvoroyri", "Midvagur", "Sorvagur" };
 
         private CatalogueHelper() {
         }
@@ -776,6 +664,8 @@ public class CatalogueHelper {
                 cities.put(vietnam, vietnamCities);
                 cities.put(malaysia, malaysiaCities);
                 cities.put(indonesia, indonesiaCities);
+                cities.put(luxembourg, luxembourgCities);
+                cities.put(faroe_islands, faroeIslandsCities);
                 if (cities.containsKey(nation_name))
                         return CommonFunctions.getRandomElement(cities.get(nation_name));
                 else
@@ -785,8 +675,7 @@ public class CatalogueHelper {
         // Prefixes and Suffixes
         private static String[] englandPrefixes = { "AFC", "FC" };
         private static String[] englandSuffixes = { "FC", "City", "Town", "United", "Wanderers", "Rovers", "Rangers",
-                        "",
-                        "FC", "County" };
+                        "", "FC", "County" };
 
         private static String[] spainPrefixes = { "FC", "Atletico", "Athletic", "Real", "RCD", "SD", "CD", "CA", "RC",
                         "Deportivo", "Sporting" };
@@ -806,13 +695,11 @@ public class CatalogueHelper {
         private static String[] portugalSuffixes = { "FC", "Clube", "SC", "CP" };
 
         private static String[] belgiumPrefixes = { "Club", "Cercle", "Standard", "RSC", "KSC", "KVC", "KAA", "KRC",
-                        "KVV",
-                        "Koninklijke" };
+                        "KVV", "Koninklijke" };
         private static String[] belgiumSuffixes = { "FC", "SK", "SC", "VV", "SV" };
 
         private static String[] russiaPrefixes = { "FC", "PFC", "CSKA", "Dinamo", "Spartak", "Lokomotiv", "Torpedo",
-                        "SKA",
-                        "Zenit" };
+                        "SKA", "Zenit" };
         private static String[] russiaSuffixes = { "FC", "Zvezda" };
 
         private static String[] netherlandsPrefixes = { "FC", "ADO", "SC", "SV", "Sparta", "SBV", "SVV", "VV" };
@@ -852,8 +739,7 @@ public class CatalogueHelper {
         private static String[] israelSuffixes = { "FC" };
 
         private static String[] romaniaPrefixes = { "FC", "Dinamo", "Rapid", "Steaua", "Universitea", "Petrolul",
-                        "Astra",
-                        "Unirea", "Viitorul", "Club", "CS", "Politechnica", "UTA" };
+                        "Astra", "Unirea", "Viitorul", "Club", "CS", "Politechnica", "UTA" };
         private static String[] romaniaSuffixes = { "FC" };
 
         private static String[] hungaryPrefixes = { "FC", "TC", "MTK", "SC" };
@@ -866,8 +752,7 @@ public class CatalogueHelper {
         private static String[] brazilSuffixes = { "FC", "Clube" };
 
         private static String[] latinPrefixes = { "FC", "Atletico", "Athletic", "RCD", "SD", "CD", "CA", "RC",
-                        "Deportivo",
-                        "Sporting", "Union" };
+                        "Deportivo", "Sporting", "Union" };
         private static String[] latinSuffixes = { "FC", "CF", "UD", "Juniors" };
 
         private static String[] belarusPrefixes = { "FC", "Dinamo", "Ruch", "Slavia", "Shaktyor", "Neman" };
@@ -906,6 +791,9 @@ public class CatalogueHelper {
 
         private static String[] estoniaPrefixes = { "FC", "FCI" };
         private static String[] estoniaSuffixes = { "FC" };
+
+        private static String[] indiaPrefixes = { "SC", "FC", "AC" };
+        private static String[] indiaSuffixes = { "United", "FC", "SC", "AC", "Union" };
 
         public static List<String[]> getPrefixOrSuffixData(String nation_name) {
                 String[] latin_countries = { argentina, bolivia, chile, colombia, ecuador, peru, paraguay, uruguay,
@@ -1035,6 +923,9 @@ public class CatalogueHelper {
                 } else if (nation_name.equalsIgnoreCase(estonia)) {
                         data.add(estoniaPrefixes);
                         data.add(estoniaSuffixes);
+                } else if (nation_name.equalsIgnoreCase(india)) {
+                        data.add(indiaPrefixes);
+                        data.add(indiaSuffixes);
                 } else {
                         String[] temp = { "FC" };
                         data.add(temp);
@@ -1081,55 +972,46 @@ public class CatalogueHelper {
         // Formations
         private static Position[][] formations = {
                         { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                                        Position.LEFT_BACK,
-                                        Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                                        Position.RIGHT_MIDFIELDER,
-                                        Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
+                                        Position.LEFT_BACK, Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                                        Position.RIGHT_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER,
+                                        Position.STRIKER },
                         { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                                        Position.LEFT_BACK,
-                                        Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.RIGHT_WINGER, Position.STRIKER, Position.LEFT_WINGER },
+                                        Position.LEFT_BACK, Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                                        Position.CENTRAL_MIDFIELDER, Position.RIGHT_WINGER, Position.STRIKER,
+                                        Position.LEFT_WINGER },
                         { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                                        Position.LEFT_BACK,
-                                        Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER,
-                                        Position.RIGHT_MIDFIELDER,
+                                        Position.LEFT_BACK, Position.DEFENSIVE_MIDFIELDER,
+                                        Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER,
                                         Position.LEFT_MIDFIELDER, Position.ATTACKING_MIDFIELDER, Position.STRIKER },
                         { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
                                         Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.LEFT_MIDFIELDER, Position.RIGHT_WINGER, Position.STRIKER,
-                                        Position.LEFT_WINGER },
+                                        Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.RIGHT_WINGER,
+                                        Position.STRIKER, Position.LEFT_WINGER },
                         { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
-                                        Position.LEFT_BACK,
-                                        Position.DEFENSIVE_MIDFIELDER, Position.DEFENSIVE_MIDFIELDER,
-                                        Position.ATTACKING_MIDFIELDER,
+                                        Position.LEFT_BACK, Position.DEFENSIVE_MIDFIELDER,
+                                        Position.DEFENSIVE_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
                                         Position.ATTACKING_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
                                         Position.STRIKER },
                         { Position.GOALKEEPER, Position.RIGHT_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
                                         Position.CENTRE_BACK, Position.LEFT_BACK, Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.RIGHT_WINGER, Position.STRIKER, Position.LEFT_WINGER },
+                                        Position.CENTRAL_MIDFIELDER, Position.RIGHT_WINGER, Position.STRIKER,
+                                        Position.LEFT_WINGER },
                         { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
                                         Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER,
-                                        Position.STRIKER },
+                                        Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                                        Position.LEFT_MIDFIELDER, Position.STRIKER, Position.STRIKER },
                         { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.RIGHT_BACK,
-                                        Position.LEFT_BACK,
-                                        Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER, Position.STRIKER },
+                                        Position.LEFT_BACK, Position.DEFENSIVE_MIDFIELDER, Position.RIGHT_MIDFIELDER,
+                                        Position.CENTRAL_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                                        Position.LEFT_MIDFIELDER, Position.STRIKER },
                         { Position.GOALKEEPER, Position.CENTRE_BACK, Position.CENTRE_BACK, Position.CENTRE_BACK,
                                         Position.RIGHT_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
-                                        Position.CENTRAL_MIDFIELDER,
-                                        Position.LEFT_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
-                                        Position.ATTACKING_MIDFIELDER,
+                                        Position.CENTRAL_MIDFIELDER, Position.LEFT_MIDFIELDER,
+                                        Position.ATTACKING_MIDFIELDER, Position.ATTACKING_MIDFIELDER,
                                         Position.STRIKER } };
 
         private static String[] formationNames = { "4-4-2", "4-3-3", "4-2-3-1 Wide", "3-4-3", "4-2-3-1", "5-2-3",
-                        "3-5-2",
-                        "4-1-4-1", "3-4-3" };
+                        "3-5-2", "4-1-4-1", "3-4-3" };
 
         public static Position[] getFormation(int formation_id) {
                 return formations[formation_id];
@@ -1143,19 +1025,10 @@ public class CatalogueHelper {
                 return formationNames.length;
         }
 
-        public static Position[] allPositions = {
-                        Position.GOALKEEPER,
-                        Position.CENTRE_BACK,
-                        Position.RIGHT_BACK,
-                        Position.LEFT_BACK,
-                        Position.DEFENSIVE_MIDFIELDER,
-                        Position.CENTRAL_MIDFIELDER,
-                        Position.ATTACKING_MIDFIELDER,
-                        Position.RIGHT_MIDFIELDER,
-                        Position.LEFT_MIDFIELDER,
-                        Position.RIGHT_WINGER,
-                        Position.LEFT_WINGER,
-                        Position.STRIKER
+        public static Position[] allPositions = { Position.GOALKEEPER, Position.CENTRE_BACK, Position.RIGHT_BACK,
+                        Position.LEFT_BACK, Position.DEFENSIVE_MIDFIELDER, Position.CENTRAL_MIDFIELDER,
+                        Position.ATTACKING_MIDFIELDER, Position.RIGHT_MIDFIELDER, Position.LEFT_MIDFIELDER,
+                        Position.RIGHT_WINGER, Position.LEFT_WINGER, Position.STRIKER
         };
 
         public static Position[] getAllPositions() {
@@ -1222,553 +1095,358 @@ public class CatalogueHelper {
         // Names
         private static String[] englishNames = { "Adam", "Andrew", "Alexander", "Matthew", "Sam", "Robin", "Arthur",
                         "Douglas", "Michael", "Gareth", "Alfred", "Simon", "Henry", "Robert", "Jack", "Jacob", "Jake",
-                        "George",
-                        "Lewis", "Peter", "Lando", "Kevin", "Luke", "Oliver", "Harry", "Leo", "Lionel", "Oscar", "Jim",
-                        "Jeremy",
-                        "Boris", "Denis", "John", "Fred", "Kieran", "Mark", "Christopher", "William", "Will", "James",
-                        "Steven",
-                        "Frank", "David", "Bradley", "Marcus", "Jordan", "Jamie", "Craig", "Sean", "Brendan",
-                        "Brandon" };
+                        "George", "Lewis", "Peter", "Lando", "Kevin", "Luke", "Oliver", "Harry", "Leo", "Lionel",
+                        "Oscar", "Jim", "Jeremy", "Boris", "Denis", "John", "Fred", "Kieran", "Mark", "Christopher",
+                        "William", "Will", "James", "Steven", "Frank", "David", "Bradley", "Marcus", "Jordan", "Jamie",
+                        "Craig", "Sean", "Brendan", "Brandon" };
         private static String[] englishSurnames = { "Charlton", "Kane", "Winks", "Trippier", "Armstrong", "Russell",
                         "Hamilton", "Wood", "Adams", "Jones", "Sharp", "Bale", "Hart", "Stokes", "Strauss", "Paul",
-                        "Gerrard",
-                        "Lampard", "Hutchinson", "Sterling", "Morgan", "Derbyshire", "London", "Palmer", "Cook",
-                        "Lucas", "Beckham",
-                        "Anderson", "Ferdinand", "Neville", "Southall", "Southgate", "Hodgson", "Shaw", "Collins",
-                        "Maddison",
-                        "Henderson", "Maguire", "Burley", "Dyche", "Rodgers", "Williams" };
+                        "Gerrard", "Lampard", "Hutchinson", "Sterling", "Morgan", "Derbyshire", "London", "Palmer",
+                        "Cook", "Lucas", "Beckham", "Anderson", "Ferdinand", "Neville", "Southall", "Southgate",
+                        "Hodgson", "Shaw", "Collins", "Maddison", "Henderson", "Maguire", "Burley", "Dyche", "Rodgers",
+                        "Williams" };
 
         private static String[] germanNames = { "Toni", "Marco", "Jurgen", "Timo", "Marcel", "Manuel", "Bastian", "Kai",
                         "Klaus", "Steffen", "Karl", "Heinz", "Oliver", "Stefan", "Maximillian", "Leon", "Serge",
-                        "Leroy", "Thomas",
-                        "Jonas", "Lukas", "Michael", "Fritz", "Uwe", "Hans", "Nico", "Christian", "Moritz", "Patrick",
-                        "Florian",
-                        "Daniel", "Dennis", "Phillip", "Helmut", "Andreas", "Julian", "Mario", "Tobias", "Felix",
-                        "Mats", "Marius",
-                        "Andre", "Marvin", "Peter", "Wolfgang", "Gerhard", "Gunter", "Dieter", "Horst", "Josef",
-                        "Frank", "Bernd",
-                        "Franz", "Heinrich", "Rolf", "Ralf", "Joachim", "Rainer", "Siegfried", "Norbert", "Wilhelm",
-                        "Jorg", "Sven",
-                        "Lars", "Ulrich", "Willi", "Erich", "Paul", "Otto", "Erwin", "Johannes", "Lothar", "Ernst",
-                        "Gerd",
-                        "Volker", "Jens", "Holger", "Dietmar", "Axel", "Torsten" };
+                        "Leroy", "Thomas", "Jonas", "Lukas", "Michael", "Fritz", "Uwe", "Hans", "Nico", "Christian",
+                        "Moritz", "Patrick", "Florian", "Daniel", "Dennis", "Phillip", "Helmut", "Andreas", "Julian",
+                        "Mario", "Tobias", "Felix", "Mats", "Marius", "Andre", "Marvin", "Peter", "Wolfgang", "Gerhard",
+                        "Gunter", "Dieter", "Horst", "Josef", "Frank", "Bernd", "Franz", "Heinrich", "Rolf", "Ralf",
+                        "Joachim", "Rainer", "Siegfried", "Norbert", "Wilhelm", "Jorg", "Sven", "Lars", "Ulrich",
+                        "Willi", "Erich", "Paul", "Otto", "Erwin", "Johannes", "Lothar", "Ernst", "Gerd", "Volker",
+                        "Jens", "Holger", "Dietmar", "Axel", "Torsten" };
         private static String[] germanSurnames = { "Muller", "Schmidt", "Schneider", "Fischer", "Weber", "Meyer",
-                        "Wagner",
-                        "Becker", "Schulz", "Hoffmann", "Schafer", "Koch", "Bauer", "Richter", "Klein", "Wolf",
-                        "Schroder",
-                        "Neumann", "Schwarz", "Zimmermann", "Braun", "Kruger", "Hofmann", "Hartmann", "Lange",
-                        "Schmitt", "Werner",
-                        "Schmitz", "Krause", "Meier", "Lehmann", "Schmid", "Schulze", "Maier", "Kohler", "Herrmann",
-                        "Konig",
-                        "Walter", "Mayer", "Huber", "Kaiser", "Fuchs", "Peters", "Lang", "Scholz", "Moller", "Weiss",
-                        "Jung",
-                        "Hahn", "Schubert", "Vogel", "Friedrich", "Keller", "Gunther", "Frank", "Berger", "Winkler",
-                        "Roth", "Beck",
-                        "Lorenz", "Baumann", "Franke", "Albrecht", "Schuster", "Simon", "Ludwig", "Bohm", "Winter",
-                        "Kraus",
+                        "Wagner", "Becker", "Schulz", "Hoffmann", "Schafer", "Koch", "Bauer", "Richter", "Klein",
+                        "Wolf", "Schroder", "Neumann", "Schwarz", "Zimmermann", "Braun", "Kruger", "Hofmann",
+                        "Hartmann", "Lange", "Schmitt", "Werner", "Schmitz", "Krause", "Meier", "Lehmann", "Schmid",
+                        "Schulze", "Maier", "Kohler", "Herrmann", "Konig", "Walter", "Mayer", "Huber", "Kaiser",
+                        "Fuchs", "Peters", "Lang", "Scholz", "Moller", "Weiss", "Jung", "Hahn", "Schubert", "Vogel",
+                        "Friedrich", "Keller", "Gunther", "Frank", "Berger", "Winkler", "Roth", "Beck", "Lorenz",
+                        "Baumann", "Franke", "Albrecht", "Schuster", "Simon", "Ludwig", "Bohm", "Winter", "Kraus",
                         "Martin", "Schumacher", "Kramer", "Vogt", "Stein", "Jager", "Otto", "Sommer", "Gross", "Seidel",
-                        "Heinrich",
-                        "Brandt", "Haas", "Schreiber", "Graf", "Schulte", "Dietrich", "Ziegler", "Kuhn", "Kahn", "Pohl",
-                        "Engel",
-                        "Horn", "Busch", "Bergmann", "Thomas", "Voigt", "Sauer", "Arnold", "Wolff", "Pfeiffer" };
+                        "Heinrich", "Brandt", "Haas", "Schreiber", "Graf", "Schulte", "Dietrich", "Ziegler", "Kuhn",
+                        "Kahn", "Pohl", "Engel", "Horn", "Busch", "Bergmann", "Thomas", "Voigt", "Sauer", "Arnold",
+                        "Wolff", "Pfeiffer" };
 
         private static String[] spanishNames = { "Diego", "Leo", "Sergio", "Jaime", "Carlos", "Andres", "Iker",
-                        "Victor",
-                        "Gonzalo", "Javier", "Luis", "Fernando", "Alejandro", "Mateo", "Antonio", "Jorge", "Emilio",
-                        "Jose",
-                        "Enrique", "Leonanrdo", "Juan", "Emiliano", "Manuel", "Lorenzo", "Miguel", "Maximiliano",
-                        "Matias",
-                        "Cristian", "Santiago", "Francisco", "Rafael", "Raul", "Pedro", "Marco", "Ricardo", "Armando",
-                        "Cesar",
-                        "Ezequiel", "Sergi", "Roberto", "Rodrigo", "Pablo", "Mario", "Esteban", "Joaquin", "Alberto",
-                        "Aitor",
-                        "Joselu", "Ruben", "Ivan", "Ramon", "Roman", "Eduardo", "Santi", "Marcos", "Alfonso", "Julio",
-                        "Roque",
-                        "Marc", "Ignacio", "Mikel", "Carles", "Gerard", "Arturo", "Hector", "Angel", "Facundo",
-                        "Sebastian",
-                        "Federico", "Fede", "Enrico", "Dario", "Alvaro", "Xavi", "Xabi", "Julen" };
+                        "Victor", "Gonzalo", "Javier", "Luis", "Fernando", "Alejandro", "Mateo", "Antonio", "Jorge",
+                        "Emilio", "Jose", "Enrique", "Leonanrdo", "Juan", "Emiliano", "Manuel", "Lorenzo", "Miguel",
+                        "Maximiliano", "Matias", "Cristian", "Santiago", "Francisco", "Rafael", "Raul", "Pedro",
+                        "Marco", "Ricardo", "Armando", "Cesar", "Ezequiel", "Sergi", "Roberto", "Rodrigo", "Pablo",
+                        "Mario", "Esteban", "Joaquin", "Alberto", "Aitor", "Joselu", "Ruben", "Ivan", "Ramon", "Roman",
+                        "Eduardo", "Santi", "Marcos", "Alfonso", "Julio", "Roque", "Marc", "Ignacio", "Mikel", "Carles",
+                        "Gerard", "Arturo", "Hector", "Angel", "Facundo", "Sebastian", "Federico", "Fede", "Enrico",
+                        "Dario", "Alvaro", "Xavi", "Xabi", "Julen" };
         private static String[] spanishSurnames = { "Cuenca", "de la Fuente", "Mesa", "Hurtado", "Trujillo",
-                        "Santamaria",
-                        "Iniesta", "Izquierdo", "Camacho", "Merino", "Pardo", "Llorente", "Luque", "Ruidiaz", "Roca",
-                        "Salazar",
-                        "Munoz", "Puyol", "Manzano", "Bentancur", "Rocha", "de Los Santos", "de Leon", "Silvera",
-                        "Machado",
-                        "Serrano", "Giraldo", "Quintero", "Sanz", "Fuentes", "Espinoza", "Sepulveda", "Rubio", "Villa",
-                        "Delgano",
-                        "Moralez", "Marin", "Iglesias", "Sainz", "Gonzalez", "Rodriguez", "Gomez", "Fernandez", "Lopez",
-                        "Diaz",
-                        "Martinez", "Perez", "Garcia", "Sanchez", "Romero", "Sosa", "Torres", "Alvarez", "Ruiz",
-                        "Ramirez",
-                        "Flores", "Benitez", "Acosta", "Medina", "Herrera", "Suarez", "Aguirre", "Gimenez", "Gutierrez",
-                        "Pereyra",
-                        "Rojas", "Molina", "Castro", "Ortiz", "Silva", "Nuñez", "Luna", "Juarez", "Cabrera", "Rios",
-                        "Morales",
-                        "Godoy", "Moreno", "Ferreyra", "Dominguez", "Carrizo", "Peralta", "Castillo", "Ledesma",
-                        "Quiroga", "Vega",
-                        "Vera", "Muñoz", "Ojeda", "Ponce", "Villalba", "Cardozo", "Navarro", "Coronel", "Vazquez",
-                        "Ramos",
-                        "Vargas", "Caceres", "Arias", "Figueroa", "Cordoba", "Correa", "Maldonado", "Paz", "Rivero",
-                        "Miranda",
-                        "Mansilla", "Farias", "Roldan", "Mendez", "Guzman", "Aguero", "Hernandez", "Lucero", "Cruz",
-                        "Paez",
-                        "Escobar", "Mendoza", "Barrios", "Bustos", "Avila", "Ayala", "Blanco", "Soria", "Maidana",
-                        "Acuña", "Leiva",
-                        "Duarte", "Moyano", "Campos", "Soto", "Martin", "Valdez", "Bravo", "Chavez", "Velazquez",
-                        "Olivera",
-                        "Toledo", "Franco", "Ibañez", "Leguizamon", "Montenegro", "Delgado", "Arce", "Ibarra",
-                        "Gallardo",
+                        "Santamaria", "Iniesta", "Izquierdo", "Camacho", "Merino", "Pardo", "Llorente", "Luque",
+                        "Ruidiaz", "Roca", "Salazar", "Munoz", "Puyol", "Manzano", "Bentancur", "Rocha",
+                        "de Los Santos", "de Leon", "Silvera", "Machado", "Serrano", "Giraldo", "Quintero", "Sanz",
+                        "Fuentes", "Espinoza", "Sepulveda", "Rubio", "Villa", "Delgano", "Moralez", "Marin", "Iglesias",
+                        "Sainz", "Gonzalez", "Rodriguez", "Gomez", "Fernandez", "Lopez", "Diaz", "Martinez", "Perez",
+                        "Garcia", "Sanchez", "Romero", "Sosa", "Torres", "Alvarez", "Ruiz", "Ramirez", "Flores",
+                        "Benitez", "Acosta", "Medina", "Herrera", "Suarez", "Aguirre", "Gimenez", "Gutierrez",
+                        "Pereyra", "Rojas", "Molina", "Castro", "Ortiz", "Silva", "Nuñez", "Luna", "Juarez", "Cabrera",
+                        "Rios", "Morales", "Godoy", "Moreno", "Ferreyra", "Dominguez", "Carrizo", "Peralta", "Castillo",
+                        "Ledesma", "Quiroga", "Vega", "Vera", "Muñoz", "Ojeda", "Ponce", "Villalba", "Cardozo",
+                        "Navarro", "Coronel", "Vazquez", "Ramos", "Vargas", "Caceres", "Arias", "Figueroa", "Cordoba",
+                        "Correa", "Maldonado", "Paz", "Rivero", "Miranda", "Mansilla", "Farias", "Roldan", "Mendez",
+                        "Guzman", "Aguero", "Hernandez", "Lucero", "Cruz", "Paez", "Escobar", "Mendoza", "Barrios",
+                        "Bustos", "Avila", "Ayala", "Blanco", "Soria", "Maidana", "Acuña", "Leiva", "Duarte", "Moyano",
+                        "Campos", "Soto", "Martin", "Valdez", "Bravo", "Chavez", "Velazquez", "Olivera", "Toledo",
+                        "Franco", "Ibañez", "Leguizamon", "Montenegro", "Delgado", "Arce", "Ibarra", "Gallardo",
                         "Santillan", "Acevedo", "Aguilar", "Vallejos", "Contreras", "Alegre", "Galvan", "Oviedo",
-                        "Aranda",
-                        "Albornoz", "Baez", "Sandoval", "Barrionuevo", "Veron", "Gauna", "Zarate", "Heredia", "Mercado",
-                        "Monzon",
-                        "Marquez", "Zalazar", "Mamani", "Coria", "Segovia", "Romano", "Jimenez", "Salinas", "Quinteros",
-                        "Barrera",
-                        "Ortega", "Cabral", "Palacios", "Cejas", "Quintana", "Zapata", "Rosales", "Altamirano", "Nieva",
-                        "Bazan",
-                        "Alonso", "Burgos", "Bustamante", "Varela", "Lescano", "Aguilera", "Paredes", "Avalos",
-                        "Cuello", "Aquino",
-                        "Orellana", "Caballero", "Reynoso", "Reyes", "Villarreal", "Alarcon", "Pacheco", "Tapia",
-                        "Galarza",
-                        "Ocampo", "Meza", "Guerrero", "Salas", "Frias", "Videla", "Miño", "Jara", "Garay", "Rossi",
-                        "Lezcano",
+                        "Aranda", "Albornoz", "Baez", "Sandoval", "Barrionuevo", "Veron", "Gauna", "Zarate", "Heredia",
+                        "Mercado", "Monzon", "Marquez", "Zalazar", "Mamani", "Coria", "Segovia", "Romano", "Jimenez",
+                        "Salinas", "Quinteros", "Barrera", "Ortega", "Cabral", "Palacios", "Cejas", "Quintana",
+                        "Zapata", "Rosales", "Altamirano", "Nieva", "Bazan", "Alonso", "Burgos", "Bustamante", "Varela",
+                        "Lescano", "Aguilera", "Paredes", "Avalos", "Cuello", "Aquino", "Orellana", "Caballero",
+                        "Reynoso", "Reyes", "Villarreal", "Alarcon", "Pacheco", "Tapia", "Galarza", "Ocampo", "Meza",
+                        "Guerrero", "Salas", "Frias", "Videla", "Miño", "Jara", "Garay", "Rossi", "Lezcano",
                         "Valenzuela", "Oliva", "Fuentes", "Robledo", "Espindola", "Nieto", "Pereira", "Brizuela",
-                        "Andrada",
-                        "Maciel", "Funes", "Robles", "Sotelo", "Cortez", "Almiron", "Rivas", "Gil", "Villegas",
-                        "Calderon",
-                        "Vergara", "Carabajal", "Ceballos", "Gallo", "Palavecino" };
+                        "Andrada", "Maciel", "Funes", "Robles", "Sotelo", "Cortez", "Almiron", "Rivas", "Gil",
+                        "Villegas", "Calderon", "Vergara", "Carabajal", "Ceballos", "Gallo", "Palavecino" };
 
         private static String[] frenchNames = { "Remy", "Charles", "Romain", "Florian", "Rene", "Julien", "Antoine",
                         "Olivier", "Andre", "Quincy", "Marcellus", "Remi", "Eric", "Hugo", "Jules", "Lucas", "Raphael",
-                        "Gerard",
-                        "Matt", "Jacques", "Pierre", "Jean", "Jeanne", "Fabian", "Maurice", "Gustav", "Guy",
-                        "Emanuelle",
-                        "Francois", "Brett", "Xavier", "Yves", "Thierry", "Henry", "Robert", "Marcel", "Christophe",
-                        "Louis",
-                        "Philippe", "Edgar", "Claude", "Albert", "Auguste", "Alexandre", "Alain", "Benoit", "Chapin",
-                        "Edouard",
-                        "Fabrice", "Mathieu", "Franck", "Franc", "Didier", "Patrice" };
+                        "Gerard", "Matt", "Jacques", "Pierre", "Jean", "Jeanne", "Fabian", "Maurice", "Gustav", "Guy",
+                        "Emanuelle", "Francois", "Brett", "Xavier", "Yves", "Thierry", "Henry", "Robert", "Marcel",
+                        "Christophe", "Louis", "Philippe", "Edgar", "Claude", "Albert", "Auguste", "Alexandre", "Alain",
+                        "Benoit", "Chapin", "Edouard", "Fabrice", "Mathieu", "Franck", "Franc", "Didier", "Patrice" };
         private static String[] frenchSurnames = { "Martin", "Bernard", "Thomas", "Petit", "Richard", "Durand",
-                        "Dubois",
-                        "Moreau", "Laurent", "Gasly", "Grosjean", "Gignac", "Prost", "Valbuena", "Berger", "Bisset",
-                        "Boucher",
-                        "Brodeur", "Caron", "Charpentier", "Chevrolet", "Couture", "Fabron", "Faucheux", "Gagne",
-                        "Gnagnon",
-                        "Granger", "Lefebvre", "Marchand", "Mercier", "Mullins", "Paquet", "Page", "Pelletier", "Segal",
-                        "Legrand",
-                        "Leblanc", "Brun", "Beaulieu", "Beaumont", "Chastain", "Comtois", "Deschamps", "Dupont",
-                        "Desmarais",
-                        "Dupuis", "Linville", "Ribery" };
+                        "Dubois", "Moreau", "Laurent", "Gasly", "Grosjean", "Gignac", "Prost", "Valbuena", "Berger",
+                        "Bisset", "Boucher", "Brodeur", "Caron", "Charpentier", "Chevrolet", "Couture", "Fabron",
+                        "Faucheux", "Gagne", "Gnagnon", "Granger", "Lefebvre", "Marchand", "Mercier", "Mullins",
+                        "Paquet", "Page", "Pelletier", "Segal", "Legrand", "Leblanc", "Brun", "Beaulieu", "Beaumont",
+                        "Chastain", "Comtois", "Deschamps", "Dupont", "Desmarais", "Dupuis", "Linville", "Ribery" };
 
         private static String[] italianNames = { "Alberto", "Alessio", "Alessandro", "Angelo", "Anselmo", "Antonio",
                         "Bruno", "Bernardo", "Carlo", "Cristiano", "Claudio", "Damiano", "Dario", "Domenico", "Enrico",
-                        "Enzo",
-                        "Eugenio", "Ezio", "Fabrizio", "Filippo", "Federico", "Francesco", "Franco", "Flavio",
-                        "Gaetano", "Gennaro",
-                        "Giorgio", "Giuliano", "Gregorio", "Lorenzo", "Marco", "Mario", "Martino", "Massimo", "Matteo",
-                        "Maurizio",
-                        "Mauro", "Nevio", "Norberto", "Ottaviano", "Paolo", "Pietro", "Riccardo", "Roberto", "Silvio",
-                        "Stefano",
-                        "Tommaso", "Umberto", "Valentino", "Vincenzo", "Vittorio", "Achille", "Aimone", "Alceste",
-                        "Alcide",
-                        "Amilcare", "Amintore", "Annibale", "Apollone", "Aristotele", "Astore", "Baldassarre", "Beppe",
-                        "Carmine",
-                        "Cesare", "Clemente", "Daniele", "Dante", "Davide", "Emanuele", "Ercole", "Ettore", "Felice",
-                        "Gabriele",
-                        "Gaspare", "Gastone", "Gentile", "Giacobbe", "Giosue", "Giuseppe", "Leone", "Marte",
-                        "Melchiorre",
+                        "Enzo", "Eugenio", "Ezio", "Fabrizio", "Filippo", "Federico", "Francesco", "Franco", "Flavio",
+                        "Gaetano", "Gennaro", "Giorgio", "Giuliano", "Gregorio", "Lorenzo", "Marco", "Mario", "Martino",
+                        "Massimo", "Matteo", "Maurizio", "Mauro", "Nevio", "Norberto", "Ottaviano", "Paolo", "Pietro",
+                        "Riccardo", "Roberto", "Silvio", "Stefano", "Tommaso", "Umberto", "Valentino", "Vincenzo",
+                        "Vittorio", "Achille", "Aimone", "Alceste", "Alcide", "Amilcare", "Amintore", "Annibale",
+                        "Apollone", "Aristotele", "Astore", "Baldassarre", "Beppe", "Carmine", "Cesare", "Clemente",
+                        "Daniele", "Dante", "Davide", "Emanuele", "Ercole", "Ettore", "Felice", "Gabriele", "Gaspare",
+                        "Gastone", "Gentile", "Giacobbe", "Giosue", "Giuseppe", "Leone", "Marte", "Melchiorre",
                         "Michele", "Nataniele", "Oddone", "Ottone", "Pasquale", "Raffaele", "Salomone", "Salvatore",
-                        "Samuele",
-                        "Sante", "Scipione", "Simone", "Ulisse", "Vitale", "Vittore", "Dionigi", "Gianni", "Giovanni",
-                        "Luigi",
-                        "Nanni", "Ranieri", "Andrea", "Battista", "Elia", "Enea", "Evangelista", "Luca", "Mattia",
-                        "Nicola" };
+                        "Samuele", "Sante", "Scipione", "Simone", "Ulisse", "Vitale", "Vittore", "Dionigi", "Gianni",
+                        "Giovanni", "Luigi", "Nanni", "Ranieri", "Andrea", "Battista", "Elia", "Enea", "Evangelista",
+                        "Luca", "Mattia", "Nicola" };
         private static String[] italianSurnames = { "Rossi", "Russo", "Ferrari", "Esposito", "Bianchi", "Romano",
-                        "Regio",
-                        "Ricci", "Marino", "Lupo", "Lastra", "Bruno", "Gallo", "Conti", "De Luca", "Mancini", "Costa",
-                        "Giordano",
-                        "Rizzo", "Lombardi", "Moretti", "Tarantino", "Cantu", "Milanesi", "Lucchese", "Greco", "Jilani",
-                        "Napolitano", "Cremonesi", "Calabrese", "Romano", "Pesci", "Giuliani", "Bruni", "Rivera",
-                        "Immobile",
-                        "Caputo", "De Rossi", "Totti", "Bonetti", "Armani", "Pacino", "Di Maggio", "Capone", "Gollini",
-                        "Pirlo",
-                        "Vialli", "Marcotti", "Maggio", "De Niro", "Barone", "Acerbi", "Sportiello", "Como", "Argento",
-                        "Berlusconi", "Pellegri", "Pochettino", "Di Francesco", "Berardi", "Pellegrini", "Barella",
-                        "Leto" };
+                        "Regio", "Ricci", "Marino", "Lupo", "Lastra", "Bruno", "Gallo", "Conti", "De Luca", "Mancini",
+                        "Costa", "Giordano", "Rizzo", "Lombardi", "Moretti", "Tarantino", "Cantu", "Milanesi",
+                        "Lucchese", "Greco", "Jilani", "Napolitano", "Cremonesi", "Calabrese", "Romano", "Pesci",
+                        "Giuliani", "Bruni", "Rivera", "Immobile", "Caputo", "De Rossi", "Totti", "Bonetti", "Armani",
+                        "Pacino", "Di Maggio", "Capone", "Gollini", "Pirlo", "Vialli", "Marcotti", "Maggio", "De Niro",
+                        "Barone", "Acerbi", "Sportiello", "Como", "Argento", "Berlusconi", "Pellegri", "Pochettino",
+                        "Di Francesco", "Berardi", "Pellegrini", "Barella", "Leto" };
 
         private static String[] dutchNames = { "Abraham", "Bram", "Adrianus", "Aart", "Janus", "Antonie", "Anthonie",
                         "Antony", "Anthony", "Arend", "Berend", "Christiaan", "Cornelis", "Kees", "Nelis", "Derk",
-                        "Dirk", "Evert",
-                        "Gerrit", "Garrit", "Geert", "Harmen", "Herman", "Hendrik", "Jacob", "Jakob", "Coepe", "Ceupe",
-                        "Koepe",
-                        "Keupe", "Jan", "Karel", "Klaas", "Nicolaas", "Leendert", "Manus", "Marinus", "Matthias",
-                        "Matthijs",
-                        "Mattijs", "Thijs", "Meindert", "Machiel", "Michiel", "Peter", "Petrus", "Pieter", "Roelof",
-                        "Rudolf",
-                        "Steven", "Stephanus", "Teube", "Tobias", "Teunis", "Tonnis", "Theodorus", "Dorus", "Doris",
-                        "Wichart",
-                        "Willem", "Johan", "Max", "Martijn", "Marten", "Arjen", "Ruud", "Frenkie", "Jos", "Kevin",
-                        "Nick", "Theo",
-                        "Luuk", "Siem", "Rafael", "Dries", "Toby", "Erik", "Robin", "Wout", "Bas" };
+                        "Dirk", "Evert", "Gerrit", "Garrit", "Geert", "Harmen", "Herman", "Hendrik", "Jacob", "Jakob",
+                        "Coepe", "Ceupe", "Koepe", "Keupe", "Jan", "Karel", "Klaas", "Nicolaas", "Leendert", "Manus",
+                        "Marinus", "Matthias", "Matthijs", "Mattijs", "Thijs", "Meindert", "Machiel", "Michiel",
+                        "Peter", "Petrus", "Pieter", "Roelof", "Rudolf", "Steven", "Stephanus", "Teube", "Tobias",
+                        "Teunis", "Tonnis", "Theodorus", "Dorus", "Doris", "Wichart", "Willem", "Johan", "Max",
+                        "Martijn", "Marten", "Arjen", "Ruud", "Frenkie", "Jos", "Kevin", "Nick", "Theo", "Luuk", "Siem",
+                        "Rafael", "Dries", "Toby", "Erik", "Robin", "Wout", "Bas" };
         private static String[] dutchSurnames = { "de Jong", "Jansen", "de Vries", "van der Berg", "van den Berg",
                         "van de Berg", "van Dijk", "Bakker", "Janssen", "Visser", "Smit", "Meijer", "de Boer", "Mulder",
-                        "de Groot",
-                        "Bos", "Vos", "Peters", "Hendriks", "Dekker", "van Leeuwen", "Brouwer", "Verstappen",
-                        "van der Vaart",
-                        "Krol", "van Nistelrooy", "Robben", "Heitinga", "Vossen", "Mertens", "de Bruyne", "de Wit",
-                        "Dijkstra",
-                        "Smits", "de Graaf", "van der Meer", "Willems", "Gossens", "de Wout", "Thyssen", "Teuling",
-                        "de Ligt",
-                        "de Konig", "Bouwman", "Huntelaar", "Promes", "Depay", "Wijnaldum", "de Bruin",
-                        "van der Westhuizen",
-                        "Weghorst", "Dost", "Alderweireld" };
+                        "de Groot", "Bos", "Vos", "Peters", "Hendriks", "Dekker", "van Leeuwen", "Brouwer",
+                        "Verstappen", "van der Vaart", "Krol", "van Nistelrooy", "Robben", "Heitinga", "Vossen",
+                        "Mertens", "de Bruyne", "de Wit", "Dijkstra", "Smits", "de Graaf", "van der Meer", "Willems",
+                        "Gossens", "de Wout", "Thyssen", "Teuling", "de Ligt", "de Konig", "Bouwman", "Huntelaar",
+                        "Promes", "Depay", "Wijnaldum", "de Bruin", "van der Westhuizen", "Weghorst", "Dost",
+                        "Alderweireld" };
 
         private static String[] portugueseNames = { "Bruno", "Eder", "Pepe", "Bernardo", "Cristiano", "Joao", "Ruben",
                         "Jose", "Henrique", "Hernanes", "Gedson", "David", "Antonio", "Felix", "Pedro", "Guilherme",
-                        "Joaquim",
-                        "Jorge", "Felipe", "Aurelio", "Diogo", "Eduardo", "Fernando", "Luis", "Eusebio", "Miguel",
-                        "Nelson",
-                        "Gelson", "Marcelo", "Carlos", "Zeca", "Rui", "Sebastiao", "Ricardo", "Nuno", "Tiago", "Renato",
-                        "Manuel",
-                        "Paulo", "Otavio", "Goncalo", "Gabriel", "Eugenio", "Augusto", "Amancio", "Afonso", "Alexandre",
-                        "Claudio",
-                        "Fabiano", "Tomas", "Martim", "Lucas" };
+                        "Joaquim", "Jorge", "Felipe", "Aurelio", "Diogo", "Eduardo", "Fernando", "Luis", "Eusebio",
+                        "Miguel", "Nelson", "Gelson", "Marcelo", "Carlos", "Zeca", "Rui", "Sebastiao", "Ricardo",
+                        "Nuno", "Tiago", "Renato", "Manuel", "Paulo", "Otavio", "Goncalo", "Gabriel", "Eugenio",
+                        "Augusto", "Amancio", "Afonso", "Alexandre", "Claudio", "Fabiano", "Tomas", "Martim", "Lucas" };
         private static String[] portugueseSurnames = { "Silva", "Santos", "Ferreira", "Pereira", "Oliveira", "Costa",
                         "Rodrigues", "Martins", "Jesus", "Sousa", "Fernandes", "Goncalves", "Gomes", "Lopes", "Marques",
-                        "Alves",
-                        "Almeida", "Ribeiro", "Pinto", "Carvalho", "Castelinho", "Teixeira", "Moreira", "Correia",
-                        "Mendes",
-                        "Nunes", "Soares", "Vieira", "Monteiro", "Cardoso", "Rocha", "Neves", "Coelho", "Cruz", "Cunha",
-                        "Pires",
-                        "Ramos", "Reis", "Simoes", "Antunes", "Matos", "Fonseca", "Machado", "Araujo", "Fonseca",
-                        "Barbosa",
-                        "Tavares", "Pimentel", "Nascimento", "Lima", "Moutinho", "Ronaldo", "Mourinho" };
+                        "Alves", "Almeida", "Ribeiro", "Pinto", "Carvalho", "Castelinho", "Teixeira", "Moreira",
+                        "Correia", "Mendes", "Nunes", "Soares", "Vieira", "Monteiro", "Cardoso", "Rocha", "Neves",
+                        "Coelho", "Cruz", "Cunha", "Pires", "Ramos", "Reis", "Simoes", "Antunes", "Matos", "Fonseca",
+                        "Machado", "Araujo", "Fonseca", "Barbosa", "Tavares", "Pimentel", "Nascimento", "Lima",
+                        "Moutinho", "Ronaldo", "Mourinho" };
 
         private static String[] turkishNames = { "Ahmet", "Ayaz", "Eymen", "Mehmet", "Mirac", "Muhammed", "Mustafa",
-                        "Omer",
-                        "Yusuf", "Aagha", "Aaghaa", "Abay", "Abi", "Adalar", "Adlee", "Afridi", "Afshin", "Agha",
-                        "Agin", "Aimal",
-                        "Ajdin", "Ajnur", "Akara", "Akay", "Alibek", "Alp", "Altan", "Anarbek", "Arystanbek", "Asen",
-                        "Asker",
-                        "Aslan", "Asuman", "Asur", "Ata", "Ataa", "Atil", "Aydar", "Aydin", "Azizbek", "Azzat",
-                        "Bahadir", "Baki",
-                        "Bakytbek", "Balian", "Baris", "Bata", "Bayar", "Bechir", "Beg", "Behrem", "Beibut", "Bekarys",
-                        "Berkan",
-                        "Buqat", "Burak", "Cahil", "Can", "Candana", "Candanin", "Candon", "Cenk", "Cetin", "Ceyhun",
-                        "Demir",
-                        "Deniz", "Duman", "Ediz", "Edric", "Efe", "Eldar", "Emin", "Emir", "Emmad", "Emre", "Emree",
-                        "Emry",
-                        "Enayat", "Encarna", "Ender", "Ensar", "Enver", "Eren", "Ergin", "Erol", "Eshaq", "Esmaeel",
-                        "Esmail",
-                        "Etemad", "Galip", "Guney", "Gyula", "Hakan", "Halil", "Hamit", "Hasad", "Hidir", "Hosmunt",
-                        "Kaan",
+                        "Omer", "Yusuf", "Aagha", "Aaghaa", "Abay", "Abi", "Adalar", "Adlee", "Afridi", "Afshin",
+                        "Agha", "Agin", "Aimal", "Ajdin", "Ajnur", "Akara", "Akay", "Alibek", "Alp", "Altan", "Anarbek",
+                        "Arystanbek", "Asen", "Asker", "Aslan", "Asuman", "Asur", "Ata", "Ataa", "Atil", "Aydar",
+                        "Aydin", "Azizbek", "Azzat", "Bahadir", "Baki", "Bakytbek", "Balian", "Baris", "Bata", "Bayar",
+                        "Bechir", "Beg", "Behrem", "Beibut", "Bekarys", "Berkan", "Buqat", "Burak", "Cahil", "Can",
+                        "Candana", "Candanin", "Candon", "Cenk", "Cetin", "Ceyhun", "Demir", "Deniz", "Duman", "Ediz",
+                        "Edric", "Efe", "Eldar", "Emin", "Emir", "Emmad", "Emre", "Emree", "Emry", "Enayat", "Encarna",
+                        "Ender", "Ensar", "Enver", "Eren", "Ergin", "Erol", "Eshaq", "Esmaeel", "Esmail", "Etemad",
+                        "Galip", "Guney", "Gyula", "Hakan", "Halil", "Hamit", "Hasad", "Hidir", "Hosmunt", "Kaan",
                         "Kahraman", "Karawan", "Kiral", "Latafat", "Mart", "Mert", "Mesich", "Mesut", "Metin", "Murat",
-                        "Neval",
-                        "Nijaz", "Oguz", "Okan", "Olcay", "Onur", "Orhan", "Osmanek", "Osmen", "Otar", "Ozan", "Rifat",
-                        "Roshan",
-                        "Safet", "Sukru", "Suleyman", "Tengiz", "Tuncay", "Yusuf", "Ilkay", "Recep", "Cengiz",
-                        "Caglar" };
+                        "Neval", "Nijaz", "Oguz", "Okan", "Olcay", "Onur", "Orhan", "Osmanek", "Osmen", "Otar", "Ozan",
+                        "Rifat", "Roshan", "Safet", "Sukru", "Suleyman", "Tengiz", "Tuncay", "Yusuf", "Ilkay", "Recep",
+                        "Cengiz", "Caglar" };
         private static String[] turkishSurnames = { "Aksoy", "Arap", "Aslan", "Avci", "Badem", "Balik", "Bardakci",
-                        "Baris",
-                        "Binici", "Burakgazi", "Degirmenci", "Demir", "Demirci", "Ekmekci", "Karga", "Kartal",
-                        "Katirci", "Koc",
-                        "Kucuk", "Makar", "Marangoz", "Mataraci", "Nacar", "Sadik", "Solak", "Teke", "Terzi", "Tilki",
-                        "Tiryaki",
-                        "Uzun", "Yilmaz", "Topal", "Belozoglu", "Erdogan", "Under", "Calhanoglu", "Senturk", "Inler",
-                        "Derdiyok",
-                        "Tufan", "Sukur", "Kahveci", "Recber", "Kaya", "Aga" };
+                        "Baris", "Binici", "Burakgazi", "Degirmenci", "Demir", "Demirci", "Ekmekci", "Karga", "Kartal",
+                        "Katirci", "Koc", "Kucuk", "Makar", "Marangoz", "Mataraci", "Nacar", "Sadik", "Solak", "Teke",
+                        "Terzi", "Tilki", "Tiryaki", "Uzun", "Yilmaz", "Topal", "Belozoglu", "Erdogan", "Under",
+                        "Calhanoglu", "Senturk", "Inler", "Derdiyok", "Tufan", "Sukur", "Kahveci", "Recber", "Kaya",
+                        "Aga" };
 
         private static String[] russianNames = { "Ivan", "Ilya", "Nikolai", "Boris", "Vladimir", "Pyotr", "Andrei",
                         "Aleksandr", "Filip", "Dmitrij", "Sergei", "Leonid", "Viktor", "Georgi", "Pavel", "Konstantin",
-                        "Kirill",
-                        "Vasili", "Roman", "Vladislav", "Vyacheslav", "Matvei", "Mikhail", "Oleg", "Igor", "Maksim",
-                        "Sasha",
-                        "Anatoly", "Gennady", "Grigory", "Grisha", "Yevgeniy", "Lev", "Misha", "Stanislav", "Vadim",
-                        "Valentin",
-                        "Valery", "Yaroslav", "Yuri", "Artem", "Bogdan", "Radoslav", "Daler", "Daniil", "Nikita",
-                        "Aleksei",
-                        "Stepan", "Denis" };
+                        "Kirill", "Vasili", "Roman", "Vladislav", "Vyacheslav", "Matvei", "Mikhail", "Oleg", "Igor",
+                        "Maksim", "Sasha", "Anatoly", "Gennady", "Grigory", "Grisha", "Yevgeniy", "Lev", "Misha",
+                        "Stanislav", "Vadim", "Valentin", "Valery", "Yaroslav", "Yuri", "Artem", "Bogdan", "Radoslav",
+                        "Daler", "Daniil", "Nikita", "Aleksei", "Stepan", "Denis" };
         private static String[] russianSurnames = { "Smirnov", "Ivanov", "Kuznetsov", "Popov", "Sokolov", "Lebedev",
                         "Kozlov", "Novikov", "Morozov", "Petrov", "Volkov", "Solovyov", "Vasilyev", "Zaytsev", "Pavlov",
-                        "Semyonov",
-                        "Golubev", "Vinogradov", "Bogdanov", "Vorobyov", "Semak", "Zhirkov", "Stepanov", "Arshavin",
-                        "Yeltsin",
-                        "Gorbachev", "Yusupov", "Abramovich", "Akinfeev", "Aliyev", "Andropov", "Anisimov", "Antonov",
-                        "Mazepin",
-                        "Kvyat", "Berezutskiy", "Brezhnev", "Brusilov", "Bobrov", "Voronin", "Putin", "Vasin", "Gusev",
-                        "Golovin",
-                        "Goncharev", "Ignasevich", "Kerzhakov", "Fomin", "Chalov", "Miranchuk", "Cheryshev",
-                        "Sharapov" };
+                        "Semyonov", "Golubev", "Vinogradov", "Bogdanov", "Vorobyov", "Semak", "Zhirkov", "Stepanov",
+                        "Arshavin", "Yeltsin", "Gorbachev", "Yusupov", "Abramovich", "Akinfeev", "Aliyev", "Andropov",
+                        "Anisimov", "Antonov", "Mazepin", "Kvyat", "Berezutskiy", "Brezhnev", "Brusilov", "Bobrov",
+                        "Voronin", "Putin", "Vasin", "Gusev", "Golovin", "Goncharev", "Ignasevich", "Kerzhakov",
+                        "Fomin", "Chalov", "Miranchuk", "Cheryshev", "Sharapov" };
 
         private static String[] ukrainianNames = { "Anatoliy", "Andriy", "Anton", "Artem", "Artur", "Bohdan", "Ivan",
                         "Yevhen", "Viktor", "Olexandr", "Olexiy", "Borys", "Kliment", "Konstantyn", "Danylo", "Serhiy",
-                        "Yuriy",
-                        "Mykola", "Heorhiy", "Denys", "Ihor", "Dmytro", "Mykyta", "Eduard", "Yevhenii", "Vitaliy",
-                        "Roman", "Marko",
-                        "Krystiyan", "Mykhailo", "Petro", "Pylyp", "Symon", "Taras", "Volodymyr", "Yosyp", "" };
+                        "Yuriy", "Mykola", "Heorhiy", "Denys", "Ihor", "Dmytro", "Mykyta", "Eduard", "Yevhenii",
+                        "Vitaliy", "Roman", "Marko", "Krystiyan", "Mykhailo", "Petro", "Pylyp", "Symon", "Taras",
+                        "Volodymyr", "Yosyp", "" };
         private static String[] ukrainianSurnames = { "Shevchenko", "Kovalenko", "Bondarenko", "Tkachenko", "Boyko",
                         "Kravchenko", "Melnik", "Koval", "Rudenko", "Savchenko", "Marchenko", "Kovalchuk", "Klimenko",
-                        "Petrenko",
-                        "Bondar", "Kuzmenko", "Sidorenko", "Pavlenko", "Vasilenko", "Moroz", "Shevchuk", "Ponomarenko",
-                        "Levchenko",
-                        "Kharchenko", "Litvinenko", "Kolesnik", "Karpenko", "Oleynik", "Yurchenko", "Dyachenko",
-                        "Khomenko",
-                        "Panchenko", "Upravl", "Ivanov", "Nazarenko", "Pomeschenie", "Goncharenko", "Romanenko",
-                        "Prikhodko",
-                        "Lysenko", "Kirichenko", "Kostenko", "Tischenko", "Tereschenko", "Fedorenko", "Popov",
-                        "Makarenko",
-                        "Demchenko", "Tarasenko", "Nesterenko", "Tkachuk", "Kollektivnyy", "Pilipenko", "Timoshenko",
-                        "Shvets",
-                        "Vlasenko", "Kulik", "Kravchuk", "Gerasimenko", "Polischuk", "Litvin", "Petrova", "Moskalenko",
-                        "Kovtun",
+                        "Petrenko", "Bondar", "Kuzmenko", "Sidorenko", "Pavlenko", "Vasilenko", "Moroz", "Shevchuk",
+                        "Ponomarenko", "Levchenko", "Kharchenko", "Litvinenko", "Kolesnik", "Karpenko", "Oleynik",
+                        "Yurchenko", "Dyachenko", "Khomenko", "Panchenko", "Upravl", "Ivanov", "Nazarenko",
+                        "Pomeschenie", "Goncharenko", "Romanenko", "Prikhodko", "Lysenko", "Kirichenko", "Kostenko",
+                        "Tischenko", "Tereschenko", "Fedorenko", "Popov", "Makarenko", "Demchenko", "Tarasenko",
+                        "Nesterenko", "Tkachuk", "Kollektivnyy", "Pilipenko", "Timoshenko", "Shvets", "Vlasenko",
+                        "Kulik", "Kravchuk", "Gerasimenko", "Polischuk", "Litvin", "Petrova", "Moskalenko", "Kovtun",
                         "Radchenko", "Miroshnichenko", "Babenko", "Volkova", "Kravets", "Gostinitsa", "Melnichenko",
-                        "Smirnova",
-                        "Prokopenko", "Grischenko", "Denisenko", "Naumenko", "Maksimenko", "Stepanenko", "Onischenko",
-                        "Ostapenko",
-                        "Scherbina", "Shulga", "Doroshenko", "Parkhomenko", "Babich", "Borisenko", "Upravlenie",
-                        "Sokolova",
-                        "Serdyuk", "Mischenko", "Mikhaylenko", "Lutsenko", "Vovk", "Dmitrenko", "Zavod", "Omelchenko",
-                        "Novikova",
-                        "Yarmolenko", "Konoplyanka", "Rotan", "Akhmetov", "Zinchenko" };
+                        "Smirnova", "Prokopenko", "Grischenko", "Denisenko", "Naumenko", "Maksimenko", "Stepanenko",
+                        "Onischenko", "Ostapenko", "Scherbina", "Shulga", "Doroshenko", "Parkhomenko", "Babich",
+                        "Borisenko", "Upravlenie", "Sokolova", "Serdyuk", "Mischenko", "Mikhaylenko", "Lutsenko",
+                        "Vovk", "Dmitrenko", "Zavod", "Omelchenko", "Novikova", "Yarmolenko", "Konoplyanka", "Rotan",
+                        "Akhmetov", "Zinchenko" };
 
         private static String[] croatianNames = { "Berislav", "Berivoj", "Blago", "Bogdan", "Bogumil", "Bogoljub",
                         "Bogomil", "Bojan", "Boris", "Borislav", "Borna", "Bozetjeh", "Bozidar", "Bozo", "Bratislav",
-                        "Budimir",
-                        "Branimir", "Brajko", "Branko", "Braslav", "Bratoljub", "Cvitko", "Cvjetko", "Caslav",
-                        "Castimir",
-                        "Cedomir", "Dalibor", "Damir", "Darko", "Davor", "Desimir", "Dobroslav", "Dobrovit", "Domagoj",
-                        "Dragan",
-                        "Drago", "Dragoslav", "Dragutin", "Dragomir", "Drazen", "Drziha", "Drzislav", "Godemir",
-                        "Gojko",
-                        "Gojislav", "Gojslav", "Goran", "Grubisa", "Hrvatin", "Hrvoj", "Hrvoje", "Hrvoslav", "Kazimir",
-                        "Kazimir",
-                        "Jasenko", "Klonimir", "Kresimir", "Krsevan", "Lavoslav", "Ljubomir", "Ljudevit", "Milan",
-                        "Mile",
-                        "Milivoj", "Milovan", "Miljenko", "Mirko", "Miroslav", "Miros", "Mislav", "Mladen", "Mojmir",
-                        "Mutimir",
-                        "Nediljko", "Nedjeljko", "Nenad", "Ognjen", "Ostoja", "Ozren", "Predrag", "Pribislav", "Prvan",
-                        "Prvoslav",
+                        "Budimir", "Branimir", "Brajko", "Branko", "Braslav", "Bratoljub", "Cvitko", "Cvjetko",
+                        "Caslav", "Castimir", "Cedomir", "Dalibor", "Damir", "Darko", "Davor", "Desimir", "Dobroslav",
+                        "Dobrovit", "Domagoj", "Dragan", "Drago", "Dragoslav", "Dragutin", "Dragomir", "Drazen",
+                        "Drziha", "Drzislav", "Godemir", "Gojko", "Gojislav", "Gojslav", "Goran", "Grubisa", "Hrvatin",
+                        "Hrvoj", "Hrvoje", "Hrvoslav", "Kazimir", "Kazimir", "Jasenko", "Klonimir", "Kresimir",
+                        "Krsevan", "Lavoslav", "Ljubomir", "Ljudevit", "Milan", "Mile", "Milivoj", "Milovan",
+                        "Miljenko", "Mirko", "Miroslav", "Miros", "Mislav", "Mladen", "Mojmir", "Mutimir", "Nediljko",
+                        "Nedjeljko", "Nenad", "Ognjen", "Ostoja", "Ozren", "Predrag", "Pribislav", "Prvan", "Prvoslav",
                         "Prvos", "Radimir", "Radomir", "Rados", "Rajko", "Ranko", "Ratimir", "Ratko", "Rato", "Radovan",
-                        "Radoslav",
-                        "Slaven", "Slavisa", "Slavoljub", "Slavomir", "Smiljan", "Spomenko", "Srebrenko", "Srecko",
-                        "Stanislav",
-                        "Stanko", "Strahimir", "Svetoslav", "Tihomil", "Tihomir", "Tjesimir", "Tomislav", "Tomo",
-                        "Tvrtko",
-                        "Trpimir", "Vatroslav", "Veceslav", "Vedran", "Velimir", "Veselko", "Vidoslav", "Vjekoslav",
-                        "Vjenceslav",
-                        "Viseslav", "Vitomir", "Vjeran", "Vladimir", "Vlado", "Vlatko", "Vojmil", "Vojnomir", "Vuk",
-                        "Zdenko",
-                        "Zdeslav", "Zdravko", "Zorislav", "Zoran", "Zrinko", "Zrinoslav", "Zlatko", "Zvonimir",
-                        "Zvonko", "Zarko",
-                        "Zelimir", "Zeljko", "Zivko", "Aleksandar", "Ante", "Antija", "Danijel", "Dominik", "Edvard",
-                        "Filip",
-                        "Franjo", "Fridrik", "Ivan", "Josip", "Juraj", "Karlo", "Luka", "Marko", "Matej", "Nicola",
-                        "Niko", "Petar",
-                        "Stipe", "Lovro", "Andrej" };
+                        "Radoslav", "Slaven", "Slavisa", "Slavoljub", "Slavomir", "Smiljan", "Spomenko", "Srebrenko",
+                        "Srecko", "Stanislav", "Stanko", "Strahimir", "Svetoslav", "Tihomil", "Tihomir", "Tjesimir",
+                        "Tomislav", "Tomo", "Tvrtko", "Trpimir", "Vatroslav", "Veceslav", "Vedran", "Velimir",
+                        "Veselko", "Vidoslav", "Vjekoslav", "Vjenceslav", "Viseslav", "Vitomir", "Vjeran", "Vladimir",
+                        "Vlado", "Vlatko", "Vojmil", "Vojnomir", "Vuk", "Zdenko", "Zdeslav", "Zdravko", "Zorislav",
+                        "Zoran", "Zrinko", "Zrinoslav", "Zlatko", "Zvonimir", "Zvonko", "Zarko", "Zelimir", "Zeljko",
+                        "Zivko", "Aleksandar", "Ante", "Antija", "Danijel", "Dominik", "Edvard", "Filip", "Franjo",
+                        "Fridrik", "Ivan", "Josip", "Juraj", "Karlo", "Luka", "Marko", "Matej", "Nicola", "Niko",
+                        "Petar", "Stipe", "Lovro", "Andrej" };
         private static String[] croatianSurnames = { "Modric", "Petkovic", "Rakitic", "Perisic", "Kovac", "Prosinecki",
                         "Horvat", "Kovacevic", "Babic", "Maric", "Juric", "Novak", "Kovacic", "Knezevic", "Vukovic",
-                        "Markovic",
-                        "Duvnjak", "Simunic", "Olic", "Bosnjak", "Blazevic", "Bozic", "Bilic", "Filipovic", "Grgic",
-                        "Ivanovic",
-                        "Kralj", "Loncar", "Lovric", "Majer", "Mandic", "Pavlovic", "Petrovic", "Tomic", "Simunovic",
-                        "Vukovic",
-                        "Zoric", "Antic", "Kalinic", "Kramaric", "Bogdanic", "Brankovic", "Hadzic", "Broz", "Pletikosa",
-                        "Srna" };
+                        "Markovic", "Duvnjak", "Simunic", "Olic", "Bosnjak", "Blazevic", "Bozic", "Bilic", "Filipovic",
+                        "Grgic", "Ivanovic", "Kralj", "Loncar", "Lovric", "Majer", "Mandic", "Pavlovic", "Petrovic",
+                        "Tomic", "Simunovic", "Vukovic", "Zoric", "Antic", "Kalinic", "Kramaric", "Bogdanic",
+                        "Brankovic", "Hadzic", "Broz", "Pletikosa", "Srna" };
 
         private static String[] scotlandNames = { "Jack", "Oliver", "James", "Lewis", "Alexander", "Charlie", "Lucas",
                         "Logan", "Harris", "Daniel", "Finlay", "Jacob", "Leo", "Mason", "Noah", "Harry", "Alfie", "Max",
-                        "Callum",
-                        "Aaron", "Adam", "Thomas", "Ethan", "Rory", "Cameron", "Archie", "Oscar", "Matthew", "Nathan",
-                        "Joshua",
-                        "Brodie", "William", "Liam", "Ryan", "Jamie", "Harrison", "Joseph", "Dylan", "Samuel", "Riley",
-                        "David",
-                        "Ollie", "Andrew", "Connor", "Luke", "Jaxon", "Kyle", "Benjamin", "Michael", "Caleb", "Jackson",
-                        "George",
-                        "Finn", "Leon", "Fraser", "Murray", "Jake", "John", "Arran", "Angus", "Cole", "Robert",
-                        "Cooper", "Isaac",
-                        "Jayden", "Aiden", "Kai", "Theo", "Jude", "Ben", "Tyler", "Owen", "Blake", "Freddie", "Euan",
-                        "Josh",
-                        "Blair", "Robbie", "Hamish", "Kian", "Sam", "Aidan", "Jay", "Christopher", "Reuben", "Cody",
-                        "Luca",
-                        "Lachlan", "Elliot", "Evan", "Sonny", "Calum", "Henry", "Rhys", "Carson", "Harvey", "Calvin",
-                        "Callan" };
+                        "Callum", "Aaron", "Adam", "Thomas", "Ethan", "Rory", "Cameron", "Archie", "Oscar", "Matthew",
+                        "Nathan", "Joshua", "Brodie", "William", "Liam", "Ryan", "Jamie", "Harrison", "Joseph", "Dylan",
+                        "Samuel", "Riley", "David", "Ollie", "Andrew", "Connor", "Luke", "Jaxon", "Kyle", "Benjamin",
+                        "Michael", "Caleb", "Jackson", "George", "Finn", "Leon", "Fraser", "Murray", "Jake", "John",
+                        "Arran", "Angus", "Cole", "Robert", "Cooper", "Isaac", "Jayden", "Aiden", "Kai", "Theo", "Jude",
+                        "Ben", "Tyler", "Owen", "Blake", "Freddie", "Euan", "Josh", "Blair", "Robbie", "Hamish", "Kian",
+                        "Sam", "Aidan", "Jay", "Christopher", "Reuben", "Cody", "Luca", "Lachlan", "Elliot", "Evan",
+                        "Sonny", "Calum", "Henry", "Rhys", "Carson", "Harvey", "Calvin", "Callan" };
         private static String[] scotlandSurnames = { "Aitken", "Alexander", "Allan", "Anderson", "Bell", "Black",
-                        "Boyle",
-                        "Brown", "Bruce", "Burns", "Cameron", "Campbell", "Christie", "Clark", "Craig", "Crawford",
-                        "Cunningham",
-                        "Davidson", "Dickson", "Dixon", "Docherty", "Donaldson", "Douglas", "Duncan", "Ferguson",
-                        "Findlay",
-                        "Fleming", "Forbes", "Fraser", "Gibson", "Gordon", "Graham", "Grant", "Gray", "Hamilton",
-                        "Henderson",
-                        "Hill", "Hughes", "Hunter", "Jamieson", "Johnstone", "Jones", "Kelly", "Kennedy", "Kerr",
-                        "King",
-                        "Macdonald", "Mackay", "Mackenzie", "Maclean", "Macleod", "Marshall", "Martin", "McDonald",
-                        "McGregor",
-                        "McIntosh", "McIntyre", "McKay", "McKenzie", "McLean", "McMillan", "Miller", "Millar", "Milne",
-                        "Mitchell",
-                        "Moore", "Morrison", "Muir", "Murphy", "Munro", "Murray", "Paterson", "Reid", "Reilly",
-                        "Ritchie",
-                        "Robertson", "Ross", "Russell", "Scott", "Shaw", "Simpson", "Sinclair", "Smith", "Stevenson",
-                        "Stewart",
+                        "Boyle", "Brown", "Bruce", "Burns", "Cameron", "Campbell", "Christie", "Clark", "Craig",
+                        "Crawford", "Cunningham", "Davidson", "Dickson", "Dixon", "Docherty", "Donaldson", "Douglas",
+                        "Duncan", "Ferguson", "Findlay", "Fleming", "Forbes", "Fraser", "Gibson", "Gordon", "Graham",
+                        "Grant", "Gray", "Hamilton", "Henderson", "Hill", "Hughes", "Hunter", "Jamieson", "Johnstone",
+                        "Jones", "Kelly", "Kennedy", "Kerr", "King", "Macdonald", "Mackay", "Mackenzie", "Maclean",
+                        "Macleod", "Marshall", "Martin", "McDonald", "McGregor", "McIntosh", "McIntyre", "McKay",
+                        "McKenzie", "McLean", "McMillan", "Miller", "Millar", "Milne", "Mitchell", "Moore", "Morrison",
+                        "Muir", "Murphy", "Munro", "Murray", "Paterson", "Reid", "Reilly", "Ritchie", "Robertson",
+                        "Ross", "Russell", "Scott", "Shaw", "Simpson", "Sinclair", "Smith", "Stevenson", "Stewart",
                         "Sutherland", "Taylor", "Thompson", "Thomson", "Walker", "Wallace", "Watson", "White", "Watt",
-                        "Williams",
-                        "Williamson", "Wilson", "Wood", "Wright", "Young" };
+                        "Williams", "Williamson", "Wilson", "Wood", "Wright", "Young" };
 
         private static String[] danishNames = { "William", "Noah", "Oscar", "Lucas", "Victor", "Malthe", "Oliver",
-                        "Alfred",
-                        "Carl", "Valdemar", "Emil", "Elias", "August", "Aksel", "Magnus", "Frederik", "Arthur", "Felix",
-                        "Anton",
-                        "Elliot", "Kevin", "Jan", "Christian", "Peter", "Michael", "Brian", "Peter", "Markus" };
+                        "Alfred", "Carl", "Valdemar", "Emil", "Elias", "August", "Aksel", "Magnus", "Frederik",
+                        "Arthur", "Felix", "Anton", "Elliot", "Kevin", "Jan", "Christian", "Peter", "Michael", "Brian",
+                        "Peter", "Markus" };
         private static String[] danishSurnames = { "Nielsen", "Jensen", "Hansen", "Pedersen", "Andersen", "Christensen",
                         "Larsen", "Sorensen", "Rasmussen", "Jorgensen", "Petersen", "Madsen", "Kristensen", "Olsen",
-                        "Thomsen",
-                        "Christiansen", "Poulsen", "Johansen", "Moller", "Mortensen", "Magnnussen", "Knudsen", "Lund",
-                        "Mikkelsen",
-                        "Jacobsen", "Eriksen", "Henriksen", "Clausen", "Holm", "Simonsen", "Dahl", "Iverson", "Kjaer",
-                        "Jepsen",
-                        "Skov", "Laudrup", "Nygaard" };
+                        "Thomsen", "Christiansen", "Poulsen", "Johansen", "Moller", "Mortensen", "Magnnussen",
+                        "Knudsen", "Lund", "Mikkelsen", "Jacobsen", "Eriksen", "Henriksen", "Clausen", "Holm",
+                        "Simonsen", "Dahl", "Iverson", "Kjaer", "Jepsen", "Skov", "Laudrup", "Nygaard" };
 
         private static String[] czechNames = { "Jakub", "Jan", "Tomas", "Adam", "Matyas", "Martin", "Michal", "Ondra",
                         "Daniel", "Marek", "Petr", "Patrik", "Henry", "Filip", "Vojtech", "Lukas", "Karel", "Dominik",
-                        "Michael",
-                        "Radek", "David", "Josef", "Honza", "Matej", "Vaclav", "Krystof", "Jiri", "Milan", "Ondrej",
-                        "Zdenek",
-                        "Vladimir", "Jirka", "Ales" };
+                        "Michael", "Radek", "David", "Josef", "Honza", "Matej", "Vaclav", "Krystof", "Jiri", "Milan",
+                        "Ondrej", "Zdenek", "Vladimir", "Jirka", "Ales" };
         private static String[] czechSurnames = { "Novak", "Svoboda", "Novotny", "Dvorak", "Cerny", "Prochazka",
-                        "Kucera",
-                        "Vesely", "Horak", "Nemec", "Maly", "Zelezny", "Kolar", "Sediak", "Koci", "Liska", "Zajic",
-                        "Jelinek",
-                        "Jezek", "Sokol", "Holub", "Cap", "Javor", "Ruzicka", "Jahoda", "Cibulka", "Hruska", "Makovec",
-                        "Oliva",
-                        "Slezak", "Moravec", "Rosicky", "Nepomucky", "Musil", "Pospisil", "Hrabal", "Zdrazil",
-                        "Svacina" };
+                        "Kucera", "Vesely", "Horak", "Nemec", "Maly", "Zelezny", "Kolar", "Sediak", "Koci", "Liska",
+                        "Zajic", "Jelinek", "Jezek", "Sokol", "Holub", "Cap", "Javor", "Ruzicka", "Jahoda", "Cibulka",
+                        "Hruska", "Makovec", "Oliva", "Slezak", "Moravec", "Rosicky", "Nepomucky", "Musil", "Pospisil",
+                        "Hrabal", "Zdrazil", "Svacina" };
 
         private static String[] greekNames = { "Andreas", "Alexios", "Daniel", "David", "Elias", "Angelos", "Christos",
                         "Christoforos", "Evangelos", "Dimitrios", "Georgios", "Pantelis", "Sergios", "Stavros",
-                        "Theofilos",
-                        "Zacharias", "Stefanos", "Sotiris", "Thomas", "Kostas", "Petros", "Pavlos", "Ioannis",
-                        "Giannis", "Yiannis",
-                        "Markos", "Loukas", "Eleftherios", "Emmanouil", "Anastasios", "Athanasios", "Vassileios",
-                        "Christianos",
-                        "Konstantinos", "Gabriel", "Panagiotis", "Nicolaos", "Niketas", "Solomon", "Leo" };
+                        "Theofilos", "Zacharias", "Stefanos", "Sotiris", "Thomas", "Kostas", "Petros", "Pavlos",
+                        "Ioannis", "Giannis", "Yiannis", "Markos", "Loukas", "Eleftherios", "Emmanouil", "Anastasios",
+                        "Athanasios", "Vassileios", "Christianos", "Konstantinos", "Gabriel", "Panagiotis", "Nicolaos",
+                        "Niketas", "Solomon", "Leo" };
         private static String[] greekSurnames = { "Mitsotakis", "Theodorakis", "Doukakis", "Xarhakos", "Kyrgiakos",
                         "Katsioulis", "Giannoulis", "Melas", "Dimas", "Zorbas", "Lekkas", "Moustakas", "Zappas",
-                        "Pappas", "Doukas",
-                        "Georgatos", "Cosmatos", "Manatos", "Charisteas", "Georgeas", "Katselis", "Papadelis",
-                        "Georgallis",
-                        "Kanellis", "Stavridis", "Koutoufides", "Angelidis", "Georgiadis", "Stamatelopoulos",
-                        "Papadopoulos",
-                        "Gianopoulos", "Anagnostopoulos", "Theodorakopoulos", "Tsolakoglou", "Ardizoglou",
-                        "Patsatzoglou",
-                        "Afxentiou", "Economou", "Konstantinou", "Christoforou", "Gregoriou", "Politis", "Chiotis",
-                        "Hatzipanagis",
-                        "Devetzi", "Kouyioumtzis", "Samaras", "Papoutsis", "Kritikos", "Aivaliotis", "Kontos",
-                        "Mytaras", "Koufos",
-                        "Manolas" };
+                        "Pappas", "Doukas", "Georgatos", "Cosmatos", "Manatos", "Charisteas", "Georgeas", "Katselis",
+                        "Papadelis", "Georgallis", "Kanellis", "Stavridis", "Koutoufides", "Angelidis", "Georgiadis",
+                        "Stamatelopoulos", "Papadopoulos", "Gianopoulos", "Anagnostopoulos", "Theodorakopoulos",
+                        "Tsolakoglou", "Ardizoglou", "Patsatzoglou", "Afxentiou", "Economou", "Konstantinou",
+                        "Christoforou", "Gregoriou", "Politis", "Chiotis", "Hatzipanagis", "Devetzi", "Kouyioumtzis",
+                        "Samaras", "Papoutsis", "Kritikos", "Aivaliotis", "Kontos", "Mytaras", "Koufos", "Manolas" };
 
         private static String[] serbianNames = { "Miroslav", "Vladimir", "Zoran", "Ljubomir", "Milorad", "Dragan",
-                        "Milan",
-                        "Goran", "Radomir", "Vukasin", "Miomir", "Branimir", "Budimir", "Nikola", "Ivan", "Jovan",
-                        "Mihailo",
-                        "Aleksandar", "Andrej", "Djordje", "Stefan", "Petar", "Vasilije", "Todor", "Marko", "Antonije",
-                        "Pavle",
-                        "Srdjan", "Igor", "Dejan", "Vuk", "Nenad", "Prodan", "Stanisa", "Lazar", "Sasa", "Bojan",
-                        "Branislav",
-                        "Novak", "Zivko", "Zdravko", "Nemanja", "Andrija", "Predrag" };
+                        "Milan", "Goran", "Radomir", "Vukasin", "Miomir", "Branimir", "Budimir", "Nikola", "Ivan",
+                        "Jovan", "Mihailo", "Aleksandar", "Andrej", "Djordje", "Stefan", "Petar", "Vasilije", "Todor",
+                        "Marko", "Antonije", "Pavle", "Srdjan", "Igor", "Dejan", "Vuk", "Nenad", "Prodan", "Stanisa",
+                        "Lazar", "Sasa", "Bojan", "Branislav", "Novak", "Zivko", "Zdravko", "Nemanja", "Andrija",
+                        "Predrag" };
         private static String[] serbianSurnames = { "Jovanovic", "Petrovic", "Nikolic", "Markovic", "Djordjevic",
                         "Stojanovic", "Ilic", "Stankovic", "Pavlovic", "Milosevic", "Milankovic", "Petric", "Katic",
-                        "Sindjelic",
-                        "Nedic", "Maric", "Visnjic", "Janjic", "Saric", "Milicic", "Milenic", "Natalic", "Zoric",
-                        "Smiljic",
-                        "Andjelic", "Tosic", "Kolarov" };
+                        "Sindjelic", "Nedic", "Maric", "Visnjic", "Janjic", "Saric", "Milicic", "Milenic", "Natalic",
+                        "Zoric", "Smiljic", "Andjelic", "Tosic", "Kolarov" };
 
         private static String[] hebrewNames = { "David", "Benjamin", "Nir", "Ariel", "Noam", "Lavi", "Joseph", "Uri",
                         "Ethan", "Daniel", "Yehuda", "Moshe", "Raphael", "Aaron", "Itai", "Yehonathan", "Israel",
-                        "Abraham",
-                        "Samuel", "Omer", "Michael", "Itamar", "Yaakov", "Eliya", "Yair", "Yitzhak", "Yonathan", "Ido",
-                        "Ari",
-                        "Shimon", "Chaim", "Yanai", "Solomon", "Manor", "Harel", "Amit", "Nathaniel", "Mordechai" };
+                        "Abraham", "Samuel", "Omer", "Michael", "Itamar", "Yaakov", "Eliya", "Yair", "Yitzhak",
+                        "Yonathan", "Ido", "Ari", "Shimon", "Chaim", "Yanai", "Solomon", "Manor", "Harel", "Amit",
+                        "Nathaniel", "Mordechai" };
         private static String[] hebrewSurnames = { "Hoffman", "Pereira", "Abrams", "Haddad", "Goldmann", "Levi", "Levy",
                         "Blau", "Friedman", "Fridman", "Friedmann", "Horowitz", "Abulafia", "Blum", "Kantor", "Cantor",
-                        "Fingerhut",
-                        "Leib", "Leiberman", "Leibermann", "Cardoso", "Bensaïd", "Cohen", "Efron", "Abutbul",
-                        "Schechter",
-                        "Abecassis", "Bernstein", "Geller", "Nazarian", "Bensoussan", "Melamed", "Weinberg", "Stern",
-                        "Benveniste",
-                        "Obadia", "Becker", "Chason", "Chazen", "Ackerman", "Rubin", "Altman", "Pasternak", "Nahum",
-                        "Navarro",
-                        "Naftali", "Nisim", "Aarons", "Abate", "Babel", "Bach", "Camhi", "Ancel", "Arenberg",
-                        "Alterman", "Abadi",
-                        "Abeles", "Netanyahu", "Biton", "Mizrachi", "Ohayon", "Katz" };
+                        "Fingerhut", "Leib", "Leiberman", "Leibermann", "Cardoso", "Bensaïd", "Cohen", "Efron",
+                        "Abutbul", "Schechter", "Abecassis", "Bernstein", "Geller", "Nazarian", "Bensoussan", "Melamed",
+                        "Weinberg", "Stern", "Benveniste", "Obadia", "Becker", "Chason", "Chazen", "Ackerman", "Rubin",
+                        "Altman", "Pasternak", "Nahum", "Navarro", "Naftali", "Nisim", "Aarons", "Abate", "Babel",
+                        "Bach", "Camhi", "Ancel", "Arenberg", "Alterman", "Abadi", "Abeles", "Netanyahu", "Biton",
+                        "Mizrachi", "Ohayon", "Katz" };
 
         private static String[] romanianNames = { "Andrei", "Constantin", "Cristian", "Daniel", "Dan", "Gheroghe",
                         "Grigore", "Ilie", "Ion", "Ioan", "Iacob", "Laurentiu", "Luca", "Marcu", "Matei", "Mihail",
-                        "Mihai",
-                        "Nicolae", "Niculaie", "Pavel", "Petrul", "Petre", "Stefan", "Vasile", "Traian", "Titus",
-                        "Marius",
-                        "Ovidiu", "Cornel", "Codrut", "Sorin", "Florin", "Bogdan", "Dragos", "Mircea", "Radu",
-                        "Tihomir", "Vlad",
-                        "Vladislav", "Vladimir", "Miroslav", "Casimir", "Adrian", "Cosmin", "Alexandru", "Ionut",
-                        "Gabriel",
-                        "Darius", "Ciprian", "Razvan", "Ianis" };
+                        "Mihai", "Nicolae", "Niculaie", "Pavel", "Petrul", "Petre", "Stefan", "Vasile", "Traian",
+                        "Titus", "Marius", "Ovidiu", "Cornel", "Codrut", "Sorin", "Florin", "Bogdan", "Dragos",
+                        "Mircea", "Radu", "Tihomir", "Vlad", "Vladislav", "Vladimir", "Miroslav", "Casimir", "Adrian",
+                        "Cosmin", "Alexandru", "Ionut", "Gabriel", "Darius", "Ciprian", "Razvan", "Ianis" };
         private static String[] romanianSurnames = { "Ionescu", "Mutu", "Petrescu", "Ardeleanu", "Moldoveanu",
-                        "Muresanu",
-                        "Popa", "Popescu", "Hagi", "Pop", "Radu", "Dumitru", "Stan", "Stoica", "Ciobanu", "Rusu",
-                        "Patrascu",
-                        "Maxim", "Rat", "Racovita", "Ionita", "Andone", "Contra", "Raducioiu", "Lucescu", "Ghanea",
-                        "Dobrin",
-                        "Marica", "Chivu", "Tatarusanu", "Nedelcearu", "Marin", "Tanase", "Keseru", "Man", "Nastase" };
+                        "Muresanu", "Popa", "Popescu", "Hagi", "Pop", "Radu", "Dumitru", "Stan", "Stoica", "Ciobanu",
+                        "Rusu", "Patrascu", "Maxim", "Rat", "Racovita", "Ionita", "Andone", "Contra", "Raducioiu",
+                        "Lucescu", "Ghanea", "Dobrin", "Marica", "Chivu", "Tatarusanu", "Nedelcearu", "Marin", "Tanase",
+                        "Keseru", "Man", "Nastase" };
 
         private static String[] hungarianNames = { "Andras", "Attila", "Bela", "Csabo", "Geza", "Gyorgy", "Istvan",
-                        "Imre",
-                        "Janos", "Jozsef", "Karoly", "Lajos", "Laszlo", "Mark", "Marton", "Matyas", "Sandor", "Tamas",
-                        "Zoltan",
-                        "Zsigmond", "Adam", "Ferenc", "Viktor", "Arpad", "Gabor", "Gustav", "Jeno", "Krisztian", "Erno",
-                        "Zsolt" };
+                        "Imre", "Janos", "Jozsef", "Karoly", "Lajos", "Laszlo", "Mark", "Marton", "Matyas", "Sandor",
+                        "Tamas", "Zoltan", "Zsigmond", "Adam", "Ferenc", "Viktor", "Arpad", "Gabor", "Gustav", "Jeno",
+                        "Krisztian", "Erno", "Zsolt" };
         private static String[] hungarianSurnames = { "Nagy", "Kovacs", "Toth", "Szabo", "Horvath", "Varga", "Kiss",
                         "Molnar", "Nemeth", "Farkas", "Balogh", "Papp", "Lakatos", "Takacs", "Juhasz", "Meszaros",
-                        "Olah", "Simon",
-                        "Racz", "Fekete", "Szilagyi", "Torok", "Feher", "Balazs", "Gal", "Orban", "Dzudszak", "Halasz",
-                        "Kalmar" };
+                        "Olah", "Simon", "Racz", "Fekete", "Szilagyi", "Torok", "Feher", "Balazs", "Gal", "Orban",
+                        "Dzudszak", "Halasz", "Kalmar" };
 
         private static String[] polishNames = { "Robert", "Arkadiusz", "Antoni", "Jakub", "Jan", "Szymon", "Franciszek",
                         "Filip", "Aleksander", "Mikolaj", "Wojciech", "Kacper", "Stanislaw", "Kazimierz", "Piotr",
-                        "Lech",
-                        "Mieszko", "Krzysztof", "Andrzej", "Mateusz" };
+                        "Lech", "Mieszko", "Krzysztof", "Andrzej", "Mateusz" };
         private static String[] polishSurnames = { "Lewandowski", "Milik", "Blaszczykowski", "Szczesny", "Nowak",
                         "Kowalski", "Wisniewski", "Wojcik", "Kowalczyk", "Kaminski", "Zielinksi", "Szymanski",
-                        "Wozniak",
-                        "Dabrowski", "Kozlowski", "Jankowski", "Mazur", "Kwiatkowski", "Wojciechowski", "Krawczyk",
-                        "Kaczmarek",
-                        "Piotrowski", "Grabowski", "Trochowski", "Deyna", "Kuchar" };
+                        "Wozniak", "Dabrowski", "Kozlowski", "Jankowski", "Mazur", "Kwiatkowski", "Wojciechowski",
+                        "Krawczyk", "Kaczmarek", "Piotrowski", "Grabowski", "Trochowski", "Deyna", "Kuchar" };
 
         private static String[] norwegianNames = { "Jan", "Per", "Bjorn", "Kjell", "Ole", "Lars", "Arne", "Svein",
-                        "Knut",
-                        "Hans", "Geir", "Odd", "Tor", "Torje", "Morten", "John", "Rune", "Trond", "Thomas", "Erik",
-                        "Tore", "Tom",
-                        "John", "Gunnar", "Leif", "Olav", "Helge", "Frode", "Dag", "Stig", "Martin", "Iver", "Erling",
-                        "Thor",
-                        "Egil", "Gamst" };
+                        "Knut", "Hans", "Geir", "Odd", "Tor", "Torje", "Morten", "John", "Rune", "Trond", "Thomas",
+                        "Erik", "Tore", "Tom", "John", "Gunnar", "Leif", "Olav", "Helge", "Frode", "Dag", "Stig",
+                        "Martin", "Iver", "Erling", "Thor", "Egil", "Gamst" };
         private static String[] norwegianSurnames = { "Hansen", "Johansen", "Olsen", "Larsen", "Andersen", "Nilsen",
                         "Pedersen", "Jensen", "Kristiansen", "Karlsen", "Johnsen", "Pettersen", "Eriksen", "Berg",
-                        "Haugen",
-                        "Hagen", "Johannessen", "Jacobsen", "Andreassen", "Dahl", "Halvorsen", "Lund", "Henriksen",
-                        "Jorgensen",
-                        "Jakobsen", "Gundersen", "Moen", "Sorensen", "Iversen", "Svendsen", "Strand", "Solberg",
-                        "Martinsen",
-                        "Paulsen", "Knutsen", "Gulbrandsen", "Strom", "Fossum", "Odegaard", "Larsson", "Berger",
-                        "Haaland",
-                        "Moller" };
+                        "Haugen", "Hagen", "Johannessen", "Jacobsen", "Andreassen", "Dahl", "Halvorsen", "Lund",
+                        "Henriksen", "Jorgensen", "Jakobsen", "Gundersen", "Moen", "Sorensen", "Iversen", "Svendsen",
+                        "Strand", "Solberg", "Martinsen", "Paulsen", "Knutsen", "Gulbrandsen", "Strom", "Fossum",
+                        "Odegaard", "Larsson", "Berger", "Haaland", "Moller" };
 
         private static String[] belarusianNames = { "Ivan", "Jan", "Jaraslau", "Jury", "Uladzimir", "Piatro", "Pavel",
                         "Mikalaj", "Lieanid", "Stanislau", "Siarhiej", "Dzimitriy", "Vadzim", "Andrej", "Vasil",
-                        "Aliaksandr",
-                        "Ihar" };
+                        "Aliaksandr", "Ihar" };
         private static String[] belarusianSurnames = { "Hleb", "Daskievic", "Suskievic", "Vajciuskievic", "Mackievic",
                         "Mickievic", "Misilievic", "Navicki", "Kalinouski", "Piliecki", "Rusiecki", "Sadouski",
-                        "Caulouski",
-                        "Bialiauski", "Ramancuk", "Kacuk", "Kavalcuk", "Moroz", "Zhuk", "Kot", "Lukasenka",
-                        "Jakavienka",
-                        "Haponienka", "Malasonak", "Manionak" };
+                        "Caulouski", "Bialiauski", "Ramancuk", "Kacuk", "Kavalcuk", "Moroz", "Zhuk", "Kot", "Lukasenka",
+                        "Jakavienka", "Haponienka", "Malasonak", "Manionak" };
 
         private static String[] slovakNames = { "Marek", "Jozef", "Jan", "Martin", "Peter", "Stefan", "Milan", "Michal",
                         "Miroslav", "Tomas", "Ladislav", "Dobromil", "Vojtech", "Lukas", "Slavo", "Victor" };
@@ -1777,336 +1455,234 @@ public class CatalogueHelper {
 
         private static String[] sloveneNames = { "Jan", "Josip", "Robert", "Franc", "Janez", "Marko", "Ivan", "Andrej",
                         "Anton", "Jozef", "Joze", "Luka", "Peter", "Matej", "Tomaz", "Ales", "Bojan", "Branko", "Rok",
-                        "Bostjan",
-                        "Miha" };
+                        "Bostjan", "Miha" };
         private static String[] sloveneSurnames = { "Oblak", "Mlakar", "Ilicic", "Koren", "Krajnc", "Kos", "Golob",
                         "Potocnik", "Zupancic", "Vidmar", "Kralj", "Bizjak", "Korosec", "Zupan", "Kotnik", "Hribar",
-                        "Kavcic",
-                        "Rozman", "Zajc", "Ceh", "Ceferin", "Matavz" };
+                        "Kavcic", "Rozman", "Zajc", "Ceh", "Ceferin", "Matavz" };
 
         private static String[] bulgarianNames = { "Andrei", "Angel", "Aleksandar", "Aleksi", "Anastas", "Anton",
-                        "Asen",
-                        "Asparuh", "Atanas", "Blagun", "Bogdan", "Bogomil", "Bojidar", "Boris", "Borislav", "Boyan",
-                        "Boiko",
-                        "Branimir", "Dafo", "Daniel", "Danuil", "Delyan", "Desislav", "Dimo", "Dobromir", "Dragan",
-                        "Dragomir",
-                        "Elian", "Genadi", "Georgi", "Grozdan", "Hristo", "Hristofor", "Ilian", "Iordan", "Ivan", "Ivo",
-                        "Ivailo",
-                        "Kalin", "Kaloyan", "Kiril", "Kostadin", "Krasimir", "Krum", "Lyuben", "Lyubomir", "Mihail",
-                        "Milan",
-                        "Milen", "Miroslav", "Mladen", "Momchil", "Nayden", "Nedelcho", "Nedyalko", "Nikola", "Nikolay",
-                        "Ognian",
-                        "Ognyan", "Petar", "Plamen", "Radko", "Radomir", "Radoslav", "Rayko", "Rumen", "Sabin",
-                        "Samuil", "Simeon",
-                        "Spas", "Stefan", "Stanimir", "Stanislav", "Stanko", "Stilyan", "Stoyan", "Theodosii",
-                        "Tihomir", "Todor",
+                        "Asen", "Asparuh", "Atanas", "Blagun", "Bogdan", "Bogomil", "Bojidar", "Boris", "Borislav",
+                        "Boyan", "Boiko", "Branimir", "Dafo", "Daniel", "Danuil", "Delyan", "Desislav", "Dimo",
+                        "Dobromir", "Dragan", "Dragomir", "Elian", "Genadi", "Georgi", "Grozdan", "Hristo", "Hristofor",
+                        "Ilian", "Iordan", "Ivan", "Ivo", "Ivailo", "Kalin", "Kaloyan", "Kiril", "Kostadin", "Krasimir",
+                        "Krum", "Lyuben", "Lyubomir", "Mihail", "Milan", "Milen", "Miroslav", "Mladen", "Momchil",
+                        "Nayden", "Nedelcho", "Nedyalko", "Nikola", "Nikolay", "Ognian", "Ognyan", "Petar", "Plamen",
+                        "Radko", "Radomir", "Radoslav", "Rayko", "Rumen", "Sabin", "Samuil", "Simeon", "Spas", "Stefan",
+                        "Stanimir", "Stanislav", "Stanko", "Stilyan", "Stoyan", "Theodosii", "Tihomir", "Todor",
                         "Tsvetan", "Valko", "Vasil", "Ventsislav", "Veselin", "Vladimir", "Vladislav", "Yasen", "Yavor",
-                        "Zdravko",
-                        "Zhelyazko", "Zhivko", "Zlatan", "Zlatko" };
+                        "Zdravko", "Zhelyazko", "Zhivko", "Zlatan", "Zlatko" };
         private static String[] bulgarianSurnames = { "Ivanov", "Georgiev", "Dimitrov", "Petrov", "Nikolov", "Hristov",
                         "Stoyanov", "Todorov", "Iliev", "Angelov", "Stoichkov", "Asparuhov", "Kolev", "Nedelev",
-                        "Mihaylov",
-                        "Kostadinov", "Marinov", "Kraev", "Popov", "Lazarov", "Pandev", "Penev", "Minchev" };
+                        "Mihaylov", "Kostadinov", "Marinov", "Kraev", "Popov", "Lazarov", "Pandev", "Penev",
+                        "Minchev" };
 
         private static String[] swedishNames = { "Lars", "Per", "Karl", "Jan", "Hans", "Nils", "Sven", "Viktor", "Kim",
                         "Carl", "Erik", "Bengt", "Bo", "Anders", "Mats", "Leif", "Ulf", "Bjorn", "Ronnie", "Fredrik",
-                        "Jonas",
-                        "Rolf", "Gunnar" };
+                        "Jonas", "Rolf", "Gunnar" };
         private static String[] swedishSurnames = { "Johansson", "Andersson", "Karlsson", "Nilsson", "Eriksson",
-                        "Larsson",
-                        "Olsson", "Persson", "Svensson", "Gustafsson", "Pettersson", "Jonsson", "Jansson", "Hansson",
-                        "Bengtsson",
-                        "Carlsson", "Jonsson", "Petersson", "Lindberg", "Magnusson", "Gustavsson", "Olofsson",
-                        "Lindgren",
-                        "Lindstrom", "Axelsson", "Kallstrom", "Lindelof", "Nordahl" };
+                        "Larsson", "Olsson", "Persson", "Svensson", "Gustafsson", "Pettersson", "Jonsson", "Jansson",
+                        "Hansson", "Bengtsson", "Carlsson", "Jonsson", "Petersson", "Lindberg", "Magnusson",
+                        "Gustavsson", "Olofsson", "Lindgren", "Lindstrom", "Axelsson", "Kallstrom", "Lindelof",
+                        "Nordahl" };
 
         private static String[] albanianNames = { "Arben", "Xherdan", "Vedat", "Milot", "Agim", "Fatmir", "Enis",
-                        "Altin",
-                        "Petrit", "Agron", "Kujtim", "Gezim", "Besnik", "Dritan", "Edmond", "Bujar" };
+                        "Altin", "Petrit", "Agron", "Kujtim", "Gezim", "Besnik", "Dritan", "Edmond", "Bujar" };
         private static String[] albanianSurnames = { "Hoxha", "Prifti", "Shehu", "Dervishi", "Bektashi", "Begu",
-                        "Gjoni",
-                        "Gjonaj", "Leka", "Lekaj", "Murati", "Mehmeti", "Hysi", "Gjika", "Marku", "Kola", "Kolla",
-                        "Nikolla",
-                        "Hasani", "Kristi", "Luka", "Brahimi", "Sinani", "Thanasi", "Halili", "Abazi", "Dibra", "Laci",
-                        "Shkodra",
-                        "Prishtina", "Delvina", "Koroveshi", "Permeti", "Frasheri", "Gegaj", "Toskaj", "Chami",
-                        "Kelmendi",
-                        "Shkreli", "Berisha", "Krasniqi", "Gashi", "Kuqi", "Bardhi", "Xhaka", "Shaqiri" };
+                        "Gjoni", "Gjonaj", "Leka", "Lekaj", "Murati", "Mehmeti", "Hysi", "Gjika", "Marku", "Kola",
+                        "Kolla", "Nikolla", "Hasani", "Kristi", "Luka", "Brahimi", "Sinani", "Thanasi", "Halili",
+                        "Abazi", "Dibra", "Laci", "Shkodra", "Prishtina", "Delvina", "Koroveshi", "Permeti", "Frasheri",
+                        "Gegaj", "Toskaj", "Chami", "Kelmendi", "Shkreli", "Berisha", "Krasniqi", "Gashi", "Kuqi",
+                        "Bardhi", "Xhaka", "Shaqiri" };
 
         private static String[] bosnianNames = { "Edin", "Eldin", "Safet", "Faruk", "Kenan", "Kemal", "Samir", "Sejad",
                         "Senan", "Senad", "Admir", "Ademir", "Alen", "Farid", "Vedad", "Vahid", "Haris", "Ibrahim",
-                        "Anel", "Amer",
-                        "Miralem", "Hasan", "Izet", "Armin", "Mohamed", "Asmir", "Refik", "Muamer" };
+                        "Anel", "Amer", "Miralem", "Hasan", "Izet", "Armin", "Mohamed", "Asmir", "Refik", "Muamer" };
         private static String[] bosnianSurnames = { "Dzeko", "Pjanic", "Ibisevic", "Susic", "Salihamidzic", "Salihovic",
                         "Hajrovic", "Gojak", "Seferovic", "Halilovic", "Kodro", "Visca", "Halilhodzic", "Hodzic",
-                        "Besic",
-                        "Begovic", "Bosnic", "Ibrahimovic", "Izetbegovic", "Sabanadzovic", "Tankovic", "Rahimic",
-                        "Medunjanin",
-                        "Hadzibegic", "Alomerovic", "Bicakcic" };
+                        "Besic", "Begovic", "Bosnic", "Ibrahimovic", "Izetbegovic", "Sabanadzovic", "Tankovic",
+                        "Rahimic", "Medunjanin", "Hadzibegic", "Alomerovic", "Bicakcic" };
 
         private static String[] finnishNames = { "Matti", "Timo", "Juha", "Kari", "Pekka", "Jari", "Jukka", "Markku",
                         "Antti", "Miko", "Hannu", "Heikki", "Seppo", "Mika", "Ari", "Pentti", "Erkki", "Teemu",
-                        "Valtteri", "Kimi",
-                        "Niki", "Joni", "Joona" };
+                        "Valtteri", "Kimi", "Niki", "Joni", "Joona" };
         private static String[] finnishSurnames = { "Korhonen", "Virtanen", "Nieminen", "Makinen", "Hamalainen",
-                        "Makela",
-                        "Laine", "Heikkinen", "Koskinen", "Lehtonen", "Jarvinen", "Saarinen", "Salminen", "Salo",
-                        "Lehto",
-                        "Toivonen", "Hakala", "Lahti", "Bottas", "Hakkinen", "Raikkonen" };
+                        "Makela", "Laine", "Heikkinen", "Koskinen", "Lehtonen", "Jarvinen", "Saarinen", "Salminen",
+                        "Salo", "Lehto", "Toivonen", "Hakala", "Lahti", "Bottas", "Hakkinen", "Raikkonen" };
 
         private static String[] icelandicNames = { "Jon", "Sigurdur", "Gudmundur", "Gunnar", "Einar", "Olafur",
-                        "Johann",
-                        "Kristjan", "Stefan", "Magnus", "Bjorn", "Arni", "Helgi", "Petur", "Halldor", "Arnar", "Bjarni",
-                        "Kristinn",
-                        "Ragnar", "Gisli", "Sveinn", "Karl", "Gudjon", "Pall", "David", "Birgir", "Thorsteinn", "Andri",
-                        "Atli",
-                        "Daniel", "Johannes", "Kjartan", "Oskar", "Haukur", "Fridrik", "Agust", "Ingi", "Haraldur",
-                        "Jonas",
-                        "Tomas", "Aron", "Asgeir", "Runar", "Brynjar", "Eirikur", "Baldur",
+                        "Johann", "Kristjan", "Stefan", "Magnus", "Bjorn", "Arni", "Helgi", "Petur", "Halldor", "Arnar",
+                        "Bjarni", "Kristinn", "Ragnar", "Gisli", "Sveinn", "Karl", "Gudjon", "Pall", "David", "Birgir",
+                        "Thorsteinn", "Andri", "Atli", "Daniel", "Johannes", "Kjartan", "Oskar", "Haukur", "Fridrik",
+                        "Agust", "Ingi", "Haraldur", "Jonas", "Tomas", "Aron", "Asgeir", "Runar", "Brynjar", "Eirikur",
+                        "Baldur",
         };
         private static String[] icelandicSurnames = { "Jonsson", "Gudmundsson", "Sigurdsson", "Gunnarsson", "Olafsson",
                         "Magnusson", "Einarsson", "Kristjansson", "Stefansson", "Johannsson", "Bjornsson", "Arnason",
-                        "Halldorsson",
-                        "Helgason", "Sveinsson", "Kristinsson", "Palsson", "Karlsson", "Gudjonsson", "Petursson",
-                        "Gislason",
-                        "Thorsteinsson" };
+                        "Halldorsson", "Helgason", "Sveinsson", "Kristinsson", "Palsson", "Karlsson", "Gudjonsson",
+                        "Petursson", "Gislason", "Thorsteinsson" };
 
         private static String[] japaneseNames = { "Kenji", "Hiroshi", "Toshio", "Yoshio", "Kazuo", "Akira", "Masao",
                         "Kiyoshi", "Takashi", "Yukio", "Hideo", "Koichi", "Koji", "Takeshi", "Tadashi", "Ko", "Shoji",
-                        "Masami",
-                        "Mitsuo", "Yasuo", "Hiroyuki", "Shigeo", "Susumu", "Akio", "Isamu", "Kenichi", "Masahiro",
-                        "Shinichi",
-                        "Shoichi", "Jitsu", "Osamu", "Masayuki", "Takeo", "Takao", "Tsutomu", "Yoshiaki", "Yuki",
-                        "Yuji", "Haruo",
-                        "Atsushi", "Kachi", "Tetsuo", "Yoshihiro", "Kunio", "Yutaka", "Tatsuo", "Tadao" };
+                        "Masami", "Mitsuo", "Yasuo", "Hiroyuki", "Shigeo", "Susumu", "Akio", "Isamu", "Kenichi",
+                        "Masahiro", "Shinichi", "Shoichi", "Jitsu", "Osamu", "Masayuki", "Takeo", "Takao", "Tsutomu",
+                        "Yoshiaki", "Yuki", "Yuji", "Haruo", "Atsushi", "Kachi", "Tetsuo", "Yoshihiro", "Kunio",
+                        "Yutaka", "Tatsuo", "Tadao" };
         private static String[] japaneseSurnames = { "Sato", "Suzuki", "Tanaka", "Watanabe", "Takahashi", "Ito",
-                        "Yamamoto",
-                        "Nakamura", "Kobayashi", "Saito", "Kato", "Yoshida", "Yamada", "Sasaki", "Matsumoto",
-                        "Yamaguchi", "Inoue",
-                        "Kimura", "Shimizu", "Hayashi", "Abe", "Ono", "Mori", "Nakajima", "Hashimoto", "Ikeda",
-                        "Yamazaki",
-                        "Ishikawa", "Yamashita", "Ogawa", "Ishii", "Sakamoto", "Goto", "Maeda", "Okada", "Hasegawa",
-                        "Fujita",
-                        "Kondo", "Sakai", "Murakami", "Ota", "Kikuchi", "Ueda", "Arai", "Endo", "Aoki", "Takeuchi",
-                        "Nakano",
-                        "Fujii", "Fukuda", "Kaneko", "Nishimura", "Okamoto", "Nakagawa", "Fujiwara", "Miura", "Harada",
-                        "Matsuda",
-                        "Kojima", "Morita", "Tamura", "Nakayama", "Ishida", "Wada", "Shibata", "Masuda", "Hara", "Ando"
+                        "Yamamoto", "Nakamura", "Kobayashi", "Saito", "Kato", "Yoshida", "Yamada", "Sasaki",
+                        "Matsumoto", "Yamaguchi", "Inoue", "Kimura", "Shimizu", "Hayashi", "Abe", "Ono", "Mori",
+                        "Nakajima", "Hashimoto", "Ikeda", "Yamazaki", "Ishikawa", "Yamashita", "Ogawa", "Ishii",
+                        "Sakamoto", "Goto", "Maeda", "Okada", "Hasegawa", "Fujita", "Kondo", "Sakai", "Murakami", "Ota",
+                        "Kikuchi", "Ueda", "Arai", "Endo", "Aoki", "Takeuchi", "Nakano", "Fujii", "Fukuda", "Kaneko",
+                        "Nishimura", "Okamoto", "Nakagawa", "Fujiwara", "Miura", "Harada", "Matsuda", "Kojima",
+                        "Morita", "Tamura", "Nakayama", "Ishida", "Wada", "Shibata", "Masuda", "Hara", "Ando"
         };
 
         private static String[] chineseNames = { "Nushi", "Wei", "Yan", "Li", "Ying", "Hui", "Lei", "Hong", "Yu", "Min",
                         "Xin", "Bin", "Ping", "Lin", "Yong", "Ming", "Ling", "Qing", "Peng", "Qiang", "Yun", "Jin",
-                        "Rong", "Chao",
-                        "Gang", "Yue", "Jianhua", "Xiaoyan", "Na", "Liping", "Mei", "Ning", "Zhen", "Chen", "Kai",
-                        "Cheng", "Xiang",
-                        "Haiyan", "Jianping", "Lihua", "Nan", "Xiaohong", "Zhiqiang", "Lan", "Kun", "Lijun", "Xiaoli",
-                        "Jianguo",
-                        "Jianjun", "Xiaoping" };
+                        "Rong", "Chao", "Gang", "Yue", "Jianhua", "Xiaoyan", "Na", "Liping", "Mei", "Ning", "Zhen",
+                        "Chen", "Kai", "Cheng", "Xiang", "Haiyan", "Jianping", "Lihua", "Nan", "Xiaohong", "Zhiqiang",
+                        "Lan", "Kun", "Lijun", "Xiaoli", "Jianguo", "Jianjun", "Xiaoping" };
         private static String[] chineseSurnames = { "Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Huang", "Wu", "Xu",
                         "Zhao", "Zhou", "Lu", "Zhu", "Sun", "He", "Ma", "Yu", "Hu", "Lin", "Jiang", "Guo", "Luo", "Gao",
-                        "Zheng",
-                        "Liang", "Tang", "Wei", "Shi", "Xie", "Song", "Feng", "Yan", "Deng", "Han", "Cao", "Tan",
-                        "Ceng", "Peng",
-                        "Xiao", "Yuan", "Pan", "Cai", "Cheng", "Fan", "Tian", "Dong", "Fu", "Ye", "Su", "Du" };
+                        "Zheng", "Liang", "Tang", "Wei", "Shi", "Xie", "Song", "Feng", "Yan", "Deng", "Han", "Cao",
+                        "Tan", "Ceng", "Peng", "Xiao", "Yuan", "Pan", "Cai", "Cheng", "Fan", "Tian", "Dong", "Fu", "Ye",
+                        "Su", "Du" };
 
         private static String[] koreanNames = { "Min-Jun", "Seo-Jun", "Ju-Won", "Ye-jun", "Si-U", "Do-Yun", "Yeon-u",
                         "Ji-Hu", "Seo-Jin", "Ji-Ho", "Ha-Jun", "Jun-Seo", "Jun-U", "Hyeon-u", "Su-Hyeon", "Do-Hyeon",
-                        "Ji-Hun",
-                        "Geon-u", "U-Jin", "Si-Yun", "Seon-U", "Min-Jae", "Hyeon-jun", "Eun-u", "Seung-Hyeon",
-                        "Jeong-U", "Yu-Jun",
-                        "Jun-Hyeok", "Seung-U", "Ji-Hwan", "Seung-Min", "Min-Seong", "Yu-Chan", "Jun-Yeong", "Si-hu",
-                        "Yun-u",
-                        "Si-On", "Jin-U", "Jeong-Min", "Ha-Ram", "Ha-Jin", "Si-Won", "Jae-Yun", "Dong-Hyeon", "Jae-Won",
-                        "Tae-Yun",
-                        "Han-Gyeol", "Jun-Hui", "Min-Gyu", "Jae-Min", "Yul", "Eun-chan", "Min-U", "Ha-rang", "I-An",
-                        "Eun-Seong",
-                        "Yun-Ho", "Min-Chan", "Seong-Min", "Seong-Hyeon", "Jeong-Hyeon", "Su-Ho", "Jun", "Seung-Jun",
-                        "Jun-Ho",
-                        "Ha-Min", "Ye-Seong" };
+                        "Ji-Hun", "Geon-u", "U-Jin", "Si-Yun", "Seon-U", "Min-Jae", "Hyeon-jun", "Eun-u", "Seung-Hyeon",
+                        "Jeong-U", "Yu-Jun", "Jun-Hyeok", "Seung-U", "Ji-Hwan", "Seung-Min", "Min-Seong", "Yu-Chan",
+                        "Jun-Yeong", "Si-hu", "Yun-u", "Si-On", "Jin-U", "Jeong-Min", "Ha-Ram", "Ha-Jin", "Si-Won",
+                        "Jae-Yun", "Dong-Hyeon", "Jae-Won", "Tae-Yun", "Han-Gyeol", "Jun-Hui", "Min-Gyu", "Jae-Min",
+                        "Yul", "Eun-chan", "Min-U", "Ha-rang", "I-An", "Eun-Seong", "Yun-Ho", "Min-Chan", "Seong-Min",
+                        "Seong-Hyeon", "Jeong-Hyeon", "Su-Ho", "Jun", "Seung-Jun", "Jun-Ho", "Ha-Min", "Ye-Seong" };
         private static String[] koreanSurnames = { "Kim", "Pak", "Chong", "Choe", "Cho", "Kang", "Yu", "Yun", "Chang",
                         "Im", "Sin", "Song", "Chon", "So", "Han", "Hwang", "Kwon", "An", "Hong", "Yang", "Son", "Ko",
-                        "Mun",
-                        "Pae", "Paek", "Ho", "No", "Chu", "Nam" };
+                        "Mun", "Pae", "Paek", "Ho", "No", "Chu", "Nam" };
 
         private static String[] iranianNames = { "Habib", "Hamid Reza", "Milad", "Behrooz", "Behzad", "Sadegh",
-                        "Mohammad",
-                        "Ali", "Seyyed", "Hossein", "Mahdi", "Reza", "Hassan", "Ahmad", "Saeed", "Alireza", "Mohsen",
-                        "Hamid",
-                        "Amir", "Majid", "Abbas", "Somayeh", "Morteza", "Ebrahim", "Mostafa", "Javad", "Mahmoud",
-                        "Rasool",
-                        "Mohammad Reza", "Mojtaba", "Hadi", "Masoud", "Vahid", "Ehsan", "Esmaeil", "Omid", "Rooh",
-                        "Akbar", "Hamed",
-                        "Nasser", "Davood", "Gholam Reza", "Amin", "Sajjad", "Azam", "Abolfazl", "Jafar", "Yousef",
-                        "Akram",
-                        "Meysam", "Asghar", "Farhad", "Qasem", "Mansour" };
+                        "Mohammad", "Ali", "Seyyed", "Hossein", "Mahdi", "Reza", "Hassan", "Ahmad", "Saeed", "Alireza",
+                        "Mohsen", "Hamid", "Amir", "Majid", "Abbas", "Somayeh", "Morteza", "Ebrahim", "Mostafa",
+                        "Javad", "Mahmoud", "Rasool", "Mohammad Reza", "Mojtaba", "Hadi", "Masoud", "Vahid", "Ehsan",
+                        "Esmaeil", "Omid", "Rooh", "Akbar", "Hamed", "Nasser", "Davood", "Gholam Reza", "Amin",
+                        "Sajjad", "Azam", "Abolfazl", "Jafar", "Yousef", "Akram", "Meysam", "Asghar", "Farhad", "Qasem",
+                        "Mansour" };
         private static String[] iranianSurnames = { "Mohammadi", "Hosseini", "Ahmadi", "Ali", "Moradi", "Heydari",
-                        "Karimi",
-                        "Mousavi", "Jafari", "Mohammad", "Pour", "Ghasemi", "Rahimi", "Ebrahimi", "Sadeghi", "Abbasi",
-                        "Gholami",
-                        "Akbari", "Asadi", "Zare", "Mahmoudi", "Ghorbani", "Bagheri", "Amiri", "Kazemi", "Zarei",
-                        "Haji", "Hashemi",
-                        "Nouri", "Yousefi", "Alizadeh", "Esmaeili", "Rezaei", "Salehi", "Nazari", "Mir", "Razaee",
-                        "Norouzi",
-                        "Shah", "Soleimani", "Sharifi", "Karami", "Rahmani", "Azizi", "Rostami", "Najafi", "Safari",
-                        "Amini",
-                        "Soltani", "Taheri", "Ramezani", "Razaie", "Khosravi" };
+                        "Karimi", "Mousavi", "Jafari", "Mohammad", "Pour", "Ghasemi", "Rahimi", "Ebrahimi", "Sadeghi",
+                        "Abbasi", "Gholami", "Akbari", "Asadi", "Zare", "Mahmoudi", "Ghorbani", "Bagheri", "Amiri",
+                        "Kazemi", "Zarei", "Haji", "Hashemi", "Nouri", "Yousefi", "Alizadeh", "Esmaeili", "Rezaei",
+                        "Salehi", "Nazari", "Mir", "Razaee", "Norouzi", "Shah", "Soleimani", "Sharifi", "Karami",
+                        "Rahmani", "Azizi", "Rostami", "Najafi", "Safari", "Amini", "Soltani", "Taheri", "Ramezani",
+                        "Razaie", "Khosravi" };
 
         private static String[] arabNames = { "Ali", "Mohamed", "Ahmed", "Hussein", "Mostafa", "Haidar", "Hassan",
-                        "Abbas",
-                        "Omar", "Alaa", "Abdullah", "Saad", "Nasr", "Karrar", "Sajjad", "Saif", "Ibrahim", "Jassim",
-                        "Ammar",
-                        "Khaled", "Mahmoud", "Ibtisam", "Qasim", "Kazem", "Wissam", "Yousef", "Mortada", "Muhannad",
-                        "Yasser",
-                        "Sabah", "Karim", "Adel", "Emad", "Raad", "Waleed", "Fadel", "Azhar", "Mahdi", "Adnan", "Amir",
-                        "Amer",
-                        "Hossam", "Hamid", "Laith", "Anwar", "Dia", "Basim", "Iyad", "Salah", "Abdel", "Hamza", "Firas",
-                        "Salam",
-                        "Naima", "Sadiq", "Raed", "Jaafar", "Jabbar", "Majed", "Aqeel", "Abdel Rahman", "Mohsen",
-                        "Montazer",
-                        "Akhlas", "Osama", "Salman", "Khalil", "Ismail", "Nabil", "Ayman", "Ashruf", "Sharif", "Hany",
-                        "Tarek",
-                        "Essam", "Abdul", "Mido", "Shahid", "Salim", "Nadim", "Ziyad", "Zinedine", "Ramy", "Navid",
-                        "Arshad",
-                        "Malik", "Ramzi", "Sajid", "Atif", "Sulaiman", "Jamal", "Mousa", "Anas", "Bilal", "Faisal",
-                        "Younes" };
+                        "Abbas", "Omar", "Alaa", "Abdullah", "Saad", "Nasr", "Karrar", "Sajjad", "Saif", "Ibrahim",
+                        "Jassim", "Ammar", "Khaled", "Mahmoud", "Ibtisam", "Qasim", "Kazem", "Wissam", "Yousef",
+                        "Mortada", "Muhannad", "Yasser", "Sabah", "Karim", "Adel", "Emad", "Raad", "Waleed", "Fadel",
+                        "Azhar", "Mahdi", "Adnan", "Amir", "Amer", "Hossam", "Hamid", "Laith", "Anwar", "Dia", "Basim",
+                        "Iyad", "Salah", "Abdel", "Hamza", "Firas", "Salam", "Naima", "Sadiq", "Raed", "Jaafar",
+                        "Jabbar", "Majed", "Aqeel", "Abdel Rahman", "Mohsen", "Montazer", "Akhlas", "Osama", "Salman",
+                        "Khalil", "Ismail", "Nabil", "Ayman", "Ashruf", "Sharif", "Hany", "Tarek", "Essam", "Abdul",
+                        "Mido", "Shahid", "Salim", "Nadim", "Ziyad", "Zinedine", "Ramy", "Navid", "Arshad", "Malik",
+                        "Ramzi", "Sajid", "Atif", "Sulaiman", "Jamal", "Mousa", "Anas", "Bilal", "Faisal", "Younes" };
 
         private static String[] thaiNames = { "Somchai", "Prasoet", "Sombun", "Somsak", "Narong", "Prasit", "Somphon",
                         "Sombat", "Udom", "Wichian", "Thawi", "Charoen", "Samran", "Wichai", "Sawat", "Chan",
-                        "Somphong", "Pricha",
-                        "Wirat", "Somnuek", "Sunthon", "Anan", "Wanchai", "Somkiat", "Suwit", "Wirot", "Saman",
-                        "Somkhit", "Amnuai",
-                        "Winai", "Sommai", "Arun", "Suthep", "Wira", "Prayun", "Chaloem", "Surin", "Mongkhon", "Suchat",
-                        "Bunloet",
-                        "Phaibun", "Bunsong", "Phairot", "Suwan", "Thongchai", "Wichit", "Ari", "Phonchai", "Manit",
-                        "Banchong",
-                        "Sunphon", "Charun", "Chatchai", "Suphot", "Pradit", "Sanit", "Uthai", "Chamlong", "Sompong",
-                        "Kasem",
-                        "Thawatchai", "Phongsak", "Kamon" };
+                        "Somphong", "Pricha", "Wirat", "Somnuek", "Sunthon", "Anan", "Wanchai", "Somkiat", "Suwit",
+                        "Wirot", "Saman", "Somkhit", "Amnuai", "Winai", "Sommai", "Arun", "Suthep", "Wira", "Prayun",
+                        "Chaloem", "Surin", "Mongkhon", "Suchat", "Bunloet", "Phaibun", "Bunsong", "Phairot", "Suwan",
+                        "Thongchai", "Wichit", "Ari", "Phonchai", "Manit", "Banchong", "Sunphon", "Charun", "Chatchai",
+                        "Suphot", "Pradit", "Sanit", "Uthai", "Chamlong", "Sompong", "Kasem", "Thawatchai", "Phongsak",
+                        "Kamon" };
         private static String[] thaiSurnames = { "Adulyadej", "Ayutthaya", "A-wut", "Boonmee", "Bun Ma ", "Chaidee ",
                         "Chaichana ", "Chaiya ", "Chakrii", "Charoen ", "Charoensuk ", "Krungthep ", "Makok ", "Ngam",
-                        "Noi",
-                        "Ratanaporn", "Rattanakosin", "Saengkaew", "Shinawatra ", "Soikham ", "Somsri", "Srisuwan ",
-                        "Suwannarat ",
-                        "Tham-boon ", "Thong Di", "Senamuang", "Dangda", "Arjvirai", "Kraisom", "Promsrikaew",
-                        "Pomphan", "Panya" };
+                        "Noi", "Ratanaporn", "Rattanakosin", "Saengkaew", "Shinawatra ", "Soikham ", "Somsri",
+                        "Srisuwan ", "Suwannarat ", "Tham-boon ", "Thong Di", "Senamuang", "Dangda", "Arjvirai",
+                        "Kraisom", "Promsrikaew", "Pomphan", "Panya" };
 
         private static String[] uzbekNames = { "Timur", "Rustam", "Alisher", "Aziz", "Sherzod", "Anvar", "Dilshod",
                         "Sardor", "Akmal", "Shukhrat", "Alyeksandr", "Ulugbek", "Ravshan", "Umid", "Syergyei", "Azamat",
-                        "Otabek",
-                        "Shavkat", "Bekzod", "Oybek", "Bobur", "Zafar", "Farrukh", "Nodir", "Vladimir", "Muzaffar",
-                        "Sergey",
-                        "Azizbek", "Sanjar", "Farkhod", "Bakhodir", "Davron", "Jasur", "Jamshid", "Erkin", "Ilkhom",
-                        "Aleksandr",
-                        "Yurii", "Dilmurod", "Firdavs", "Abror", "Akbar", "Andryei", "Ruslan" };
+                        "Otabek", "Shavkat", "Bekzod", "Oybek", "Bobur", "Zafar", "Farrukh", "Nodir", "Vladimir",
+                        "Muzaffar", "Sergey", "Azizbek", "Sanjar", "Farkhod", "Bakhodir", "Davron", "Jasur", "Jamshid",
+                        "Erkin", "Ilkhom", "Aleksandr", "Yurii", "Dilmurod", "Firdavs", "Abror", "Akbar", "Andryei",
+                        "Ruslan" };
         private static String[] uzbekSurnames = { "Karimov", "Yusupov", "Abdullayev", "Ibragimov", "Rakhimov", "Umarov",
                         "Akhmyedov", "Usmanov", "Sultanov", "Sharipov", "Yuldashyev", "Khasanov", "Tursunov",
-                        "Makhmudov", "Saidov",
-                        "Ismailov", "Alimov", "Rasulov", "Azimov", "Khakimov", "Mirzayev", "Yunusov", "Kurbanov",
-                        "Yakubov",
-                        "Pulatov", "Muminov", "Rustamov", "Abdurakhmanov", "Abdullaev", "Sabirov", "Djurayev",
-                        "Zakirov", "Azizov",
-                        "Ergashyev", "Akbarov", "Kadyrov", "Rakhmanov", "Gafurov", "Khamidov", "Jurayev", "Yuldashev",
-                        "Safarov",
-                        "Khaidarov", "Khalilov", "Kodirov", "Sadykov", "Kasimov", "Kadirov", "Rakhmatov", "Khodjayev" };
+                        "Makhmudov", "Saidov", "Ismailov", "Alimov", "Rasulov", "Azimov", "Khakimov", "Mirzayev",
+                        "Yunusov", "Kurbanov", "Yakubov", "Pulatov", "Muminov", "Rustamov", "Abdurakhmanov",
+                        "Abdullaev", "Sabirov", "Djurayev", "Zakirov", "Azizov", "Ergashyev", "Akbarov", "Kadyrov",
+                        "Rakhmanov", "Gafurov", "Khamidov", "Jurayev", "Yuldashev", "Safarov", "Khaidarov", "Khalilov",
+                        "Kodirov", "Sadykov", "Kasimov", "Kadirov", "Rakhmatov", "Khodjayev" };
 
         private static String[] alegrianSurnames = { "Saidi", "Slimani", "Touati", "Mansouri", "Brahimi", "Messaoudi",
                         "Haddad", "Yahiaoui", "Rahmani", "Dahmani", "Sahraoui", "Benaissa", "Moussaoui", "Bouziane",
-                        "Salhi",
-                        "Saadi", "Aissaoui", "Benyahia", "Amara", "Belhadj", "Mokhtari", "Merabet", "Abbas", "Taleb",
-                        "Bouzid",
-                        "Mebarki", "Khaldi", "Bouzidi", "Hadji", "Hamdi", "Hamidi", "Zitouni", "Cherifi", "Talbi",
-                        "Kadri",
-                        "Bouras", "Abed", "Belaid", "Toumi", "Benali" };
+                        "Salhi", "Saadi", "Aissaoui", "Benyahia", "Amara", "Belhadj", "Mokhtari", "Merabet", "Abbas",
+                        "Taleb", "Bouzid", "Mebarki", "Khaldi", "Bouzidi", "Hadji", "Hamdi", "Hamidi", "Zitouni",
+                        "Cherifi", "Talbi", "Kadri", "Bouras", "Abed", "Belaid", "Toumi", "Benali" };
         private static String[] moroccanSurnames = { "Ait", "Alaoui", "Alami", "Bennani", "Idrissi", "Berrada",
-                        "Lahlou",
-                        "Tazi", "El Idrissi", "Benjelloun", "Hassan", "Saidi", "Tahiri", "Aziz", "Mohamed", "Filali",
-                        "El Mostafa",
-                        "Amrani", "Cherkaoui", "Daoudi", "El Alaoui", "Naji", "El Mehdi", "Ben", "Bennis", "Karim",
-                        "Chakir",
-                        "Naciri", "Amine", "Khalil", "El Alami", "Hajji", "Salhi", "En Nessyri", "Bounou", "Ziyech",
-                        "Hakimi" };
+                        "Lahlou", "Tazi", "El Idrissi", "Benjelloun", "Hassan", "Saidi", "Tahiri", "Aziz", "Mohamed",
+                        "Filali", "El Mostafa", "Amrani", "Cherkaoui", "Daoudi", "El Alaoui", "Naji", "El Mehdi", "Ben",
+                        "Bennis", "Karim", "Chakir", "Naciri", "Amine", "Khalil", "El Alami", "Hajji", "Salhi",
+                        "En Nessyri", "Bounou", "Ziyech", "Hakimi" };
         private static String[] tunisianSurnames = { "Trabelsi", "Gharbi", "Hammami", "Mohamed", "Dridi", "Ayari",
-                        "Cherif",
-                        "Sassi", "Allah", "Ammar", "Hamdi", "Mejri", "Ali", "Al Trabelsi", "Ayadi", "Riahi", "Arfaoui",
-                        "Abidi",
-                        "El Hadi", "Salem", "Saidi", "Ahmed", "Oueslati", "Mansour", "Nasri", "Ben Ali", "Chebbi",
-                        "Ben Amor",
-                        "Amri", "Abid", "Al Hamami", "Aloui", "Kamoun", "Ben Abdallah", "Farhat", "Amara", "Souissi",
-                        "Mabrouk",
-                        "Tlili", "Omar" };
+                        "Cherif", "Sassi", "Allah", "Ammar", "Hamdi", "Mejri", "Ali", "Al Trabelsi", "Ayadi", "Riahi",
+                        "Arfaoui", "Abidi", "El Hadi", "Salem", "Saidi", "Ahmed", "Oueslati", "Mansour", "Nasri",
+                        "Ben Ali", "Chebbi", "Ben Amor", "Amri", "Abid", "Al Hamami", "Aloui", "Kamoun", "Ben Abdallah",
+                        "Farhat", "Amara", "Souissi", "Mabrouk", "Tlili", "Omar" };
 
         private static String[] georgianNames = { "Giorgi", "Davit", "Aleqsandre", "Irakli", "Zurab", "Levan",
-                        "Nikoloz",
-                        "Mikheil", "Gocha", "Givi", "Mamuka", "Daviti", "Lasa", "Zaza", "Shota", "Kvicha", "Nika",
-                        "Saba", "Jaba",
-                        "Beka", "Valeri", "Kakha" };
+                        "Nikoloz", "Mikheil", "Gocha", "Givi", "Mamuka", "Daviti", "Lasa", "Zaza", "Shota", "Kvicha",
+                        "Nika", "Saba", "Jaba", "Beka", "Valeri", "Kakha" };
         private static String[] georgianSurnames = { "Beridze", "Kapanadze", "Gelashvili", "Maisuradze", "Giorgadze",
                         "Tsiklauri", "Lomidze", "Tskhoidze", "Nozadze", "Bolqvadze", "Chikhladze", "Khachishvili",
-                        "Abuladze",
-                        "Miqeladze", "Tabatadze", "Medolishvili", "Shengelia", "Gogoladze", "Diasamidze", "Makharadze",
-                        "Dolidze",
-                        "Maruashvili", "Dzavashvili", "Kvaratskhelia" };
+                        "Abuladze", "Miqeladze", "Tabatadze", "Medolishvili", "Shengelia", "Gogoladze", "Diasamidze",
+                        "Makharadze", "Dolidze", "Maruashvili", "Dzavashvili", "Kvaratskhelia" };
 
         private static String[] armenianNames = { "Armen", "Artur", "Samvel", "Gevorg", "Ashot", "Arman", "Gagik",
-                        "Vardan",
-                        "Hayk", "Tigran", "Hovhannes", "Arsen", "Aram", "Davit", "Andranik", "Artak", "Sargis", "Levon",
-                        "Edgar",
-                        "Harutyun", "Hakob", "Suren", "Narek", "Alvard", "Grigor", "Robert" };
+                        "Vardan", "Hayk", "Tigran", "Hovhannes", "Arsen", "Aram", "Davit", "Andranik", "Artak",
+                        "Sargis", "Levon", "Edgar", "Harutyun", "Hakob", "Suren", "Narek", "Alvard", "Grigor",
+                        "Robert" };
         private static String[] armenianSurnames = { "Grigoryan", "Sargsyan", "Harutyunyan", "Hovhannisyan",
-                        "Khachatryan",
-                        "Hakobyan", "Petrosyan", "Vardanyan", "Gevorgyan", "Karapetyan", "Mkrtchyan", "Manukyan",
-                        "Ghazaryan",
-                        "Avetisyan", "Martirosyan", "Poghosyan", "Sahakyan", "Margaryan", "Arakelyan", "Davtyan",
-                        "Simonyan",
-                        "Stepanyan", "Galstyan", "Hayrapetyan", "Muradyan", "Gasparyan", "Avagyan", "Baghdasaryan",
-                        "Abrahamyan",
-                        "Asatryan", "Hovsepyan", "Melkonyan", "Minasyan", "Kirakosyan", "Mkhitaryan" };
+                        "Khachatryan", "Hakobyan", "Petrosyan", "Vardanyan", "Gevorgyan", "Karapetyan", "Mkrtchyan",
+                        "Manukyan", "Ghazaryan", "Avetisyan", "Martirosyan", "Poghosyan", "Sahakyan", "Margaryan",
+                        "Arakelyan", "Davtyan", "Simonyan", "Stepanyan", "Galstyan", "Hayrapetyan", "Muradyan",
+                        "Gasparyan", "Avagyan", "Baghdasaryan", "Abrahamyan", "Asatryan", "Hovsepyan", "Melkonyan",
+                        "Minasyan", "Kirakosyan", "Mkhitaryan" };
 
         private static String[] azeriNames = { "Ali", "Elnur", "Vuqar", "Samir", "Elsan", "Ilqar", "Elvin", "Samire",
                         "Tural", "Zaur", "Azar", "Vusal", "Ilham", "Rovsan", "Rasad", "Orxan", "Matanat", "Ruslan",
-                        "Emin", "Ramil",
-                        "Ramin", "Ceyhun" };
+                        "Emin", "Ramil", "Ramin", "Ceyhun" };
         private static String[] azeriSurnames = { "Mammadov", "Aliyev", "Huseynov", "Hasanov", "Quliyev", "Ismayilov",
                         "Ahmadov", "Abdullayev", "Abbasov", "Cafarov", "Qasimov", "Agayev", "Karimov", "Babayev",
-                        "Ibrahimov",
-                        "Haciyev", "Bayramov", "Qurbanov", "Mustafayev", "Rzayev", "Mirzayev", "Musayev", "Zeynalov",
-                        "Valiyev",
-                        "Safarov", "Asgarov", "Suleymanov", "Rahimov" };
+                        "Ibrahimov", "Haciyev", "Bayramov", "Qurbanov", "Mustafayev", "Rzayev", "Mirzayev", "Musayev",
+                        "Zeynalov", "Valiyev", "Safarov", "Asgarov", "Suleymanov", "Rahimov" };
 
         private static String[] lithuanianNames = { "Jonas", "Vytautas", "Antanas", "Juozas", "Petras", "Algirdas",
                         "Kestutis", "Stasys", "Saulius", "Rimantas", "Algimantas", "Arunas", "Mindaugas", "Darius",
-                        "Tomas",
-                        "Andrius", "Gintaras", "Romualdas", "Gintautas", "Stanislovas", "Arturas", "Arvydas",
-                        "Gediminas",
-                        "Egidijus", "Alvydas", "Pranas", "Sigitas", "Valdas", "Vidmantas", "Audrius", "Rolandas",
-                        "Alfonsas" };
+                        "Tomas", "Andrius", "Gintaras", "Romualdas", "Gintautas", "Stanislovas", "Arturas", "Arvydas",
+                        "Gediminas", "Egidijus", "Alvydas", "Pranas", "Sigitas", "Valdas", "Vidmantas", "Audrius",
+                        "Rolandas", "Alfonsas" };
         private static String[] lithuanianSurnames = { "Petrauskas", "Jankauskas", "Kazlauskas", "Stankevicius",
                         "Vasiliauskas", "Butkus", "Urbonas", "Stankevic", "Kavaliauskas", "Zukauskas", "Ramanauskas",
-                        "Paulauskas",
-                        "Navickas", "Rimkus", "Simkus", "Pocius", "Balciūnas", "Savickas", "Zilinskas", "Sakalauskas",
-                        "Adomaitis",
-                        "Petraitis", "Mikalauskas", "Kaminskas", "Baranauskas", "Vaitkevicius" };
+                        "Paulauskas", "Navickas", "Rimkus", "Simkus", "Pocius", "Balciūnas", "Savickas", "Zilinskas",
+                        "Sakalauskas", "Adomaitis", "Petraitis", "Mikalauskas", "Kaminskas", "Baranauskas",
+                        "Vaitkevicius" };
 
         private static String[] latvianNames = { "Janis", "Aleksandrs", "Vladimirs", "Nikolajs", "Juris", "Viktors",
                         "Andris", "Peteris", "Ivans", "Sergejs", "Anatolijs", "Aivars", "Jurijs", "Andrejs", "Mihails",
-                        "Edgars",
-                        "Valerijs", "Vasilijs", "Gunars", "Valdis", "Igors", "Maris", "Karlis", "Imants", "Jevgenijs",
-                        "Arturs",
-                        "Aleksejs", "Ivars", "Antons", "Uldis", "Stanislavs", "Arvids" };
+                        "Edgars", "Valerijs", "Vasilijs", "Gunars", "Valdis", "Igors", "Maris", "Karlis", "Imants",
+                        "Jevgenijs", "Arturs", "Aleksejs", "Ivars", "Antons", "Uldis", "Stanislavs", "Arvids" };
         private static String[] latvianSurnames = { "Berzins", "Ozols", "Kalnins", "Ivanovs", "Ozolins", "Dreimanis",
                         "Jansons", "Vasiljevs", "Liepins", "Krumins", "Smirnovs", "Petersons", "Balodis", "Karklins",
-                        "Petrovs",
-                        "Vanags", "Zarins", "Zvirbulis", "Eglitis", "Vitols", "Mihailovs", "Grinbergs", "Silins",
-                        "Fjodorovs" };
+                        "Petrovs", "Vanags", "Zarins", "Zvirbulis", "Eglitis", "Vitols", "Mihailovs", "Grinbergs",
+                        "Silins", "Fjodorovs" };
 
         private static String[] estonianNames = { "Andres", "Toomas", "Margus", "Martin", "Indrek", "Peeter", "Priit",
                         "Marko", "Juri", "Urmas", "Tarmo", "Rein", "Jaan", "Aivar", "Andrus", "Meelis", "Tiit",
-                        "Jaanus",
-                        "Kristjan", "Janek", "Timo", "Erko", "Taijo", "Markus", "Ragnar" };
+                        "Jaanus", "Kristjan", "Janek", "Timo", "Erko", "Taijo", "Markus", "Ragnar" };
         private static String[] estonianSurnames = { "Tamm", "Saar", "Sepp", "Kask", "Magi", "Kukk", "Rebane", "Koppel",
                         "Karu", "Ilves", "Lepik", "Oja", "Kuusk", "Kaasik", "Luik", "Raudsepp", "Vaher", "Kallas",
-                        "Lepp", "Laur",
-                        "Parn", "Kuusik", "Kivi", "Ots", "Liiv", "Peterson", "Teder", "Mets", "Poder" };
+                        "Lepp", "Laur", "Parn", "Kuusik", "Kivi", "Ots", "Liiv", "Peterson", "Teder", "Mets", "Poder" };
 
         private static String[] macedonianNames = { "Stole", "Risto", "Goran", "Todor", "Stefan", "Kire", "Nikola",
                         "Bojan", "Darko", "Damian", "Kristijan", "Boban", "Stojan", "Ilija", "Dejan", "Gjoko" };
@@ -2122,10 +1698,10 @@ public class CatalogueHelper {
                         "Kundu", "Lahiri", "Maitra", "Maji", "Malakar", "Mitra", "Mukherjee", "Pal", "Purkayastha",
                         "Ray", "Roy", "Saha", "Sanyal", "Seal", "Sen", "Sengupta", "Seth", "Shome", "Sikdar", "Bagh",
                         "Mullick", "Sarkar", "Majumdar", "Barman", "Kanjilal", "Karak", "Naskar" };
-        private static String[] indian_bengali_names = { "Sayan", "Rupak", "Bhaskar", "Arindam", "Sourav",
-                        "Sandipan", "Neel", "Abhirup", "Anik", "Anukul", "Anirban", "Arko", "Tanumoy", "Debashis",
-                        "Divyendu", "Goutam", "Emon", "Rajdeep", "Mihir", "Milan", "Subho", "Tapas", "Swapnil",
-                        "Utpal", "Debayan", "Kaustav" };
+        private static String[] indian_bengali_names = { "Sayan", "Rupak", "Bhaskar", "Arindam", "Sourav", "Sandipan",
+                        "Neel", "Abhirup", "Anik", "Anukul", "Anirban", "Arko", "Tanumoy", "Debashis", "Divyendu",
+                        "Goutam", "Emon", "Rajdeep", "Mihir", "Milan", "Subho", "Tapas", "Swapnil", "Utpal", "Debayan",
+                        "Kaustav" };
         private static String[] indian_hindu_names = { "Utsav", "Amit", "Ishan", "Ram", "Sanjay", "Sunil", "Rajesh",
                         "Ramesh", "Suresh", "Ashok", "Manoj", "Anil", "Vijay", "Raju", "Vinod", "Raj", "Dinesh",
                         "Harsh", "Harshvardhan", "Mukesh", "Gautam", "Virat", "Rohit", "Rahul", "Rishi", "Anish",
@@ -2146,8 +1722,7 @@ public class CatalogueHelper {
 
         public static String getPlayerName(String nation_name) {
                 String[] spanish_countries = { spain, argentina, bolivia, chile, colombia, peru, paraguay, ecuador,
-                                uruguay,
-                                venezuela, mexico, costa_rica };
+                                uruguay, venezuela, mexico, costa_rica };
                 String[] portuguese_countries = { brazil, portugal };
                 String[] german_countries = { germany, austria };
                 String[] arab_countries = { iraq, qatar, saudi_arabia, syria, egypt, emirates };
@@ -2368,18 +1943,16 @@ public class CatalogueHelper {
         private static String[] argentinaTarget = { "Paraguay", "Uruguay", "Mexico", "Brazil", "Chile", "Colombia" };
         private static String[] brazilTarget = { "Argentina" };
         private static String[] franceTarget = { "Belgium", "Germany", "Italy", "Portugal", "Algeria", "Tunisia",
-                        "Senegal",
-                        "Ivory Coast" };
-        private static String[] netherlandsTarget = { "Denmark", "Sweden", "Finland", "Norway", "France",
-                        "Brazil", "Belgium", "Germany" };
+                        "Senegal", "Ivory Coast" };
+        private static String[] netherlandsTarget = { "Denmark", "Sweden", "Finland", "Norway", "France", "Brazil",
+                        "Belgium", "Germany" };
         private static String[] portugalTarget = { "Brazil", "Argentina", "Serbia", "England", "Mexico" };
         private static String[] belgiumTarget = { "France", "Netherlands", "Nigeria", "Bosnia", "Croatia", "Slovakia",
                         "Serbia", "Ukraine" };
         private static String[] croatiaTarget = { "Bosnia", "Serbia", "Slovenia", "Albania" };
         private static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
         private static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel",
-                        "Portugal",
-                        "Spain", "Czechia", "Slovakia", "Lithuania" };
+                        "Portugal", "Spain", "Czechia", "Slovakia", "Lithuania" };
         private static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
                         "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova" };
         private static String[] turkeyTarget = { "Germany", "Belgium", "Moldova", "Albania", "Azerbaijan", "China",
@@ -2461,8 +2034,7 @@ public class CatalogueHelper {
         private static String[] region_east_europe = { "Czechia", "Slovakia", "Hungary", "Romania", "Poland" };
         private static String[] region_soviet = { "Russia", "Ukraine", "Belarus", "Moldova", "Georgia", "Azerbaijan",
                         "Armenia", "Kazakhstan", "Estonia", "Lithuania", "Latvia", "Uzbekistan", "Tajikstan",
-                        "Turkmenistan",
-                        "Kyrgyzstan" };
+                        "Turkmenistan", "Kyrgyzstan" };
         private static String[] region_levant = { "Syria", "Iraq", "Palestine", "Lebanon", "Jordan", "Israel" };
 
         public static String getRegion(String nation) {

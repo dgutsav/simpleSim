@@ -149,8 +149,10 @@ public class ControllerEurope {
                     return 3;
                 else if (rank <= 15)
                     return 2;
-                else
+                else if (rank <= 50)
                     return 1;
+                else
+                    return 0;
             case UEL:
                 if (rank <= 5)
                     return 2;
@@ -163,8 +165,12 @@ public class ControllerEurope {
                     return 1;
                 else if (rank <= 15)
                     return 2;
-                else
+                else if (rank <= 44)
                     return 3;
+                else if (rank <= 50)
+                    return 2;
+                else
+                    return 0;
             default:
                 return 0;
         }
@@ -573,8 +579,10 @@ public class ControllerEurope {
     private static List<String> adjustECLQ2CH(List<String> teams) {
         teams = CommonFunctions.sortByCoefficients(teams);
         List<String> adjusted = new ArrayList<>();
-        adjusted.add(teams.remove(1));
-        adjusted.add(teams.remove(0));
+        int BYE_TEAMS_COUNT = 6;
+        for (int i = 0; i < BYE_TEAMS_COUNT; i++) {
+            adjusted.add(teams.remove(BYE_TEAMS_COUNT - (i + 1)));
+        }
         bye_teams = adjusted;
         return teams;
     }
