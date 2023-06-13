@@ -317,6 +317,19 @@ public class ControllerAsia {
         return options;
     }
 
+    private static String preventZeroGroups(List<String> pot, int pot_number, String[][] groups) {
+        String min_team = null;
+        int min_options = 1000;
+        for (String team : pot) {
+            List<Integer> options = getGroupOptions(team, pot_number, groups);
+            if (options.size() < min_options) {
+                min_options = options.size();
+                min_team = team;
+            }
+        }
+        return min_team;
+    }
+
     private static String[][] drawGroups(String[][] pots) {
         String[][] groups = new String[NUM_GROUPS][NUM_POTS];
         for (int i = 0; i < NUM_GROUPS; i++) {
@@ -327,6 +340,9 @@ public class ControllerAsia {
             pot_teams.addAll(Arrays.asList(pots[i]));
             while (!pot_teams.isEmpty()) {
                 String selected_team = CommonFunctions.getRandomElement(pot_teams);
+                String zero_team = preventZeroGroups(pot_teams, i, groups);
+                if (zero_team != null)
+                    selected_team = zero_team;
                 List<Integer> options = getGroupOptions(selected_team, i, groups);
                 int group = CommonFunctions.getRandomIntElement(options);
                 groups[group][i] = selected_team;
