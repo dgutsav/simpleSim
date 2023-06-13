@@ -54,7 +54,7 @@ public class ControllerEurope {
                 CCType.CompType.UEL, true, true),
         EL_Q3_CP("EL Third Qualifying Round Chaampions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
                 CCType.CompType.UEL, true, true),
-        EL_Q4_MP("EL Play-off Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL,
+        EL_Q4_MP("EL Play-off Round", CCType.StageType.TWO_LEGGED_KNOCKOUT, CCType.CompType.UEL,
                 true, true),
         EL_Q4_CP("EL Play-off Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
                 CCType.CompType.UEL, true, true),
@@ -244,19 +244,9 @@ public class ControllerEurope {
             case UECL:
                 if (league_rank <= 4)
                     return SeedingType.ECL_Q4;
-                else if (league_rank <= 10 && rank <= 1)
-                    return SeedingType.ECL_Q4;
-                else if (league_rank <= 10)
+                else if (league_rank <= 14 || (league_rank <= 15 && rank <= 1))
                     return SeedingType.ECL_Q3;
-                else if (league_rank <= 15 && rank <= 1)
-                    return SeedingType.ECL_Q3;
-                else if (league_rank <= 27 && rank <= 1)
-                    return SeedingType.ECL_Q3;
-                else if (league_rank <= 15)
-                    return SeedingType.ECL_Q2;
-                else if (league_rank <= 25 && rank <= 2)
-                    return SeedingType.ECL_Q2;
-                else if (rank <= 1)
+                else if (league_rank <= 29 || (league_rank <= 30 && rank <= 1))
                     return SeedingType.ECL_Q2;
                 else
                     return SeedingType.ECL_Q1;
@@ -330,12 +320,12 @@ public class ControllerEurope {
                 break;
             case EL_Q4_MP:
                 stages.add(Stage.EL_Q3_MP);
-                break;
-            case EL_Q4_CP:
                 stages.add(Stage.EL_Q3_CP);
                 break;
+            case EL_Q4_CP:
+                break;
             case EL_GROUP:
-                stages.add(Stage.EL_Q4_CP);
+                // stages.add(Stage.EL_Q4_CP);
                 stages.add(Stage.EL_Q4_MP);
                 break;
             case ECL_Q4_CP:
@@ -399,7 +389,7 @@ public class ControllerEurope {
             case EL_Q3_MP:
                 stages.add(Stage.CL_Q2_MP);
                 break;
-            case EL_Q4_CP:
+            case EL_Q4_MP:
                 stages.add(Stage.CL_Q3_CP);
                 break;
             case EL_GROUP:
@@ -417,7 +407,7 @@ public class ControllerEurope {
                 stages.add(Stage.EL_Q3_MP);
                 break;
             case ECL_GROUP:
-                stages.add(Stage.EL_Q4_CP);
+                // stages.add(Stage.EL_Q4_CP);
                 stages.add(Stage.EL_Q4_MP);
                 break;
             default:
@@ -787,7 +777,7 @@ public class ControllerEurope {
     private static void setQ4Stages() {
         setStage(Stage.CL_Q4_CP);
         setStage(Stage.CL_Q4_MP);
-        setStage(Stage.EL_Q4_CP);
+        // setStage(Stage.EL_Q4_CP);
         setStage(Stage.EL_Q4_MP);
         setStage(Stage.ECL_Q4_CP);
         setStage(Stage.ECL_Q4_MP);
@@ -796,7 +786,7 @@ public class ControllerEurope {
     private static void simulateQ4Stages() {
         simulateStage(Stage.CL_Q4_CP);
         simulateStage(Stage.CL_Q4_MP);
-        simulateStage(Stage.EL_Q4_CP);
+        // simulateStage(Stage.EL_Q4_CP);
         simulateStage(Stage.EL_Q4_MP);
         simulateStage(Stage.ECL_Q4_CP);
         simulateStage(Stage.ECL_Q4_MP);
