@@ -59,6 +59,12 @@ public class FixtureScheduler {
     }
 
     public static List<Integer[]> generateMatches(int count) {
+        boolean use_dummy = false;
+        if (count % 2 != 0) {
+            count++;
+            use_dummy = true;
+        }
+
         List<Integer[]> gen = new ArrayList<>();
 
         int[] ids = new int[count];
@@ -86,6 +92,14 @@ public class FixtureScheduler {
             away_days[away_days.length - i] = away_day;
 
             for (int j = 0; j < home.length; j++) {
+
+                if (use_dummy) {
+                    if (home[j] == (count - 1))
+                        continue;
+                    if (away[j] == (count - 1))
+                        continue;
+                }
+
                 Integer[] arr_home = new Integer[3];
                 Integer[] arr_away = new Integer[3];
                 if (i % 2 == 0) {

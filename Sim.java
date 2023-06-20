@@ -25,6 +25,7 @@ public class Sim {
     public static boolean TEST = true;
     public static boolean SHOW_DETAILS = true;
     public static boolean USE_TRANSFER_MARKET = true;
+    public static boolean USE_INTERNATIONALS = true;
 
     private Sim() {
     }
@@ -154,29 +155,33 @@ public class Sim {
     }
 
     public static void sim() {
-        for (Map.Entry<String, League> entry : leagues.entrySet()) {
-            entry.getValue().seasonStart();
-            entry.getValue().simulateSeason();
-            entry.getValue().endSeasonChanges();
-        }
+        // for (Map.Entry<String, League> entry : leagues.entrySet()) {
+        //     entry.getValue().seasonStart();
+        //     entry.getValue().simulateSeason();
+        //     entry.getValue().endSeasonChanges();
+        // }
 
-        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
-            entry.getValue().setup();
-            entry.getValue().simulateCup();
-        }
+        // for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+        //     entry.getValue().setup();
+        //     entry.getValue().simulateCup();
+        // }
 
-        if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            ControllerSAmerica.simulate();
-            ControllerNAmerica.simulate();
-            ControllerEurope.simulate();
-            ControllerAfrica.simulate();
-            ControllerAsia.simulate();
-            ControllerCWC.simulate();
+        // if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
+        //     ControllerSAmerica.simulate();
+        //     ControllerNAmerica.simulate();
+        //     ControllerEurope.simulate();
+        //     ControllerAfrica.simulate();
+        //     ControllerAsia.simulate();
+        //     ControllerCWC.simulate();
+        // }
+
+        if (USE_INTERNATIONALS && !TEST) {
+            International.simulateWC();
         }
-        seasonEndChanges();
-        if (USE_TRANSFER_MARKET) {
-            TransferMarket.simulate();
-        }
+        // seasonEndChanges();
+        // if (USE_TRANSFER_MARKET) {
+        //     TransferMarket.simulate();
+        // }
         season++;
     }
 
@@ -460,7 +465,7 @@ public class Sim {
 
     public static void main(String[] args) {
         TEST = false;
-        USE_TRANSFER_MARKET = false;
+        USE_TRANSFER_MARKET = true;
         int num_seasons = 1;
         double[] d = new double[num_seasons];
         initSetup();

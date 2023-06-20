@@ -165,4 +165,8 @@ public class NationalTeam {
         this.points += d;
         this.update();
     }
+
+    public int getNationId() {
+        return this.nation_id;
+    }
 }

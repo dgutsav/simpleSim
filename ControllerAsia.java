@@ -65,6 +65,8 @@ public class ControllerAsia {
 
     private static Map<Integer, Integer> zonal_rankings = new HashMap<>();
 
+    private static Map<String, Integer> team_nations = new HashMap<>();
+
     private static Map<String, SeedingType> seedings = new HashMap<>();
     private static Map<Stage, List<KnockoutTie>> stages = new HashMap<>();
     private static Map<Stage, League[]> groups = new HashMap<>();
@@ -183,6 +185,7 @@ public class ControllerAsia {
                 int rank = i + 1;
                 SeedingType seedingType = getSeeding(nation, rank);
                 seedings.put(teams.get(i), seedingType);
+                team_nations.put(teams.get(i), nation.getId());
             }
         }
     }
@@ -310,7 +313,13 @@ public class ControllerAsia {
     private static List<Integer> getGroupOptions(String team, int pot_number, String[][] groups) {
         List<Integer> options = new ArrayList<>();
         for (int i = 0; i < NUM_GROUPS; i++) {
-            if (groups[i][pot_number] == null) {
+            boolean has_same_nation = false;
+            for (int j = 0; j < pot_number; j++) {
+                if (team_nations.get(team) == team_nations.get(groups[i][j])) {
+                    has_same_nation = true;
+                }
+            }
+            if (!has_same_nation && groups[i][pot_number] == null) {
                 options.add(i);
             }
         }
@@ -543,6 +552,7 @@ public class ControllerAsia {
         stages = new HashMap<>();
         groups = new HashMap<>();
         zonal_rankings = new HashMap<>();
+        team_nations = new HashMap<>();
         setZonalRankings();
         setSeedings();
         qualifiers();
