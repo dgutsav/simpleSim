@@ -239,7 +239,7 @@ public class League {
     }
 
     public void distributePrizeMoney() {
-        long prize_money = this.reputation * 500000 * (long)(Math.pow(1.1, (this.reputation - 200)));
+        long prize_money = this.reputation * 500000 * (long)(Math.pow(1.1, (this.reputation - 200))); 
         int size = this.teams.size();
         float[] shares = new float[size];
         for (int i = 0; i < size / 2; i++) {

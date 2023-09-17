@@ -23,7 +23,7 @@ public class ControllerNAmerica {
     }
 
     private static Map<String, SeedingType> seedings = new HashMap<>();
-    private static Map<Stage, List<KnockoutTie>> stages = new HashMap<>();
+    private static Map<Stage, List<TwoLeggedKnockoutTie>> stages = new HashMap<>();
 
     private static int getPlaces(Nation nation) {
         int rank = nation.getLeagueRanking();
@@ -98,8 +98,8 @@ public class ControllerNAmerica {
 
     private static List<String> getWinnersFromStage(Stage stage) {
         List<String> winners = new ArrayList<>();
-        List<KnockoutTie> ties = stages.get(stage);
-        for (KnockoutTie tie : ties) {
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
+        for (TwoLeggedKnockoutTie tie : ties) {
             winners.add(tie.getWinner());
         }
         return winners;
@@ -137,7 +137,7 @@ public class ControllerNAmerica {
         seeded.addAll(teams.subList(0, len / 2));
         ArrayList<String> unseeded = new ArrayList<>();
         unseeded.addAll(teams.subList(len / 2, len));
-        List<KnockoutTie> ties = new ArrayList<>();
+        List<TwoLeggedKnockoutTie> ties = new ArrayList<>();
         int ties_size = teams.size() / 2;
         for (int i = 0; i < ties_size; i++) {
             String selected_team = CommonFunctions.getRandomElement(seeded);
@@ -145,7 +145,7 @@ public class ControllerNAmerica {
             if (filtered.size() == 0)
                 System.out.println("No team found in stage: " + type);
             String selected_team_2 = CommonFunctions.getRandomElement(filtered);
-            KnockoutTie tie = new KnockoutTie(selected_team, selected_team_2, 1);
+            TwoLeggedKnockoutTie tie = new TwoLeggedKnockoutTie(selected_team, selected_team_2, 1);
             ties.add(tie);
             seeded = removeFromList(seeded, selected_team);
             unseeded = removeFromList(unseeded, selected_team_2);
@@ -155,7 +155,7 @@ public class ControllerNAmerica {
 
     private static void simulateStage(Stage stage) {
         System.out.println("\n" + stage.stage_name);
-        List<KnockoutTie> ties = stages.get(stage);
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
         for (int i = 0; i < ties.size(); i++) {
             ties.get(i).simulate();
             System.out.print("Match " + (i + 1) + ": ");
@@ -185,7 +185,7 @@ public class ControllerNAmerica {
     private static void updateHistory(CCType.CompType type) {
         Stage stageFinal = Stage.FINAL;
         List<TeamHistory> tHistory = new ArrayList<>();
-        KnockoutTie tie = stages.get(stageFinal).get(0);
+        TwoLeggedKnockoutTie tie = stages.get(stageFinal).get(0);
         tHistory.add(new TeamHistory(tie.getWinner(), 1, Sim.getClub(tie.getWinner()).getBestSquadRating()));
         tHistory.add(new TeamHistory(tie.getLoser(), 2, Sim.getClub(tie.getLoser()).getBestSquadRating()));
         List<CompetitionHistory> chistory;

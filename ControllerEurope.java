@@ -131,7 +131,7 @@ public class ControllerEurope {
         }
     }
 
-    private static Map<Stage, List<KnockoutTie>> stages = new HashMap<>();
+    private static Map<Stage, List<TwoLeggedKnockoutTie>> stages = new HashMap<>();
     private static Map<String, SeedingType> seedings = new HashMap<>();
     private static Map<String, Integer> team_nations = new HashMap<>();
 
@@ -599,8 +599,8 @@ public class ControllerEurope {
 
     private static List<String> getWinnersFromStage(Stage stage) {
         List<String> winners = new ArrayList<>();
-        List<KnockoutTie> ties = stages.get(stage);
-        for (KnockoutTie tie : ties) {
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
+        for (TwoLeggedKnockoutTie tie : ties) {
             winners.add(tie.getWinner());
         }
         return winners;
@@ -608,8 +608,8 @@ public class ControllerEurope {
 
     private static List<String> getLosersFromStage(Stage stage) {
         List<String> losers = new ArrayList<>();
-        List<KnockoutTie> ties = stages.get(stage);
-        for (KnockoutTie tie : ties) {
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
+        for (TwoLeggedKnockoutTie tie : ties) {
             losers.add(tie.getLoser());
         }
         return losers;
@@ -649,7 +649,7 @@ public class ControllerEurope {
             seeded.addAll(teams.subList(0, len / 2));
             ArrayList<String> unseeded = new ArrayList<>();
             unseeded.addAll(teams.subList(len / 2, len));
-            List<KnockoutTie> ties = new ArrayList<>();
+            List<TwoLeggedKnockoutTie> ties = new ArrayList<>();
             int ties_size = teams.size() / 2;
             for (int i = 0; i < ties_size; i++) {
                 String selected_team = CommonFunctions.getRandomElement(seeded);
@@ -665,7 +665,7 @@ public class ControllerEurope {
                 if (filtered.size() == 0)
                     System.out.println("No team found in stage: " + type);
                 String selected_team_2 = CommonFunctions.getRandomElement(filtered);
-                KnockoutTie tie = new KnockoutTie(selected_team, selected_team_2, 1);
+                TwoLeggedKnockoutTie tie = new TwoLeggedKnockoutTie(selected_team, selected_team_2, 1);
                 ties.add(tie);
                 seeded = removeFromList(seeded, selected_team);
                 unseeded = removeFromList(unseeded, selected_team_2);
@@ -713,7 +713,7 @@ public class ControllerEurope {
             seeded.addAll(getGroupTeamsAtRank(Stage.ECL_GROUP, 1));
         }
 
-        List<KnockoutTie> ties = new ArrayList<>();
+        List<TwoLeggedKnockoutTie> ties = new ArrayList<>();
         int ties_size = seeded.size();
         for (int i = 0; i < ties_size; i++) {
             String selected_team = CommonFunctions.getRandomElement(seeded);
@@ -724,7 +724,7 @@ public class ControllerEurope {
             if (filtered.size() == 0)
                 System.out.println("No team found in stage: " + stage);
             String selected_team_2 = CommonFunctions.getRandomElement(filtered);
-            KnockoutTie tie = new KnockoutTie(selected_team, selected_team_2, 1);
+            TwoLeggedKnockoutTie tie = new TwoLeggedKnockoutTie(selected_team, selected_team_2, 1);
             ties.add(tie);
             seeded = removeFromList(seeded, selected_team);
             unseeded = removeFromList(unseeded, selected_team_2);
@@ -956,7 +956,7 @@ public class ControllerEurope {
 
     private static void simulateStage(Stage stage) {
         System.out.println("\n" + stage.stage_name);
-        List<KnockoutTie> ties = stages.get(stage);
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
         for (int i = 0; i < ties.size(); i++) {
             ties.get(i).simulate();
             System.out.print("Match " + (i + 1) + ": ");
@@ -1023,26 +1023,26 @@ public class ControllerEurope {
     }
 
     private static void setStageBonusPoints(Stage stage) {
-        List<KnockoutTie> ties = stages.get(stage);
-        for (KnockoutTie tie : ties) {
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
+        for (TwoLeggedKnockoutTie tie : ties) {
             addCoefficientPoints(tie.getTeam1(), 1.0, false);
             addCoefficientPoints(tie.getTeam2(), 1.0, false);
         }
     }
 
     private static void setEliminationPoints(Stage stage, double points) {
-        List<KnockoutTie> ties = stages.get(stage);
-        for (KnockoutTie tie : ties) {
+        List<TwoLeggedKnockoutTie> ties = stages.get(stage);
+        for (TwoLeggedKnockoutTie tie : ties) {
             addCoefficientPointsToClub(tie.getLoser(), points);
         }
     }
 
     private static void updateCoefficients() {
         // apply match points
-        for (Map.Entry<Stage, List<KnockoutTie>> entry : stages.entrySet()) {
-            List<KnockoutTie> ties = entry.getValue();
+        for (Map.Entry<Stage, List<TwoLeggedKnockoutTie>> entry : stages.entrySet()) {
+            List<TwoLeggedKnockoutTie> ties = entry.getValue();
             Stage stage = entry.getKey();
-            for (KnockoutTie tie : ties) {
+            for (TwoLeggedKnockoutTie tie : ties) {
                 updateCoefficientsForMatch(tie.getFirstLeg(), stage.qualifying());
                 updateCoefficientsForMatch(tie.getSecondLeg(), stage.qualifying());
             }
@@ -1306,7 +1306,7 @@ public class ControllerEurope {
         Stage stageFinal = type == CCType.CompType.UCL ? Stage.CL_FINAL
                 : type == CCType.CompType.UEL ? Stage.EL_FINAL : Stage.ECL_FINAL;
         List<TeamHistory> tHistory = new ArrayList<>();
-        KnockoutTie tie = stages.get(stageFinal).get(0);
+        TwoLeggedKnockoutTie tie = stages.get(stageFinal).get(0);
         tHistory.add(new TeamHistory(tie.getWinner(), 1, Sim.getClub(tie.getWinner()).getBestSquadRating()));
         tHistory.add(new TeamHistory(tie.getLoser(), 2, Sim.getClub(tie.getLoser()).getBestSquadRating()));
         List<CompetitionHistory> chistory;
@@ -1466,14 +1466,14 @@ public class ControllerEurope {
     }
 
     private static void distributePrizeMoney() {
-        for (Map.Entry<Stage, List<KnockoutTie>> entry : stages.entrySet()) {
+        for (Map.Entry<Stage, List<TwoLeggedKnockoutTie>> entry : stages.entrySet()) {
             Stage stage = entry.getKey();
             if (stage == Stage.CL_FINAL || stage == Stage.EL_FINAL || stage == Stage.ECL_FINAL) {
-                for (KnockoutTie tie : entry.getValue()) {
+                for (TwoLeggedKnockoutTie tie : entry.getValue()) {
                     Sim.getClub(tie.getWinner()).updateBudget(getWinnerPrizeMoney(stage.competition()));
                 }
             }
-            for (KnockoutTie tie : entry.getValue()) {
+            for (TwoLeggedKnockoutTie tie : entry.getValue()) {
                 long amount = getPrizeMoneyForStage(stage);
                 if (amount > 0) {
                     Sim.getClub(tie.getLoser()).updateBudget(amount);
