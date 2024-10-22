@@ -56,18 +56,20 @@ public class MarketHelper {
         }
         int rep_diff = selling_club.getReputation() - buying_club.getReputation();
         int abs_diff = (int) (Math.abs(rep_diff));
-        if (Sim.findTeamInLeague(buying_club).equalsIgnoreCase(Sim.findTeamInLeague(selling_club))) {
-            if (abs_diff <= 200) {
-                log("Clubs of same strature");
-                return false;
-            }
-        } else {
-            if (abs_diff <= 100) {
-                log("Clubs of same strature");
-                return false;
-            }
-        }
-        if (buying_club.getPlayerRankAtClub(player) > rank && rep_diff < 500) {
+        // log("Seller Rep: " + selling_club.getReputation() + " Buyer Rep: " + buying_club.getReputation() + " rep diff: " + abs_diff);
+        // if (Sim.findTeamInLeague(buying_club).equalsIgnoreCase(Sim.findTeamInLeague(selling_club))) {
+        //     if (abs_diff <= 200) {
+        //         log("Clubs of same strature");
+        //         return false;
+        //     }
+        // } else {
+        //     if (abs_diff <= 100) {
+        //         log("Clubs of same strature");
+        //         return false;
+        //     }
+        // }
+        boolean rep_difference = rep_diff < 0; //rep_diff < 500;
+        if (buying_club.getPlayerRankAtClub(player) > rank && rep_difference) {
             log("Not promising project");
             return false;
         }

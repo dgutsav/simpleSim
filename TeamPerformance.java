@@ -64,7 +64,7 @@ public class TeamPerformance {
     public String displayLongContinental() {
         String code = Sim.getNation(Sim.getClub(this.team_id).getNationId()).getCode();
         return (CommonFunctions.getPaddedString(this.team_name + "(" + code + ")", 35) + "\t" + this.matches_won + "-" + this.matches_drawn
-                + "-" + this.matches_lost + "\t" + this.goals_scored + ":" + this.goals_conceded + "\t"
+                + "-" + this.matches_lost + "\t" + this.goals_scored + ":" + this.goals_conceded + "\t" + this.goalDifference() + "\t"
                 + this.points());
     }
 

@@ -36,7 +36,7 @@ public class Club_Team {
     }
 
     private int getStartingRecruitmentLevel(int reputation) {
-        float base = reputation / 1000.0f;
+        float base = reputation / 500.0f;
         base += CommonFunctions.getRandomInt(3);
         base = base > 20 ? 20 : base;
         return Math.round(base);
@@ -122,7 +122,7 @@ public class Club_Team {
         float num = (float) (this.recruitment_level * Sim.getNation(this.nation_id).getYouthRating() * 100);
         float den = 200.0f * 20.0f;
         double q = num / den;
-        q *= 0.75;
+        q *= 0.77;
         return (int) (Math.round(q));
     }
 

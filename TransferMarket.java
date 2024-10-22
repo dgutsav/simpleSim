@@ -348,7 +348,7 @@ public class TransferMarket {
     }
 
     public static void showTransferStats() {
-        for (int start = Sim.getSeasonNumber() - 1; start >= 2020; start--) {
+        for (int start = Sim.getSeasonNumber() - 1; start >= Sim.STARTING_SEASON; start--) {
             ArrayList<Integer> times = time_data.get(start);
             String size = size_data.get(start);
             System.out.print(start + " Time: ");

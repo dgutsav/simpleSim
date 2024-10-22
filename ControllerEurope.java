@@ -1185,7 +1185,7 @@ public class ControllerEurope {
     private static Map<Integer, Map<String, Double>> club_coefficients = new HashMap<>();
 
     public static void initCoefficientsCalculations() {
-        for (int i = 2015; i <= 2019; i++) {
+        for (int i = Sim.STARTING_SEASON-5; i <= Sim.STARTING_SEASON-1; i++) {
             Map<Integer, Double> p_map = new HashMap<>();
             nation_coefficients.put(Integer.valueOf(i), p_map);
         }
@@ -1196,9 +1196,10 @@ public class ControllerEurope {
             String code = nation.getCode();
             Double[] points = initial_points.get(code);
             for (int i = 0; i < points.length; i++) {
-                int year = i + 2015;
+                int year = i + Sim.STARTING_SEASON-5;
                 Map<Integer, Double> year_map = nation_coefficients.get(year);
                 year_map.put(nation.getId(), points[i]);
+                nation_coefficients.put(year, year_map);
             }
         }
     }
@@ -1230,7 +1231,7 @@ public class ControllerEurope {
     public static void showLeagueRankings() {
         Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
         System.out.print(CommonFunctions.getPaddedString("Country", 25));
-        for (int year = 2020; year <= Sim.getSeasonNumber(); year++) {
+        for (int year = Sim.STARTING_SEASON; year <= Sim.getSeasonNumber(); year++) {
             Map<Integer, Integer> ymap = getLeagueRankingsForSeason(year);
             map.put(year, ymap);
             System.out.print(CommonFunctions.getPaddedString(String.valueOf(year), 7));
@@ -1239,7 +1240,7 @@ public class ControllerEurope {
         List<Nation> nations = Sim.getNationFromContinent("Europe");
         for (Nation nation : nations) {
             System.out.print(CommonFunctions.getPaddedString(nation.getName(), 25));
-            for (int year = 2020; year <= Sim.getSeasonNumber(); year++) {
+            for (int year = Sim.STARTING_SEASON; year <= Sim.getSeasonNumber(); year++) {
                 System.out.print(CommonFunctions.getPaddedString(String.valueOf(map.get(year).get(nation.getId())), 7));
             }
             System.out.println();
@@ -1498,5 +1499,6 @@ public class ControllerEurope {
     public static void showCoefficients() {
         showClubCoefficients();
         showNationsCoefficients();
+        showLeagueRankings();
     }
 }

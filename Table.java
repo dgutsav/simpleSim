@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Table {
@@ -24,37 +26,48 @@ public class Table {
     }
 
     public void sortTable() {
-        int num_teams = performances.length;
-        int big;
-        int index;
-        TeamPerformance temp;
-        for (int i = 0; i < num_teams; i++) {
-            big = performances[i].points();
-            index = i;
-            for (int j = i + 1; j < num_teams; j++) {
-                if (big < performances[j].points()) {
-                    big = performances[j].points();
-                    index = j;
-                } else if (big == performances[j].points()) {
-                    if (performances[i].goalDifference() < performances[j].goalDifference()) {
-                        index = j;
-                    } else if (performances[i].goalDifference() == performances[j].goalDifference()) {
-                        if (performances[i].matchesWon() < performances[j].matchesWon()) {
-                            index = j;
-                        } else if (performances[i].matchesWon() == performances[j].matchesWon()) {
-                            if (performances[i].goalsScored() < performances[j].goalsScored()) {
-                                index = j;
-                            } else {
-                                // nothing to do here
-                            }
-                        }
-                    }
-                }
-            }
-            temp = performances[i];
-            performances[i] = performances[index];
-            performances[index] = temp;
-        }
+        sortTableAdvanced();
+        return;
+        // int num_teams = performances.length;
+        // int big;
+        // int index;
+        // TeamPerformance temp;
+        // for (int i = 0; i < num_teams; i++) {
+        //     big = performances[i].points();
+        //     index = i;
+        //     for (int j = i + 1; j < num_teams; j++) {
+        //         if (big < performances[j].points()) {
+        //             big = performances[j].points();
+        //             index = j;
+        //         } else if (big == performances[j].points()) {
+        //             if (performances[i].goalDifference() < performances[j].goalDifference()) {
+        //                 index = j;
+        //             } else if (performances[i].goalDifference() == performances[j].goalDifference()) {
+        //                 if (performances[i].matchesWon() < performances[j].matchesWon()) {
+        //                     index = j;
+        //                 } else if (performances[i].matchesWon() == performances[j].matchesWon()) {
+        //                     if (performances[i].goalsScored() < performances[j].goalsScored()) {
+        //                         index = j;
+        //                     } else {
+        //                         // nothing to do here
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     temp = performances[i];
+        //     performances[i] = performances[index];
+        //     performances[index] = temp;
+        // }
+    }
+
+    public void sortTableAdvanced() {
+        Arrays.sort(performances, Comparator.comparingInt(TeamPerformance::points)
+                .thenComparingInt(TeamPerformance::goalDifference)
+                .thenComparingInt(TeamPerformance::matchesWon)
+                .thenComparingInt(TeamPerformance::goalsScored)
+                .thenComparingInt(TeamPerformance::goalsConceded).reversed());
+
     }
 
     public String getTeamAtRank(int rank) {

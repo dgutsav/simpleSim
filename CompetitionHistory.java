@@ -56,4 +56,8 @@ public class CompetitionHistory {
         }
         System.out.println();
     }
+
+    public String getWinner() {
+        return getTeamHistory(1).getTeamId();
+    }
 }

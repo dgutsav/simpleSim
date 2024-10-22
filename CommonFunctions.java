@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import Models.Player;
 import Models.Position;
@@ -12,35 +16,49 @@ public class CommonFunctions {
 
     }
 
+    public static Club_Team getTeam(Setups.Club_Setup setup, String nation_name, int nation_id) {
+        Club_Team team = new Club_Team(setup.name, nation_id, setup.reputation);
+        return setTeamData(team, setup.reputation / 100, nation_name, nation_id);
+    }
+
     public static Club_Team getTeam(float rating, String nation_name, int nation_id, float league_rating) {
         int reputation = Math.round((rating + 10) * (league_rating + 10));
         Club_Team team = new Club_Team(CommonFunctions.getTeamNameForCountry(nation_name), nation_id, reputation);
+        setTeamData(team, rating, nation_name, nation_id);
+        return team;
+    }
+
+    private static Club_Team setTeamData(Club_Team team, float rating, String nation_name, int nation_id) {
         int[] ratings = CommonFunctions.getPlayerDistribution((int) rating);
         Position[] positions = CommonFunctions.getPositions(team.getSeniorSquad().getPositions(), ratings.length);
         for (int i = 0; i < ratings.length; i++) {
-            int age;
-            if (ratings[i] >= 86) {
-                age = CommonFunctions.getRandomNumber(10) + 28;
-            } else if (ratings[i] >= 84) {
-                age = CommonFunctions.getRandomNumber(12) + 26;
-            } else if (ratings[i] >= 82) {
-                age = CommonFunctions.getRandomNumber(14) + 24;
-            } else if (ratings[i] >= 80) {
-                age = CommonFunctions.getRandomNumber(16) + 22;
-            } else if (ratings[i] >= 78) {
-                age = CommonFunctions.getRandomNumber(18) + 21;
-            } else if (ratings[i] >= 75) {
-                age = CommonFunctions.getRandomNumber(20) + 20;
-            } else if (ratings[i] >= 70) {
-                age = CommonFunctions.getRandomNumber(18) + 18;
-            } else {
-                age = CommonFunctions.getRandomNumber(20) + 17;
-            }
+            int age = getAge(ratings[i]);
+
             Player player = CommonFunctions.getPlayer(nation_name, nation_id, ratings[i], age, positions[i]);
             String player_id = Sim.addPlayer(player);
             team.getSeniorSquad().addPlayer(player_id);
         }
         return team;
+    }
+
+    private static int getAge(int rating) {
+        if (rating >= 86) {
+            return CommonFunctions.getRandomNumber(10) + 28;
+        } else if (rating >= 84) {
+            return CommonFunctions.getRandomNumber(12) + 26;
+        } else if (rating >= 82) {
+            return CommonFunctions.getRandomNumber(14) + 24;
+        } else if (rating >= 80) {
+            return CommonFunctions.getRandomNumber(16) + 22;
+        } else if (rating >= 78) {
+            return CommonFunctions.getRandomNumber(18) + 21;
+        } else if (rating >= 75) {
+            return CommonFunctions.getRandomNumber(20) + 20;
+        } else if (rating >= 70) {
+            return CommonFunctions.getRandomNumber(18) + 18;
+        } else {
+            return CommonFunctions.getRandomNumber(20) + 17;
+        }
     }
 
     public static Position[] getPositions(Position[] formation, int length) {
@@ -78,7 +96,7 @@ public class CommonFunctions {
         for (int i = 0; i < totalPlayers; i++) {
             if (i < 11) {
                 ratings[i] = rating + CommonFunctions.getRandomInt(3);
-            } else if (i < 20){
+            } else if (i < 20) {
                 ratings[i] = ((int) ((double) rating * 0.75)) + CommonFunctions.getRandomNumber(5);
             } else {
                 ratings[i] = ((int) ((double) rating * 0.6)) + CommonFunctions.getRandomNumber(7);
@@ -164,18 +182,45 @@ public class CommonFunctions {
 
     public static League createLeague(int league_rating, int size, int nation_id, int level, int promotion,
             int relegation, String nation_name) {
-        int variance = 0;
-        if (level == 1) {
-            variance = CommonFunctions.getRandomNumber(2);
-        } else {
-            variance = CommonFunctions.getRandomNumber(3);
-        }
-        int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
         League league = getLeague(nation_name, level, promotion, relegation, nation_id, league_rating);
-        for (int i = 0; i < team_ratings.length; i++) {
-            Club_Team team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
-            String team_id = Sim.addClub(team);
-            league.addTeam(team_id);
+        List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation_name, level);
+        if (club_sets.size() > 0 && club_sets.size() == size) {
+            for (Setups.Club_Setup setup : club_sets) {
+                Club_Team team = getTeam(setup, nation_name, nation_id);
+                String team_id = Sim.addClub(team);
+                league.addTeam(team_id);
+            }
+        } else if (club_sets.size() > 0 && club_sets.size() != size) {
+            for (Setups.Club_Setup setup : club_sets) {
+                Club_Team team = getTeam(setup, nation_name, nation_id);
+                String team_id = Sim.addClub(team);
+                league.addTeam(team_id);
+            }
+            int variance = 0;
+            if (level == 1) {
+                variance = CommonFunctions.getRandomNumber(2);
+            } else {
+                variance = CommonFunctions.getRandomNumber(3);
+            }
+            int[] team_ratings = CommonFunctions.getDistribution(size - club_sets.size(), league_rating, variance);
+            for (int i = 0; i < team_ratings.length; i++) {
+                Club_Team team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
+                String team_id = Sim.addClub(team);
+                league.addTeam(team_id);
+            }
+        } else {
+            int variance = 0;
+            if (level == 1) {
+                variance = CommonFunctions.getRandomNumber(2);
+            } else {
+                variance = CommonFunctions.getRandomNumber(3);
+            }
+            int[] team_ratings = CommonFunctions.getDistribution(size, league_rating, variance);
+            for (int i = 0; i < team_ratings.length; i++) {
+                Club_Team team = getTeam((float) team_ratings[i], nation_name, nation_id, league_rating);
+                String team_id = Sim.addClub(team);
+                league.addTeam(team_id);
+            }
         }
         return league;
     }
@@ -306,5 +351,27 @@ public class CommonFunctions {
         }
         return padded;
 
+    }
+
+    public static Map<String, Integer> sortMap(Map<String, Integer> map, boolean ascending, int limit, int min,
+            int max) {
+        Map<String, Integer> filteredMap = map.entrySet().stream()
+                .filter(entry -> entry.getValue() >= min && entry.getValue() <= max).collect(
+                        HashMap::new, (m, e) -> m.put(e.getKey(), e.getValue()),
+                        HashMap::putAll);
+
+        Comparator<Map.Entry<String, Integer>> comparator = Comparator.comparing(Map.Entry::getValue);
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+
+        return filteredMap.entrySet()
+                .stream()
+                .sorted(comparator)
+                .limit(limit)
+                .collect(
+                        LinkedHashMap::new,
+                        (m, e) -> m.put(e.getKey(), e.getValue()),
+                        LinkedHashMap::putAll);
     }
 }

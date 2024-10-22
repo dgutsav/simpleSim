@@ -4,6 +4,41 @@ import java.util.List;
 import java.util.Map;
 
 public class Setups {
+    static class Club_Setup {
+        public String name;
+        public int reputation;
+    
+        public Club_Setup(String name, int reputation) {
+            this.name = name;
+            this.reputation = reputation;
+        }
+    }
+
+    static class Nation_Setup {
+        String name;
+        String short_name;
+        int national_team_ranking;
+        int league_ranking;
+        int num_leagues;
+        int num_team_leagues;
+        int league_rating;
+        int youth_rating;
+        String continent;
+    
+        public Nation_Setup(String name, String shortString, int nat_rank, int leg_rank, int num_leg, int team_leg,
+                int leg_strength, int youth_rating, String continent) {
+            this.name = name;
+            this.short_name = shortString;
+            this.national_team_ranking = nat_rank;
+            this.league_ranking = leg_rank;
+            this.num_leagues = num_leg;
+            this.num_team_leagues = team_leg;
+            this.league_rating = leg_strength;
+            this.youth_rating = youth_rating;
+            this.continent = continent;
+        }
+    }
+
     public static List<Nation_Setup> getNormalSetup() {
         List<Nation_Setup> setups = new ArrayList<>();
         setups.addAll(getUEFASetups());
@@ -131,24 +166,24 @@ public class Setups {
         List<Nation_Setup> setups = new ArrayList<>();
         setups.add(new Nation_Setup("England", "ENG", 4, 1, 4, 20, 82, 157, "Europe"));
         setups.add(new Nation_Setup("Spain", "ESP", 6, 2, 2, 20, 81, 163, "Europe"));
-        setups.add(new Nation_Setup("Germany", "GER", 13, 3, 3, 18, 81, 162, "Europe"));
         setups.add(new Nation_Setup("Italy", "ITA", 10, 4, 2, 20, 80, 156, "Europe"));
-        setups.add(new Nation_Setup("France", "FRA", 2, 5, 2, 20, 76, 165, "Europe"));
-        setups.add(new Nation_Setup("Russia", "RUS", 39, 6, 3, 16, 68, 139, "Europe"));
+        setups.add(new Nation_Setup("Germany", "GER", 13, 3, 3, 18, 81, 162, "Europe"));
+        setups.add(new Nation_Setup("France", "FRA", 2, 5, 2, 18, 76, 165, "Europe"));
         setups.add(new Nation_Setup("Portugal", "POR", 5, 7, 2, 18, 71, 159, "Europe"));
-        setups.add(new Nation_Setup("Belgium", "BEL", 1, 8, 2, 16, 67, 160, "Europe"));
-        setups.add(new Nation_Setup("Ukraine", "UKR", 24, 9, 2, 10, 66, 141, "Europe"));
-        setups.add(new Nation_Setup("Turkey", "TUR", 32, 10, 3, 16, 67, 140, "Europe"));
         setups.add(new Nation_Setup("Netherlands", "NED", 14, 11, 2, 18, 71, 159, "Europe"));
         setups.add(new Nation_Setup("Austria", "AUT", 23, 12, 2, 12, 67, 144, "Europe"));
-        setups.add(new Nation_Setup("Czechia", "CZE", 42, 13, 2, 14, 65, 145, "Europe"));
+        setups.add(new Nation_Setup("Scotland", "SCO", 48, 20, 2, 12, 64, 135, "Europe"));
+        setups.add(new Nation_Setup("Russia", "RUS", 39, 6, 3, 16, 68, 139, "Europe"));
+        setups.add(new Nation_Setup("Serbia", "SRB", 30, 19, 3, 16, 62, 148, "Europe"));
+        setups.add(new Nation_Setup("Ukraine", "UKR", 24, 9, 2, 10, 66, 141, "Europe"));
+        setups.add(new Nation_Setup("Belgium", "BEL", 1, 8, 2, 16, 67, 160, "Europe"));
+        setups.add(new Nation_Setup("Switzerland", "SUI", 16, 17, 3, 12, 66, 137, "Europe"));
         setups.add(new Nation_Setup("Greece", "GRE", 53, 14, 3, 18, 61, 135, "Europe"));
         setups.add(new Nation_Setup("Croatia", "CRO", 11, 15, 2, 10, 65, 150, "Europe"));
+        setups.add(new Nation_Setup("Turkey", "TUR", 32, 10, 3, 16, 67, 140, "Europe"));
+        setups.add(new Nation_Setup("Czechia", "CZE", 42, 13, 2, 14, 65, 145, "Europe"));
         setups.add(new Nation_Setup("Denmark", "DEN", 12, 16, 2, 14, 68, 130, "Europe"));
-        setups.add(new Nation_Setup("Switzerland", "SUI", 16, 17, 3, 12, 66, 137, "Europe"));
         setups.add(new Nation_Setup("Cyprus", "CYP", 100, 18, 2, 10, 59, 127, "Europe"));
-        setups.add(new Nation_Setup("Serbia", "SRB", 30, 19, 3, 16, 62, 148, "Europe"));
-        setups.add(new Nation_Setup("Scotland", "SCO", 48, 20, 2, 12, 64, 135, "Europe"));
         setups.add(new Nation_Setup("Norway", "NOR", 44, 21, 3, 14, 63, 134, "Europe"));
         setups.add(new Nation_Setup("Poland", "POL", 19, 22, 3, 18, 63, 136, "Europe"));
         setups.add(new Nation_Setup("Israel", "ISR", 87, 23, 3, 12, 63, 127, "Europe"));
@@ -360,4 +395,278 @@ public class Setups {
         return map;
     }
 
+    public static List<Club_Setup> getClubSetups(String nation, int level) {
+        List<Club_Setup> clubs = new ArrayList<>();
+        switch (nation) {
+            case "England":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Manchester City", 9400));
+                    clubs.add(new Club_Setup("Liverpool FC", 9100));
+                    clubs.add(new Club_Setup("Arsenal", 8900));
+                    clubs.add(new Club_Setup("Manchester United", 8800));
+                    clubs.add(new Club_Setup("Chelsea", 8700));
+                    clubs.add(new Club_Setup("Tottenham Hotspur", 8700));
+                    clubs.add(new Club_Setup("Aston Villa", 8300));
+                    clubs.add(new Club_Setup("Leicester City", 8300));
+                    clubs.add(new Club_Setup("West Ham United", 8300));
+                    clubs.add(new Club_Setup("Everton", 8300));
+                    clubs.add(new Club_Setup("Newcastle United", 8300));
+                    clubs.add(new Club_Setup("Brighton & Hove Albion", 8300));
+                    clubs.add(new Club_Setup("Leeds United", 7900));
+                    clubs.add(new Club_Setup("AFC Sunderland", 7700));
+                    clubs.add(new Club_Setup("Wolverhampton Wanderers", 7600));
+                    clubs.add(new Club_Setup("Southampton", 7500));
+                    clubs.add(new Club_Setup("Nottingham Forest", 7500));
+                    clubs.add(new Club_Setup("Fulham", 7400));
+                    clubs.add(new Club_Setup("Sheffield United", 7300));
+                    clubs.add(new Club_Setup("AFC Bournemouth", 7400));
+                }
+                break;
+            case "Spain":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Real Madrid", 9200));
+                    clubs.add(new Club_Setup("FC Barcelona", 9100));
+                    clubs.add(new Club_Setup("Atletico de Madrid", 8900));
+                    clubs.add(new Club_Setup("Valencia", 8600));
+                    clubs.add(new Club_Setup("Sevilla", 8700));
+                    clubs.add(new Club_Setup("Real Sociedad", 8700));
+                    clubs.add(new Club_Setup("Athletic Club de Bilbao", 8700));
+                    clubs.add(new Club_Setup("Villarreal", 8600));
+                    clubs.add(new Club_Setup("Real Betis", 8200));
+                    clubs.add(new Club_Setup("Celta Vigo", 8200));
+                    clubs.add(new Club_Setup("Deportivo La Coruna", 7300));
+                    clubs.add(new Club_Setup("Mallorca", 7400));
+                    clubs.add(new Club_Setup("Osasuna", 8100));
+                    clubs.add(new Club_Setup("Real Zaragoza", 8000));
+                    clubs.add(new Club_Setup("RCD Espanyol", 7800));
+                    clubs.add(new Club_Setup("Girona", 8400));
+                    clubs.add(new Club_Setup("Deportivo Alaves", 7800));
+                    clubs.add(new Club_Setup("Rayo Vallecano", 7900));
+                    clubs.add(new Club_Setup("Getafe", 7700));
+                    clubs.add(new Club_Setup("UD Las Palmas", 7500));
+                }
+                break;
+            case "Germany":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("FC Bayern Munchen", 8900));
+                    clubs.add(new Club_Setup("Borussia Dortmund", 8600));
+                    clubs.add(new Club_Setup("Bayer Leverkusen", 8700));
+                    clubs.add(new Club_Setup("Schalke 04", 7100));
+                    clubs.add(new Club_Setup("Hamburg SV", 7200));
+                    clubs.add(new Club_Setup("Eintracht Frankfurt", 8500));
+                    clubs.add(new Club_Setup("RB Leipzig", 8600));
+                    clubs.add(new Club_Setup("Hertha Berlin", 7300));
+                    clubs.add(new Club_Setup("SC Freiburg", 7900));
+                    clubs.add(new Club_Setup("Monchengladbach", 8000));
+                    clubs.add(new Club_Setup("VfB Stuttgart", 8600));
+                    clubs.add(new Club_Setup("VfL Wolfsburg", 7800));
+                    clubs.add(new Club_Setup("SC Augsburg", 8100));
+                    clubs.add(new Club_Setup("1. FSV Mainz 05", 7600));
+                    clubs.add(new Club_Setup("TSG 1899 Hoffenheim", 7700));
+                    clubs.add(new Club_Setup("1. FC Koln", 7500));
+                    clubs.add(new Club_Setup("SV Werder Bremen", 7800));
+                    clubs.add(new Club_Setup("Union Berlin", 7600));
+                }
+                break;
+            case "Italy":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Juventus FC", 8600));
+                    clubs.add(new Club_Setup("Internazionale Milano", 8800));
+                    clubs.add(new Club_Setup("AC Milan", 8400));
+                    clubs.add(new Club_Setup("SSC Napoli", 8500));
+                    clubs.add(new Club_Setup("AS Roma", 8200));
+                    clubs.add(new Club_Setup("SS Lazio", 8100));
+                    clubs.add(new Club_Setup("Atalanta BC", 7900));
+                    clubs.add(new Club_Setup("Bologna FC 1909", 7800));
+                    clubs.add(new Club_Setup("Genoa CFC", 7700));
+                    clubs.add(new Club_Setup("US Sassuolo", 7600));
+                    clubs.add(new Club_Setup("ACF Fiorentina", 7700));
+                    clubs.add(new Club_Setup("UC Sampdoria", 7000));
+                    clubs.add(new Club_Setup("Hellas Verona", 7500));
+                    clubs.add(new Club_Setup("Cagliari Calcio", 7500));
+                    clubs.add(new Club_Setup("Udinese Calcio", 7600));
+                    clubs.add(new Club_Setup("Parma Calcio", 7100));
+                    clubs.add(new Club_Setup("US Palermo", 7000));
+                    clubs.add(new Club_Setup("AC Monza", 7600));
+                    clubs.add(new Club_Setup("Torino FC", 7600));
+                    clubs.add(new Club_Setup("Empoli FC", 7500));
+                }
+                break;
+            case "France":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Paris Saint-Germain", 8800));
+                    clubs.add(new Club_Setup("AS Monaco FC", 8200));
+                    clubs.add(new Club_Setup("Stade Brestois 29", 7900));
+                    clubs.add(new Club_Setup("Lille OSC", 8100));
+                    clubs.add(new Club_Setup("OGC Nice", 7800));
+                    clubs.add(new Club_Setup("RC Lens", 7700));
+                    clubs.add(new Club_Setup("Olympique de Marseille", 8000));
+                    clubs.add(new Club_Setup("Stade Rennais", 7800));
+                    clubs.add(new Club_Setup("Olympique Lyonnais", 7800));
+                    clubs.add(new Club_Setup("Toulouse FC", 7400));
+                    clubs.add(new Club_Setup("Stade Reims", 7200));
+                    clubs.add(new Club_Setup("FC Nantes", 7000));
+                    clubs.add(new Club_Setup("Montpellier HSC", 7000));
+                    clubs.add(new Club_Setup("RC Strasbourg", 7100));
+                    clubs.add(new Club_Setup("AJ Auxerre", 6900));
+                    clubs.add(new Club_Setup("Girodins de Bordeaux", 6700));
+                    clubs.add(new Club_Setup("AS Saint-Ettiene", 6700));
+                    clubs.add(new Club_Setup("AC Ajaccio", 6600));
+                }
+                break;
+            case "Portugal":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("SL Benfica", 8100));
+                    clubs.add(new Club_Setup("FC Porto", 8000));
+                    clubs.add(new Club_Setup("Sporting CP", 8000));
+                    clubs.add(new Club_Setup("SC Braga", 7800));
+                    clubs.add(new Club_Setup("Vitoria de Guimaraes", 7400));
+                    clubs.add(new Club_Setup("OS Belenses", 7300));
+                    clubs.add(new Club_Setup("Vitoria Setubal", 7200));
+                    clubs.add(new Club_Setup("Boavista FC", 7000));
+                    clubs.add(new Club_Setup("Academica de Coimbra", 6700));
+                    clubs.add(new Club_Setup("CS Maritimo", 6700));
+                    clubs.add(new Club_Setup("Rio Ave FC", 6700));
+                    clubs.add(new Club_Setup("Estoril de Praia", 6600));
+                    clubs.add(new Club_Setup("Farense", 6500));
+                    clubs.add(new Club_Setup("Pacos de Ferreira", 6500));
+                    clubs.add(new Club_Setup("Beira-Mar", 6400));
+                    clubs.add(new Club_Setup("Gil Vicente", 6300));
+                    clubs.add(new Club_Setup("CD Nacional", 6300));
+                    clubs.add(new Club_Setup("Portimonense", 6200));
+                }
+                break;
+            case "Netherlands":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("AFC Ajax", 8200));
+                    clubs.add(new Club_Setup("PSV Eindhoven", 8100));
+                    clubs.add(new Club_Setup("Feyenoord", 8100));
+                    clubs.add(new Club_Setup("FC Twente", 7700));
+                    clubs.add(new Club_Setup("AZ Alkmaar", 7700));
+                    clubs.add(new Club_Setup("Sparta Rotterdam", 7300));
+                    clubs.add(new Club_Setup("Roda JC", 7300));
+                    clubs.add(new Club_Setup("FC Utrecht", 7200));
+                    clubs.add(new Club_Setup("NAC Breda", 7200));
+                    clubs.add(new Club_Setup("ADO Den Haag", 6800));
+                    clubs.add(new Club_Setup("FC Groningen", 6700));
+                    clubs.add(new Club_Setup("Vitesse Arnhem", 6600));
+                    clubs.add(new Club_Setup("Willem II", 6600));
+                    clubs.add(new Club_Setup("NEC Nijmegen", 6500));
+                    clubs.add(new Club_Setup("MVV Maastricht", 6400));
+                    clubs.add(new Club_Setup("SC Heerenveen", 6400));
+                    clubs.add(new Club_Setup("Go Ahead Eagles", 6300));
+                    clubs.add(new Club_Setup("RKC Waalwijk", 6300));
+                }
+                break;
+            case "Scotland":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Celtic FC", 7800));
+                    clubs.add(new Club_Setup("Rangers FC", 7700));
+                    clubs.add(new Club_Setup("Aberdeen", 7200));
+                }
+                break;
+            case "Russia":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Zenit St. Petersburg", 7600));
+                    clubs.add(new Club_Setup("FC Krasnodar", 7400));
+                    clubs.add(new Club_Setup("Lokomotiv Moskva", 7400));
+                    clubs.add(new Club_Setup("PFC CSKA Moskva", 7300));
+                    clubs.add(new Club_Setup("Spartak Moksva", 7300));
+                    clubs.add(new Club_Setup("Dinamo Moskva", 7300));
+                }
+                break;
+            case "Ukraine":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Shakhtar Donetsk", 7500));
+                    clubs.add(new Club_Setup("Dynamo Kyiv", 7400));
+                    clubs.add(new Club_Setup("FC Dnipro", 7100));
+                }
+                break;
+            case "Belgium":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Club Brugge", 7800));
+                    clubs.add(new Club_Setup("Union Saint-Gilloise", 7700));
+                    clubs.add(new Club_Setup("RSC Anderlecht", 7600));
+                    clubs.add(new Club_Setup("KAA Gent", 7600));
+                    clubs.add(new Club_Setup("KRC Genk", 7600));
+                    clubs.add(new Club_Setup("Royal Antwerp", 7500));
+                }
+                break;
+            case "Austria":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Red Bull Salzburg", 7700));
+                    clubs.add(new Club_Setup("SK Sturm Graz", 7600));
+                    clubs.add(new Club_Setup("SK Rapid Vienna", 7400));
+                }
+                break;
+            case "Croatia":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("GNK Dinamo Zagreb", 7700));
+                    clubs.add(new Club_Setup("HNK Hajduk Split", 7600));
+                    clubs.add(new Club_Setup("HNK Rijeka", 7500));
+                }
+                break;
+            case "Serbia":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("FK Crvena Zvezda", 7600));
+                    clubs.add(new Club_Setup("FK Partizan", 7000));
+                    clubs.add(new Club_Setup("FK TSC Backa Topola", 7000));
+                    clubs.add(new Club_Setup("FK Vojvodina", 6900));
+                }
+                break;
+            case "Switzerland":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("BSC Young Boys", 7400));
+                    clubs.add(new Club_Setup("Servette FC", 7400));
+                    clubs.add(new Club_Setup("FC Zurich", 7400));
+                    clubs.add(new Club_Setup("FC Lugano", 7400));
+                }
+                break;
+            case "Poland":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Legia Warszawa", 7400));
+                    clubs.add(new Club_Setup("KKS Lech Poznan", 7400));
+                    clubs.add(new Club_Setup("Rokow Czestochowa", 7400));
+                    clubs.add(new Club_Setup("Jagiellonia Bialystok", 7300));
+                    clubs.add(new Club_Setup("Pogon Szczecin", 7300));
+                    clubs.add(new Club_Setup("KS Cracovia", 7200));
+                }
+                break;
+            case "Turkey":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Fenerbahce", 8000));
+                    clubs.add(new Club_Setup("Galatasaray", 8000));
+                    clubs.add(new Club_Setup("Besiktas", 7600));
+                    clubs.add(new Club_Setup("Istanbul Basaksehir", 7600));
+                    clubs.add(new Club_Setup("Trabzonspor", 7500));
+                } break;
+            case "Greece":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Olympiakos", 7800));
+                    clubs.add(new Club_Setup("PAOK FC", 7700));
+                    clubs.add(new Club_Setup("AEK Athens", 7700));
+                    clubs.add(new Club_Setup("Panathinaikos", 7600));
+                } break;
+            case "Czechia":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("Slavia Praha", 8000));
+                    clubs.add(new Club_Setup("Sparta Praha", 7900));
+                    clubs.add(new Club_Setup("Viktoria Plzen", 7700));
+                } break;
+            case "Denmark":
+                if (level == 1) {
+                    clubs.add(new Club_Setup("FC Midtjylland", 7800));
+                    clubs.add(new Club_Setup("FC Kobenhavn", 7700));
+                    clubs.add(new Club_Setup("FC Nordsjaelland", 7600));
+                    clubs.add(new Club_Setup("Brondby IF", 7600));
+                }
+                break;
+            case "Norway":
+            if (level == 1) {
+                clubs.add(new Club_Setup("FK Bodo/Glimt", 7700));
+                clubs.add(new Club_Setup("FK Molde", 7500));
+            } break;
+        }
+        return clubs;
+    }
 }

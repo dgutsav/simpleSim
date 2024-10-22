@@ -19,7 +19,8 @@ public class Sim {
     private static Map<String, Player> players = new HashMap<>();
     private static Map<String, Cup> cups = new HashMap<>();
 
-    private static int season = 2020;
+    public static final int STARTING_SEASON = 2024;
+    private static int season = STARTING_SEASON;
 
     public static boolean SIMULATE_CONTINENTAL_COMPETITIONS = true;
     public static boolean TEST = true;
@@ -61,6 +62,8 @@ public class Sim {
     public static int getSeasonNumber() {
         return Sim.season;
     }
+
+    public static boolean isFirstSeason() { return season == STARTING_SEASON; }
 
     public static Club_Team getClub(String id) {
         if (clubs.containsKey(id)) {
@@ -167,13 +170,14 @@ public class Sim {
         }
 
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
+            System.out.println("CONTINENTAL COMPS");
             // ControllerSAmerica.simulate();
             // ControllerNAmerica.simulate();
-            // ControllerEurope.simulate();
+            ControllerEurope_New.simulate();
             // ControllerAfrica.simulate();
             // ControllerAsia.simulate();
             // ControllerCWC.simulate();
-            Controller_WCL.simulate();
+            //Controller_WCL.simulate();
         }
 
         if (USE_INTERNATIONALS && !TEST) {
@@ -275,11 +279,11 @@ public class Sim {
 
     public static void initSetup() {
         int count = 0;
-        List<Nation_Setup> setups = Setups.getNormalSetup();
+        List<Setups.Nation_Setup> setups = Setups.getNormalSetup();
         if (Sim.TEST) {
             setups = Setups.getTestSetup();
         }
-        for (Nation_Setup setup : setups) {
+        for (Setups.Nation_Setup setup : setups) {
             Nation nation = new Nation(setup.name, setup.short_name, count, setup.league_ranking);
             for (int i = 1; i <= setup.num_leagues; i++) {
                 int promotion = League.getPyramidPlaces(setup.num_team_leagues);
@@ -312,8 +316,8 @@ public class Sim {
             count++;
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            //ControllerEurope.initCoefficientsCalculations();
-            Controller_WCL.initCoefficientsCalculations();
+            ControllerEurope_New.initCoefficientsCalculations();
+            //Controller_WCL.initCoefficientsCalculations();
         }
     }
 
@@ -402,7 +406,7 @@ public class Sim {
                     + CatalogueHelper.getPositionName(player.getPosition()) + "\t"
                     + player.getRating() + "\t" + player.getAge() + "\t"
                     + CommonFunctions.formatMoney(MarketHelper.getPlayerValue(player, null)));
-            if (count >= 100) {
+            if (count >= 50) {
                 break;
             }
             count++;
@@ -439,20 +443,20 @@ public class Sim {
     }
 
     public static void showCompetitionHistories() {
-        for (Map.Entry<String, League> entry : leagues.entrySet()) {
-            entry.getValue().showCompetitionHistory();
-        }
-        for (Map.Entry<String, Cup> entry : cups.entrySet()) {
-            entry.getValue().showCompetitionHistory();
-        }
+        // for (Map.Entry<String, League> entry : leagues.entrySet()) {
+        //     entry.getValue().showCompetitionHistory();
+        // }
+        // for (Map.Entry<String, Cup> entry : cups.entrySet()) {
+        //     entry.getValue().showCompetitionHistory();
+        // }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
-            // ControllerEurope.showCompetitionHistory();
+            ControllerEurope_New.showCompetitionHistory();
             // ControllerSAmerica.showCompetitionHistory();
             // ControllerAsia.showCompetitionHistory();
             // ControllerNAmerica.showCompetitionHistory();
             // ControllerAfrica.showCompetitionHistory();
             // ControllerCWC.showCompetitionHistory();
-            Controller_WCL.showCompetitionHistory();
+            // Controller_WCL.showCompetitionHistory();
         }
     }
 
@@ -469,7 +473,7 @@ public class Sim {
     public static void main(String[] args) {
         TEST = false;
         USE_TRANSFER_MARKET = false;
-        int num_seasons = 10;
+        int num_seasons = 80;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -487,13 +491,16 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            //showCompetitionHistories();
+            showCompetitionHistories();
             //showTeams();
             //showPlayers();
+            ControllerEurope_New.showCoefficients();
             //showNationalTeams();
-            //TransferMarket.showTopTransfers();
-            //TransferMarket.showTransferStats();
-            Controller_WCL.showLeagueRankings();
+            // TransferMarket.showTopTransfers();
+            // TransferMarket.showTransferStats();
+            ControllerEurope_New.showLeagueRankings();
+            // Controller_WCL.showLeagueRankings();
+            //Controller_WCL.getClubRankingsForSeason(Sim.getSeasonNumber());
         }
     }
 }

@@ -60,6 +60,7 @@ public class CCType {
         KNOCKOUT,
         LEAGUE,
         GROUPS,
-        TWO_LEGGED_KNOCKOUT
+        TWO_LEGGED_KNOCKOUT,
+        SWISS_LEAGUE
     }
 }
