@@ -8,11 +8,14 @@ public class Target {
     private Position position;
     private int min_rating;
     private long max_price;
-    private Club_Team club;
+    //private Club_Team club;
     private String id;
     private boolean made_offer;
     private List<String> made_offers_for;
     private int div_level;
+    private String club_id;
+    private int club_reputation;
+    private int nation_id;
 
     public static final int PREMIUM_REPUTATION_CUTOFF = 7000;
 
@@ -20,11 +23,23 @@ public class Target {
         this.position = position;
         this.min_rating = rating;
         this.max_price = price;
-        this.club = club2;
         this.id = CommonFunctions.getRandomId();
         this.made_offer = false;
         this.made_offers_for = new ArrayList<>();
         this.div_level = Sim.getLeague(Sim.findTeamInLeague(club2)).getCompetitionLevel();
+    }
+
+    public Target(Position pos, int rate, long price, String club_id, int rep, int level, int nation_id) {
+        this.position = pos;
+        this.min_rating = rate;
+        this.max_price = price;
+        this.club_id = club_id;
+        this.club_reputation = rep;
+        this.div_level = level;
+        this.id = CommonFunctions.getRandomId();
+        this.made_offer = false;
+        this.made_offers_for = new ArrayList<>();
+        this.nation_id = nation_id;
     }
 
     public Position getPosition() {
@@ -37,10 +52,6 @@ public class Target {
 
     public long getPrice() {
         return this.max_price;
-    }
-
-    public Club_Team getClub() {
-        return this.club;
     }
 
     public String getId() {
@@ -69,15 +80,19 @@ public class Target {
     }
 
     public boolean canAccessPremium() {
-        return (this.club.getReputation() > PREMIUM_REPUTATION_CUTOFF);
+        return (this.club_reputation > PREMIUM_REPUTATION_CUTOFF);
     }
 
     public int getDivLevel() {
         return this.div_level;
     }
 
+    public String getClubId() { return this.club_id; }
+
+    public int getNationId() { return this.nation_id; }
+
     public ArrayList<String> getTargetNations() {
-        String nation_name = Sim.getNation(this.club.getNationId()).getName();
+        String nation_name = Sim.getNation(this.nation_id).getName();
         if (this.div_level == 1) {
             String[] arrays = CatalogueHelper.getFavourableNations(nation_name);
             ArrayList<String> nations = new ArrayList<>();

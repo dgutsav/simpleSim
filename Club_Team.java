@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import Functions.CatalogueHelper;
+import Models.Contract;
 import Models.Player;
 import Models.Position;
 import Models.PositionHelper;
@@ -229,7 +231,65 @@ public class Club_Team {
     }
 
     public Target getTransferTargetDetails() {
-        return new Target(this.senior_squad.getWeakestPosition(), this.senior_squad.getBestLineupRating(), this.budget,
-                this);
+        Position pos = this.senior_squad.getWeakestPosition();
+        int rating = this.senior_squad.getBestLineupRating();
+        long price = this.budget;
+        Target t = new Target(pos, rating, price, this);
+        return t;
     }
+
+    // region CONTRACTS
+    private Map<String, Contract> contracts;
+
+    public void addContract(String player, Contract contract) {
+        contracts.put(player, contract);
+    }
+
+    public Contract getDefaultContract(Player player) {
+        int years = 1;
+        if (player.getRating() > 85)
+            years = 5;
+        else if (player.getRating() > 80)
+            years = 4;
+        else if (player.getRating() > 75)
+            years = 3;
+        else if (player.getRating() > 65)
+            years = 2;
+
+        if (player.getAge() > 32 && years > 2)
+            years = 2;
+        if (player.getAge() < 21 && player.getRating() > 79 && years < 4)
+            years = 4;
+
+        if (getPlayerRankAtClub(player) == 1 && years == 1)
+            years = 2;
+
+        int salary = 100, rating = player.getRating();
+
+        if (rating > 95)
+            salary = 500 * 1000 + (rating - 95) * 100 * 1000;
+        else if (rating > 90)
+            salary = 250 * 1000 + (rating - 90) * 50 * 1000;
+        else if (rating > 85)
+            salary = 200 * 1000 + (rating - 85) * 10 * 1000;
+        else if (rating > 80)
+            salary = 150 * 1000 + (rating - 80) * 10 * 1000;
+        else if (rating > 75)
+            salary = 100 * 1000 + (rating - 75) * 10 * 1000;
+        else if (rating > 70)
+            salary = 50 * 1000 + (rating - 70) * 10 * 1000;
+        else if (rating > 65)
+            salary = 15 * 1000 + (rating - 65) * 7 * 1000;
+        else if (rating > 60)
+            salary = 5 * 1000 + (rating - 60) * 2 * 1000;
+        else if (rating > 55)
+            salary = 2 * 1000 + (rating - 55) * 600;
+        else if (rating > 50)
+            salary = 1 * 1000 + (rating - 50) * 200;
+        else
+            salary = 500;
+
+        return Contract.signNewContract(player.getId(), Sim.getSeasonNumber() + years, salary);
+    }
+    // endregion CONTRACTS
 }

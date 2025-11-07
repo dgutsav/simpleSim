@@ -241,6 +241,7 @@ public class League {
     public void distributePrizeMoney() {
         long prize_money = this.reputation * 50000 * (long)(Math.pow(1.01, (this.reputation - 200))); 
         int size = this.teams.size();
+        prize_money = (prize_money / 20) * size;
         float[] shares = new float[size];
         for (int i = 0; i < size / 2; i++) {
             float multiplier = ((size / 2) - i) * 0.05f;

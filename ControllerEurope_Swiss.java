@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ControllerEurope_New {
+public class ControllerEurope_Swiss {
     private enum SeedingType {
         CL_GROUP,
         CL_Q4_CP,
@@ -168,14 +168,15 @@ public class ControllerEurope_New {
             if (cl_n != 0 && el_n != 0 && ecl_n != 0)
                 break;
         }
+        //System.out.println("CL N: " + cl_n + " Nation: " + Sim.getNation(cl_n).getLeague(1).getName());
         prev_champions.put(CCType.CompType.UCL,
-                Sim.sortByReputation(Sim.getNation(cl_n).getLeague(1).getTeams()).get(0));
+                Sim.sortByReputation(Sim.getNation(cl_n).getTeamIds(1)).get(0));
 
         prev_champions.put(CCType.CompType.UEL,
-                Sim.sortByReputation(Sim.getNation(el_n).getLeague(1).getTeams()).get(0));
+                Sim.sortByReputation(Sim.getNation(el_n).getTeamIds(1)).get(0));
 
         prev_champions.put(CCType.CompType.UECL,
-                Sim.sortByReputation(Sim.getNation(ecl_n).getLeague(1).getTeams()).get(0));
+                Sim.sortByReputation(Sim.getNation(ecl_n).getTeamIds(1)).get(0));
     }
 
     private static void setPreviousChampions() {
@@ -234,7 +235,7 @@ public class ControllerEurope_New {
         int el_places = getPlaces(CCType.CompType.UEL, ranking);
         int ecl_places = getPlaces(CCType.CompType.UECL, ranking);
         for (int i = 1; i <= cl_places + el_places + ecl_places; i++) {
-            teams.add(nation.getLeague(1).getTeamAtRank(i));
+            teams.add(nation.getDivision(1).getTeamAtRank(i));
         }
         String cw = nation.getCupWinner();
         if (!teams.contains(cw)) {
@@ -408,63 +409,6 @@ public class ControllerEurope_New {
         return 10000;
     }
 
-    private static SeedingType getSeeding(CCType.CompType type, int league_rank, int rank) {
-        switch (type) {
-            case UCL:
-                if (league_rank <= 4 && rank <= 4)
-                    return SeedingType.CL_GROUP;
-                else if (league_rank <= 6) {
-                    if (rank <= 2)
-                        return SeedingType.CL_GROUP;
-                    else if (rank <= 3)
-                        return SeedingType.CL_Q3_MP;
-                } else if (league_rank <= 9) {
-                    if (rank <= 1)
-                        return SeedingType.CL_GROUP;
-                    else if (rank <= 2)
-                        return SeedingType.CL_Q3_MP;
-                } else if (league_rank <= 12) {
-                    if (rank <= 1)
-                        return SeedingType.CL_GROUP;
-                    else if (rank <= 2)
-                        return SeedingType.CL_Q2_MP;
-                } else if (league_rank <= 14) {
-                    if (rank <= 1)
-                        return SeedingType.CL_Q4_CP;
-                    else if (rank <= 2)
-                        return SeedingType.CL_Q2_MP;
-                } else if (league_rank <= 15) {
-                    if (rank <= 1)
-                        return SeedingType.CL_Q3_CP;
-                    else if (rank <= 2)
-                        return SeedingType.CL_Q2_MP;
-                } else if (league_rank <= 16 && rank <= 1)
-                    return SeedingType.CL_Q3_CP;
-                else if (league_rank <= 22 && rank <= 1)
-                    return SeedingType.CL_Q2_CP;
-                else if (league_rank <= 50 && rank <= 1)
-                    return SeedingType.CL_Q1_CP;
-            case UEL:
-                if (league_rank <= 7)
-                    return SeedingType.EL_GROUP;
-                else if (league_rank <= 14)
-                    return SeedingType.EL_Q4_MP;
-                else if (league_rank <= 15)
-                    return SeedingType.EL_Q3_MP;
-            case UECL:
-                if (league_rank <= 4)
-                    return SeedingType.ECL_Q4;
-                else if (league_rank <= 14 || (league_rank <= 15 && rank <= 1))
-                    return SeedingType.ECL_Q3;
-                else if (league_rank <= 29 || (league_rank <= 30 && rank <= 1))
-                    return SeedingType.ECL_Q2;
-                else
-                    return SeedingType.ECL_Q1;
-            default:
-                return SeedingType.DEFAULT;
-        }
-    }
-
     private static void setSeedings() {
         setPreviousChampions();
         setSeedingScores();
@@ -588,6 +532,18 @@ public class ControllerEurope_New {
             setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 8, 3, 6, 48, 48, 9);
         } else if (qcl == 38 && qmcl == 11 && qel == 32 && qecl == 105) {
             setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 8, 1, 7, 46, 49, 10);
+        } else if (qcl == 40 && qmcl == 11 && qel == 30 && qecl == 105) {
+            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 0, 7, 48, 49, 8);
+        } else if (qcl == 39 && qmcl == 10 && qel == 32 && qecl == 105) {
+            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 1, 8, 48, 49, 8);
+        } else if (qcl == 39 && qmcl == 10 && qel == 33 && qecl == 105) {
+            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 3, 7, 50, 48, 7);
+        } else if (qcl == 40 && qmcl == 10 && qel == 33 && qecl == 105) {
+            setQualifierFormat(24, 8, 6, 2, 6, 3, 1, 18, 5, 4, 6, 50, 48, 7);
+        } else if (qcl == 40 && qmcl == 10 && qel == 32 && qecl == 105) {
+            setQualifierFormat(24, 8, 6, 2, 6, 3, 1, 14, 9, 3, 6, 50, 48, 7);
+        } else if (qcl == 40 && qmcl == 11 && qel == 31 && qecl == 104) {
+            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 2, 6, 48, 49, 7);
         } else if (qcl == 39 && qmcl == 11 && qel == 33 && qecl == 104) {
             setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 5, 4, 48, 48, 8);
         } else if (qcl == 39 && qmcl == 11 && qel == 32 && qecl == 104) {
@@ -601,19 +557,16 @@ public class ControllerEurope_New {
         } else if (qcl == 40 && qmcl == 11 && qel == 32 && qecl == 104) {
             setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 16, 8, 5, 3, 48, 48, 8);
         } else if (qcl == 40 && qmcl == 11 && qel == 33 && qecl == 103) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 5, 4, 46, 49, 8);
-        } else if (qcl == 40 && qmcl == 11 && qel == 30 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 0, 7, 48, 49, 8);
-        } else if (qcl == 39 && qmcl == 10 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 1, 8, 48, 49, 8);
-        } else if (qcl == 40 && qmcl == 11 && qel == 31 && qecl == 104) {
-            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 2, 6, 48, 49, 7);
-        } else if (qcl == 39 && qmcl == 10 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 3, 7, 50, 48, 7);
+            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 16, 8, 4, 5, 50, 47, 6);
+        } else if (qcl == 39 && qmcl == 11 && qel == 33 && qecl == 103) {
+            setQualifierFormat(24, 8, 4, 3, 8, 2, 1, 16, 8, 2, 7, 48, 48, 7);
+        } else if (qcl == 39 && qmcl == 10 && qel == 33 && qecl == 104) {
+            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 3, 7, 48, 49, 7);
         } else {
             int[] sln = EuropeanFormatCalculator.getSolution(qcl, qmcl, qel, qecl);
             if (sln != null) {
-                setQualifierFormat(sln[0], sln[1], sln[2], sln[3], sln[4], sln[5], sln[6], sln[7], sln[8], sln[9], sln[10],
+                setQualifierFormat(sln[0], sln[1], sln[2], sln[3], sln[4], sln[5], sln[6], sln[7], sln[8], sln[9],
+                        sln[10],
                         sln[11], sln[12], sln[13]);
             }
         }
@@ -1112,7 +1065,7 @@ public class ControllerEurope_New {
             for (int i = 0; i < teams.size(); i++) {
                 league.addTeam(teams.get(i));
             }
-            FixturesTest f = new FixturesTest();
+            EuropeanFixtures f = new EuropeanFixtures();
             List<Match> matches = new ArrayList<>();
             if (type == Stage.CL_GROUP || type == Stage.EL_GROUP) {
                 f.initCL(pots, team_nations);
@@ -1637,6 +1590,7 @@ public class ControllerEurope_New {
     }
 
     private static void simulateFinal() {
+        System.out.println("FINALS " + Sim.getSeasonNumber());
         simulateStage(Stage.ECL_FINAL);
         simulateStage(Stage.EL_FINAL);
         simulateStage(Stage.CL_FINAL);

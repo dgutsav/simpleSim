@@ -105,7 +105,7 @@ class EuropeanFormatCalculator {
                     + " -> " + qe3 + " + " + e4 + " + " + qec3 + " + " + qc3 + " -> " + qe4 + "\n"
                     + "ECL CHAMPIONS PATH: " + qc1 + " -> " + qfc2 + " -> " + qfc3 + " + " + qec3 + " -> " + qfc4 + "\n"
                     + "ECL LEAGUE PATH: " + f1 + " -> " + qf1 + " + " + f2 + " + " + qe1 + " -> " + qf2 + " + " + qe2
-                    + " -> " + qf3 + " + " + f4 + " + " + qe3 + " -> " + qf4 + "\n" + "\n";
+                    + " -> " + qf3 + " + " + f4 + " + " + qe3 + " -> " + qf4 + "\n";
         } else {
             return null;
         }
@@ -187,14 +187,14 @@ class EuropeanFormatCalculator {
     }
 
     private static String getSolutionText(int c, int m, int e, int f, EFC_Solution s) {
-        return "CL(C): " + c + " CL(M): " + m + " EL: " + e + " ECL: " + f + "\n" + s.result + "\n" +
+        return "CL(C): " + c + " CL(M): " + m + " EL: " + e + " ECL: " + f + "\n" + s.result +
                 "Distance: " + s.distance + "\n" +
                 "c1: " + s.solution[0] + " c2: " + s.solution[1] + " c3: " + s.solution[2] + " c4: " + s.solution[3]
                 + "\n" +
                 "m2: " + s.solution[4] + " m3: " + s.solution[5] + " m4: " + s.solution[6] + "\n" +
                 "e1: " + s.solution[7] + " e2: " + s.solution[8] + " e3: " + s.solution[9] + " e4: " + s.solution[10]
                 + "\n" +
-                "f1: " + s.solution[11] + " f2: " + s.solution[12] + " f4: " + s.solution[13] + "\n";
+                "f1: " + s.solution[11] + " f2: " + s.solution[12] + " f4: " + s.solution[13] + "\n\n";
     }
 
     private static String getDemandText(int c, int m, int e, int f) {
@@ -223,6 +223,7 @@ class EuropeanFormatCalculator {
     }
 
     public static void main(String args[]) {
-        getSolution(39, 10, 33, 105);
+        EFC_Solution s =  selectClosest(40, 11, 33, 103);
+        System.out.println(getSolutionText(40, 11, 33, 103, s));
     }
 }

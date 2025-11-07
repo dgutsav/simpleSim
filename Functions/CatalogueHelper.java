@@ -224,6 +224,33 @@ public class CatalogueHelper {
                         return "Edener";
         }
 
+        public static String getOrdinalNumber(int num) {
+                switch (num) {
+                        case 1:
+                                return "First";
+                        case 2:
+                                return "Second";
+                        case 3:
+                                return "Third";
+                        case 4:
+                                return "Fourth";
+                        case 5:
+                                return "Fifth";
+                        case 6:
+                                return "Sixth";
+                        case 7:
+                                return "Seventh";
+                        case 8:
+                                return "Eigth";
+                        case 9:
+                                return "Ninth";
+                        case 10:
+                                return "Tenth";
+                        default:
+                                return "Nth";
+                }
+        }
+
         // Cities
         private static String[] englandCities = { "London", "Liverpool", "Manchester", "Birmingham", "Sheffield",
                         "Southampton", "Newcastle", "Leeds", "Bradford", "Bristol", "Leicester", "Wakefield",
@@ -331,7 +358,7 @@ public class CatalogueHelper {
                         "Posadas", "Jujuy", "Bahia Blanca", "Formosa", "Neuquen", "Parana", "Agronomia", "Almagro",
                         "Balvanera", "Barracas", "Belgrano", "Boedo", "Caballito", "Chacarita", "Coghlan", "Colegiales",
                         "Constitucion", "Flores", "Floresta", "La Boca", "La Paternal", "Liniers", "Mataderos",
-                        "Monte Castro", "Monserrat", "Nueva Pompeya", "Nuñez", "Palermo", "Avellaneda", "Chacabuco",
+                        "Monte Castro", "Monserrat", "Nueva Pompeya", "Nunez", "Palermo", "Avellaneda", "Chacabuco",
                         "Chas", "Patricios", "Puerto Madero", "Recoleta", "Retiro", "Saavedra", "San Cristobal",
                         "San Nicolas", "San Telmo", "Velez Sarsfield", "Versalles", "Crespo", "Devoto", "Lugano",
                         "Luro", "Mitre", "Ortuzar", "Pueyrredon", "Villa Real", "Riachuelo", "Santa Rita", "Soldati",
@@ -345,7 +372,7 @@ public class CatalogueHelper {
         private static String[] colombiaCities = { "Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Cucuta",
                         "Soledad", "Ibague", "Bucaramanga", "Soacha", "Villavicencio", "Santa Marta", "Valledupar",
                         "Bello", "Pereira", "Monteria", "Pasto", "Buenaventura", "Manizales", "Neiva", "Palmira",
-                        "Armenia", "Riohacha", "Sincelejo", "Popayan", "Itagüi" };
+                        "Armenia", "Riohacha", "Sincelejo", "Popayan", "Itagui" };
         private static String[] ecuadorCities = { "Guayaquil", "Quito", "Cuenca", "Santo Domingo", "Machala", "Duran",
                         "Manta", "Portoviejo", "Ibarra", "Quevedo", "Loja", "Ambato", "Esmeraldas", "Riobamba",
                         "Milagro", "Latacunga", "La Libertad", "Babahoyo" };
@@ -508,10 +535,10 @@ public class CatalogueHelper {
                         "Edmonton", "Calgary", "Halifax", "Victoria", "St. John's", "Saskatoon", "Regina", "Hamilton",
                         "Kelowna", "Abbotsford", "Windsor", "Fredericton", "Thunder Bay", "Kingston", "Whitehorse",
                         "Charlottetown", "Moncton", "Trois-Rivieres" };
-        private static String[] mexicoCities = { "Ciudad Mexico", "Tijuana", "Ecatepec", "León", "Puebla",
-                        "Ciudad Juárez", "Guadalajara", "Zapopan", "Monterrey", "Nezahualcoyotl", "Chihuahua", "Mérida",
-                        "Naucalpan", "Toluca", "Cancún", "Saltillo", "Aguascalientes", "Hermosillo", "Mexicali",
-                        "San Luis Potosí", "Culiacán", "Querétaro", "Morelia", "Chimalhuacán", "Reynosa", "Torreón",
+        private static String[] mexicoCities = { "Ciudad Mexico", "Tijuana", "Ecatepec", "Leon", "Puebla",
+                        "Ciudad Juarez", "Guadalajara", "Zapopan", "Monterrey", "Nezahualcoyotl", "Chihuahua", "Merida",
+                        "Naucalpan", "Toluca", "Cancun", "Saltillo", "Aguascalientes", "Hermosillo", "Mexicali",
+                        "San Luis Potosi", "Culiacan", "Queretaro", "Morelia", "Chimalhuacan", "Reynosa", "Torreon",
                         "Tlalnepantla", "Acapulco", "Tlaquepaque", "Guadalupe" };
 
         private static String[] algeriaCities = { "Algiers", "Oran", "Constantine", "Setif", "Tlemcen", "Chlef",
@@ -1145,15 +1172,15 @@ public class CatalogueHelper {
                         "Sainz", "Gonzalez", "Rodriguez", "Gomez", "Fernandez", "Lopez", "Diaz", "Martinez", "Perez",
                         "Garcia", "Sanchez", "Romero", "Sosa", "Torres", "Alvarez", "Ruiz", "Ramirez", "Flores",
                         "Benitez", "Acosta", "Medina", "Herrera", "Suarez", "Aguirre", "Gimenez", "Gutierrez",
-                        "Pereyra", "Rojas", "Molina", "Castro", "Ortiz", "Silva", "Nuñez", "Luna", "Juarez", "Cabrera",
+                        "Pereyra", "Rojas", "Molina", "Castro", "Ortiz", "Silva", "Nunez", "Luna", "Juarez", "Cabrera",
                         "Rios", "Morales", "Godoy", "Moreno", "Ferreyra", "Dominguez", "Carrizo", "Peralta", "Castillo",
-                        "Ledesma", "Quiroga", "Vega", "Vera", "Muñoz", "Ojeda", "Ponce", "Villalba", "Cardozo",
+                        "Ledesma", "Quiroga", "Vega", "Vera", "Munoz", "Ojeda", "Ponce", "Villalba", "Cardozo",
                         "Navarro", "Coronel", "Vazquez", "Ramos", "Vargas", "Caceres", "Arias", "Figueroa", "Cordoba",
                         "Correa", "Maldonado", "Paz", "Rivero", "Miranda", "Mansilla", "Farias", "Roldan", "Mendez",
                         "Guzman", "Aguero", "Hernandez", "Lucero", "Cruz", "Paez", "Escobar", "Mendoza", "Barrios",
-                        "Bustos", "Avila", "Ayala", "Blanco", "Soria", "Maidana", "Acuña", "Leiva", "Duarte", "Moyano",
+                        "Bustos", "Avila", "Ayala", "Blanco", "Soria", "Maidana", "Acuna", "Leiva", "Duarte", "Moyano",
                         "Campos", "Soto", "Martin", "Valdez", "Bravo", "Chavez", "Velazquez", "Olivera", "Toledo",
-                        "Franco", "Ibañez", "Leguizamon", "Montenegro", "Delgado", "Arce", "Ibarra", "Gallardo",
+                        "Franco", "Ibanez", "Leguizamon", "Montenegro", "Delgado", "Arce", "Ibarra", "Gallardo",
                         "Santillan", "Acevedo", "Aguilar", "Vallejos", "Contreras", "Alegre", "Galvan", "Oviedo",
                         "Aranda", "Albornoz", "Baez", "Sandoval", "Barrionuevo", "Veron", "Gauna", "Zarate", "Heredia",
                         "Mercado", "Monzon", "Marquez", "Zalazar", "Mamani", "Coria", "Segovia", "Romano", "Jimenez",
@@ -1161,7 +1188,7 @@ public class CatalogueHelper {
                         "Zapata", "Rosales", "Altamirano", "Nieva", "Bazan", "Alonso", "Burgos", "Bustamante", "Varela",
                         "Lescano", "Aguilera", "Paredes", "Avalos", "Cuello", "Aquino", "Orellana", "Caballero",
                         "Reynoso", "Reyes", "Villarreal", "Alarcon", "Pacheco", "Tapia", "Galarza", "Ocampo", "Meza",
-                        "Guerrero", "Salas", "Frias", "Videla", "Miño", "Jara", "Garay", "Rossi", "Lezcano",
+                        "Guerrero", "Salas", "Frias", "Videla", "Mino", "Jara", "Garay", "Rossi", "Lezcano",
                         "Valenzuela", "Oliva", "Fuentes", "Robledo", "Espindola", "Nieto", "Pereira", "Brizuela",
                         "Andrada", "Maciel", "Funes", "Robles", "Sotelo", "Cortez", "Almiron", "Rivas", "Gil",
                         "Villegas", "Calderon", "Vergara", "Carabajal", "Ceballos", "Gallo", "Palavecino" };
@@ -1725,7 +1752,7 @@ public class CatalogueHelper {
                                 uruguay, venezuela, mexico, costa_rica };
                 String[] portuguese_countries = { brazil, portugal };
                 String[] german_countries = { germany, austria };
-                String[] arab_countries = { iraq, qatar, saudi_arabia, syria, egypt, emirates };
+                String[] arab_countries = { iraq, qatar, saudi_arabia, syria, egypt, emirates, jordan };
 
                 int prob = CommonFunctions.getRandomNumber(100);
 
@@ -1935,11 +1962,12 @@ public class CatalogueHelper {
                 return CommonFunctions.getRandomElement(names) + " " + CommonFunctions.getRandomElement(surnames);
         }
 
-        private static String[] germanyTarget = { "Poland", "Japan", "France", "Mexico", "Austria", "Switzerland",
+        private static String[] germanyTarget = { "Poland", "Japan", "France", "Austria", "Switzerland",
                         "United States" };
-        private static String[] italyTarget = { "Poland", "Germany", "Argentina" };
-        private static String[] englandTarget = { "France", "Netherlands", "Scotland", "Ireland", "Wales" };
-        private static String[] spainTarget = { "Germany", "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
+        private static String[] italyTarget = { "Spain", "Germany", "Argentina" };
+        private static String[] englandTarget = { "France", "Spain", "Netherlands", "Scotland", "Portugal", "Brazil",
+                        "Argentina", "Italy", "Germany" };
+        private static String[] spainTarget = { "Italy", "Argentina", "Mexico", "Uruguay", "Portugal" };
         private static String[] argentinaTarget = { "Paraguay", "Uruguay", "Mexico", "Brazil", "Chile", "Colombia" };
         private static String[] brazilTarget = { "Argentina" };
         private static String[] franceTarget = { "Belgium", "Germany", "Italy", "Portugal", "Algeria", "Tunisia",
@@ -1954,11 +1982,11 @@ public class CatalogueHelper {
         private static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel",
                         "Portugal", "Spain", "Czechia", "Slovakia", "Lithuania" };
         private static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
-                        "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova" };
+                        "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova", "Iran" };
         private static String[] turkeyTarget = { "Germany", "Belgium", "Moldova", "Albania", "Azerbaijan", "China",
                         "Saudi Arabia" };
         private static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria", "Kosovo",
-                        "North Macedonia", "Montenegro" };
+                        "North Macedonia", "Montenegro", "Romania", "Hungary" };
         private static String[] romaniaTarget = { "Bulgaria", "Poland", "Hungary", "Moldova" };
         private static String[] ukraineTarget = { "Argentina", "Brazil", "Denmark", "Sweden", "Norway", "Poland",
                         "Russia", "Moldova" };
@@ -1975,10 +2003,10 @@ public class CatalogueHelper {
         private static String[] americaTarget = { "Mexico", "Ecuador", "Canada", "West Indies", "Costa Rica",
                         "Honduras" };
         private static String[] japanTarget = { "Korea", "Brazil", "Thailand" };
-        private static String[] chinaTarget = { "Australia", "Korea", "Brazil", "Uzbekistan" };
+        private static String[] chinaTarget = { "Australia", "Korea", "Brazil", "Uzbekistan", "Japan" };
         private static String[] koreaTarget = { "Japan", "China", "Brazil" };
         private static String[] saudiTarget = { "Emirates", "Qatar", "Iraq", "Syria", "Egypt", "Morocco", "Algeria",
-                        "Tunisia" };
+                        "Tunisia", "China", "Korea" };
 
         public static String[] getFavourableNations(String nation_name) {
                 Map<String, String[]> fav_nations = new HashMap<>();

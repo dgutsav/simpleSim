@@ -170,7 +170,6 @@ public class Market {
         deal.player_name = offer.getPlayer().getName();
         deal.seller_name = seller.getName();
         deal.buyer_name = buyer.getName();
-        deal.date = day + "/" + SimBettered.getSeasonNumber();
         deal.amount = offer.getAmount();
         completed_transfers.add(deal);
     }
@@ -190,7 +189,7 @@ public class Market {
                 break;
             }
             String x = CommonFunctions.getPaddedString(deal.seller_name + " --> " + deal.buyer_name, 50);
-            System.out.println(count + " " + deal.date + "\t" + CommonFunctions.getPaddedString(deal.player_name, 40)
+            System.out.println(count + " " + deal.date() + "\t" + CommonFunctions.getPaddedString(deal.player_name, 40)
                     + "  " + x + CommonFunctions.formatMoney(deal.amount));
             count++;
         }

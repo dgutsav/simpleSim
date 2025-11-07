@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class FixturesTest {
+class EuropeanFixtures {
     private String[][] pots;
     private Map<String, Integer> teams;
     private int NUM_POTS;
@@ -21,18 +21,29 @@ class FixturesTest {
     private Map<String, List<String>> opp_list;
     private List<String> dummies_set = new ArrayList<>();
 
+    // #region INIT
     public void initCL(String[][] p, Map<String, Integer> m) {
         pots = p;
-        teams = m;
         NUM_POTS = 4;
         MATCHES_PER_POT = 2;
+        teams = setTeamsMap(p, m);
     }
 
     public void initConfLeague(String[][] p, Map<String, Integer> m) {
         pots = p;
-        teams = m;
         NUM_POTS = 6;
         MATCHES_PER_POT = 1;
+        teams = setTeamsMap(p, m);
+    }
+
+    private Map<String, Integer> setTeamsMap(String[][] p, Map<String, Integer> m) {
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < NUM_POTS; i++) {
+            for (int j = 0; j < (NUM_TEAMS / NUM_POTS); j++) {
+                map.put(p[i][j], m.get(p[i][j]));
+            }
+        }
+        return map;
     }
 
     private void initPairMap() {
@@ -57,12 +68,24 @@ class FixturesTest {
         int count = 0;
         do {
             dummies_set = new ArrayList<>();
-            if (count > 15) {
+            count++;
+            if (count > 10) {
                 showPots();
                 System.out.println("MAX COUNT REACHED CL/EL FIXTURES");
                 return null;
             }
-            count++;
+            if (count == 3) {
+                adjustPots();
+                showPots();
+                System.out.println("ADJUSTED POT");
+                continue;
+            }
+            if (count == 6) {
+                adjustPotsNation();
+                showPots();
+                System.out.println("ADJUSTED POT");
+                continue;
+            }
             initPairMap();
             initNationLimits();
             try {
@@ -91,6 +114,7 @@ class FixturesTest {
         scheduleConf();
         return getMatchesFromMap();
     }
+    // #endregion INIT
 
     // #region HELPERS
     private String getMapKey(int a, int b) {
@@ -212,16 +236,6 @@ class FixturesTest {
         return opponents;
     }
 
-    private List<String> removeElement(String remove, List<String> list) {
-        List<String> filtered = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).equals(remove)) {
-                filtered.add(list.get(i));
-            }
-        }
-        return filtered;
-    }
-
     private List<Match> getMatchesFromMap() {
         List<Match> matches = new ArrayList<>();
         for (int i = 1; i <= (NUM_POTS * MATCHES_PER_POT); i++) {
@@ -246,7 +260,7 @@ class FixturesTest {
         int count = Integer.MAX_VALUE;
         for (String p1 : pot1) {
             List<String> o = getPossibleOpponents(p1, pot2);
-            //System.out.println(p1 + ": " + o + " " + o.size());
+            // System.out.println(p1 + ": " + o + " " + o.size());
             if (o.size() < count) {
                 team = p1;
                 options = o;
@@ -256,7 +270,7 @@ class FixturesTest {
 
         for (String p2 : pot2) {
             List<String> o = getPossibleOpponents(p2, pot1);
-            //System.out.println(p2 + ": " + o + " " + o.size());
+            // System.out.println(p2 + ": " + o + " " + o.size());
             if (o.size() < count) {
                 team = p2;
                 options = o;
@@ -271,18 +285,19 @@ class FixturesTest {
     private void drawPots(List<String> pot1, List<String> pot2) {
         int size = pot1.size();
         for (int j = 0; j < size; j++) {
-            //System.out.println("MATCH: " + (j + 1) + " LEFT: " + pot1.size() + "/" + pot2.size());
+            // System.out.println("MATCH: " + (j + 1) + " LEFT: " + pot1.size() + "/" +
+            // pot2.size());
             String[] pair = drawCrossPot(pot1, pot2);
-            //System.out.println(pair[0] + " v " + pair[1]);
+            // System.out.println(pair[0] + " v " + pair[1]);
             if (pot1.contains(pair[0])) {
-                pot1 = removeElement(pair[0], pot1);
+                pot1 = CommonFunctions.removeElement(pair[0], pot1);
             } else {
-                pot2 = removeElement(pair[0], pot2);
+                pot2 = CommonFunctions.removeElement(pair[0], pot2);
             }
             if (pot1.contains(pair[1])) {
-                pot1 = removeElement(pair[1], pot1);
+                pot1 = CommonFunctions.removeElement(pair[1], pot1);
             } else {
-                pot2 = removeElement(pair[1], pot2);
+                pot2 = CommonFunctions.removeElement(pair[1], pot2);
             }
             addPair(pair);
         }
@@ -321,7 +336,7 @@ class FixturesTest {
                 }
             }
             String opp = CommonFunctions.getRandomElement(options);
-            pot = removeElement(opp, removeElement(team, pot));
+            pot = CommonFunctions.removeElement(opp, CommonFunctions.removeElement(team, pot));
             addPair(new String[] { team, opp });
         }
     }
@@ -393,7 +408,6 @@ class FixturesTest {
                 List<List<String[]>> pairs1 = getDummyPairs(k1);
                 List<List<String[]>> pairs2 = getDummyPairs(k2);
 
-                int count = 0;
                 for (List<String[]> p1 : pairs1) {
                     for (List<String[]> p2 : pairs2) {
                         List<String> arr = new ArrayList<>();
@@ -405,14 +419,11 @@ class FixturesTest {
                             for (String a : x)
                                 arr.add(a);
                         }
-                        count++;
                         dummies.add(arr);
                     }
                 }
-                //System.out.println("KEY PAIR: " + k1 + "+" + k2 + ": " + count);
             }
         }
-        //System.out.println("DUMMIES COUNT: " + dummies.size());
         return dummies;
     }
 
@@ -494,7 +505,7 @@ class FixturesTest {
                 return null;
             String opp = CommonFunctions.getRandomElement(opt);
             arr.add(new String[] { select, opp });
-            t1 = removeElement(opp, removeElement(select, t1));
+            t1 = CommonFunctions.removeElement(opp, CommonFunctions.removeElement(select, t1));
         }
 
         for (int i = 0; i < matches; i++) {
@@ -519,7 +530,7 @@ class FixturesTest {
                 return null;
             String opp = CommonFunctions.getRandomElement(opt);
             arr.add(new String[] { select, opp });
-            t2 = removeElement(opp, removeElement(select, t2));
+            t2 = CommonFunctions.removeElement(opp, CommonFunctions.removeElement(select, t2));
         }
         Collections.reverse(arr);
         return arr;
@@ -676,181 +687,6 @@ class FixturesTest {
     }
     // #endregion CONF FIXTURES
 
-    // #region DRAW SAME POT FIRST
-    private List<String[]> getDummyPairsForPot(List<String> pTeams) {
-        List<String[]> dummy_pairs = new ArrayList<>();
-        for (int i = 0; i < pTeams.size(); i++) {
-            for (int j = i + 1; j < pTeams.size(); j++) {
-                if (canFace(pTeams.get(i), pTeams.get(j))) {
-                    dummy_pairs.add(new String[] { pTeams.get(i), pTeams.get(j) });
-                }
-            }
-        }
-        return dummy_pairs;
-    }
-
-    private List<String[]> getArrangementsForPot(int pot) {
-        List<String> pot_teams = getPotTeams(pot);
-        List<String[]> dummy_pairs = getDummyPairsForPot(pot_teams);
-        Collections.shuffle(dummy_pairs);
-        for (String[] p : dummy_pairs) {
-            List<String[]> pairs = samePotArrangement(p, pot);
-            if (pairs != null) {
-                return pairs;
-            }
-        }
-        return null;
-    }
-
-    private void setSamePots() {
-        for (int i = 1; i <= NUM_POTS; i++) {
-            List<String[]> pairs = getArrangementsForPot(i);
-            if (pairs != null) {
-                addPairs(pairs);
-            }
-        }
-    }
-
-    private List<String[]> dummyPairMatchups(String[][] dummies) {
-        List<String[]> dummy_pair_matches = new ArrayList<>();
-        List<String> t = new ArrayList<>();
-        for (String[] x : dummies) {
-            for (String y : x)
-                t.add(y);
-        }
-        int max_size = t.size() / 2;
-        for (int i = 0; i < max_size; i++) {
-            List<String> options = new ArrayList<>();
-            int size = Integer.MAX_VALUE;
-            String str = t.get(0);
-            for (String p : t) {
-                List<String> o = new ArrayList<>();
-                for (String q : t) {
-                    if (canFace(p, q) && getPot(p) != getPot(q))
-                        o.add(q);
-                }
-                if (o.size() < size) {
-                    size = o.size();
-                    options = o;
-                    str = p;
-                }
-            }
-            if (options.size() != 0) {
-                String op = CommonFunctions.getRandomElement(options);
-                dummy_pair_matches.add(new String[] { str, op });
-                t = removeElement(op, removeElement(str, t));
-            } else {
-                return null;
-            }
-        }
-        return dummy_pair_matches;
-    }
-
-    private void selectDummyMatches() {
-        List<String[]> pairs_a = pairmap.get(getMapKey(1, 1));
-        List<String[]> pairs_b = pairmap.get(getMapKey(2, 2));
-        List<String[]> pairs_c = pairmap.get(getMapKey(3, 3));
-        List<String[]> pairs_d = pairmap.get(getMapKey(4, 4));
-
-        List<String[][]> combinations = new ArrayList<>();
-        for (String[] a : pairs_a) {
-            for (String[] b : pairs_b) {
-                for (String[] c : pairs_c) {
-                    for (String[] d : pairs_d) {
-                        combinations.add(new String[][] { a, b, c, d });
-                    }
-                }
-            }
-        }
-
-        Collections.shuffle(combinations);
-        for (String[][] c : combinations) {
-            List<String[]> dpm = dummyPairMatchups(c);
-            if (dpm != null && dpm.size() > 0) {
-                addPairs(dpm);
-                break;
-            }
-        }
-    }
-
-    private void setNonEmptyCrossPots() {
-        for (int i = 1; i <= NUM_POTS; i++) {
-            for (int j = i + 1; j <= NUM_POTS; j++) {
-                String key = getMapKey(i, j);
-                List<String[]> pairs = pairmap.get(key);
-                if (pairs.size() != 0) {
-                    System.out.println("====================CURRENT KEY: " + key + "================");
-                    List<String> teams1 = getPotTeams(i);
-                    List<String> teams2 = getPotTeams(j);
-                    for (String[] p : pairs) {
-                        for (String x : p) {
-                            if (teams1.contains(x))
-                                teams1 = removeElement(x, teams1);
-                            if (teams2.contains(x))
-                                teams2 = removeElement(x, teams2);
-                        }
-                    }
-                    System.out.println("NON EMPTY BALANCE SET");
-                    System.out.println(teams1 + " " + teams1.size());
-                    System.out.println(teams2 + " " + teams2.size());
-                    drawPots(teams1, teams2);
-                    System.out.println("NON EMPTY SET 2");
-                    drawPots(getPotTeams(i), getPotTeams(j));
-                }
-            }
-        }
-    }
-
-    private void setEmptyCrossPots() {
-        for (int i = 1; i <= NUM_POTS; i++) {
-            for (int j = i + 1; j <= NUM_POTS; j++) {
-                String key = getMapKey(i, j);
-                List<String[]> pairs = pairmap.get(key);
-                if (pairs.size() == 0) {
-                    System.out.println("====================CURRENT KEY: " + key + "================");
-                    for (int a = 0; a < MATCHES_PER_POT; a++) {
-                        System.out.println("EMPTY SET: " + (a+1));
-                        drawPots(getPotTeams(i), getPotTeams(j));
-                    }
-                }
-            }
-        }
-    }
-    // #endregion DRAW SAME POT FIRST
-
-    private void displayOpponents() {
-        List<String> t = getAllTeams();
-        List<String> missing = new ArrayList<>();
-        int count = 0;
-        for (String team : t) {
-            count++;
-            String[] opps = new String[NUM_POTS * MATCHES_PER_POT];
-            for (String[] p : matches) {
-                if (p[0].equals(team)) {
-                    int pot = getPot(p[1]);
-                    opps[(pot - 1) * 2] = p[1];
-                } else if (p[1].equals(team)) {
-                    int pot = getPot(p[0]);
-                    opps[((pot - 1) * 2) + 1] = p[0];
-                }
-            }
-            System.out.print(count + ": " + team + ": ");
-            for (int i = 0; i < NUM_POTS * MATCHES_PER_POT; i++) {
-                String prefix = " " + (1 + (i / 2));
-                if (i % 2 == 0)
-                    prefix += "H";
-                else
-                    prefix += "A";
-                System.out.print(prefix + ": " + opps[i] + "(" + getNationCode(teams.get(opps[i])) + ")");
-                if (opps[i] == null) {
-                    missing.add(team + " missing " + prefix);
-                }
-            }
-            System.out.println();
-        }
-        System.out.println(missing);
-    }
-
     private void schedule() {
         List<List<String[]>> sets = new ArrayList<>();
         List<List<String>> teamsInSet = new ArrayList<>();
@@ -998,219 +834,132 @@ class FixturesTest {
         }
     }
 
-    private void displayMatchSchedule() {
-        System.out.println("MATCH SCHEDULE");
-        for (int k : matchdayMap.keySet()) {
-            System.out.println("MATCHDAY " + k);
-            for (String[] p : matchdayMap.get(k)) {
-                System.out.println(p[0] + " vs " + p[1] + " " + getPot(p[0]) + "-" + getPot(p[1]));
-            }
-        }
-    }
-
-    // region SETUP
-    private String[][] getPots() {
-        String[][] tpots = new String[4][9];
-
-        String[] t1 = { "Manchester City", "Bayern Munich", "Arsenal", "Athletic Bilbao", "Chelsea", "Liverpool",
-                "Inter Milan", "Real Madrid", "Real Sociedad" };
-        String[] t2 = { "Eintracht", "Barcelona", "Napoli", "Juventus", "Bayer Leverkusen", "Paris SG", "Feyenoord",
-                "Atletico de Madrid", "AC Milan" };
-        String[] t3 = { "Porto", "Benfica", "Ajax", "Panathinaikos", "Marseille", "Sparta Praha", "Hajduk Split",
-                "Sturm Graz", "Zurich" };
-        String[] t4 = { "Roda JC", "Nordsjaelland", "Aberdeen", "Anderlecht", "Molde", "Monchengladbach", "Everton",
-                "Newcastle", "Lens" };
-
-        tpots[0] = t1;
-        tpots[1] = t2;
-        tpots[2] = t3;
-        tpots[3] = t4;
-        return tpots;
-    }
-
-    private Map<String, Integer> getTeams() {
-        Map<String, Integer> tnat = new HashMap<>();
-        tnat.put("Manchester City", 2);
-        tnat.put("Arsenal", 2);
-        tnat.put("Chelsea", 2);
-        tnat.put("Liverpool", 2);
-        tnat.put("Everton", 2);
-        tnat.put("Newcastle", 2);
-        tnat.put("Athletic Bilbao", 1);
-        tnat.put("Real Sociedad", 1);
-        tnat.put("Real Madrid", 1);
-        tnat.put("Barcelona", 1);
-        tnat.put("Atletico de Madrid", 1);
-        tnat.put("Bayern Munich", 3);
-        tnat.put("Eintracht", 3);
-        tnat.put("Bayer Leverkusen", 3);
-        tnat.put("Monchengladbach", 3);
-        tnat.put("Inter Milan", 5);
-        tnat.put("Napoli", 5);
-        tnat.put("Juventus", 5);
-        tnat.put("AC Milan", 5);
-        tnat.put("Paris SG", 4);
-        tnat.put("Marseille", 4);
-        tnat.put("Lens", 4);
-        tnat.put("Feyenoord", 7);
-        tnat.put("Ajax", 7);
-        tnat.put("Roda JC", 7);
-        tnat.put("Porto", 6);
-        tnat.put("Benfica", 6);
-        tnat.put("Anderlecht", 8);
-        tnat.put("Aberdeen", 10);
-        tnat.put("Hajduk Split", 11);
-        tnat.put("Sturm Graz", 13);
-        tnat.put("Sparta Praha", 14);
-        tnat.put("Zurich", 16);
-        tnat.put("Panathinaikos", 17);
-        tnat.put("Nordsjaelland", 18);
-        tnat.put("Molde", 19);
-        return tnat;
-    }
-
-    private String getNationCode(int nat) {
-        switch (nat) {
-            case 1:
-                return "ESP";
-            case 2:
-                return "ENG";
-            case 3:
-                return "GER";
-            case 4:
-                return "FRA";
-            case 5:
-                return "ITA";
-            case 6:
-                return "POR";
-            case 7:
-                return "NED";
-            case 8:
-                return "BEL";
-            case 9:
-                return "UKR";
-            case 10:
-                return "SCO";
-            case 11:
-                return "CRO";
-            case 12:
-                return "SRB";
-            case 13:
-                return "AUT";
-            case 14:
-                return "CZE";
-            case 15:
-                return "SVK";
-            case 16:
-                return "SUI";
-            case 17:
-                return "GRE";
-            case 18:
-                return "DEN";
-            case 19:
-                return "NOR";
-            default:
-                return "NULL";
-        }
-    }
-    // endregion SETUP
-
-    // #region SETUP CONF
-    private Map<String, Integer> getTeamsConf() {
-        Map<String, Integer> tnations = new HashMap<>();
-        tnations.put("Chelsea", 1);
-        tnations.put("Copenhagen", 2);
-        tnations.put("Gent", 3);
-        tnations.put("Fiorentina", 4);
-        tnations.put("LASK", 5);
-        tnations.put("Real Betis", 6);
-        tnations.put("Istanbul BB", 7);
-        tnations.put("Molde", 8);
-        tnations.put("Legia Warsaw", 9);
-        tnations.put("Heidenheim", 10);
-        tnations.put("Djurgardens", 11);
-        tnations.put("APOEL", 12);
-        tnations.put("Rapid Wien", 5);
-        tnations.put("Omonia", 12);
-        tnations.put("HJK", 13);
-        tnations.put("Vitoria", 14);
-        tnations.put("Astana", 15);
-        tnations.put("Olimpija", 16);
-        tnations.put("Cercle Brugge", 3);
-        tnations.put("Shamrock Rovers", 17);
-        tnations.put("The New Saints", 18);
-        tnations.put("Lugano", 19);
-        tnations.put("Hearts", 20);
-        tnations.put("Mlada Boleslav", 21);
-        tnations.put("Petrocub", 22);
-        tnations.put("St Gallen", 19);
-        tnations.put("Panathinaikos", 23);
-        tnations.put("TSC", 24);
-        tnations.put("Borac BL", 25);
-        tnations.put("Jagiellonia", 9);
-        tnations.put("Celje", 16);
-        tnations.put("Larne", 26);
-        tnations.put("Dinamo Minsk", 27);
-        tnations.put("Pafos", 12);
-        tnations.put("Vikingur", 28);
-        tnations.put("Noah", 29);
-        return tnations;
-    }
-
-    private String[][] getPotsConf() {
-        String[][] tpots = new String[6][6];
-
-        String[] tp1 = { "Chelsea", "Copenhagen", "Gent", "Fiorentina", "LASK", "Real Betis" };
-        String[] tp2 = { "Istanbul BB", "Molde", "Legia Warsaw", "Heidenheim", "Djurgardens", "APOEL" };
-        String[] tp3 = { "Rapid Wien", "Omonia", "HJK", "Vitoria", "Astana", "Olimpija" };
-        String[] tp4 = { "Cercle Brugge", "Shamrock Rovers", "The New Saints", "Lugano", "Hearts", "Mlada Boleslav" };
-        String[] tp5 = { "Petrocub", "St Gallen", "Panathinaikos", "TSC", "Borac BL", "Jagiellonia" };
-        String[] tp6 = { "Celje", "Larne", "Dinamo Minsk", "Pafos", "Vikingur", "Noah" };
-
-        tpots[0] = tp1;
-        tpots[1] = tp2;
-        tpots[2] = tp3;
-        tpots[3] = tp4;
-        tpots[4] = tp5;
-        tpots[5] = tp6;
-        return tpots;
-    }
-    // #endregion SETUP CONF
-
     private void showPots() {
+        Map<Integer, Integer> count = new HashMap<>();
         System.out.println("CURRENT POTS: ");
         for (int i = 0; i < NUM_POTS; i++) {
             System.out.print("POT " + (i + 1) + ": ");
             for (int j = 0; j < NUM_TEAMS / NUM_POTS; j++) {
-                System.out.print(Sim.getClub(pots[i][j]).getName() + "("
-                        + Sim.getNation(teams.get(pots[i][j])).getCode() + ")" + "  ");
+                String t = pots[i][j];
+                if (count.containsKey(teams.get(t))) {
+                    int c = count.get(teams.get(t));
+                    count.put(teams.get(t), c + 1);
+                } else {
+                    count.put(teams.get(t), 1);
+                }
+                System.out.print(Sim.getClub(t).getName() + "(" + (teams.get(t)) + ")" + " ");
             }
             System.out.println();
         }
+        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
+            if (e.getKey() >= 1000) {
+                System.out.print(e.getKey() + "-" + e.getValue() + " ");
+            } else {
+                System.out.print(Sim.getNation(e.getKey()).getCode() + "-" + e.getValue() + " ");
+            }
+        }
+        System.out.println();
     }
 
-    private void showTeams() {
+    private void adjustPotsNation() {
+        Map<Integer, Integer> count = new HashMap<>();
         for (int i = 0; i < NUM_POTS; i++) {
-            System.out.print("POT " + (i + 1) + ": ");
             for (int j = 0; j < NUM_TEAMS / NUM_POTS; j++) {
-                System.out.print(Sim.getClub(pots[i][j]).getName() + " "
-                        + ControllerEurope_New.getTeamCoefficient(pots[i][j]) + ", ");
+                String t = pots[i][j];
+                if (count.containsKey(teams.get(t))) {
+                    int c = count.get(teams.get(t));
+                    count.put(teams.get(t), c + 1);
+                } else {
+                    count.put(teams.get(t), 1);
+                }
             }
-            System.out.println();
+        }
+        int c = 0, n = 0;
+        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
+            if (e.getValue() > c) {
+                c = e.getValue();
+                n = e.getKey();
+            }
+        }
+        if (c > 5) {
+            for (int i = 0; i < NUM_POTS; i++) {
+                boolean f = false;
+                for (int j = 0; j < NUM_TEAMS / NUM_POTS; j++) {
+                    String t = pots[i][j];
+                    if (teams.get(t) == n) {
+                        int next = CommonFunctions.getRandomInt(10) + 2000;
+                        teams.put(t, next);
+                        System.out.println("CHANGE " + Sim.getClub(t).getName() + " " + next);
+                        f = true;
+                        break;
+                    }
+                }
+                if (f)
+                    break;
+            }
         }
     }
 
-    public static void main(String[] args) {
-        FixturesTest ft = new FixturesTest();
-        ft.initCL(ft.getPots(), ft.getTeams());
-        ft.initPairMap();
-        ft.initNationLimits();
-        ft.setSamePots();
-        ft.selectDummyMatches();
-        ft.setNonEmptyCrossPots();
-        ft.setEmptyCrossPots();
-        for (String k : ft.pairmap.keySet()) {
-            System.out.println(k + " " + ft.pairmap.get(k).size());
+    private void adjustPots() {
+        int max = 3;
+        for (int i = 0; i < NUM_POTS; i++) {
+            System.out.println("POT " + (i + 1));
+            List<String> t = getPotTeams(i + 1);
+            Map<Integer, Integer> pot_nation = new HashMap<>();
+            for (String x : t) {
+                if (pot_nation.containsKey(teams.get(x)))
+                    continue;
+                int c = 0;
+                for (String y : t) {
+                    if (getNation(x) == getNation(y))
+                        c++;
+                }
+                pot_nation.put(getNation(x), c);
+            }
+            List<Integer> max_nations = new ArrayList<>();
+            for (Map.Entry<Integer, Integer> m : pot_nation.entrySet()) {
+                if (m.getValue() > max) {
+                    max_nations.add(m.getKey());
+                }
+            }
+            for (Integer m : max_nations) {
+                System.out.println(Sim.getNation(m).getCode() + "-" + pot_nation.get(m));
+                int diff = pot_nation.get(m) - max;
+                for (int count = 0; count < diff; count++) {
+                    int to = -1;
+                    for (int j = (NUM_TEAMS / NUM_POTS) - 1; j >= 0; j--) {
+                        if (getNation(pots[i][j]) == m) {
+                            to = j;
+                            System.out.println(pots[i][to] + " moving");
+                            break;
+                        }
+                    }
+                    boolean swapped = false;
+                    for (int p = i + 1; p < NUM_POTS && !swapped; p++) {
+                        for (int j = 0; j < (NUM_TEAMS / NUM_POTS); j++) {
+                            int nat_p = getNation(pots[p][j]);
+                            if (pot_nation.containsKey(nat_p) && pot_nation.get(nat_p) >= max)
+                                continue;
+                            System.out.println(Sim.getClub(pots[p][j]).getName() + " " + Sim.getNation(nat_p).getCode()
+                                    + " " + pot_nation.get(nat_p));
+                            if (nat_p != m) {
+                                System.out.println("SWAPPING: " + pots[p][j] + "(" + p + "," + j + ") and "
+                                        + pots[i][to] + "(" + i + "," + to + ")");
+                                String temp = pots[p][j];
+                                pots[p][j] = pots[i][to];
+                                pots[i][to] = temp;
+                                pot_nation.put(m, pot_nation.get(m) - 1);
+                                int update = 1;
+                                if (pot_nation.containsKey(getNation(temp)))
+                                    update = pot_nation.get(getNation(temp));
+                                pot_nation.put(getNation(temp), update + 1);
+                                swapped = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -326,7 +326,7 @@ class TestFixtures {
     private static int getTeamValue(String team) {
         for (int i = 0; i < NUM_POTS; i++) {
             for (int j = 0; j < (NUM_TEAMS / NUM_POTS); j++) {
-                return (i * NUM_POTS) + j;
+                return ((i * NUM_POTS) + j);
             }
         }
         return -1;

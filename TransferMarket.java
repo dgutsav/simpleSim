@@ -4,8 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import Functions.CatalogueHelper;
+import Functions.Market;
+import Models.PositionHelper;
 import Models.Player;
 import Models.Deal;
 
@@ -19,23 +22,52 @@ public class TransferMarket {
 
     private static int day = 1;
 
-    private static final int WINDOW_LENGTH = 3;
+    private static final int WINDOW_LENGTH = 50;
 
     private static Map<Integer, ArrayList<Integer>> time_data = new HashMap<>();
     private static Map<Integer, String> size_data = new HashMap<>();
+    private static Map<String, Map<String, Integer>> team_stats = new HashMap<>();
+
+    private static Map<String, String> player_club_link = new HashMap<>();
+    private static Map<String, Integer> player_price_map = new HashMap<>();
+
+    private static List<String> premium_clubs = new ArrayList<>();
+
+    private static boolean continue_window = true;
 
     private static void resetSeasonVariables() {
+        continue_window = true;
         targets = new HashMap<>();
         lists = new HashMap<>();
         key_list = new HashMap<>();
         player_list_map = new HashMap<>();
+
+        player_club_link = new HashMap<>();
+        player_price_map = new HashMap<>();
     }
 
-    public static void setTargets() {
-        Map<String, Club_Team> clubs = Sim.getAllClubs();
-        for (Map.Entry<String, Club_Team> entry : clubs.entrySet()) {
-            Club_Team club = entry.getValue();
-            targets.put(club.getId(), club.getTransferTargetDetails());
+    private static void setTargets() {
+        premium_clubs = new ArrayList<>();
+        Set<Integer> nat_ids = Sim.getAllNations().keySet();
+        for (int x : nat_ids) {
+            LeagueStructure y = Sim.getLeagueStructure(x);
+            int level = 1;
+            while (y.getDivisions().containsKey(level)) {
+                List<String> ids = y.getDivisions().get(level).getTeams();
+                for (String t : ids) {
+                    Club_Team team = Sim.getClub(t);
+                    Target target = new Target(team.getSeniorSquad().getWeakestPosition(),
+                            team.getSeniorSquad().getBestLineupRating(), team.getBudget(), t, team.getReputation(),
+                            level, x);
+                    targets.put(t, target);
+                    if (team.getReputation() >= Target.PREMIUM_REPUTATION_CUTOFF) {
+                        premium_clubs.add(team.getId());
+                    }
+                    // System.out.println(team.getName() + ": " + target.getPosition() + " $"
+                    //         + CommonFunctions.formatMoney(target.getPrice()) + " " + target.getRating() + "/100");
+                }
+                level++;
+            }
         }
     }
 
@@ -44,33 +76,22 @@ public class TransferMarket {
     }
 
     public static Map<Integer, List<Target>> groupTargetsByNation() {
-        Map<Integer, List<Target>> league_targets = new HashMap<>();
-        Map<Integer, Nation> nations = Sim.getAllNations();
-        for (Nation nation : nations.values()) {
-            List<Target> targets_d = new ArrayList<>();
-            for (String league_id : nation.getLeagues()) {
-                League league = Sim.getLeague(league_id);
-                for (String club_id : league.getTeams()) {
-                    targets_d.add(targets.get(club_id));
+        Map<Integer, List<Target>> nat_targets = new HashMap<>();
+        Set<Integer> nat_ids = Sim.getAllNations().keySet();
+        for (int x : nat_ids) {
+            List<Target> nats = new ArrayList<>();
+            LeagueStructure y = Sim.getLeagueStructure(x);
+            int level = 1;
+            while (y.getDivisions().containsKey(level)) {
+                List<String> ids = y.getDivisions().get(level).getTeams();
+                for (String t : ids) {
+                    nats.add(targets.get(t));
                 }
+                level++;
             }
-            league_targets.put(nation.getId(), targets_d);
+            nat_targets.put(x, nats);
         }
-        return league_targets;
-    }
-
-    public static Map<League, List<Target>> groupTargets() {
-        Map<League, List<Target>> league_targets = new HashMap<>();
-        Map<String, League> all_leagues = Sim.getAllLeagues();
-        for (Map.Entry<String, League> entry : all_leagues.entrySet()) {
-            League league = entry.getValue();
-            List<Target> league_t = new ArrayList<>();
-            for (String club_id : league.getTeams()) {
-                league_t.add(targets.get(club_id));
-            }
-            league_targets.put(league, league_t);
-        }
-        return league_targets;
+        return nat_targets;
     }
 
     public static void updateKeyList(String desc, String key) {
@@ -84,7 +105,7 @@ public class TransferMarket {
 
     private static void setupLists() {
         setupPremiumList();
-        setupNationLists();
+        setupNationalLists();
     }
 
     private static void setupPremiumList() {
@@ -99,63 +120,45 @@ public class TransferMarket {
             prem_players.add(player);
             player_list_map.put(entry.getKey(), key);
         }
+        prem_players = Sim.sortByRating(prem_players);
         lists.put(key, prem_players);
     }
 
-    public static void setupNationLists() {
+    private static void setupNationalLists() {
         int max_size = 0;
         String max_key = "";
-        Map<String, League> all_leagues = Sim.getAllLeagues();
-        for (Map.Entry<String, League> entry : all_leagues.entrySet()) {
-            League league = entry.getValue();
-            String key = getLeagueKey(league);
-            List<Player> players = new ArrayList<>();
-            for (String club_id : league.getTeams()) {
-                Club_Team club = Sim.getClub(club_id);
-                for (String player_id : club.getSeniorPlayers()) {
-                    if (player_list_map.containsKey(player_id))
-                        continue;
-                    players.add(Sim.getPlayer(player_id));
-                    player_list_map.put(player_id, key);
+        Set<Integer> nat_ids = Sim.getAllNations().keySet();
+        for (int x : nat_ids) {
+            LeagueStructure y = Sim.getLeagueStructure(x);
+            int level = 1;
+            while (y.getDivisions().containsKey(level)) {
+                String key = Sim.getNation(x).getName() + "_" + level;
+                List<String> ids = y.getDivisions().get(level).getTeams();
+                List<Player> players = new ArrayList<>();
+                for (String t : ids) {
+                    Club_Team team = Sim.getClub(t);
+                    for (String pl : team.getSeniorPlayers()) {
+                        Player player = Sim.getPlayer(pl);
+                        player_club_link.put(pl, t);
+                        player_price_map.put(pl, MarketHelper.getPlayerValue(player, team));
+                        if (player_list_map.containsKey(pl))
+                            continue;
+                        players.add(player);
+                        player_list_map.put(pl, key);
+                    }
                 }
-            }
-            lists.put(key, players);
-            updateKeyList(Sim.getNation(league.getNationId()).getName(), key);
-            updateKeyList("div" + league.getCompetitionLevel(), key);
-            if (max_size < players.size()) {
-                max_size = players.size();
-                max_key = key;
+                players = Sim.sortByRating(players);
+                lists.put(key, players);
+                updateKeyList(Sim.getNation(x).getName(), key);
+                updateKeyList("div" + level, key);
+                if (max_size < players.size()) {
+                    max_size = players.size();
+                    max_key = key;
+                }
+                level++;
             }
         }
         size_data.put(Sim.getSeasonNumber(), max_key + " size: " + max_size);
-    }
-
-    public static List<Player> getPlayersList(League league) {
-        List<Player> players = new ArrayList<>();
-        players.addAll(lists.get("PREMIUM"));
-        String nation_name = Sim.getNation(league.getNationId()).getName();
-        String[] nations_list = CatalogueHelper.getFavourableNations(nation_name);
-        ArrayList<String> fav_nations = new ArrayList<>();
-        fav_nations.addAll(Arrays.asList(nations_list));
-        if (league.getCompetitionLevel() != 1) {
-            fav_nations = new ArrayList<>();
-        }
-        fav_nations.add(nation_name);
-        // List<String> first_div_lists = key_list.get("div1");
-        for (String fav_nation : fav_nations) {
-            List<String> list_names = key_list.get(fav_nation);
-            if (list_names == null)
-                System.out.println("No lists found for country " + fav_nation);
-            for (String list_name : list_names) {
-                // if (!fav_nation.equalsIgnoreCase(nation_name) &&
-                // !first_div_lists.contains(list_name)) continue;
-                List<Player> league_list = lists.get(list_name);
-                if (league_list == null)
-                    System.out.println("No List found for name " + list_name);
-                players.addAll(league_list);
-            }
-        }
-        return players;
     }
 
     public static List<Player> getPlayersList(int nation_id) {
@@ -178,7 +181,6 @@ public class TransferMarket {
                 }
             }
         }
-        players = Sim.sortByRating(players);
         return players;
     }
 
@@ -186,6 +188,21 @@ public class TransferMarket {
         int max_size = 0;
         String max_key = "";
         Map<String, ArrayList<Offer>> offers = new HashMap<>();
+        List<Player> prem = lists.get("PREMIUM");
+        for (String x : premium_clubs) {
+            for (Player p: prem) {
+                if (p.getRating() < targets.get(x).getRating()) break;
+                Target target = targets.get(x);
+                if (MarketHelper.canMakeOffer(target, p, player_price_map.get(p.getId()), player_club_link.get(p.getId()))) {
+                        Offer offer = new Offer(target.getClubId(), player_club_link.get(p.getId()), p.getId(), player_price_map.get(p.getId()));
+                        ArrayList<Offer> list = offers.containsKey(p.getId()) ? offers.get(p.getId()) : new ArrayList<>();
+                        list.add(offer);
+                        offers.put(p.getId(), list);
+                        targets.get(x).offerMade(p.getId());
+                        break;
+                    }
+            }
+        }
         Map<Integer, List<Target>> targets = groupTargetsByNation();
         for (Map.Entry<Integer, List<Target>> entry : targets.entrySet()) {
             int nation_id = entry.getKey();
@@ -196,17 +213,15 @@ public class TransferMarket {
                 max_key = Sim.getNation(nation_id).getName();
             }
             int targets_met = 0;
-            int players_searched = 0;
             for (Player player : players) {
-                players_searched++;
-                Club_Team player_club = Sim.getClub(Sim.findPlayerInClub(player.getId()));
-                long asking_price = MarketHelper.getPlayerValue(player, player_club);
+                Club_Team player_club = Sim.getClub(player_club_link.get(player.getId()));
+                long asking_price = player_price_map.get(player.getId());
                 for (int i = 0; i < league_targets.size(); i++) {
                     Target target = league_targets.get(i);
                     if (target.hasMadeOffer())
                         continue;
                     if (MarketHelper.canMakeOffer(target, player, asking_price, player_club.getId())) {
-                        Offer offer = new Offer(target.getClub().getId(), player_club.getId(), player.getId(),
+                        Offer offer = new Offer(target.getClubId(), player_club.getId(), player.getId(),
                                 asking_price);
                         targets_met++;
                         ArrayList<Offer> pOffers = new ArrayList<>();
@@ -221,20 +236,21 @@ public class TransferMarket {
                 if (targets_met >= league_targets.size())
                     break;
             }
-            if (players_searched == players.size()) {
-                System.out.println("Nation: " + Sim.getNation(nation_id).getName() + " targets not met: "
-                        + (league_targets.size() - targets_met) + " out of " + players.size() + " players");
-                for (Target target : league_targets) {
-                    if (!target.hasMadeOffer()) {
-                        System.out.print("Target Rating: " + target.getRating());
-                        System.out.print(" Position: " + target.getPosition());
-                        System.out.print(" Price: " + CommonFunctions.formatMoney(target.getPrice()));
-                        System.out.print(" Club: " + target.getClub().getName());
-                        System.out.print(" Club Rating: " + target.getClub().getBestSquadRating());
-                        System.out.println(" Level: " + target.getDivLevel());
-                    }
-                }
-            }
+            // for (int i = 0; i < league_targets.size(); i++) {
+            //     if (league_targets.get(i).hasMadeOffer()) continue;
+            //     for (Player player: players) {
+            //         if (player.getRating() < league_targets.get(i).getRating()) break;
+            //         Target target = league_targets.get(i);
+            //         if (MarketHelper.canMakeOffer(target, player, player_price_map.get(player.getId()), player_club_link.get(player.getId()))) {
+            //             Offer offer = new Offer(target.getClubId(), player_club_link.get(player.getId()), player.getId(), player_price_map.get(player.getId()));
+            //             ArrayList<Offer> list = offers.containsKey(player.getId()) ? offers.get(player.getId()) : new ArrayList<>();
+            //             list.add(offer);
+            //             offers.put(player.getId(), list);
+            //             entry.getValue().get(i).offerMade(player.getId());
+            //             break;
+            //         }
+            //     }
+            // }
         }
         ArrayList<Offer> finalizedOffers = new ArrayList<>();
         for (Map.Entry<String, ArrayList<Offer>> offer_Entry : offers.entrySet()) {
@@ -247,6 +263,8 @@ public class TransferMarket {
         for (Offer final_offer : finalizedOffers) {
             finalizeOffer(final_offer);
         }
+        System.out.println("Transfers completed: " + finalizedOffers.size());
+        if (finalizedOffers.size() == 0) continue_window = false;
         clearAllTargets();
         String size = size_data.get(Sim.getSeasonNumber());
         if (size != null) {
@@ -280,16 +298,27 @@ public class TransferMarket {
         buyer.update();
         seller.update();
         removePlayerFromList(offer.getPlayerId());
-        targets.remove(buyer.getId());
-        Target new_target = buyer.getTransferTargetDetails();
+        Target old_t = targets.remove(buyer.getId());
+        Target new_target = new Target(buyer.getSeniorSquad().getWeakestPosition(),
+                buyer.getSeniorSquad().getBestLineupRating(), buyer.getBudget(), buyer.getId(), buyer.getReputation(),
+                old_t.getDivLevel(), old_t.getNationId());
         targets.put(buyer.getId(), new_target);
         Deal deal = new Deal();
         deal.player_name = offer.getPlayer().getName();
         deal.seller_name = seller.getName();
         deal.buyer_name = buyer.getName();
-        deal.date = day + "/" + Sim.getSeasonNumber();
+        deal.day = day;
+        deal.year = Sim.getSeasonNumber();
         deal.amount = offer.getAmount();
+        deal.rating = offer.getPlayer().getRating();
+        deal.position = PositionHelper.getPositionName(offer.getPlayer().getPosition());
+        deal.nation = offer.getPlayer().getNationId();
+        deal.seller_nation = seller.getNationId();
+        deal.buyer_nation = buyer.getNationId();
         completed_transfers.add(deal);
+        // System.out.println(offer.getPlayer().getName() + "(" + offer.getPlayer().getRating() + ":"
+        //         + offer.getPlayer().getPosition() + ")" + " moves from " + seller.getName() + " to " + buyer.getName()
+        //         + " for $" + CommonFunctions.formatMoney(offer.getAmount()));
     }
 
     public static void clearAllTargets() {
@@ -316,14 +345,15 @@ public class TransferMarket {
     public static void simulateDay() {
         long start = System.nanoTime();
         makeOffers();
-        int diff = (int) ((System.nanoTime() - start) / 1000000000);
-        System.out.println(Sim.getSeasonNumber() + " offers, day " + day + " made time: " + diff + " seconds");
+        int diff = (int) ((System.nanoTime() - start) / 1000000);
+        System.out.println(Sim.getSeasonNumber() + " offers, day " + day + " made time: " + diff + " ms");
     }
 
     public static void simulate() {
         ArrayList<Integer> time_season = new ArrayList<>();
+        setStats(Sim.getSeasonNumber() + " START");
         setupMarket();
-        while (day <= WINDOW_LENGTH) {
+        while (day <= WINDOW_LENGTH && continue_window) {
             long start = System.nanoTime();
             simulateDay();
             day++;
@@ -331,17 +361,18 @@ public class TransferMarket {
             time_season.add(diff);
         }
         time_data.put(Sim.getSeasonNumber(), time_season);
+        setStats(Sim.getSeasonNumber() + " END");
     }
 
     public static void showTopTransfers() {
         Collections.sort(completed_transfers, (Deal a, Deal b) -> (int) (b.amount - a.amount));
         int count = 1;
         for (Deal deal : completed_transfers) {
-            if (count > 25) {
+            if (count > 30) {
                 break;
             }
             String x = CommonFunctions.getPaddedString(deal.seller_name + " --> " + deal.buyer_name, 50);
-            System.out.println(count + " " + deal.date + "\t" + CommonFunctions.getPaddedString(deal.player_name, 40)
+            System.out.println(count + " " + deal.date() + "\t" + CommonFunctions.getPaddedString(deal.player_name, 40)
                     + "  " + x + CommonFunctions.formatMoney(deal.amount));
             count++;
         }
@@ -356,5 +387,63 @@ public class TransferMarket {
                 System.out.print(time + " ");
             System.out.println("Size: " + size);
         }
+        showTeamStats();
+    }
+
+    private static void setStats(String key) {
+        Map<String, Integer> stats = new HashMap<>();
+        Set<String> c_id = Sim.getAllClubs().keySet();
+        for (String c : c_id) {
+            stats.put(Sim.getClub(c).getName(), Sim.getClub(c).getBestSquadRating());
+        }
+        team_stats.put(key, stats);
+        System.out.println("TEAM STATS KEY ADDED: " + key);
+    }
+
+    public static void showTeamStats() {
+        for (int i = Sim.STARTING_SEASON; i < Sim.getSeasonNumber(); i++) {
+            Map<String, Integer> start = team_stats.get(i + " START");
+            if (start == null) {
+                System.out.println(i + " START is null");
+            }
+            Map<String, Integer> end = team_stats.get(i + " END");
+            if (end == null) {
+                System.out.println(i + " END is null");
+            }
+        }
+
+        Set<String> c_id = Sim.getAllClubs().keySet();
+        for (String c : c_id) {
+            String name = Sim.getClub(c).getName();
+            String line = CommonFunctions
+                    .getPaddedString(name + "(" + Sim.getNation(Sim.getClub(c).getNationId()).getCode() + ")", 30);
+            for (int i = Sim.STARTING_SEASON; i < Sim.getSeasonNumber(); i++) {
+                line += " " + i + ": " + team_stats.get(i + " START").get(name) + "->"
+                        + team_stats.get(i + " END").get(name);
+            }
+            System.out.println(line);
+        }
+    }
+
+    public static Map<Integer, List<List<Deal>>> getTransfersOrder(Club_Team club) {
+        Collections.sort(completed_transfers, (Deal a, Deal b) -> (int) (a.year - b.year));
+        int index = 0;
+        Map<Integer, List<List<Deal>>> deals = new HashMap<>();
+        for (int i = Sim.STARTING_SEASON; i < Sim.getSeasonNumber(); i++) {
+            List<Deal> buys = new ArrayList<>(), sells = new ArrayList<>();
+            while(index < completed_transfers.size() && completed_transfers.get(index).year == i) {
+                if (completed_transfers.get(index).buyer_name.equals(club.getName())) {
+                    buys.add(completed_transfers.get(index));
+                } else if (completed_transfers.get(index).seller_name.equals(club.getName())) {
+                    sells.add(completed_transfers.get(index));
+                }
+                index++;
+            }
+            List<List<Deal>> list_deals = new ArrayList<>();
+            list_deals.add(buys);
+            list_deals.add(sells);
+            deals.put(i, list_deals);
+        }
+        return deals;
     }
 }

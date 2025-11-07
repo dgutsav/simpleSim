@@ -18,6 +18,18 @@ public class SingleKnockoutTie implements KnockoutTie {
         this.after_extra_time = false;
     }
 
+    public SingleKnockoutTie(String a, String b) {
+        this.team1 = a;
+        this.team2 = b;
+        this.match = new Match();
+        this.match.home_id = team1;
+        this.match.away_id = team2;
+        this.match.away_team = Sim.getClub(team2).getName();
+        this.match.home_team = Sim.getClub(team1).getName();
+        this.match.setTournamentLevel(1);
+        this.after_extra_time = false;
+    }
+
     public void simulate() {
         this.match.simulate();
         this.setWinner();

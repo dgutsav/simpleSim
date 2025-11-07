@@ -105,16 +105,26 @@ public class Nation {
     }
 
     public List<String> getTeamsForCup() {
-        List<String> all_teams = new ArrayList<>();
-        int total_leagues = this.leagues.size();
-        for (int i = total_leagues; i > 0; i--) {
-            League league = this.getLeague(i);
-            int league_size = league.getTeams().size();
-            for (int j = league_size; j > 0; j--) {
-                all_teams.add(league.getTeamAtRank(j));
-            }
+        // List<String> all_teams = new ArrayList<>();
+        // int total_leagues = this.leagues.size();
+        // for (int i = total_leagues; i > 0; i--) {
+        //     League league = this.getLeague(i);
+        //     int league_size = league.getTeams().size();
+        //     for (int j = league_size; j > 0; j--) {
+        //         all_teams.add(league.getTeamAtRank(j));
+        //     }
+        // }
+        // return all_teams;
+        return getTeamsFromLeaguesForCup();
+    }
+
+    private List<String> getTeamsFromLeaguesForCup() {
+        List<String> teams = new ArrayList<>();
+        List<Division> divs = new ArrayList<>(Sim.getLeagueStructure(id).getDivisions().values());
+        for (Division d: divs) {
+            teams.addAll(d.getTeams());
         }
-        return all_teams;
+        return teams;
     }
 
     public void setCupId(String cup_id) {
@@ -155,5 +165,14 @@ public class Nation {
 
     public void setNationalTeamId(String id) {
         this.national_team = id;
+    }
+
+    public List<String> getTeamIds(int level) {
+        Division div = Sim.getDivision(this.id, level);
+        return div.getTeams();
+    }
+
+    public Division getDivision(int level) {
+        return Sim.getDivision(this.id, level);
     }
 }

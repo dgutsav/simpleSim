@@ -190,6 +190,12 @@ public class CommonFunctions {
                 String team_id = Sim.addClub(team);
                 league.addTeam(team_id);
             }
+        } else if (club_sets.size() > size && club_sets.size() > 0) {
+            for (int i = 0; i < size; i++) {
+                Club_Team team = getTeam(club_sets.get(i), nation_name, nation_id);
+                String team_id = Sim.addClub(team);
+                league.addTeam(team_id);
+            }
         } else if (club_sets.size() > 0 && club_sets.size() != size) {
             for (Setups.Club_Setup setup : club_sets) {
                 Club_Team team = getTeam(setup, nation_name, nation_id);
@@ -317,6 +323,11 @@ public class CommonFunctions {
     }
 
     public static String formatMoney(long amount) {
+        if (amount < 0) {
+            return "-"+formatMoney(amount *-1);
+        }
+        if (amount < 1000)
+            return String.valueOf(amount);
         String money = String.valueOf(amount);
         List<Integer> parts = new ArrayList<>();
         while (amount > 0) {
@@ -350,7 +361,12 @@ public class CommonFunctions {
             padded += " ";
         }
         return padded;
+    }
 
+    public static String getLeftPaddedString(String x, int len) {
+        String padded = x;
+        for(int i = padded.length(); i < len; i++) padded = " " + padded;
+        return padded;
     }
 
     public static Map<String, Integer> sortMap(Map<String, Integer> map, boolean ascending, int limit, int min,
@@ -373,5 +389,64 @@ public class CommonFunctions {
                         LinkedHashMap::new,
                         (m, e) -> m.put(e.getKey(), e.getValue()),
                         LinkedHashMap::putAll);
+    }
+
+    public static List<String> removeElement(String remove, List<String> list) {
+        List<String> filtered = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).equals(remove)) {
+                filtered.add(list.get(i));
+            }
+        }
+        return filtered;
+    }
+
+    private static List<String> generateSetClub(List<Setups.Club_Setup> clubs, int num, Nation nation) {
+        List<String> ids = new ArrayList<>();
+        int count = 0;
+        for (Setups.Club_Setup setup : clubs) {
+            Club_Team team = getTeam(setup, nation.getName(), nation.getId());
+            String team_id = Sim.addClub(team);
+            ids.add(team_id);
+            count++;
+            if (count >= num)
+                break;
+        }
+        return ids;
+    }
+
+    private static List<String> generateRandomClub(int size, int rating, int level, Nation nation) {
+        List<String> ids = new ArrayList<>();
+        int variance = CommonFunctions.getRandomNumber(level == 1 ? 2 : 3);
+        int[] team_ratings = CommonFunctions.getDistribution(size, rating, variance);
+        for (int i = 0; i < team_ratings.length; i++) {
+            Club_Team team = getTeam((float) team_ratings[i], nation.getName(), nation.getId(), rating);
+            String team_id = Sim.addClub(team);
+            ids.add(team_id);
+        }
+        return ids;
+    }
+
+    public static Division createDivision(Setups.Division_Setup div_setup, Nation nation) {
+        if (div_setup.type == LeagueStructure.DivisionType.CUSTOM) {
+            if (nation.getName().equals("United States")) {
+                MajorLeague ml = new MajorLeague();
+                List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation.getName(), div_setup.level);
+                List<String> ids = generateSetClub(club_sets, club_sets.size(), nation);
+                ml.setTeams(ids);
+                return ml;
+            }
+        } else if (div_setup.type == LeagueStructure.DivisionType.BASIC) {
+            DomesticDivision div = new DomesticDivision(div_setup.name, div_setup.level, div_setup.num_prom,
+                    div_setup.num_rel, div_setup.strength, nation.getId());
+            List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation.getName(), div_setup.level);
+            int set_club = club_sets.size() <= div_setup.num_teams ? club_sets.size() : div_setup.num_teams;
+            int rnd_club = div_setup.num_teams - set_club;
+            List<String> ids = generateSetClub(club_sets, set_club, nation);
+            ids.addAll(generateRandomClub(rnd_club, div_setup.strength, div_setup.level, nation));
+            div.setTeams(ids);
+            return div;
+        } 
+        return new DomesticDivision("League", 0, 0, 0, 0, 0);
     }
 }
