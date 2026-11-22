@@ -60,6 +60,11 @@ public class CatalogueHelper {
         public static String n_ireland = "Northern Ireland";
         public static String luxembourg = "Luxembourg";
         public static String faroe_islands = "Faroe Islands";
+        public static String andorra = "Andorra";
+        public static String malta = "Malta";
+        public static String gibraltar = "Gibraltar";
+        public static String liechtenstein = "Liechtenstein";
+        public static String san_marino = "San Marino";
 
         public static String argentina = "Argentina";
         public static String bolivia = "Bolivia";
@@ -85,13 +90,12 @@ public class CatalogueHelper {
         public static String iran = "Iran";
         public static String iraq = "Iraq";
         public static String japan = "Japan";
-        public static String korea = "Korea";
+        public static String korea = "South Korea";
         public static String qatar = "Qatar";
         public static String saudi_arabia = "Saudi Arabia";
         public static String syria = "Syria";
         public static String thailand = "Thailand";
         public static String uzbekistan = "Uzbekistan";
-
         public static String india = "India";
         public static String new_zealand = "New Zealand";
         public static String jordan = "Jordan";
@@ -158,7 +162,7 @@ public class CatalogueHelper {
                 denonyms.put(italy, "Italian");
                 denonyms.put(ivory_coast, "Ivorian");
                 denonyms.put(japan, "Japanese");
-                denonyms.put(korea, "Korean");
+                denonyms.put(korea, "South Korean");
                 denonyms.put(mexico, "Mexican");
                 denonyms.put(morocco, "Moroccan");
                 denonyms.put(netherlands, "Dutch");
@@ -1951,8 +1955,11 @@ public class CatalogueHelper {
                                 return getName(indian_marathi_names, indian_marathi_surnames);
                         else if (prob < 18)
                                 return getName(indian_gujarati_names, indian_gujarati_surnames);
-                        else
+                        else if (prob < 30)
                                 return getName(indian_bengali_names, indian_bengali_surnames);
+                        else {
+                                return getName(indian_hindu_names, indian_hindu_names);
+                        }
                 } else {
                         return "Player Player";
                 }
@@ -1981,8 +1988,8 @@ public class CatalogueHelper {
         private static String[] switzerlandTarget = { "Albania", "Croatia", "Austria", "Egypt" };
         private static String[] polandTarget = { "Bosnia", "Bulgaria", "Croatia", "Cyprus", "Hungary", "Israel",
                         "Portugal", "Spain", "Czechia", "Slovakia", "Lithuania" };
-        private static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "Korea", "Belarus",
-                        "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova", "Iran" };
+        private static String[] russiaTarget = { "Romania", "Poland", "Ukraine", "Sweden", "Serbia", "South Korea",
+                        "Belarus", "Uzbekistan", "Kazakhstan", "Georgia", "Armenia", "Moldova", "Iran" };
         private static String[] turkeyTarget = { "Germany", "Belgium", "Moldova", "Albania", "Azerbaijan", "China",
                         "Saudi Arabia" };
         private static String[] serbiaTarget = { "Bosnia", "Croatia", "Slovenia", "Albania", "Bulgaria", "Kosovo",
@@ -2002,11 +2009,11 @@ public class CatalogueHelper {
         private static String[] colombiaTarget = { "Venezuela", "Argentina", "Bolivia", "Ecuador", "Peru", "Paraguay" };
         private static String[] americaTarget = { "Mexico", "Ecuador", "Canada", "West Indies", "Costa Rica",
                         "Honduras" };
-        private static String[] japanTarget = { "Korea", "Brazil", "Thailand" };
-        private static String[] chinaTarget = { "Australia", "Korea", "Brazil", "Uzbekistan", "Japan" };
+        private static String[] japanTarget = { "South Korea", "Brazil", "Thailand" };
+        private static String[] chinaTarget = { "Australia", "South Korea", "Brazil", "Uzbekistan", "Japan" };
         private static String[] koreaTarget = { "Japan", "China", "Brazil" };
         private static String[] saudiTarget = { "Emirates", "Qatar", "Iraq", "Syria", "Egypt", "Morocco", "Algeria",
-                        "Tunisia", "China", "Korea" };
+                        "Tunisia", "China", "South Korea" };
 
         public static String[] getFavourableNations(String nation_name) {
                 Map<String, String[]> fav_nations = new HashMap<>();

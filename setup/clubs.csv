@@ -1,0 +1,751 @@
+England,1,Arsenal,9500
+England,1,Manchester City,9300
+England,1,Liverpool FC,9100
+England,1,Manchester United,8800
+England,1,Chelsea,8700
+England,1,Tottenham Hotspur,8700
+England,1,Aston Villa,8700
+England,1,Leicester City,8700
+England,1,West Ham United,8600
+England,1,Everton,8600
+England,1,Newcastle United,8600
+England,1,Brighton & Hove Albion,8600
+England,1,Leeds United,8500
+England,1,AFC Sunderland,8500
+England,1,Wolverhampton Wanderers,8500
+England,1,Southampton,8400
+England,1,Nottingham Forest,8300
+England,1,Fulham,8300
+England,1,Sheffield United,8300
+England,1,AFC Bournemouth,8300
+England,2,Coventry City FC,8000
+England,2,Crystal Palace FC,8000
+England,2,Hull City AFC,8000
+England,2,Birmingham City,8000
+England,2,Ipswich Town,8000
+England,2,Brentford,8000
+England,2,West Bromwich Albion,7900
+England,2,Norwich City,7900
+England,2,Swansea City,7900
+England,2,Milwall,7800
+England,2,Wrexham,7800
+England,2,Queens Park Rangers,7800
+England,2,Portsmouth,7700
+England,2,Burnley,7600
+England,2,Stoke City,7600
+England,2,Blackburn Rovers,7500
+England,2,Cardiff City,7500
+England,2,Lincoln City,7500
+England,2,Bristol City,7500
+England,2,Huddersfield Town,7400
+England,2,Bolton Wanderers,7400
+England,2,Derby County,7300
+England,2,Stockport County,7300
+England,2,Luton Town,7300
+Spain,1,Real Madrid,9400
+Spain,1,FC Barcelona,9400
+Spain,1,Atletico de Madrid,9000
+Spain,1,Valencia,8600
+Spain,1,Sevilla,8700
+Spain,1,Real Sociedad,8700
+Spain,1,Athletic Club de Bilbao,8700
+Spain,1,Villarreal,8600
+Spain,1,Real Betis,8200
+Spain,1,Celta Vigo,8200
+Spain,1,Deportivo La Coruna,8000
+Spain,1,RCD Mallorca,8000
+Spain,1,Osasuna,8100
+Spain,1,Real Zaragoza,8000
+Spain,1,RCD Espanyol,8000
+Spain,1,Girona,8400
+Spain,1,Deportivo Alaves,7900
+Spain,1,Rayo Vallecano,7900
+Spain,1,Getafe,7900
+Spain,1,UD Las Palmas,7800
+Germany,1,Bayer Leverkusen,8600
+Germany,1,FC Bayern Munchen,9500
+Germany,1,Borussia Dortmund,8800
+Germany,1,RB Leipzig,8500
+Germany,1,VfB Stuttgart,8500
+Germany,1,Eintracht Frankfurt,8200
+Germany,1,SC Freiburg,8500
+Germany,1,SV Werder Bremen,8000
+Germany,1,1. FSV Mainz 05,7900
+Germany,1,TSG 1899 Hoffenheim,7900
+Germany,1,Union Berlin,7900
+Germany,1,Heidenheim,7900
+Germany,1,Monchengladbach,7800
+Germany,1,VfL Wolfsburg,7800
+Germany,1,SC Augsburg,7800
+Germany,1,Schalke 04,7800
+Germany,1,Hamburg SV,7800
+Germany,1,Fortuna Dusseldorf,7800
+Germany,2,KSV Holstein Kiel,7400
+Germany,2,FC Nurnberg,7400
+Germany,2,Greuther Furth,7200
+Germany,2,1. FC Koln,7100
+Germany,2,FC Saarbrucken,7000
+Germany,2,1. FC Kaiserslautern,6900
+Germany,2,Hertha BSC,7800
+Germany,2,Hannover 96,6800
+Germany,2,Dynamo Dresden,6800
+Germany,2,SV Elversberg,7700
+Germany,2,FC Magdeburg,7400
+Italy,1,Juventus FC,8600
+Italy,1,Internazionale Milano,8800
+Italy,1,SSC Napoli,8500
+Italy,1,AC Milan,8400
+Italy,1,AS Roma,8200
+Italy,1,SS Lazio,8100
+Italy,1,Atalanta BC,7900
+Italy,1,Bologna FC 1909,7800
+Italy,1,Genoa CFC,7700
+Italy,1,ACF Fiorentina,7700
+Italy,1,US Sassuolo,7600
+Italy,1,Udinese Calcio,7600
+Italy,1,AC Monza,7600
+Italy,1,Torino FC,7600
+Italy,1,Hellas Verona,7600
+Italy,1,Cagliari Calcio,7600
+Italy,1,Empoli FC,7600
+Italy,1,Parma Calcio,7600
+Italy,1,UC Sampdoria,7600
+Italy,1,US Palermo,7600
+Italy,2,Como 1907,8800
+Italy,2,Frosinone Calcio,8000
+Italy,2,Leece,7700,
+Italy,2,AC Monza,7700
+Italy,2,Venezia,7600
+Italy,2,Modena,7400
+Italy,2,Cremonese,7200
+Italy,2,Pisa Calcio,7200
+France,1,Paris Saint-Germain,9300
+France,1,AS Monaco FC,8400
+France,1,Lille OSC,8300
+France,1,Olympique Lyonnais,8300
+France,1,RC Lens,8300
+France,1,Olympique de Marseille,8300
+France,1,Paris FC,8200
+France,1,Stade Rennais,8200
+France,1,Toulouse FC,8100
+France,1,RC Strasbourg,8100
+France,1,Stade Brestois 29,8100
+France,1,OGC Nice,8000
+France,1,AJ Auxerre,7800
+France,1,Stade Reims,7300
+France,1,FC Nantes,7300
+France,1,Montpellier HSC,7300
+France,1,Girodins de Bordeaux,6700
+France,1,AS Saint-Ettiene,6700
+France,1,AC Ajaccio,6600
+Portugal,1,SL Benfica,8100
+Portugal,1,FC Porto,8000
+Portugal,1,Sporting CP,8000
+Portugal,1,SC Braga,7800
+Portugal,1,Vitoria de Guimaraes,7400
+Portugal,1,OS Belenses,7300
+Portugal,1,Vitoria Setubal,7200
+Portugal,1,Boavista FC,7000
+Portugal,1,Academica de Coimbra,6700
+Portugal,1,CS Maritimo,6700
+Portugal,1,Rio Ave FC,6700
+Portugal,1,Estoril de Praia,6600
+Portugal,1,Farense,6500
+Portugal,1,Pacos de Ferreira,6500
+Portugal,1,Beira-Mar,6400
+Portugal,1,Gil Vicente,6300
+Portugal,1,CD Nacional,6300
+Portugal,1,Portimonense,6200
+Netherlands,1,AFC Ajax,8200
+Netherlands,1,PSV Eindhoven,8100
+Netherlands,1,Feyenoord,8100
+Netherlands,1,FC Twente,7700
+Netherlands,1,AZ Alkmaar,7700
+Netherlands,1,Sparta Rotterdam,7300
+Netherlands,1,Roda JC,7300
+Netherlands,1,FC Utrecht,7200
+Netherlands,1,NAC Breda,7200
+Netherlands,1,ADO Den Haag,6800
+Netherlands,1,FC Groningen,6700
+Netherlands,1,Vitesse Arnhem,6600
+Netherlands,1,Willem II,6600
+Netherlands,1,NEC Nijmegen,6500
+Netherlands,1,MVV Maastricht,6400
+Netherlands,1,SC Heerenveen,6400
+Netherlands,1,Go Ahead Eagles,6300
+Netherlands,1,RKC Waalwijk,6300
+Scotland,1,Celtic FC,7800
+Scotland,1,Rangers FC,7800
+Scotland,1,Aberdeen,7300
+Scotland,1,Hearts,7300
+Scotland,1,Hibernian,7300
+Russia,1,Zenit St. Petersburg,8100
+Russia,1,FC Krasnodar,7800
+Russia,1,Lokomotiv Moskva,7400
+Russia,1,PFC CSKA Moskva,7600
+Russia,1,Spartak Moskva,7900
+Russia,1,Dinamo Moskva,7800
+Russia,1,Baltika Kaliningrad,7400
+Russia,1,FC Rostov,7400
+Russia,1,FC Rubin Kazan,7200
+Russia,1,Krylya Sovetov Samara,7200
+Ukraine,1,Shakhtar Donetsk,8300
+Ukraine,1,Dynamo Kyiv,8200
+Ukraine,1,FC Dnipro,8100
+Ukraine,1,Metalist Kharkiv,8000
+Ukraine,1,Polyssia Zhytomyr,7500
+Ukraine,1,Karpaty Lviv,7500
+Ukraine,1,Zorya Luhansk,7400
+Albania,1,KF Egnatia,7300
+Belarus,1,ML Vitebsk,7200
+Belarus,1,BATE Borisov,7500
+Belarus,1,Dinamo Minsk,7200
+Belgium,1,Club Brugge,8600
+Belgium,1,Union Saint-Gilloise,8500
+Belgium,1,RSC Anderlecht,8200
+Belgium,1,KAA Gent,8200
+Belgium,1,KRC Genk,8200
+Belgium,1,Royal Antwerp,7700
+Belgium,1,Charleroi,8200
+Belgium,1,Standard de Liege,7800
+Belgium,1,K Sint Truiden,8000
+Belgium,1,KVC Westerlo,7800
+Belgium,1,Lommel SK,7800
+Belgium,1,Zulte-Waregem,7700
+Austria,1,Red Bull Salzburg,8000
+Austria,1,SK Sturm Graz,7700
+Austria,1,SK Rapid Vienna,7900
+Austria,1,LASK Linz,8000
+Austria,1,SV Hartberg,7400
+Austria,1,SV Ried,7300
+Austria,1,FK Austria Vienna,7200
+Croatia,1,GNK Dinamo Zagreb,8100
+Croatia,1,HNK Hajduk Split,7800
+Croatia,1,HNK Rijeka,7600
+Croatia,1,Varazdin,7400
+Croatia,1,Istra 1961,7200
+Croatia,1,NK Osijek,7200
+Serbia,1,FK Crvena Zvezda,8000
+Serbia,1,FK Partizan,7000
+Serbia,1,FK TSC Backa Topola,7000
+Serbia,1,FK Vojvodina,7300
+Serbia,1,FK IMT,6900
+Serbia,1,FK Cukaricki,6800
+Switzerland,1,BSC Young Boys,7800
+Switzerland,1,Servette FC,7600
+Switzerland,1,FC Zurich,7200
+Switzerland,1,FC Lugano,8000
+Switzerland,1,FC Sion,7800
+Switzerland,1,St. Gallen,7800
+Switzerland,1,FC Luzern,7400
+Switzerland,1,FC Basel 1893,7400
+Poland,1,Legia Warszawa,7700
+Poland,1,KKS Lech Poznan,8100
+Poland,1,Rokow Czestochowa,7600
+Poland,1,Jagiellonia Bialystok,7600
+Poland,1,Wisla Krakow,7600
+Poland,1,Pogon Szczecin,7600
+Poland,1,KS Cracovia,7200
+Poland,1,Gornik Zabrze,7900
+Poland,1,GKS Katowice,7500
+Poland,1,Piast Gliwice,7500
+Poland,1,Zaglebie Lubin,7500
+Turkey,1,Fenerbahce,8300
+Turkey,1,Galatasaray,8400
+Turkey,1,Besiktas,8100
+Turkey,1,Istanbul Basaksehir,7700
+Turkey,1,Trabzonspor,8000
+Turkey,1,Goztepe,7700
+Turkey,1,Amed SK,7600
+Turkey,1,Kasimpasa,7500
+Turkey,1,Caykur Rizespor,7500
+Turkey,1,Corum FK,7500
+Greece,1,Olympiakos,8300
+Greece,1,PAOK FC,8000
+Greece,1,AEK Athens,8200
+Greece,1,Panathinaikos,8200
+Greece,1,OFI Crete,7500
+Greece,1,Aris Thessaloniki,7500
+Czechia,1,Sigma Olomouc,7500
+Czechia,1,Hradec Kralove,7500
+Czechia,1,Slavia Praha,8400
+Czechia,1,Sparta Praha,7900
+Czechia,1,Viktoria Plzen,7800
+Czechia,1,Slovan Liberec,7600
+Czechia,1,FK Jablonec,7600
+Czechia,1,Mlada Boleslav,7400
+Czechia,1,Bohemians 1905,7400
+Denmark,1,FC Midtjylland,7900
+Denmark,1,FC Kobenhavn,8100
+Denmark,1,FC Nordsjaelland,7800
+Denmark,1,Brondby IF,7600
+Denmark,1,AGF Aarhus,7600
+Denmark,1,Viborg,7700
+Norway,1,FK Bodo/Glimt,8500
+Norway,1,Viking FK,8300
+Norway,1,Rosenborg BK,7900
+Norway,1,FK Molde,7800
+Norway,1,SK Brann,7700
+Norway,1,Tromso IL,7600
+Sweden,1,Malmo FF,7500
+Sweden,1,IF Elfsborg,7400
+Sweden,1,Hammarby BK,7900
+Sweden,1,Sirius IK,7600
+Sweden,1,BK Hacken,7600
+Romania,1,Steaua Bucuresti,7500
+Romania,1,Dinamo Bucuresti,7500
+Romania,1,Rapid Bucuresti,7300
+Romania,1,CFR Cluj,7300
+Romania,1,Universitatea Craiova,7700
+Romania,1,Universitatea Cluj,7400
+Romania,1,UTA Arad,7000
+Romania,1,Farul Constanta,7000
+Slovakia,1,Slovan Bratislava,7600
+Slovakia,1,DAC 1904 Dunajska Streda,7700
+Slovakia,1,MSK Zilina,7300
+Israel,1,Hapoel Tel Aviv,7500
+Israel,1,Hapoel Haifa,7200
+Israel,1,Hapoel Be'er Sheva,7000
+Hungary,1,Ferencvaros,8300
+Hungary,1,Puskas Akademia,7400
+Hungary,1,Gyor ETO,7600
+Hungary,1,Debrecen,7400
+Cyprus,1,AC Omonia,8000
+Cyprus,1,AEK Larnaca,7800
+Cyprus,1,Apollon Limassol,7700
+Cyprus,1,Pafos FC,7700
+Cyprus,1,APOEL FC,7600
+Cyprus,1,Aris Limassol,7500
+United States,1,Columbus Crew,7700
+United States,1,Los Angeles FC,7600
+United States,1,Inter Miami CF,7600
+United States,1,Seattle Sounders,7400
+United States,1,Orlando City FC,7400
+United States,1,Houston Dynamo,7300
+United States,1,LA Galaxy FC,7300
+United States,1,FC Cincinnati,7300
+United States,1,Philadelphia Union,7200
+United States,1,Real Salt Lake,7200
+United States,1,Charlotte FC,7200
+United States,1,New York City FC,7200
+United States,1,Minnesota United,7200
+United States,1,Portland Timbers,7100
+United States,1,New York Red Bulls,7100
+United States,1,Vancouver Whitecaps FC,7100
+United States,1,Atlanta United,7100
+United States,1,Austin FC,7000
+United States,1,St. Louis City,7000
+United States,1,Dallas FC,7000
+United States,1,Colorado Rapids,7000
+United States,1,CF Montreal Impact,6900
+United States,1,Nashville SC,6900
+United States,1,Sporting Kansas City,6900
+United States,1,DC United,6900
+United States,1,New England Revolution,6800
+United States,1,Toronto FC,6600
+United States,1,Chicago Fire,6600
+United States,1,San Jose Earthquakes,6600
+United States,1,San Diego FC,7200
+Brazil,1,Flamengo,8000
+Brazil,1,Botafogo,7800
+Brazil,1,Sao Paulo,7700
+Brazil,1,Internacional,7700
+Brazil,1,Corinthians,7700
+Brazil,1,Cruzeiro,7600
+Brazil,1,Fluminense,7600
+Brazil,1,RB Bragantino,7500
+Brazil,1,Mirassol,7500
+Brazil,1,Bahia,7500
+Brazil,1,Atletico Mineiro,7400
+Brazil,1,Fortaleza,7400
+Brazil,1,Ceara,7400
+Brazil,1,Gremio,7300
+Brazil,1,Vasco da Gama,7300
+Brazil,1,Santos,7300
+Brazil,1,EC Vitoria,7300
+Brazil,1,Juventude,7200
+Brazil,1,Sport Recife,7100
+Argentina,1,River Plate,8000
+Argentina,1,Racing Club,8000
+Argentina,1,CA Huracan,7800
+Argentina,1,Boca Juniors,7700
+Argentina,1,CA Independiente,7700
+Argentina,1,Rosario Central,7700
+Argentina,1,Argentinos Juniors,7600
+Argentina,1,Estudiantes,7600
+Argentina,1,San Lorenzo,7500
+Argentina,1,Tigre,7500
+Argentina,1,Velez Sarsfield,7500
+Argentina,1,Newell's Old Boys,7500
+Argentina,1,Lanus,7500
+Armenia,1,Noah FC,7500
+Armenia,1,Ararat Armenia,7200
+Armenia,1,Pyunik FC,7200
+Lithuania,1,Kauno Zalgiris,7100
+Lithuania,1,FK Zalgiris Vilnius,7100
+Georgia,1,Iberia 1999,7200
+Georgia,1,Dila Gori FC,7100
+Georgia,1,Torpedo Kutaisi,7000
+Georgia,1,Dinamo Batumi,7100
+Georgia,1,Dinamo Tbilisi,7100
+Azerbaijan,1,Qarabag FK,7700
+Azerbaijan,1,Sabah FK,7800
+Azerbaijan,1,Neftchi Baku,7400
+Azerbaijan,1,Turan Tovuz,7200
+Azerbaijan,1,Zira FK,7200
+Bulgaria,1,Levski Sofia,7800
+Bulgaria,1,CSKA Sofia,7600
+Bulgaria,1,Ludogorets Razgrad,7500
+Bulgaria,1,CSKA 1948 Sofia,7300
+Bosnia,1,HSK Zrinjski Mostar,7500
+Bosnia,1,FK Borac Banja Luka,7500
+Bosnia,1,FK Sarajevo,7200
+Bosnia,1,FK Zeljeznicar,7000
+Slovenia,1,NK Celje,7400
+Slovenia,1,NK Olimpija Ljubljana,7400
+Slovenia,1,NK Maribor,7400
+Slovenia,1,NK Koper,7400
+Finland,1,Inter Turku,7200
+Finland,1,HJK Helsinki,7200
+Ireland,1,Bohemians,7000
+Ireland,1,Shamrock Rovers,7000
+Kazakhstan,1,Kairat Almaty,7200
+Kazakhstan,1,FK Ordabasy,7100
+Kazakhstan,1,FK Astana,7000
+Saudi Arabia,1,Al Hilal,7800
+Saudi Arabia,1,Al Nassr,7700
+Saudi Arabia,1,Al Ahli,7700
+Saudi Arabia,1,Al Ittihad,7600
+Saudi Arabia,1,Al Qadsiah,7600
+Qatar,1,Al Sadd,7400
+Qatar,1,Al Rayyan,7200
+Qatar,1,Al Duhail,7100
+Qatar,1,Al Shamal,6900
+Qatar,1,Al Wakrah,7000
+Emirates,1,Shabab Al Ahli,7600
+Emirates,1,Al Ain,7600
+Emirates,1,Al Wasl,7500
+Emirates,1,Al Wahda,7400
+Emirates,1,Sharjah FC,7400
+Iran,1,Esteghlal,7600
+Iran,1,Persepolis,7600
+Iran,1,Tractor Sazi,7600
+Iran,1,Sepahan Isfahan,7500
+Iran,1,Foolad,7300
+Uzbekistan,1,Pakhtakor Tashkent,7200
+Uzbekistan,1,Nasaf Qarshi,7100
+Uzbekistan,1,Bunyodkor,7000
+Uzbekistan,1,Neftchi Fargana,7100
+Iraq,1,Al Quwa Al Jawiya,6900
+Iraq,1,Al Shorta,6900
+Iraq,1,Erbil SC,6700
+Japan,1,Sanfrecce Hiroshima,7800
+Japan,1,Machida Zelvia,7700
+Japan,1,Vissel Kobe,7600
+Japan,1,FC Tokyo,7600
+Japan,1,Kashima Antlers,7600
+Japan,1,Kashiwa Reysol,7600
+Japan,1,Kawasaki Frontale,7500
+Japan,1,Yokohama F Marinos,7500
+Japan,1,Urawa Red Diamonds,7400
+Japan,1,Gamba Osaka,7400
+Japan,1,Nagoya Grampus Eight,7400
+South Korea,1,FC Seoul,7400
+South Korea,1,Daejon Hana Citizen,7400
+South Korea,1,Jeonbuk Motors,7400
+China,1,Beijing Guoan,7100
+China,1,Shanghai Port,7100
+China,1,Chengdu Rongcheng,7000
+China,1,Shanghai Shenhua,7000
+China,1,Shandong Taishan,7000
+China,1,Dalian Yingbo,7000
+Thailand,1,Buriram United,7100
+Thailand,1,Port FC,7000
+Thailand,1,Bangkok United,7000
+Australia,1,Melbourne City,7000
+Australia,1,Melbourne Victory,7000
+Australia,1,Sydney FC,7000
+Australia,1,Adelaide United,7000
+Australia,1,Newcastle Jets,7000
+Australia,1,Macarthur,7000
+Malaysia,1,Johor Darul Ta'zim,7500
+Kuwait,1,Al-Kuwait,7400
+Bahrain,1,Al-Muharraq,7000
+Bahrain,1,Al-Khaldiya,6800
+Bahrain,1,Al Riffa,6700
+Brunei,1,DPMM FC,5000
+Cambodia,1,PKR Svay Rieng,6000
+Cambodia,1,Visakha,5700
+Taiwan,1,Tainan,5500
+Taiwan,1,AC Taipei,5400
+Hong Kong,1,Kitchee,6400
+Hong Kong,1,Eastern SC,5800
+Hong Kong,1,Lee Man,6200
+India,1,Mohun Bagan,6400
+India,1,East Bengal,6400
+India,1,Mumbai City,6300
+India,1,Bengaluru FC,6200
+India,1,FC Goa,6100
+India,1,Punjab FC,6000
+India,1,Northeast United,5800
+India,1,Kerala Blasters,5700
+India,1,FC Odisha,5500
+Indonesia,1,Persib Bandung,7000
+Indonesia,1,Persija Jakarta,6700
+Indonesia,1,Borneo,6600
+Indonesia,1,Dewa United,6500
+Indonesia,1,Bali United,6500
+Jordan,1,Al Faisaly,7000
+Jordan,1,Al Hussein,7000
+Jordan,1,Al Wehdat,7000
+Kuwait,1,Al Arabi,6700
+Kuwait,1,Al Qadsia,6600
+Kyrgyzstan,1,Muras United,5400
+Kyrgyzstan,1,Bars Issyk-Kul,5400
+Kyrgyzstan,1,Dordoy Bishkek,5400
+Laos,1,Young Elephants,3500
+Laos,1,Ezra,3500
+Lebanon,1,Al Ansar,6900
+Lebanon,1,Al Nejmeh,6600
+Malaysia,1,Selangor,6600
+Malaysia,1,Kuching City,6400
+Malaysia,1,Kuala Lumpur FC,6200
+Philippines,1,Manila Digger,6500
+Philippines,1,One Taguig,6200
+Philippines,1,Cebu United,6100
+Vietnam,1,Cong An Hanoi,7000
+Vietnam,1,Thep Xanh Nam Dinh,6600
+Vietnam,1,Ninh Binh FC,6500
+Vietnam,1,Hanoi FC,6500
+Vietnam,1,The Cong-Viettel,6500
+Yemen,1,Al Ahli Sanaa,5900
+Yemen,1,Al Wahda Sanaa,5800
+Yemen,1,Hadhramut,5700
+Uzbekistan,1,Navbahor Namangan,6900
+Turkmenistan,1,Arkadag,7100
+Turkmenistan,1,Ahal FK,6100
+Turkmenistan,1,Altyn Asyr,6100
+Tajikistan,1,Istiklol,6400
+Tajikistan,1,Regar TedAz,5700
+Tajikistan,1,Ravshan,5600
+Syria,1,Al-Karamah SC,7000
+Syria,1,Al-Ittihad Ahli Aleppo,6900
+Syria,1,Homs Al Fidaa,6900
+Singapore,1,Lion City Sailors,6700
+Singapore,1,Tampines Rovers,6400
+Oman,1,Al Seeb,7100
+Oman,1,Al Nahda,6700
+Algeria,1,CR Belouizdad,7500
+Algeria,1,MC Alger,7400
+Algeria,1,JS Kabylie,7300
+Algeria,1,USM Alger,7200
+Algeria,1,MC Oran,7100
+Algeria,1,Olympique Akbou,7000
+Algeria,1,JS Saoura,7000
+Algeria,1,MB Rouisset,6900
+Algeria,1,ES Setif,6900
+Algeria,1,ES Ben Aknoun,6900
+Algeria,1,JS El Biar,6900
+Algeria,1,USM Khenchela,6800
+Algeria,1,RC Kouba,6700
+Algeria,1,CS Constantine,6700
+Algeria,1,CR Temouchent,6700
+Algeria,1,ASO Chlef,6700
+Algeria,1,USM El Harrach,6600
+Algeria,1,US Biskra,6600
+Egypt,1,Pyramids FC,7700
+Egypt,1,Al Ahly SC,7700
+Egypt,1,Zamalek SC,7400
+Egypt,1,Ceramica Cleopatra,7300
+Egypt,1,Al Masry SC,7100
+Egypt,1,National Bank Egypt,7100
+Egypt,1,Al Mokawloon Al Arab,7000
+Egypt,1,Wadi Degla,7000
+Egypt,1,ZED FC,7000
+Egypt,1,El Sharkia ENPPI,6900
+Egypt,1,Modern Sport,6900
+Egypt,1,Montakhab El Suez Petrojet,6900
+Egypt,1,Smouha SC,6900
+Egypt,1,Al Ittihad,6900
+Egypt,1,El Qanah,6800
+Egypt,1,El Gaish,6700
+Egypt,1,El Gouna FC,6700
+Egypt,1,El Mahalla,6600
+Egypt,1,Asyut Petrol,6600
+Egypt,1,Abu Qair Semad,6600
+Morocco,1,AS FAR Rabat,7500
+Morocco,1,RS Berkane,7500
+Morocco,1,Maghreb Fes,7400
+Morocco,1,Raja Casablanca,7500
+Morocco,1,Kawkab Marrakech,7000
+Morocco,1,Wydad Casablanca,7000
+Morocco,1,FUS Rabat,7000
+Morocco,1,IR Tangier,7000
+Morocco,1,COD Meknes,7000
+Morocco,1,Wydad Temara,6900
+Morocco,1,DH El Jadida,6900
+Morocco,1,HUS Agadir,6900
+Morocco,1,UTS Rabat,6800
+Morocco,1,USAT,6700
+Morocco,1,RCA Zemamra,6700
+Morocco,1,Tetouan,6600
+Tunisia,1,Club Africain,7100
+Tunisia,1,CS Sfaxien,6900
+Tunisia,1,Stade Tunisien,6800
+Tunisia,1,Esperance de Tunis,7400
+Tunisia,1,US Monastir,6800
+Tunisia,1,US Ben Guerdane,6600
+Tunisia,1,Etoile du Sahel,6600
+South Africa,1,Kaizer Chiefs,7100
+South Africa,1,AmaZulu,6900
+South Africa,1,Sekhukhune United,6800
+South Africa,1,Stellenbosch,6700
+South Africa,1,Lamontville Golden Arrows,6700
+South Africa,1,Orlando Pirates,7500
+South Africa,1,Mamelodi Sundowns,7500
+South Africa,1,Milford,6700
+South Africa,1,Durban City,6700
+South Africa,1,Polokwane City,6700
+Angola,1,Petro Luanda,7300
+Angola,1,Wiliete,6900
+Angola,1,1 de Agosto,6700
+Congo DR,1,TP Mazembe,7200
+Congo DR,1,Maniema United,6900
+Congo DR,1,Lupopo,6800
+Congo DR,1,Vita Club,6700
+Congo DR,1,Don Bosco,6300
+Libya,1,Al Ahli Tripoli,7400
+Libya,1,Asswehly SC,7100
+Libya,1,Al Ahli Benghazi,7000
+Libya,1,Al Ittihad,6900
+Libya,1,Al Nasr Benghazi,6900
+Libya,1,Al Akhdar,6700
+Tanzania,1,Young Africans,7500
+Tanzania,1,Azam FC,7100
+Tanzania,1,Simba,7500
+Tanzania,1,Black Stars,6600
+Mali,1,Djoliba AC,7000
+Mali,1,Stade Malien,7000
+Mali,1,AS Real Bamako,6700
+Mali,1,Binga FC,6600
+Nigeria,1,Enugu,7000
+Nigeria,1,Rivers United,6700
+Nigeria,1,Barau,6600
+Nigeria,1,Bendel Institute,6600
+Nigeria,1,Nasarawa United,6600
+Sudan,1,Al Hilal Omdurman,7000
+Ivory Coast,1,ASEC Mimosas,6800
+Ivory Caast,1,San-Pedro,6700
+Zimbabwe,1,Scottland,6900
+Zimbabwe,1,Hardrock,6800
+Zimbabwe,1,Ngezi,6700
+Zambia,1,Dynamos,6900
+Zambia,1,Red Arrows,6700
+Zambia,1,ZESCO United,6600
+Ghana,1,Medeama,6800
+Ghana,1,Oak,6800
+Ghana,1,Samartex,6600
+Ghana,1,Port City,6600
+Ghana,1,Aduana,6600
+Guinea,1,Horoya AC,6700
+Botswana,1,Gaborone,6700
+Mauritania,1,FC Nouadhibou,6700
+Burkina Faso,1,Rahimo FC,6800
+Mozambique,1,Black Bulls FC,6700
+Mozambique,1,UD Songo,6600
+Gabon,1,Mangasport,6700
+Uganda,1,Vipers SC,6700
+Uganda,1,SC Villa,6600
+Uganda,1,NEC FC,6600
+Togo,1,ASC Kara,6700
+Togo,1,ASKO Kara,6600
+Ecuador,1,Independiente del Valle,8400
+Ecuador,1,CSD Macara,8000
+Ecuador,1,LDU Quito,7900
+Ecuador,1,Universidad Catolica,7800
+Ecuador,1,Barcelona SC,7600
+Ecuador,1,SD Aucas,7500
+Ecuador,1,Libertad,7400
+Ecuador,1,Emelec,7400
+Ecuador,1,Guayaquil City FC,7300
+Ecuador,1,Leones FC,7300
+Colombia,1,Atletico Nacional,8200
+Colombia,1,America de Cali,8000
+Colombia,1,Millonarios FC,7900
+Colombia,1,Independiente Santa Fe,7800
+Colombia,1,Once Caldas,7800
+Colombia,1,Deportivo Cali,7800
+Colombia,1,Independiente Medellin,7800
+Colombia,1,Deportes Tolima,7800
+Colombia,1,Atletico Bucaramanga,7700
+Colombia,1,Junior FC,7700
+Colombia,1,Aguilas Dorados,7600
+Peru,1,Club Universitario,7700
+Peru,1,Allianza Lima,7700
+Peru,1,FBC Melgar,7500
+Peru,1,Sporting Cristal,7500
+Peru,1,Sport Huancayo,7400
+Peru,1,Deportivo Garcilaso,7300
+Peru,1,Club Cienciano,7300
+Peru,1,Alianza Atletico,7300
+Chile,1,Colo Colo,7900
+Chile,1,Universidad de Chile,7900
+Chile,1,Universidad Catolica,7800
+Chile,1,Coquimbo Unido,7700
+Chile,1,Everton de Vina del Mar,7500
+Chile,1,O'Higgins FC,7400
+Chile,1,CD Palestino,7400
+Chile,1,Deportes Concepcion,7400
+Chile,1,Deportes Limache,7400
+Chile,1,Audax Italiano,7400
+Paraguay,1,Club Olimpia,8000
+Paraguay,1,Cerro Porteno,7700
+Paraguay,1,Club Nacional,7600
+Paraguay,1,Sportivo Trinidense,7600
+Paraguay,1,Club Guarani,7500
+Paraguay,1,Club Libertad,7500
+Paraguay,1,2 de Mayo,7300
+Paraguay,1,Sportivo Ameliano,7300
+Paraguay,1,Recoleta FC,7200
+Paraguay,1,Sportivo Luqueno,7100
+Uruguay,1,CD Penarol,7800
+Uruguay,1,Club Nacional de Futbol,7800
+Uruguay,1,Montevideo City Torque,7700
+Uruguay,1,Liverpool Montevideo,7700
+Uruguay,1,Deportivo Maldonado,7500
+Uruguay,1,Racing Club de Montevideo,7400
+Uruguay,1,CA Juventud,7300
+Uruguay,1,Montevideo Wanderers,7200
+Uruguay,1,Albion FC,7200
+Uruguay,1,Defensor Sporting,7100
+Bolivia,1,Bolivar,7900
+Bolivia,1,Always Ready,7700
+Bolivia,1,The Strongest,7500
+Bolivia,1,Real Potosi,7300
+Bolivia,1,Nacional Potosi,7200
+Bolivia,1,Oriente Petrolero,7200
+Bolivia,1,CD Aurora,7100
+Bolivia,1,CD Guabira,7000
+Bolivia,1,Real Oruro,7000
+Bolivia,1,CSD Blooming,7000
+Venezuela,1,Carabobo,7600
+Venezuela,1,Deportivo Tachira,7600
+Venezuela,1,Metropolitanos,7400
+Venezuela,1,Academica Puerto Cabello,7300
+Venezuela,1,Deportivo La Guaira,7200
+Cameroon,1,Colombe Sportive,6600
+Cameroon,1,Coton Sport,6200
+Wales,1,The New Saints,6800
+Kosovo,1,Malisheva,7100
+Kosovo,1,FC Drita,7100
+Kosovo,1,FC Prishtina,7000
+Kosovo,1,FC Gjilani,6800
+Kosovo,1,FC Balkani,6800
+Andorra,1,Inter Club d'Escaldes,6800
+Andorra,1,FC Santa Coloma,6600
+Liechtenstein,1,FC Vaduz,7200
+Estonia,1,Levadia,7000
+Latvia,1,FC Riga,7500
+Latvia,1,FK RFS,7300
+Latvia,1,FK Auda,6900
+Latvia,1,FK Liepaja,6500

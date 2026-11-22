@@ -8,7 +8,8 @@ public class ControllerCWC {
     private static List<String> teams = new ArrayList<>();
 
     private static String getCompWinner(List<CompetitionHistory> compHistory, int year) {
-        if (compHistory == null) System.out.println("Comp History is null");
+        if (compHistory == null)
+            System.out.println("Comp History is null");
         for (CompetitionHistory comp : compHistory) {
             if (comp.getSeason() == year) {
                 System.out.println("Comp winner found: " + Sim.getClub(comp.getTeamHistory(1).getTeamId()).getName());
@@ -31,7 +32,7 @@ public class ControllerCWC {
         Map<CCType.CompType, List<CompetitionHistory>> nortAmHistory = ControllerNAmerica.getHistory();
         teams.add(getCompWinner(nortAmHistory.get(CCType.CompType.NACL), year));
         Map<CCType.CompType, List<CompetitionHistory>> asiaHistory = ControllerAsia.getHistory();
-        teams.add(getCompWinner(asiaHistory.get(CCType.CompType.ACL), year));
+        teams.add(getCompWinner(asiaHistory.get(CCType.CompType.ACLE), year));
         Map<CCType.CompType, List<CompetitionHistory>> africaHistory = ControllerAfrica.getHistory();
         teams.add(getCompWinner(africaHistory.get(CCType.CompType.ACC), year));
     }

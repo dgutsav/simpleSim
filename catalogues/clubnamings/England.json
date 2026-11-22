@@ -1,0 +1,19 @@
+{
+    "id": "england",
+    "prefixes": [
+        "FC",
+        "AFC"
+    ],
+    "suffixes": [
+        "FC",
+        "City",
+        "Town",
+        "United",
+        "Wanderers",
+        "Rovers",
+        "Rangers",
+        "",
+        "FC",
+        "County"
+    ]
+}

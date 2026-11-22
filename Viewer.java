@@ -66,7 +66,8 @@ class Viewer {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             str = br.readLine();
-        } catch(IOException e) {}
+        } catch (IOException e) {
+        }
         return str;
     }
 
@@ -236,9 +237,10 @@ class Viewer {
         for (int i = 0; i < s.size(); i++) {
             Player p = s.get(i);
             Club_Team cl = Sim.getClub(Sim.findPlayerInClub(p.getId()));
-            System.out.println(CommonFunctions.getPaddedString(PositionHelper.getPositionName(p.getPosition()), 3) + "| "
-                    + CommonFunctions.getPaddedString(p.getName(), 30) + p.getRating() + "\t"
-                    + p.getAge() + "\t" + cl.getName() + "(" + Sim.getNation(cl.getNationId()).getCode() + ")");
+            System.out
+                    .println(CommonFunctions.getPaddedString(PositionHelper.getPositionName(p.getPosition()), 3) + "| "
+                            + CommonFunctions.getPaddedString(p.getName(), 30) + p.getRating() + "\t"
+                            + p.getAge() + "\t" + cl.getName() + "(" + Sim.getNation(cl.getNationId()).getCode() + ")");
         }
     }
 
@@ -247,7 +249,7 @@ class Viewer {
         Map<Integer, Integer> sizes = new HashMap<>();
 
         Map<Integer, Nation> nat = Sim.getAllNations();
-        for(Map.Entry<Integer, Nation> entry: nat.entrySet()) {
+        for (Map.Entry<Integer, Nation> entry : nat.entrySet()) {
             int x = entry.getKey();
             LeagueStructure l = Sim.getLeagueStructure(x);
             Division d = l.getDivisions().get(1);
@@ -256,11 +258,13 @@ class Viewer {
         }
         ArrayList<Map.Entry<Integer, Integer>> list = new ArrayList<>(leagues.entrySet());
         Collections.sort(list,
-                (Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) -> (int) (o2.getValue() - o1.getValue()));
+                (Map.Entry<Integer, Integer> o1,
+                        Map.Entry<Integer, Integer> o2) -> (int) (o2.getValue() - o1.getValue()));
         for (Map.Entry<Integer, Integer> aa : list) {
             System.out.print(CommonFunctions.getPaddedString(Sim.getNation(aa.getKey()).getName(), 20));
-            long prize_money = (long)(aa.getValue() * 50000 * (double)(Math.pow(1.04, (aa.getValue() - 200)))); 
-            String str = CommonFunctions.getPaddedString(Sim.getLeagueStructure(aa.getKey()).getDivisions().get(1).getName(), 40);
+            long prize_money = (long) (aa.getValue() * 50000 * (double) (Math.pow(1.04, (aa.getValue() - 200))));
+            String str = CommonFunctions
+                    .getPaddedString(Sim.getLeagueStructure(aa.getKey()).getDivisions().get(1).getName(), 40);
             str += " " + aa.getValue() + "  ";
             str += "$ " + CommonFunctions.formatMoney(prize_money);
             System.out.println(str);
@@ -272,17 +276,19 @@ class Viewer {
         String sch = getText();
         Map<String, Player> x = Sim.getAllPlayers();
         List<Player> players = new ArrayList<>();
-        for (Map.Entry<String, Player> entry: x.entrySet()) {
-            if (entry.getValue().getName().equalsIgnoreCase(sch)) players.add(entry.getValue()); 
+        for (Map.Entry<String, Player> entry : x.entrySet()) {
+            if (entry.getValue().getName().equalsIgnoreCase(sch))
+                players.add(entry.getValue());
         }
         players = Sim.sortByRating(players);
         for (int i = 0; i < players.size(); i++) {
-            System.out.print(CommonFunctions.getPaddedString((i+1)+".", 5));
+            System.out.print(CommonFunctions.getPaddedString((i + 1) + ".", 5));
             System.out.print(CommonFunctions.getPaddedString(players.get(i).getName(), 25));
             System.out.print(Sim.getNation(players.get(i).getNationId()).getCode() + "  ");
             System.out.println(Sim.getClub(Sim.findPlayerInClub(players.get(i).getId())).getName());
         }
-        if (players.size() == 0) return;
+        if (players.size() == 0)
+            return;
         System.out.println("Enter Choice:");
         int ch = getInput();
         Player player = players.get(ch - 1);

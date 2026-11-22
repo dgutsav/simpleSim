@@ -60,4 +60,8 @@ public class CompetitionHistory {
     public String getWinner() {
         return getTeamHistory(1).getTeamId();
     }
+
+    public String getRunnerUp() {
+        return getTeamHistory(2).getTeamId();
+    }
 }

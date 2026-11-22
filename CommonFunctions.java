@@ -294,6 +294,16 @@ public class CommonFunctions {
         }
     }
 
+    public static void display2DArrayTeams(String[][] array, int a, int b) {
+        System.out.println();
+        for (int i = 0; i < a; i++) {
+            for (int j = 0; j < b; j++) {
+                System.out.print(Sim.getPaddedClubContinentalName(array[i][j]));
+            }
+            System.out.println();
+        }
+    }
+
     public static List<Club_Team> getTeams(List<String> teams_to_find) {
         List<Club_Team> teams = new ArrayList<>();
         for (String team_id : teams_to_find) {
@@ -324,7 +334,7 @@ public class CommonFunctions {
 
     public static String formatMoney(long amount) {
         if (amount < 0) {
-            return "-"+formatMoney(amount *-1);
+            return "-" + formatMoney(amount * -1);
         }
         if (amount < 1000)
             return String.valueOf(amount);
@@ -365,7 +375,8 @@ public class CommonFunctions {
 
     public static String getLeftPaddedString(String x, int len) {
         String padded = x;
-        for(int i = padded.length(); i < len; i++) padded = " " + padded;
+        for (int i = padded.length(); i < len; i++)
+            padded = " " + padded;
         return padded;
     }
 
@@ -440,13 +451,20 @@ public class CommonFunctions {
             DomesticDivision div = new DomesticDivision(div_setup.name, div_setup.level, div_setup.num_prom,
                     div_setup.num_rel, div_setup.strength, nation.getId());
             List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation.getName(), div_setup.level);
-            int set_club = club_sets.size() <= div_setup.num_teams ? club_sets.size() : div_setup.num_teams;
+            if (club_sets == null)
+                System.out.println("CLUB SETS IS NULL");
+            // System.out.println(club_sets.size());
+            int set_club = div_setup.num_teams;
+            if (club_sets.size() <= div_setup.num_teams)
+                set_club = club_sets.size();
+            // int set_club = club_sets.size() <= div_setup.num_teams ? club_sets.size() :
+            // div_setup.num_teams;
             int rnd_club = div_setup.num_teams - set_club;
             List<String> ids = generateSetClub(club_sets, set_club, nation);
             ids.addAll(generateRandomClub(rnd_club, div_setup.strength, div_setup.level, nation));
             div.setTeams(ids);
             return div;
-        } 
+        }
         return new DomesticDivision("League", 0, 0, 0, 0, 0);
     }
 }

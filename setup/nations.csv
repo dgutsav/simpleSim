@@ -1,0 +1,144 @@
+England,ENG,4,1,4,20,90,157,Europe
+Spain,ESP,6,2,2,20,85,163,Europe
+Italy,ITA,10,4,2,20,84,156,Europe
+Germany,GER,13,3,3,18,84,162,Europe
+France,FRA,2,5,2,18,83,165,Europe
+Portugal,POR,5,7,2,18,80,159,Europe
+Netherlands,NED,14,11,2,18,79,159,Europe
+Austria,AUT,23,12,2,12,78,144,Europe
+Scotland,SCO,48,20,2,12,74,135,Europe
+Russia,RUS,39,6,3,16,77,139,Europe
+Serbia,SRB,30,19,3,16,72,148,Europe
+Ukraine,UKR,24,9,2,10,72,141,Europe
+Belgium,BEL,1,8,2,16,81,160,Europe
+Switzerland,SUI,16,17,3,12,78,137,Europe
+Greece,GRE,53,14,3,18,78,135,Europe
+Croatia,CRO,11,15,2,10,78,150,Europe
+Turkey,TUR,32,10,3,16,79,140,Europe
+Czechia,CZE,42,13,2,14,78,145,Europe
+Denmark,DEN,12,16,2,14,79,130,Europe
+Cyprus,CYP,100,18,2,10,76,127,Europe
+Norway,NOR,44,21,3,14,79,134,Europe
+Poland,POL,19,22,3,18,79,136,Europe
+Israel,ISR,87,23,3,12,75,127,Europe
+Romania,ROU,37,24,3,16,74,143,Europe
+Hungary,HUN,40,25,3,14,76,134,Europe
+Belarus,BLR,88,26,2,10,69,125,Europe
+Sweden,SWE,20,27,2,10,76,135,Europe
+Slovakia,SVK,33,28,2,10,74,138,Europe
+Slovenia,SVN,62,29,2,10,72,129,Europe
+Bulgaria,BUL,68,30,2,10,73,129,Europe
+Albania,ALB,66,31,2,10,72,129,Europe
+Finland,FIN,54,32,2,10,70,129,Europe
+Ireland,IRL,42,33,2,10,69,130,Europe
+Bosnia,BIH,55,34,2,10,70,133,Europe
+Wales,WAL,18,35,1,10,57,139,Europe
+Iceland,ISL,46,36,2,10,68,131,Europe
+Moldova,MDA,46,37,2,8,64,131,Europe
+Kazakhstan,KAZ,46,38,2,10,69,131,Europe
+Georgia,GEO,46,39,2,10,67,131,Europe
+Armenia,ARM,46,40,2,10,67,131,Europe
+Azerbaijan,AZE,46,41,2,10,73,131,Europe
+Latvia,LAT,46,42,2,10,66,131,Europe
+Estonia,EST,46,43,2,10,61,131,Europe
+Lithuania,LIT,46,44,2,10,67,131,Europe
+North Macedonia,MKD,46,45,1,10,68,131,Europe
+Montenegro,MNE,46,46,1,10,63,131,Europe
+Kosovo,KVX,46,47,1,10,70,131,Europe
+Northern Ireland,NIR,46,48,1,10,60,131,Europe
+Luxembourg,LUX,46,49,1,10,63,131,Europe
+Faroe Islands,FRO,46,50,1,10,62,90,Europe
+Andorra,AND,46,51,1,10,54,90,Europe
+San Marino,SMR,46,55,1,10,50,90,Europe
+Liechtenstein,LIE,46,52,1,10,50,90,Europe
+Gibraltar,GIB,46,53,1,10,52,90,Europe
+Malta,MAL,46,54,1,10,59,90,Europe
+Argentina,ARG,7,2,3,22,81,162,South America
+Brazil,BRA,3,1,3,20,82,163,South America
+Colombia,COL,15,3,3,20,79,154,South America
+Chile,CHI,17,4,2,18,77,149,South America
+Uruguay,URU,8,5,2,16,76,150,South America
+Paraguay,PAR,34,6,3,12,77,140,South America
+Ecuador,ECU,56,7,3,16,78,141,South America
+Peru,PER,25,8,2,20,75,145,South America
+Venezuela,VEN,28,9,2,20,73,137,South America
+Bolivia,BOL,79,10,2,14,74,130,South America
+Mexico,MEX,9,1,2,18,79,145,North America
+United States,USA,22,2,1,30,79,136,North America
+Canada,CAN,72,4,1,10,58,135,North America
+Costa Rica,CRC,51,3,2,18,74,135,North America
+Nicaragua,NIC,90,6,1,10,68,100,North America
+El Salvador,ELS,90,7,1,10,68,100,North America
+Guatemala,GUA,90,8,1,10,68,100,North America
+West Indies,WIN,47,6,1,16,56,120,North America
+Honduras,HON,64,5,2,14,61,126,North America
+Panama,PAN,90,7,1,10,73,100,North America
+Belize,BLZ,90,18,1,10,68,100,North America
+Saudi Arabia,SAU,67,1,1,18,74,127,Asia
+Japan,JPN,27,2,1,18,77,138,Asia
+South Korea,KOR,38,3,1,18,73,139,Asia
+Emirates,UAE,74,4,1,10,73,127,Asia
+Iran,IRN,29,5,1,20,71,133,Asia
+Qatar,QAT,58,6,1,10,70,129,Asia
+Thailand,THA,111,7,1,12,66,115,Asia
+Australia,AUS,41,8,1,8,70,136,Asia
+Uzbekistan,UZB,85,9,1,18,67,130,Asia
+Malaysia,MAS,69,10,1,18,61,122,Asia
+China,CHN,74,11,1,18,67,125,Asia
+Jordan,JOR,69,12,1,10,67,122,Asia
+Iraq,IRQ,69,13,1,10,67,122,Asia
+Vietnam,VIE,69,14,1,14,64,122,Asia
+India,IND,69,15,1,16,60,122,Asia
+Indonesia,IDN,69,16,1,14,64,122,Asia
+Syria,SYR,76,17,1,10,53,121,Asia
+New Zealand,NZL,69,18,1,8,51,122,Asia
+Bahrain,BHR,69,19,1,8,65,122,Asia
+Oman,OMA,69,20,1,8,64,122,Asia
+Kuwait,KUW,69,21,1,8,54,122,Asia
+Singapore,SGP,69,22,1,8,59,122,Asia
+Cambodia,CAM,69,23,1,8,49,122,Asia
+Philippines,PHI,69,24,1,8,57,122,Asia
+Turkmenistan,TKM,69,25,1,8,57,122,Asia
+Hong Kong,HKG,69,26,1,8,56,122,Asia
+Tajikistan,TJK,69,27,1,8,54,122,Asia
+Taiwan,TWN,69,28,1,8,49,122,Asia
+Kyrgyzstan,KGZ,69,29,1,8,49,122,Asia
+North Korea,DPK,69,30,1,8,50,122,Asia
+Lebanon,LEB,69,31,1,8,60,122,Asia
+Myanmar,MYA,69,32,1,4,49,122,Asia
+Palestine,PAL,69,33,1,4,34,122,Asia
+Laos,LAO,69,34,1,4,39,122,Asia
+Yemen,YEM,69,35,1,4,47,122,Asia
+Brunei,BRU,69,36,1,4,57,122,Asia
+Bangladesh,BAN,69,37,1,4,46,122,Asia
+Mongolia,MNG,69,38,1,4,40,122,Asia
+Afghanistan,AFG,69,39,1,4,35,122,Asia
+Timor Leste,TLS,69,40,1,4,35,122,Asia
+Morocco,MAR,35,1,1,14,74,131,Africa
+Egypt,EGY,49,2,1,14,74,133,Africa
+Algeria,ALG,31,3,1,14,74,131,Africa
+South Africa,RSA,67,5,1,12,72,130,Africa
+Tunisia,TUN,26,4,1,14,69,130,Africa
+Congo DR,DRC,75,6,1,12,62,127,Africa
+Nigeria,NGA,35,10,1,14,69,135,Africa
+Guinea,GUI,75,9,1,12,64,124,Africa
+Angola,ANG,50,7,1,12,66,124,Africa
+Sudan,SUD,67,8,1,12,62,124,Africa
+Senegal,SEN,20,13,1,14,66,130,Africa
+Ivory Coast,CIV,61,14,1,14,66,128,Africa
+Zambia,ZAM,50,11,1,12,67,124,Africa
+Cameroon,CAM,33,12,1,12,61,124,Africa
+Ghana,GHA,52,15,1,14,69,128,Africa
+Mali,MLI,45,16,1,12,67,124,Africa
+Tanzania,TAN,103,17,1,14,66,105,Africa
+Burkina Faso,BFA,111,18,1,10,65,108,Africa
+Mozambique,MOZ,130,19,1,10,64,100,Africa
+Libya,LIB,138,20,1,10,63,95,Africa
+Zimbabwe,ZIM,144,21,1,10,63,95,Africa
+Botswana,BOT,150,22,1,10,63,95,Africa
+Mauritania,MAU,151,23,1,10,63,95,Africa
+Kenya,MAU,151,24,1,10,63,95,Africa
+Benin,BEN,151,25,1,10,63,95,Africa
+Togo,TOG,151,26,1,10,63,95,Africa
+Uganda,UGA,151,27,1,10,63,95,Africa
+Gabon,GAB,151,28,1,10,63,95,Africa

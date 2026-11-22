@@ -1,28 +1,37 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 class EuropeanFormatCalculator {
     private static int valC = 80, valE = 256, valN = 576, valM = 16;
-    private static int Ac1 = 24, Ac2 = 8, Ac3 = 4, Ac4 = 3;
-    private static int Ae1 = 16, Ae2 = 8, Ae3 = 3, Ae4 = 5;
-    private static int Af1 = 48, Af2 = 48, Af4 = 9;
-    private static int Am2 = 6, Am3 = 5, Am4 = 0;
-    private static int targetDist = 10, targetSum = 10;
+    private static int Ac1 = 28, Ac2 = 10, Ac3 = 0, Ac4 = 4;
+    private static int Ae1 = 12, Ae2 = 12, Ae3 = 3, Ae4 = 5;
+    private static int Af1 = 52, Af2 = 54, Af4 = 5;
+    private static int Am2 = 4, Am3 = 6, Am4 = 0;
+    private static int targetDist = 18;
 
     static class EFC_Solution {
-        int[] solution;
+        List<Integer> solution;
         double distance;
         String result;
 
-        public EFC_Solution(int[] s, double dist, String res) {
+        public EFC_Solution(List<Integer> s, double dist, String res) {
             this.solution = s;
             this.distance = dist;
             this.result = res;
         }
+
+        public String getSolutionString() {
+            String str = String.valueOf(this.solution.get(0));
+            for (int i = 1; i < this.solution.size(); i++) {
+                str = str + "," + this.solution.get(i);
+            }
+            return str;
+        }
     }
 
     private static int sq(int val, int target) {
-        return (val - target) * (val - target);
+        int diff = val - target;
+        return diff * diff;
     }
 
     private static boolean validate(double d) {
@@ -114,10 +123,17 @@ class EuropeanFormatCalculator {
     private static EFC_Solution selectClosest(int c, int m, int e, int f) {
         double min_distance = Integer.MAX_VALUE;
         String result = null;
-        int[] solution = new int[14];
+        List<Integer> soln = new ArrayList<>();
         for (int c1 = 2; c1 < c; c1 += 2) {
+            double qc1 = c1 / 2.0f;
             for (int c2 = 0; c2 < c - c1; c2++) {
+                double qc2 = (qc1 + c2) / 2.0f;
+                if (!validate(qc2))
+                    continue;
                 for (int c3 = 0; c3 < c - c1 - c2; c3++) {
+                    double qc3 = (qc2 + c3) / 2.0f;
+                    if (!validate(qc3))
+                        continue;
                     int c4 = c - c1 - c2 - c3;
                     int cVal = c1 + 2 * c2 + 4 * c3 + 8 * c4;
                     if (cVal != valC)
@@ -148,24 +164,16 @@ class EuropeanFormatCalculator {
                                                         + sq(c4, Ac4) + sq(e1, Ae1) + sq(e2, Ae2) + sq(e3, Ae3)
                                                         + sq(e4, Ae4) + sq(f1, Af1) + sq(f2, Af2) + sq(f4, Af4)
                                                         + sq(m2, Am2) + sq(m3, Am3) + sq(m4, Am4));
-                                                double dist_c = Math
-                                                        .sqrt(sq(c1, Ac1) + sq(c2, Ac2) + sq(c3, Ac3) + sq(c4, Ac4));
-                                                double dist_e = Math
-                                                        .sqrt(sq(e1, Ae1) + sq(e2, Ae2) + sq(e3, Ae3) + sq(e4, Ae4));
-                                                double dist_f = Math.sqrt(sq(f1, Af1) + sq(f2, Af2) + sq(f4, Af4));
-                                                double dist_m = Math.sqrt(sq(m2, Am2) + sq(m3, Am3) + sq(m4, Am4));
-                                                double sum = Math.sqrt((dist_c * dist_c) + (dist_m * dist_m)
-                                                        + (dist_e * dist_e) + (dist_f * dist_f));
-                                                if (distance <= targetDist && sum <= targetSum
-                                                        && distance < min_distance) {
+                                                if (distance <= targetDist && distance < min_distance) {
                                                     String res = visualize(c1, c2, c3, c4, e1, e2, e3, e4, f1, f2, f4,
                                                             m2, m3, m4);
                                                     if (res != null) {
                                                         result = res;
-                                                        int[] s = { c1, c2, c3, c4, m2, m3, m4, e1, e2, e3, e4, f1, f2,
-                                                                f4 };
-                                                        solution = s;
+                                                        soln = new ArrayList<>(List.of(c1, c2, c3, c4, m2, m3, m4, e1,
+                                                                e2, e3, e4, f1, f2,
+                                                                f4));
                                                         min_distance = distance;
+                                                        System.out.println(res);
                                                     }
                                                 }
                                             }
@@ -179,7 +187,7 @@ class EuropeanFormatCalculator {
             }
         }
         if (result != null) {
-            EFC_Solution s = new EFC_Solution(solution, min_distance, result);
+            EFC_Solution s = new EFC_Solution(soln, min_distance, result);
             return s;
         } else {
             return null;
@@ -189,41 +197,37 @@ class EuropeanFormatCalculator {
     private static String getSolutionText(int c, int m, int e, int f, EFC_Solution s) {
         return "CL(C): " + c + " CL(M): " + m + " EL: " + e + " ECL: " + f + "\n" + s.result +
                 "Distance: " + s.distance + "\n" +
-                "c1: " + s.solution[0] + " c2: " + s.solution[1] + " c3: " + s.solution[2] + " c4: " + s.solution[3]
+                "c1: " + s.solution.get(0) + " c2: " + s.solution.get(1) + " c3: " + s.solution.get(2) + " c4: "
+                + s.solution.get(3)
                 + "\n" +
-                "m2: " + s.solution[4] + " m3: " + s.solution[5] + " m4: " + s.solution[6] + "\n" +
-                "e1: " + s.solution[7] + " e2: " + s.solution[8] + " e3: " + s.solution[9] + " e4: " + s.solution[10]
+                "m2: " + s.solution.get(4) + " m3: " + s.solution.get(5) + " m4: " + s.solution.get(6) + "\n" +
+                "e1: " + s.solution.get(7) + " e2: " + s.solution.get(8) + " e3: " + s.solution.get(9) + " e4: "
+                + s.solution.get(10)
                 + "\n" +
-                "f1: " + s.solution[11] + " f2: " + s.solution[12] + " f4: " + s.solution[13] + "\n\n";
+                "f1: " + s.solution.get(11) + " f2: " + s.solution.get(12) + " f4: " + s.solution.get(13) + "\n\n";
     }
 
     private static String getDemandText(int c, int m, int e, int f) {
-        return "CL(C): " + c + " CL(M): " + m + " EL: " + e + " ECL: " + f  + "\n";
+        return "CL(C): " + c + " CL(M): " + m + " EL: " + e + " ECL: " + f + "\n";
     }
 
-    public static int[] getSolution(int cl, int mcl, int el, int ecl) {
-        writeToFile("demands.txt", getDemandText(cl, mcl, el, ecl));
+    private static String getFormatsText(int c, int m, int e, int f, EFC_Solution s) {
+        return c + "," + m + "," + e + "," + f + "," + s.getSolutionString() + "\n";
+    }
+
+    public static List<Integer> getSolution(int cl, int mcl, int el, int ecl) {
         EFC_Solution s = selectClosest(cl, mcl, el, ecl);
         if (s != null) {
-            writeToFile("efc_solutions.txt", getSolutionText(cl, mcl, el, ecl, s));
+            FileOperations.writeToFile("formats/europe_swiss.csv", getFormatsText(cl, mcl, el, ecl, s));
             return s.solution;
-        }
-        else
+        } else {
+            FileOperations.writeToFile("formats/failed_demands.txt", getDemandText(cl, mcl, el, ecl));
             return null;
-    }
-
-    private static void writeToFile(String file, String text) {
-        try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.write(text);
-            fw.close();
-        } catch (IOException e) {
-
         }
     }
 
     public static void main(String args[]) {
-        EFC_Solution s =  selectClosest(40, 11, 33, 103);
-        System.out.println(getSolutionText(40, 11, 33, 103, s));
+        EFC_Solution s = selectClosest(42, 11, 32, 114);
+        System.out.println(getSolutionText(42, 11, 32, 114, s));
     }
 }

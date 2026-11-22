@@ -55,7 +55,7 @@ public class ControllerEurope_Swiss {
         CL_Q2_MP("CL Second Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
                 CCType.CompType.UCL, true, true),
         CL_Q1_CP("CL First Qualifying Round Champions Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
-                CCType.CompType.UEL, true, true),
+                CCType.CompType.UCL, true, true),
         EL_Q1_MP("EL First Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
                 CCType.CompType.UEL, true, true),
         EL_Q2_MP("EL Second Qualifying Round Main Path", CCType.StageType.TWO_LEGGED_KNOCKOUT,
@@ -168,7 +168,8 @@ public class ControllerEurope_Swiss {
             if (cl_n != 0 && el_n != 0 && ecl_n != 0)
                 break;
         }
-        //System.out.println("CL N: " + cl_n + " Nation: " + Sim.getNation(cl_n).getLeague(1).getName());
+        // System.out.println("CL N: " + cl_n + " Nation: " +
+        // Sim.getNation(cl_n).getLeague(1).getName());
         prev_champions.put(CCType.CompType.UCL,
                 Sim.sortByReputation(Sim.getNation(cl_n).getTeamIds(1)).get(0));
 
@@ -202,7 +203,7 @@ public class ControllerEurope_Swiss {
                     return 3;
                 else if (rank <= 15)
                     return 2;
-                else if (rank <= 50)
+                else if (rank <= 55)
                     return 1;
                 else
                     return 0;
@@ -220,11 +221,17 @@ public class ControllerEurope_Swiss {
                     return 2;
                 else if (rank <= 50)
                     return 3;
+                else if (rank <= 55)
+                    return 2;
                 else
                     return 0;
             default:
                 return 0;
         }
+    }
+
+    private static boolean isOnlyCupNation(Nation nation) {
+        return nation.getName().equals("Liechtenstein");
     }
 
     private static Map<CCType.CompType, List<String>> getTeams(Nation nation, int ranking) {
@@ -234,20 +241,34 @@ public class ControllerEurope_Swiss {
             cl_places += 1;
         int el_places = getPlaces(CCType.CompType.UEL, ranking);
         int ecl_places = getPlaces(CCType.CompType.UECL, ranking);
-        for (int i = 1; i <= cl_places + el_places + ecl_places; i++) {
-            teams.add(nation.getDivision(1).getTeamAtRank(i));
-        }
-        String cw = nation.getCupWinner();
-        if (!teams.contains(cw)) {
-            teams.add(cl_places, cw);
-            teams.remove(teams.size() - 1);
-        }
 
         Map<CCType.CompType, List<String>> map = new HashMap<>();
-        map.put(CCType.CompType.UCL, teams.subList(0, cl_places));
-        map.put(CCType.CompType.UEL, teams.subList(cl_places, cl_places + el_places));
-        map.put(CCType.CompType.UECL,
-                teams.subList(cl_places + el_places, cl_places + el_places + ecl_places));
+
+        if (isOnlyCupNation(nation)) {
+            String cw = nation.getCupWinner();
+            teams.add(cw);
+            if (el_places > 0) {
+                map.put(CCType.CompType.UEL, teams);
+            } else if (ecl_places > 0) {
+                map.put(CCType.CompType.UECL, teams);
+            }
+        } else {
+            for (int i = 1; i <= cl_places + el_places + ecl_places; i++) {
+                teams.add(nation.getDivision(1).getTeamAtRank(i));
+            }
+
+            String cw = nation.getCupWinner();
+            if (!teams.contains(cw)) {
+                teams.add(cl_places, cw);
+                teams.remove(teams.size() - 1);
+            }
+
+            map.put(CCType.CompType.UCL, teams.subList(0, cl_places));
+            map.put(CCType.CompType.UEL, teams.subList(cl_places, cl_places + el_places));
+            map.put(CCType.CompType.UECL,
+                    teams.subList(cl_places + el_places, cl_places + el_places + ecl_places));
+        }
+
         return map;
     }
 
@@ -340,7 +361,7 @@ public class ControllerEurope_Swiss {
                     return getBaseSeedingScore(SeedingType.CL_Q3_CP) + (league_rank - 12);
                 } else if (league_rank <= 26 && rank == 1) {
                     return getBaseSeedingScore(SeedingType.CL_Q2_CP) + (league_rank - 18);
-                } else if (league_rank <= 50 && rank == 1) {
+                } else if (league_rank <= 55 && rank == 1) {
                     return getBaseSeedingScore(SeedingType.CL_Q1_CP) + (league_rank - 26);
                 }
                 break;
@@ -396,12 +417,12 @@ public class ControllerEurope_Swiss {
                         return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
                     else if (rank == 2)
                         return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
-                } else if (league_rank <= 50) {
+                } else if (league_rank <= 55) {
                     if (rank == 1)
                         return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
                     else if (rank == 2)
                         return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
-                    else if (rank == 3)
+                    else if (rank == 3 && league_rank <= 50)
                         return getBaseSeedingScore(SeedingType.ECL_Q1) + league_rank;
                 }
                 break;
@@ -442,7 +463,7 @@ public class ControllerEurope_Swiss {
                     seeding_scores.put(nat_teams.get(i), score);
                     team_nations.put(nat_teams.get(i), nation.getId());
                     if (score >= getBaseSeedingScore(SeedingType.CL_Q3_MP)
-                            && score <= getMaxSeedingScore(SeedingType.CL_Q2_MP))
+                            && score <= getMaxSeedingScore(SeedingType.CL_Q2_MP) || true)
                         System.out.println((++seed_count) + ": " + Sim.getClub(nat_teams.get(i)).getName() + " "
                                 + Sim.getNation(nation.getId()).getCode() + " rank: " + rank + " nation rank: "
                                 + ranking + " score: " + score);
@@ -508,6 +529,31 @@ public class ControllerEurope_Swiss {
         }
     }
 
+    private static Map<String, List<Integer>> formats = new HashMap<>();
+
+    private static String getFormatsKey(String a, String b, String c, String d) {
+        return a + "::" + b + "::" + c + "::" + d;
+    }
+
+    private static void loadEuropeanFormats() {
+        String file_name = "formats/europe_swiss.csv";
+        List<String[]> data = FileOperations.readCSV(file_name);
+        for (String[] x : data) {
+            if (x.length != 18)
+                continue;
+            String key = getFormatsKey(x[0], x[1], x[2], x[3]);
+            List<Integer> l = new ArrayList<>();
+            for (int i = 4; i < 18; i++) {
+                try {
+                    l.add(Integer.parseInt(x[i]));
+                } catch (Exception e) {
+                    return;
+                }
+            }
+            formats.put(key, l);
+        }
+    }
+
     private static void calculateAndSelectQualifierFormat() {
         int qcl = getSortedSeedingsList(false, 100, SeedingType.CL_Q4_CP, SeedingType.CL_Q1_CP).size();
         int qmcl = getSortedSeedingsList(false, 100, SeedingType.CL_Q3_MP, SeedingType.CL_Q2_MP).size();
@@ -516,58 +562,19 @@ public class ControllerEurope_Swiss {
 
         System.out.println("QCL: " + qcl + " QEL: " + qel + " QECL: " + qecl + " QCL(M): " + qmcl);
 
-        if (qcl == 40 && qmcl == 11 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 18, 9, 2, 4, 48, 49, 8);
-        } else if (qcl == 40 && qmcl == 11 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 18, 9, 0, 5, 46, 50, 9);
-        } else if (qcl == 40 && qmcl == 11 && qel == 31 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 16, 8, 3, 4, 48, 48, 9);
-        } else if (qcl == 39 && qmcl == 11 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 18, 7, 3, 5, 50, 46, 9);
-        } else if (qcl == 39 && qmcl == 11 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 3, 5, 48, 48, 9);
-        } else if (qcl == 39 && qmcl == 11 && qel == 31 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 1, 6, 46, 49, 10);
-        } else if (qcl == 38 && qmcl == 11 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 8, 3, 6, 48, 48, 9);
-        } else if (qcl == 38 && qmcl == 11 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 8, 1, 7, 46, 49, 10);
-        } else if (qcl == 40 && qmcl == 11 && qel == 30 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 0, 7, 48, 49, 8);
-        } else if (qcl == 39 && qmcl == 10 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 1, 8, 48, 49, 8);
-        } else if (qcl == 39 && qmcl == 10 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 3, 7, 50, 48, 7);
-        } else if (qcl == 40 && qmcl == 10 && qel == 33 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 6, 3, 1, 18, 5, 4, 6, 50, 48, 7);
-        } else if (qcl == 40 && qmcl == 10 && qel == 32 && qecl == 105) {
-            setQualifierFormat(24, 8, 6, 2, 6, 3, 1, 14, 9, 3, 6, 50, 48, 7);
-        } else if (qcl == 40 && qmcl == 11 && qel == 31 && qecl == 104) {
-            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 14, 9, 2, 6, 48, 49, 7);
-        } else if (qcl == 39 && qmcl == 11 && qel == 33 && qecl == 104) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 5, 4, 48, 48, 8);
-        } else if (qcl == 39 && qmcl == 11 && qel == 32 && qecl == 104) {
-            setQualifierFormat(24, 8, 4, 3, 6, 5, 0, 16, 8, 3, 5, 46, 49, 9);
-        } else if (qcl == 38 && qmcl == 11 && qel == 33 && qecl == 104) {
-            setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 8, 3, 6, 46, 49, 9);
-        } else if (qcl == 38 && qmcl == 11 && qel == 32 && qecl == 104) {
-            setQualifierFormat(24, 8, 2, 4, 6, 5, 0, 16, 6, 4, 6, 48, 46, 10);
-        } else if (qcl == 40 && qmcl == 11 && qel == 33 && qecl == 104) {
-            setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 16, 12, 1, 4, 48, 48, 8);
-        } else if (qcl == 40 && qmcl == 11 && qel == 32 && qecl == 104) {
-            setQualifierFormat(24, 8, 6, 2, 6, 5, 0, 16, 8, 5, 3, 48, 48, 8);
-        } else if (qcl == 40 && qmcl == 11 && qel == 33 && qecl == 103) {
-            setQualifierFormat(24, 8, 6, 2, 8, 2, 1, 16, 8, 4, 5, 50, 47, 6);
-        } else if (qcl == 39 && qmcl == 11 && qel == 33 && qecl == 103) {
-            setQualifierFormat(24, 8, 4, 3, 8, 2, 1, 16, 8, 2, 7, 48, 48, 7);
-        } else if (qcl == 39 && qmcl == 10 && qel == 33 && qecl == 104) {
-            setQualifierFormat(24, 8, 4, 3, 6, 3, 1, 14, 9, 3, 7, 48, 49, 7);
+        if (formats.size() == 0) {
+            loadEuropeanFormats();
+        }
+
+        String key = getFormatsKey(String.valueOf(qcl), String.valueOf(qmcl), String.valueOf(qel),
+                String.valueOf(qecl));
+        if (formats.containsKey(key)) {
+            setQualifierFormat(formats.get(key));
         } else {
-            int[] sln = EuropeanFormatCalculator.getSolution(qcl, qmcl, qel, qecl);
-            if (sln != null) {
-                setQualifierFormat(sln[0], sln[1], sln[2], sln[3], sln[4], sln[5], sln[6], sln[7], sln[8], sln[9],
-                        sln[10],
-                        sln[11], sln[12], sln[13]);
+            List<Integer> sol = EuropeanFormatCalculator.getSolution(qcl, qmcl, qel, qecl);
+            if (sol != null) {
+                setQualifierFormat(sol);
+                formats.put(key, sol);
             }
         }
     }
@@ -646,6 +653,24 @@ public class ControllerEurope_Swiss {
             seedings.put(ecl, seeding);
             count_ecl++;
         }
+    }
+
+    private static void setQualifierFormat(List<Integer> fmt) {
+        int c1 = fmt.get(0);
+        int c2 = fmt.get(1);
+        int c3 = fmt.get(2);
+        int c4 = fmt.get(3);
+        int m2 = fmt.get(4);
+        int m3 = fmt.get(5);
+        int m4 = fmt.get(6);
+        int e1 = fmt.get(7);
+        int e2 = fmt.get(8);
+        int e3 = fmt.get(9);
+        int e4 = fmt.get(10);
+        int f1 = fmt.get(11);
+        int f2 = fmt.get(12);
+        int f4 = fmt.get(13);
+        setQualifierFormat(c1, c2, c3, c4, m2, m3, m4, e1, e2, e3, e4, f1, f2, f4);
     }
 
     private static void setQualifierFormat(int c1, int c2, int c3, int c4, int m2, int m3, int m4, int e1, int e2,
@@ -910,7 +935,7 @@ public class ControllerEurope_Swiss {
     }
 
     private static boolean fromSameNation(String a, String b) {
-        return team_nations.get(a) == team_nations.get(b);
+        return team_nations.get(a).equals(team_nations.get(b));
     }
 
     private static String preventZeroGroupsNations(List<String> pot1, List<String> pot2) {
@@ -944,9 +969,7 @@ public class ControllerEurope_Swiss {
         for (int i = 0; i < 8; i++) {
             boolean has_same_nation = false;
             for (int j = 0; j < pot_number; j++) {
-                if (team_nations.get(team) == team_nations.get(groups[i][j])) {
-                    has_same_nation = true;
-                }
+                has_same_nation = fromSameNation(team, groups[i][j]);
             }
             if (!has_same_nation && groups[i][pot_number] == null) {
                 options.add(i);
@@ -1597,6 +1620,7 @@ public class ControllerEurope_Swiss {
     }
 
     public static void simulate() {
+        loadEuropeanFormats();
         System.out.println("==========EUROPEAN SIMULATION==========");
         setup();
         setQ1Stages();
@@ -1684,7 +1708,7 @@ public class ControllerEurope_Swiss {
     private static void updateCoefficientsForMatch(Match match, boolean qualifying) {
         if (match.home_team_goals > match.away_team_goals) {
             addCoefficientPoints(match.home_id, WIN, qualifying);
-        } else if (match.home_team_goals == match.away_team_goals) {
+        } else if (match.home_team_goals < match.away_team_goals) {
             addCoefficientPoints(match.away_id, WIN, qualifying);
         } else {
             addCoefficientPoints(match.home_id, DRAW, qualifying);
@@ -1844,7 +1868,7 @@ public class ControllerEurope_Swiss {
             String name = getTeamName(entry.getKey());
             System.out.println(count + "\t" + name + "\t\t" + entry.getValue());
             count++;
-            if (count > 50)
+            if (count > 55)
                 break;
         }
     }
@@ -1892,8 +1916,7 @@ public class ControllerEurope_Swiss {
             points.put(nation, point);
         }
         List<Map.Entry<Nation, Double>> list = new ArrayList<>(points.entrySet());
-        Collections.sort(list,
-                (Map.Entry<Nation, Double> o1, Map.Entry<Nation, Double> o2) -> (int) (o2.getValue() - o1.getValue()));
+        Collections.sort(list, (o1, o2) -> Double.compare(o2.getValue(), o1.getValue()));
         int count = 1;
         HashMap<Integer, Integer> temp = new LinkedHashMap<>();
         for (Map.Entry<Nation, Double> aa : list) {
@@ -1948,7 +1971,7 @@ public class ControllerEurope_Swiss {
             String name = getTeamNameRankings(aa.getKey());
             System.out.println("Rank: " + count + " " + name + " " + aa.getValue());
             count++;
-            if (count > 50)
+            if (count > 55)
                 break;
         }
     }

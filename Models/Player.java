@@ -88,7 +88,7 @@ public class Player {
     }
 
     public void updatePlayer() {
-        //Sim.updatePlayer(this);
+        // Sim.updatePlayer(this);
     }
 
     public boolean isRetired() {
@@ -131,8 +131,8 @@ public class Player {
     public static int adjustRating(int rating) {
         if (rating > 99) {
             return 99;
-        } else if (rating < 0) {
-            return 0;
+        } else if (rating < 25) {
+            return 25;
         }
         return rating;
     }

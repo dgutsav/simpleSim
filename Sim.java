@@ -64,7 +64,44 @@ public class Sim {
         return Sim.season;
     }
 
-    public static boolean isFirstSeason() { return season == STARTING_SEASON; }
+    public static boolean isFirstSeason() {
+        return season == STARTING_SEASON;
+    }
+
+    public static String getClubName(String id) {
+        Club_Team x = getClub(id);
+        if (x != null) {
+            return x.getName();
+        }
+        return null;
+    }
+
+    public static String getClubPaddedName(String id) {
+        String x = getClubName(id);
+        if (x != null) {
+            return CommonFunctions.getPaddedString(x, 30);
+        }
+        return null;
+    }
+
+    public static String getClubContinentalName(String id) {
+        Club_Team x = getClub(id);
+        if (x != null) {
+            Nation n = Sim.getNation(x.getNationId());
+            if (n != null) {
+                return x.getName() + " (" + n.getCode() + ")";
+            }
+        }
+        return null;
+    }
+
+    public static String getPaddedClubContinentalName(String id) {
+        String x = getClubContinentalName(id);
+        if (x != null) {
+            return CommonFunctions.getPaddedString(x, 35);
+        }
+        return null;
+    }
 
     public static Club_Team getClub(String id) {
         if (clubs.containsKey(id)) {
@@ -172,7 +209,7 @@ public class Sim {
 
     public static List<Division> getAllDivisions() {
         List<Division> div = new ArrayList<>();
-        for (int x: league_structures.keySet()) {
+        for (int x : league_structures.keySet()) {
             List<Division> d = new ArrayList<>(league_structures.get(x).getDivisions().values());
             div.addAll(d);
         }
@@ -181,12 +218,12 @@ public class Sim {
 
     public static void sim() {
         // for (Map.Entry<String, League> entry : leagues.entrySet()) {
-        //     entry.getValue().seasonStart();
-        //     entry.getValue().simulateSeason();
-        //     entry.getValue().endSeasonChanges();
+        // entry.getValue().seasonStart();
+        // entry.getValue().simulateSeason();
+        // entry.getValue().endSeasonChanges();
         // }
 
-        for (Map.Entry<Integer, LeagueStructure> entry: league_structures.entrySet()) {
+        for (Map.Entry<Integer, LeagueStructure> entry : league_structures.entrySet()) {
             entry.getValue().startSeason();
             entry.getValue().simulateSeason();
             entry.getValue().endSeason();
@@ -200,12 +237,12 @@ public class Sim {
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             System.out.println("CONTINENTAL COMPS");
             // ControllerSAmerica.simulate();
-            // ControllerNAmerica.simulate();
-            ControllerEurope_Swiss.simulate();
+            ControllerNAmerica.simulate();
+            // ControllerEurope_Swiss.simulate();
             // ControllerAfrica.simulate();
             // ControllerAsia.simulate();
             // ControllerCWC.simulate();
-            //Controller_WCL.simulate();
+            // Controller_WCL.simulate();
         }
 
         if (USE_INTERNATIONALS && !TEST) {
@@ -280,8 +317,8 @@ public class Sim {
 
     public static String findTeamInDivision(Club_Team club) {
         LeagueStructure ls = getLeagueStructure(club.getNationId());
-        for (Division x: ls.getDivisions().values()){
-            if(x.getTeams().contains(club.getId()))
+        for (Division x : ls.getDivisions().values()) {
+            if (x.getTeams().contains(club.getId()))
                 return x.getId();
         }
         return "";
@@ -317,6 +354,8 @@ public class Sim {
     public static void initSetup() {
         int count = 0;
         List<Setups.Nation_Setup> setups = Setups.getNormalSetup();
+        Setups.loadClubSetups();
+        Setups.loadNationSetups();
         if (Sim.TEST) {
             setups = Setups.getTestSetup();
         }
@@ -324,7 +363,7 @@ public class Sim {
             List<Setups.Division_Setup> divs = Setups.getLeagueStructureSetups(setup);
             Nation nation = new Nation(setup.name, setup.short_name, count, setup.league_ranking);
             Map<Integer, Division> divisions = new HashMap<>();
-            for (Setups.Division_Setup div: divs) {
+            for (Setups.Division_Setup div : divs) {
                 Division d = CommonFunctions.createDivision(div, nation);
                 divisions.put(div.level, d);
             }
@@ -343,7 +382,8 @@ public class Sim {
         }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerEurope_Swiss.initCoefficientsCalculations();
-            //Controller_WCL.initCoefficientsCalculations();
+            // Controller_WCL.initCoefficientsCalculations();
+            ControllerAfrica.initializeCoefficients();
         }
     }
 
@@ -375,7 +415,8 @@ public class Sim {
 
     public static List<String> sortByReputation(List<String> teams) {
         Map<String, Club_Team> map = new HashMap<>();
-        for(String team: teams) map.put(team, clubs.get(team));
+        for (String team : teams)
+            map.put(team, clubs.get(team));
         map = sortByReputation(map);
         return new ArrayList<>(map.keySet());
     }
@@ -441,16 +482,16 @@ public class Sim {
 
     public static void seasonEndChanges() {
         // for (Map.Entry<Integer, Nation> entry : nations.entrySet()) {
-        //     entry.getValue().promotionDemotion();
+        // entry.getValue().promotionDemotion();
         // }
 
-        for (Map.Entry<Integer, LeagueStructure> entry: league_structures.entrySet()) {
+        for (Map.Entry<Integer, LeagueStructure> entry : league_structures.entrySet()) {
             entry.getValue().promoteAndRelegate();
         }
 
         // for (Map.Entry<String, League> entry : leagues.entrySet()) {
-        //     entry.getValue().saveCompetitionHistory();
-        //     updateLeague(entry.getValue(), entry.getKey());
+        // entry.getValue().saveCompetitionHistory();
+        // updateLeague(entry.getValue(), entry.getKey());
         // }
         for (Map.Entry<String, Cup> entry : cups.entrySet()) {
             entry.getValue().saveCompetitionHistory();
@@ -475,15 +516,15 @@ public class Sim {
 
     public static void showCompetitionHistories() {
         // for (Map.Entry<String, League> entry : leagues.entrySet()) {
-        //     entry.getValue().showCompetitionHistory();
+        // entry.getValue().showCompetitionHistory();
         // }
         // for (Map.Entry<String, Cup> entry : cups.entrySet()) {
-        //     entry.getValue().showCompetitionHistory();
+        // entry.getValue().showCompetitionHistory();
         // }
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             ControllerEurope_Swiss.showCompetitionHistory();
             // ControllerSAmerica.showCompetitionHistory();
-            // ControllerAsia.showCompetitionHistory();
+            ControllerAsia.showCompetitionHistory();
             // ControllerNAmerica.showCompetitionHistory();
             // ControllerAfrica.showCompetitionHistory();
             // ControllerCWC.showCompetitionHistory();
@@ -503,8 +544,8 @@ public class Sim {
 
     public static void main(String[] args) {
         TEST = false;
-        USE_TRANSFER_MARKET = true;
-        int num_seasons = 2;
+        USE_TRANSFER_MARKET = false;
+        int num_seasons = 10;
         double[] d = new double[num_seasons];
         initSetup();
         try {
@@ -522,20 +563,22 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            //showCompetitionHistories();
-            //showTeams();
-            //showPlayers();
-            //ControllerEurope_Swiss.showCoefficients();
-            //showNationalTeams();
-            TransferMarket.showTopTransfers();
-            //TransferMarket.showTransferStats();
+            // showCompetitionHistories();
+            // showTeams();
+            // showPlayers();
+            // ControllerEurope_Swiss.showCoefficients();
+            // showNationalTeams();
+            // TransferMarket.showTopTransfers();
+            // TransferMarket.showTransferStats();
             // ControllerEurope_Swiss.showLeagueRankings();
             // Controller_WCL.showLeagueRankings();
             // Controller_WCL.getClubRankingsForSeason(Sim.getSeasonNumber());
-            // String x = Sim.sortBySquadRating(clubs).entrySet().iterator().next().getKey();
-            // System.out.println(clubs.get(x).getName() + " (" + nations.get(clubs.get(x).getNationId()).getCode()+ ")");
+            // String x =
+            // Sim.sortBySquadRating(clubs).entrySet().iterator().next().getKey();
+            // System.out.println(clubs.get(x).getName() + " (" +
+            // nations.get(clubs.get(x).getNationId()).getCode()+ ")");
             // Viewer.showTransferList(TransferMarket.getTransfersOrder(clubs.get(x)));
         }
-        Viewer.showMenu();
+        // Viewer.showMenu();
     }
 }

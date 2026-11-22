@@ -41,23 +41,41 @@ public class MajorLeague implements Division {
         }
     }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getId() { return this.id; }
+    public String getId() {
+        return this.id;
+    }
 
-    public String getName() { return this.name; }
+    public String getName() {
+        return this.name;
+    }
 
-    public int getLevel() { return this.comp_level; }
-    
-    public int getPromotionPlaces() { return this.promotion_places; }
-    
-    public int getRelegationPlaces() { return this.relegation_places; }
+    public int getLevel() {
+        return this.comp_level;
+    }
 
-    public int getNation() { return this.nation_id; }
+    public int getPromotionPlaces() {
+        return this.promotion_places;
+    }
 
-    public int getReputation() { return this.reputation; }
+    public int getRelegationPlaces() {
+        return this.relegation_places;
+    }
 
-    public void setTeams(List<String> teams) { this.teams = teams; }
+    public int getNation() {
+        return this.nation_id;
+    }
+
+    public int getReputation() {
+        return this.reputation;
+    }
+
+    public void setTeams(List<String> teams) {
+        this.teams = teams;
+    }
 
     private Conference getConferenceType(String name) {
         switch (name) {
@@ -102,8 +120,10 @@ public class MajorLeague implements Division {
     }
 
     private String getConfName(Conference conf) {
-        if (conf == Conference.WEST) return "Western Conference";
-        else return "Eastern Conference";
+        if (conf == Conference.WEST)
+            return "Western Conference";
+        else
+            return "Eastern Conference";
     }
 
     private Conference getConference(String id) {
@@ -128,7 +148,8 @@ public class MajorLeague implements Division {
     private int INTER_CONFERENCE_MATCHES = 6;
 
     private List<Match> scheduleInterConfMatches() {
-        for (String x: getTeams()) oppList.put(x, new ArrayList<>());
+        for (String x : getTeams())
+            oppList.put(x, new ArrayList<>());
         int matchday = NUM_TEAMS;
         List<Match> m = new ArrayList<>();
         for (int i = 0; i < INTER_CONFERENCE_MATCHES; i += 2) {
@@ -164,7 +185,7 @@ public class MajorLeague implements Division {
                     if (!oppList.get(x).contains(y))
                         o.add(y);
                 }
-                //System.out.println(x + ": " + o + " (" + o.size() + ")");
+                // System.out.println(x + ": " + o + " (" + o.size() + ")");
                 if (count > o.size()) {
                     options = o;
                     count = o.size();
@@ -177,17 +198,17 @@ public class MajorLeague implements Division {
                     if (!oppList.get(x).contains(y))
                         o.add(y);
                 }
-                
-                //System.out.println(x + ": " + o + " (" + o.size() + ")");
+
+                // System.out.println(x + ": " + o + " (" + o.size() + ")");
                 if (count > o.size()) {
                     options = o;
                     count = o.size();
                     team = x;
                 }
             }
-            //System.out.println("MIN: " + team + ": " + options + " " + options.size());
+            // System.out.println("MIN: " + team + ": " + options + " " + options.size());
             String opp = CommonFunctions.getRandomElement(options);
-            //System.out.println(team + " v " + opp);
+            // System.out.println(team + " v " + opp);
             matches.add(new String[] { team, opp });
             if (east.contains(team))
                 east = CommonFunctions.removeElement(team, east);
@@ -318,7 +339,8 @@ public class MajorLeague implements Division {
         pairs.add(new String[] { confTable.get(conf).getTeamAtRank(6), bye });
         pairs.add(new String[] { confTable.get(conf).getTeamAtRank(2), bye });
         pairs.add(new String[] { confTable.get(conf).getTeamAtRank(7), bye });
-        String[] stage_names = { getConfName(conf) + " Wildcard", getConfName(conf) + " Round One", getConfName(conf) + " Semifinals", getConfName(conf) + " Final"};
+        String[] stage_names = { getConfName(conf) + " Wildcard", getConfName(conf) + " Round One",
+                getConfName(conf) + " Semifinals", getConfName(conf) + " Final" };
         KnockoutTree t = new KnockoutTree();
         t.setup(pairs, Arrays.asList(stage_names));
         tree.put(conf, t);
@@ -365,7 +387,7 @@ public class MajorLeague implements Division {
     public void endSeason() {
         int reputation_steps = (this.getReputation() / NUM_TEAMS) * 10;
         List<String> sorted_teams = CommonFunctions.sortByReputation(this.getTeams());
-        long prize_money = this.getReputation() * 50000 * (long)(Math.pow(1.01, (this.getReputation() - 200)));
+        long prize_money = this.getReputation() * 50000 * (long) (Math.pow(1.01, (this.getReputation() - 200)));
         for (int i = 0; i < this.getTeams().size(); i++) {
             String team = sorted_teams.get(i);
             int rank = this.aggregateTable.getRankOfTeam(team);
@@ -404,7 +426,6 @@ public class MajorLeague implements Division {
 
     @Override
     public String getTeamAtRank(int rank) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTeamAtRank'");
+        return aggregateTable.getTeamAtRank(rank);
     }
 }

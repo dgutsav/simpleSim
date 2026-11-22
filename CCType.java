@@ -15,13 +15,16 @@ public class CCType {
         UECL(3, "Europa Conference League", "ECL", Continent.EUROPE),
 
         LIB(1, "Copa Libertadores", "LIB", Continent.SOUTH_AMERICA),
-        SUD(1, "Copa Sudamericana", "SUD", Continent.SOUTH_AMERICA),
+        SUD(2, "Copa Sudamericana", "SUD", Continent.SOUTH_AMERICA),
 
-        ACL(1, "Asian Champions League", "ACL", Continent.ASIA),
+        ACLE(1, "Asian Champions League Elite", "ACLE", Continent.ASIA),
+        ACL2(2, "Asian Champions League 2", "ACL2", Continent.ASIA),
+        ACGL(3, "Asian Challenge League", "ACGL", Continent.ASIA),
 
         NACL(1, "North American Champions League", "NACL", Continent.NORTH_AMERICA),
 
         ACC(1, "African Champions Cup", "ACC", Continent.AFRICA),
+        ACF(2, "African Confederation Cup", "ACF", Continent.AFRICA),
 
         CWC(1, "Club World Championship", "CWC", Continent.WORLD),
 
