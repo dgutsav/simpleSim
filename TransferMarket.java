@@ -64,7 +64,8 @@ public class TransferMarket {
                         premium_clubs.add(team.getId());
                     }
                     // System.out.println(team.getName() + ": " + target.getPosition() + " $"
-                    //         + CommonFunctions.formatMoney(target.getPrice()) + " " + target.getRating() + "/100");
+                    // + CommonFunctions.formatMoney(target.getPrice()) + " " + target.getRating() +
+                    // "/100");
                 }
                 level++;
             }
@@ -190,17 +191,20 @@ public class TransferMarket {
         Map<String, ArrayList<Offer>> offers = new HashMap<>();
         List<Player> prem = lists.get("PREMIUM");
         for (String x : premium_clubs) {
-            for (Player p: prem) {
-                if (p.getRating() < targets.get(x).getRating()) break;
+            for (Player p : prem) {
+                if (p.getRating() < targets.get(x).getRating())
+                    break;
                 Target target = targets.get(x);
-                if (MarketHelper.canMakeOffer(target, p, player_price_map.get(p.getId()), player_club_link.get(p.getId()))) {
-                        Offer offer = new Offer(target.getClubId(), player_club_link.get(p.getId()), p.getId(), player_price_map.get(p.getId()));
-                        ArrayList<Offer> list = offers.containsKey(p.getId()) ? offers.get(p.getId()) : new ArrayList<>();
-                        list.add(offer);
-                        offers.put(p.getId(), list);
-                        targets.get(x).offerMade(p.getId());
-                        break;
-                    }
+                if (MarketHelper.canMakeOffer(target, p, player_price_map.get(p.getId()),
+                        player_club_link.get(p.getId()))) {
+                    Offer offer = new Offer(target.getClubId(), player_club_link.get(p.getId()), p.getId(),
+                            player_price_map.get(p.getId()));
+                    ArrayList<Offer> list = offers.containsKey(p.getId()) ? offers.get(p.getId()) : new ArrayList<>();
+                    list.add(offer);
+                    offers.put(p.getId(), list);
+                    targets.get(x).offerMade(p.getId());
+                    break;
+                }
             }
         }
         Map<Integer, List<Target>> targets = groupTargetsByNation();
@@ -237,19 +241,24 @@ public class TransferMarket {
                     break;
             }
             // for (int i = 0; i < league_targets.size(); i++) {
-            //     if (league_targets.get(i).hasMadeOffer()) continue;
-            //     for (Player player: players) {
-            //         if (player.getRating() < league_targets.get(i).getRating()) break;
-            //         Target target = league_targets.get(i);
-            //         if (MarketHelper.canMakeOffer(target, player, player_price_map.get(player.getId()), player_club_link.get(player.getId()))) {
-            //             Offer offer = new Offer(target.getClubId(), player_club_link.get(player.getId()), player.getId(), player_price_map.get(player.getId()));
-            //             ArrayList<Offer> list = offers.containsKey(player.getId()) ? offers.get(player.getId()) : new ArrayList<>();
-            //             list.add(offer);
-            //             offers.put(player.getId(), list);
-            //             entry.getValue().get(i).offerMade(player.getId());
-            //             break;
-            //         }
-            //     }
+            // if (league_targets.get(i).hasMadeOffer()) continue;
+            // for (Player player: players) {
+            // if (player.getRating() < league_targets.get(i).getRating()) break;
+            // Target target = league_targets.get(i);
+            // if (MarketHelper.canMakeOffer(target, player,
+            // player_price_map.get(player.getId()), player_club_link.get(player.getId())))
+            // {
+            // Offer offer = new Offer(target.getClubId(),
+            // player_club_link.get(player.getId()), player.getId(),
+            // player_price_map.get(player.getId()));
+            // ArrayList<Offer> list = offers.containsKey(player.getId()) ?
+            // offers.get(player.getId()) : new ArrayList<>();
+            // list.add(offer);
+            // offers.put(player.getId(), list);
+            // entry.getValue().get(i).offerMade(player.getId());
+            // break;
+            // }
+            // }
             // }
         }
         ArrayList<Offer> finalizedOffers = new ArrayList<>();
@@ -264,7 +273,8 @@ public class TransferMarket {
             finalizeOffer(final_offer);
         }
         System.out.println("Transfers completed: " + finalizedOffers.size());
-        if (finalizedOffers.size() == 0) continue_window = false;
+        if (finalizedOffers.size() == 0)
+            continue_window = false;
         clearAllTargets();
         String size = size_data.get(Sim.getSeasonNumber());
         if (size != null) {
@@ -316,9 +326,11 @@ public class TransferMarket {
         deal.seller_nation = seller.getNationId();
         deal.buyer_nation = buyer.getNationId();
         completed_transfers.add(deal);
-        // System.out.println(offer.getPlayer().getName() + "(" + offer.getPlayer().getRating() + ":"
-        //         + offer.getPlayer().getPosition() + ")" + " moves from " + seller.getName() + " to " + buyer.getName()
-        //         + " for $" + CommonFunctions.formatMoney(offer.getAmount()));
+        // System.out.println(offer.getPlayer().getName() + "(" +
+        // offer.getPlayer().getRating() + ":"
+        // + offer.getPlayer().getPosition() + ")" + " moves from " + seller.getName() +
+        // " to " + buyer.getName()
+        // + " for $" + CommonFunctions.formatMoney(offer.getAmount()));
     }
 
     public static void clearAllTargets() {
@@ -431,7 +443,7 @@ public class TransferMarket {
         Map<Integer, List<List<Deal>>> deals = new HashMap<>();
         for (int i = Sim.STARTING_SEASON; i < Sim.getSeasonNumber(); i++) {
             List<Deal> buys = new ArrayList<>(), sells = new ArrayList<>();
-            while(index < completed_transfers.size() && completed_transfers.get(index).year == i) {
+            while (index < completed_transfers.size() && completed_transfers.get(index).year == i) {
                 if (completed_transfers.get(index).buyer_name.equals(club.getName())) {
                     buys.add(completed_transfers.get(index));
                 } else if (completed_transfers.get(index).seller_name.equals(club.getName())) {

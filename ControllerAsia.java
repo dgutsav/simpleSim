@@ -1028,7 +1028,7 @@ public class ControllerAsia {
             System.out.println("size: " + teams.size() + " " + type.stage_name);
             String[][] pots = divideIntoPots(teams, NUM_POTS, NUM_TEAMS / NUM_POTS);
             // CommonFunctions.display2DArrayTeams(pots, NUM_POTS, NUM_GROUPS);
-            String[][] groups_matrix = CCHelper.drawGroups(pots, NUM_GROUPS, NUM_POTS, team_nations);
+            String[][] groups_matrix = CCDrawHelper.drawGroups(pots, NUM_GROUPS, NUM_POTS, team_nations);
             League[] stage_groups = new League[NUM_GROUPS];
             for (int i = 0; i < NUM_GROUPS; i++) {
                 League league = new League();

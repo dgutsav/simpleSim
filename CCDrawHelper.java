@@ -8,13 +8,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/**
- * Draws teams from pots into groups (one team per pot per group) so that no
- * group
- * contains two teams from the same nation.
- */
-public final class CCHelper {
-    private CCHelper() {
+public final class CCDrawHelper {
+    private CCDrawHelper() {
     }
 
     public static String[][] drawGroups(String[][] pots, int numGroups, int numPots,
@@ -22,17 +17,6 @@ public final class CCHelper {
         return drawGroups(pots, numGroups, numPots, nations, new Random());
     }
 
-    /**
-     * @param pots    pots[i] holds the teams of pot i; each pot must have numGroups
-     *                teams.
-     *                Pot 0 is placed in order (pots[0][g] goes to group g), as
-     *                before.
-     * @param nations team name -> nation id
-     * @param rng     pass a seeded Random for reproducible draws
-     * @return groups[group][pot]
-     * @throws IllegalArgumentException if the input is malformed
-     * @throws IllegalStateException    if no valid draw exists
-     */
     public static String[][] drawGroups(String[][] pots, int numGroups, int numPots,
             Map<String, Integer> nations, Random rng) {
         validate(pots, numGroups, numPots, nations);
@@ -46,11 +30,6 @@ public final class CCHelper {
         return groups;
     }
 
-    // Backtracking over every team in every pot. Each step places the most
-    // constrained
-    // remaining team (fewest legal groups) into a random legal group, and backs up
-    // if a
-    // later team is left with nowhere to go.
     private static boolean fillPot(String[][] groups, int pot, List<String> remaining,
             String[][] pots, Map<String, Integer> nations, Random rng) {
         if (remaining.isEmpty()) {
