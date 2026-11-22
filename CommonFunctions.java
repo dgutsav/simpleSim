@@ -124,6 +124,9 @@ public class CommonFunctions {
             id = ((char) ((millis % 26) + 97)) + id;
             millis /= 26;
         }
+        if (id.isEmpty()) {
+            id = "id" + System.currentTimeMillis();
+        }
         return id;
     }
 

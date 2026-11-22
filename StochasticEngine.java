@@ -112,8 +112,8 @@ public class StochasticEngine {
                 if (random > 0.6) pass();
                 else dribble();
             } else if (zone == 7 || zone == 8 || zone == 9) {
-                if (random > 0.45) pass();
-                else if (random > 0.8) dribble();
+                if (random > 0.65) pass();
+                else if (random > 0.35) dribble();
                 else shoot();
             }
         }
@@ -123,8 +123,8 @@ public class StochasticEngine {
                 if (random > 0.6) pass();
                 else dribble();
             } else if (zone == 1 || zone == 2 || zone == 3) {
-                if (random > 0.45) pass();
-                else if (random > 0.8) dribble();
+                if (random > 0.65) pass();
+                else if (random > 0.35) dribble();
                 else shoot();
             }
         }

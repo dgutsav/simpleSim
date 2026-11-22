@@ -113,8 +113,8 @@ public class Club_Team {
     }
 
     public List<String> getAllPlayers() {
-        List<String> players = this.getSeniorPlayers();
-        if (this.has_youth_squad) {
+        List<String> players = new ArrayList<>(this.getSeniorPlayers());
+        if (this.has_youth_squad && this.youth_squad != null) {
             players.addAll(this.getYouthPlayers());
         }
         return players;
@@ -200,7 +200,9 @@ public class Club_Team {
             }
         }
         for (Player player : promoted_players) {
-            this.senior_squad.addPlayer(player.getId());
+            if (player != null && this.senior_squad.getPlayerIds().size() < MAX_SQUAD_SIZE) {
+                this.senior_squad.addPlayer(player.getId());
+            }
         }
     }
 

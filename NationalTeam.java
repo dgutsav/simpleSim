@@ -92,10 +92,11 @@ public class NationalTeam {
 
     public void fillSquad() {
         for (Map.Entry<Position, List<Player>> entry : this.pool.entrySet()) {
-            this.squad.addPlayer(entry.getValue().get(0).getId());
-            this.squad.addPlayer(entry.getValue().get(1).getId());
-            this.squad.addPlayer(entry.getValue().get(2).getId());
-            this.squad.addPlayer(entry.getValue().get(3).getId());
+            List<Player> list = entry.getValue();
+            int limit = Math.min(4, list.size());
+            for (int i = 0; i < limit; i++) {
+                this.squad.addPlayer(list.get(i).getId());
+            }
         }
     }
 

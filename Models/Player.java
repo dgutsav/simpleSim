@@ -142,29 +142,23 @@ public class Player {
     }
 
     public void seasonEndChanges() {
-        int max_growth = 0;
-        if (this.age < 18) {
-            max_growth = 6;
-        } else if (this.age < 20) {
-            max_growth = 5;
+        int change = 0;
+        if (this.age < 19) {
+            change = CommonFunctions.getRandomRange(2, 6);
         } else if (this.age < 22) {
-            max_growth = 4;
-        } else if (this.age < 24) {
-            max_growth = 3;
-        } else if (this.age < 26) {
-            max_growth = 1;
-        } else if (this.age < 30) {
-            max_growth = 0;
-        } else if (this.age < 32) {
-            max_growth = -3;
-        } else if (this.age < 35) {
-            max_growth = -5;
+            change = CommonFunctions.getRandomRange(1, 5);
+        } else if (this.age < 25) {
+            change = CommonFunctions.getRandomRange(1, 3);
+        } else if (this.age < 28) {
+            change = CommonFunctions.getRandomRange(0, 2);
+        } else if (this.age <= 30) {
+            change = CommonFunctions.getRandomInt(1);
+        } else if (this.age <= 33) {
+            change = -CommonFunctions.getRandomRange(1, 3);
+        } else {
+            change = -CommonFunctions.getRandomRange(2, 5);
         }
-        if (max_growth > 0) {
-            this.rating += CommonFunctions.getRandomNumber(max_growth);
-        } else if (max_growth < 0) {
-            this.rating -= CommonFunctions.getRandomNumber(max_growth * -1);
-        }
+        this.rating += change;
         this.rating = Player.adjustRating(this.rating);
         this.incrementAge();
         if (this.age > 36) {

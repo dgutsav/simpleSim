@@ -228,7 +228,7 @@ public class League {
             String team = sorted_teams.get(i);
             int rank = this.table.getRankOfTeam(team);
             int diff = rank - (i + 1);
-            if (diff < 3 || diff > -3) {
+            if (diff > -3 && diff < 3) {
                 continue;
             } else if (diff > 0) {
                 Sim.getClub(team).addReputation(reputation_steps * (diff - 3) * -1);

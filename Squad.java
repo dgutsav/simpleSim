@@ -165,12 +165,15 @@ public class Squad {
         int injured_players = 0;
         if (physio_check > 99) {
             injured_players = 3;
-        } else if (injured_players > 95) {
+        } else if (physio_check > 95) {
             injured_players = 2;
-        } else if (injured_players > 85) {
+        } else if (physio_check > 85) {
             injured_players = 1;
         }
         for (int i = 0; i < injured_players; i++) {
+            if (current_lineup.isEmpty()) {
+                break;
+            }
             String player_id = CommonFunctions.getRandomElement(current_lineup);
             current_lineup.remove(player_id);
             Injury injury = new Injury(Injury.getInjury(Injury.injuryTypes()), 0);
@@ -239,9 +242,6 @@ public class Squad {
 
     public int getProspectivePlayerRankInSquad(Player player) {
         Player best_player = this.getBestPlayerAtPosition(player.getPosition(), new ArrayList<>(), false);
-        if (best_player == null) {
-            System.out.println("No player found in squad for position");
-        }
         if (best_player != null && best_player.getRatingForPosition(player.getPosition()) < player.getRating()) {
             return 1;
         }

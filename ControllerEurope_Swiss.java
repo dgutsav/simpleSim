@@ -321,111 +321,107 @@ public class ControllerEurope_Swiss {
     }
 
     private static int getSeedingScore(CCType.CompType type, int league_rank, int rank) {
-        switch (type) {
-            case UCL:
-                if (league_rank <= 4 && rank <= 4)
+        if (type == CCType.CompType.UCL) {
+            if (league_rank <= 4 && rank <= 4)
+                return getBaseSeedingScore(SeedingType.CL_GROUP);
+            else if (league_rank == 5) {
+                if (rank <= 3)
                     return getBaseSeedingScore(SeedingType.CL_GROUP);
-                else if (league_rank == 5) {
-                    if (rank <= 3)
-                        return getBaseSeedingScore(SeedingType.CL_GROUP);
-                    else if (rank == 4)
-                        return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
-                } else if (league_rank == 6) {
-                    if (rank <= 2)
-                        return getBaseSeedingScore(SeedingType.CL_GROUP);
-                    else if (rank == 3)
-                        return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
-                } else if (league_rank >= 7 && league_rank <= 9) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.CL_GROUP);
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
-                } else if (league_rank == 10) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.CL_GROUP);
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
-                } else if (league_rank <= 12) {
-                    if (rank == 1) {
-                        return getBaseSeedingScore(SeedingType.CL_Q4_CP) + (league_rank - 10);
-                    } else if (rank == 2) {
-                        return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
-                    }
-                } else if (league_rank <= 15) {
-                    if (rank == 1) {
-                        return getBaseSeedingScore(SeedingType.CL_Q3_CP) + (league_rank - 12);
-                    } else if (rank == 2) {
-                        return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
-                    }
-                } else if (league_rank <= 18 && rank == 1) {
+                else if (rank == 4)
+                    return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
+            } else if (league_rank == 6) {
+                if (rank <= 2)
+                    return getBaseSeedingScore(SeedingType.CL_GROUP);
+                else if (rank == 3)
+                    return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
+            } else if (league_rank >= 7 && league_rank <= 9) {
+                if (rank == 1)
+                    return getBaseSeedingScore(SeedingType.CL_GROUP);
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.CL_Q3_MP) + league_rank;
+            } else if (league_rank == 10) {
+                if (rank == 1)
+                    return getBaseSeedingScore(SeedingType.CL_GROUP);
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
+            } else if (league_rank <= 12) {
+                if (rank == 1) {
+                    return getBaseSeedingScore(SeedingType.CL_Q4_CP) + (league_rank - 10);
+                } else if (rank == 2) {
+                    return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
+                }
+            } else if (league_rank <= 15) {
+                if (rank == 1) {
                     return getBaseSeedingScore(SeedingType.CL_Q3_CP) + (league_rank - 12);
-                } else if (league_rank <= 26 && rank == 1) {
-                    return getBaseSeedingScore(SeedingType.CL_Q2_CP) + (league_rank - 18);
-                } else if (league_rank <= 55 && rank == 1) {
-                    return getBaseSeedingScore(SeedingType.CL_Q1_CP) + (league_rank - 26);
+                } else if (rank == 2) {
+                    return getBaseSeedingScore(SeedingType.CL_Q2_MP) + league_rank;
                 }
-                break;
-            case UEL:
-                if (league_rank <= 5 && (rank == 1 || rank == 2)) {
+            } else if (league_rank <= 18 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.CL_Q3_CP) + (league_rank - 12);
+            } else if (league_rank <= 26 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.CL_Q2_CP) + (league_rank - 18);
+            } else if (league_rank <= 55 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.CL_Q1_CP) + (league_rank - 26);
+            }
+        } else if (type == CCType.CompType.UEL) {
+            if (league_rank <= 5 && (rank == 1 || rank == 2)) {
+                return getBaseSeedingScore(SeedingType.EL_GROUP);
+            } else if (league_rank == 6) {
+                if (rank == 1)
                     return getBaseSeedingScore(SeedingType.EL_GROUP);
-                } else if (league_rank == 6) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.EL_GROUP);
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
-                } else if (league_rank == 7) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.EL_GROUP);
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
-                } else if (league_rank <= 11) {
-                    if (rank == 1) {
-                        return getBaseSeedingScore(SeedingType.EL_Q4_MP) + (league_rank - 7);
-                    } else if (rank == 2) {
-                        return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
-                    }
-                } else if (league_rank == 12) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.EL_Q3_MP) + (league_rank - 11);
-                    else if (rank == 2) {
-                        return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
-                    }
-                } else if (league_rank == 13 && rank == 1) {
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
+            } else if (league_rank == 7) {
+                if (rank == 1)
+                    return getBaseSeedingScore(SeedingType.EL_GROUP);
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
+            } else if (league_rank <= 11) {
+                if (rank == 1) {
+                    return getBaseSeedingScore(SeedingType.EL_Q4_MP) + (league_rank - 7);
+                } else if (rank == 2) {
+                    return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
+                }
+            } else if (league_rank == 12) {
+                if (rank == 1)
                     return getBaseSeedingScore(SeedingType.EL_Q3_MP) + (league_rank - 11);
-                } else if (league_rank <= 15 && rank == 1) {
-                    return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank - 13);
-                } else if (league_rank <= 33 && rank == 1) {
-                    return getBaseSeedingScore(SeedingType.EL_Q1_MP) + (league_rank - 15);
+                else if (rank == 2) {
+                    return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank);
                 }
-                break;
-            case UECL:
-                if (league_rank <= 5 && rank == 1)
+            } else if (league_rank == 13 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.EL_Q3_MP) + (league_rank - 11);
+            } else if (league_rank <= 15 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.EL_Q2_MP) + (league_rank - 13);
+            } else if (league_rank <= 33 && rank == 1) {
+                return getBaseSeedingScore(SeedingType.EL_Q1_MP) + (league_rank - 15);
+            }
+        } else if (type == CCType.CompType.UECL) {
+            if (league_rank <= 5 && rank == 1)
+                return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
+            else if (league_rank == 6 && rank == 1)
+                return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
+            else if (league_rank <= 8 && rank == 1)
+                return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
+            else if (league_rank <= 12 && rank == 1)
+                return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
+            else if (league_rank <= 15) {
+                if (rank == 1)
                     return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                else if (league_rank == 6 && rank == 1)
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
+            } else if (league_rank <= 33) {
+                if (rank == 1)
                     return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                else if (league_rank <= 8 && rank == 1)
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
+            } else if (league_rank <= 55) {
+                if (rank == 1)
                     return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                else if (league_rank <= 12 && rank == 1)
-                    return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                else if (league_rank <= 15) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
-                } else if (league_rank <= 33) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
-                } else if (league_rank <= 55) {
-                    if (rank == 1)
-                        return getBaseSeedingScore(SeedingType.ECL_Q4) + league_rank;
-                    else if (rank == 2)
-                        return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
-                    else if (rank == 3 && league_rank <= 50)
-                        return getBaseSeedingScore(SeedingType.ECL_Q1) + league_rank;
-                }
-                break;
+                else if (rank == 2)
+                    return getBaseSeedingScore(SeedingType.ECL_Q2) + league_rank;
+                else if (rank == 3 && league_rank <= 50)
+                    return getBaseSeedingScore(SeedingType.ECL_Q1) + league_rank;
+            }
         }
         return 10000;
     }
@@ -922,46 +918,8 @@ public class ControllerEurope_Swiss {
         return min_team;
     }
 
-    private static boolean fromSameGroup(String a, String b) {
-        for (Map.Entry<Stage, League[]> entry : groups.entrySet()) {
-            League[] leagues = entry.getValue();
-            for (League league : leagues) {
-                List<String> teams = league.getTeams();
-                if (teams.contains(a) && teams.contains(b))
-                    return true;
-            }
-        }
-        return false;
-    }
-
     private static boolean fromSameNation(String a, String b) {
         return team_nations.get(a).equals(team_nations.get(b));
-    }
-
-    private static String preventZeroGroupsNations(List<String> pot1, List<String> pot2) {
-        int min_options = 1000;
-        String min_team = null;
-        for (String team : pot1) {
-            int options = 0;
-            for (String oTeam : pot2) {
-                if (!fromSameNation(team, oTeam) && !fromSameGroup(team, oTeam))
-                    options++;
-            }
-            if (options < min_options) {
-                min_options = options;
-                min_team = team;
-            }
-        }
-        return min_team;
-    }
-
-    private static List<String> filterNationGroup(String team, List<String> pot) {
-        List<String> filtered = new ArrayList<>();
-        for (String altTeam : pot) {
-            if (!fromSameNation(team, altTeam) && !fromSameGroup(team, altTeam))
-                filtered.add(altTeam);
-        }
-        return filtered;
     }
 
     private static List<Integer> getGroupOptions(String team, int pot_number, String[][] groups) {
@@ -1153,46 +1111,6 @@ public class ControllerEurope_Swiss {
         }
     }
 
-    private static void setKOPO_R16Stage(Stage stage) {
-        ArrayList<String> seeded = new ArrayList<>();
-        ArrayList<String> unseeded = new ArrayList<>();
-
-        if (stage == Stage.CL_R16) {
-            seeded.addAll(getGroupTeamsAtRank(Stage.CL_GROUP, 1));
-            unseeded.addAll(getGroupTeamsAtRank(Stage.CL_GROUP, 2));
-        } else if (stage == Stage.EL_KO_PO) {
-            seeded.addAll(getGroupTeamsAtRank(Stage.EL_GROUP, 2));
-            unseeded.addAll(getGroupTeamsAtRank(Stage.CL_GROUP, 3));
-        } else if (stage == Stage.ECL_KO_PO) {
-            seeded.addAll(getGroupTeamsAtRank(Stage.ECL_GROUP, 2));
-            unseeded.addAll(getGroupTeamsAtRank(Stage.EL_GROUP, 3));
-        } else if (stage == Stage.EL_R16) {
-            unseeded.addAll(getWinnersFromStage(Stage.EL_KO_PO));
-            seeded.addAll(getGroupTeamsAtRank(Stage.EL_GROUP, 1));
-        } else if (stage == Stage.ECL_R16) {
-            unseeded.addAll(getWinnersFromStage(Stage.ECL_KO_PO));
-            seeded.addAll(getGroupTeamsAtRank(Stage.ECL_GROUP, 1));
-        }
-
-        List<TwoLeggedKnockoutTie> ties = new ArrayList<>();
-        int ties_size = seeded.size();
-        for (int i = 0; i < ties_size; i++) {
-            String selected_team = CommonFunctions.getRandomElement(seeded);
-            String zero_choice = preventZeroGroupsNations(seeded, unseeded);
-            if (zero_choice != null)
-                selected_team = zero_choice;
-            List<String> filtered = filterNationGroup(selected_team, unseeded);
-            if (filtered.size() == 0)
-                System.out.println("No team found in stage: " + stage);
-            String selected_team_2 = CommonFunctions.getRandomElement(filtered);
-            TwoLeggedKnockoutTie tie = new TwoLeggedKnockoutTie(selected_team, selected_team_2, 1);
-            ties.add(tie);
-            seeded = removeFromList(seeded, selected_team);
-            unseeded = removeFromList(unseeded, selected_team_2);
-        }
-        stages.put(stage, ties);
-    }
-
     private static void setQ1Stages() {
         setStage(Stage.CL_Q1_CP);
         setStage(Stage.EL_Q1_MP);
@@ -1263,59 +1181,6 @@ public class ControllerEurope_Swiss {
         setStage(Stage.ECL_GROUP);
     }
 
-    private static List<String[][]> getMatchups(String[] pot1, String pot2[]) {
-        List<String[][]> matchups = new ArrayList<>();
-        for (int point = 0; point < pot1.length; point++) {
-            String arr1[] = new String[pot1.length];
-            for (int i = 0; i < pot1.length; i++)
-                arr1[i] = pot1[i];
-            String arr2[] = new String[pot2.length];
-            for (int i = 0; i < pot2.length; i++)
-                arr2[i] = pot2[i];
-
-            int max = (pot1.length) - point;
-            for (int i = 0; i < max; i++) {
-                String first2 = arr2[0];
-                String last1 = arr1[arr1.length - 1];
-                for (int j = arr1.length - 1; j >= point + 1; j--) {
-                    arr1[j] = arr1[j - 1];
-                }
-                arr1[point] = first2;
-                for (int j = 1; j < arr2.length; j++) {
-                    arr2[j - 1] = arr2[j];
-                }
-                arr2[arr2.length - 1] = last1;
-            }
-            boolean flag = true;
-            String[][] matchday = new String[pot1.length][pot2.length];
-            for (int i = 0; i < pot1.length; i++) {
-                if (team_nations.get(arr1[i]).equals(team_nations.get(arr2[i]))) {
-                    flag = false;
-                    break;
-                }
-                if (contains(arr1[i], pot1) && contains(arr2[i], pot2)) {
-                    matchday[i][0] = arr1[i];
-                    matchday[i][1] = arr2[i];
-                } else if (contains(arr1[i], pot2) && contains(arr2[i], pot1)) {
-                    matchday[i][1] = arr1[i];
-                    matchday[i][0] = arr2[i];
-                }
-            }
-            if (flag) {
-                matchups.add(matchday);
-            }
-        }
-        return matchups;
-    }
-
-    private static boolean contains(String str, String[] arr) {
-        for (String s : arr) {
-            if (str.equals(s))
-                return true;
-        }
-        return false;
-    }
-
     private static String[][] drawGroups(String[][] pots) {
         String[][] groups = new String[8][4];
         for (int i = 0; i < 8; i++) {
@@ -1338,38 +1203,6 @@ public class ControllerEurope_Swiss {
         return groups;
     }
 
-    private static void simulateGroupsMatchDay(Stage stage, int matchday) {
-        League[] gLeagues = groups.get(stage);
-        for (int i = 0; i < gLeagues.length; i++) {
-            char ch = (char) (65 + i);
-            System.out.println(stage.stage_name() + ": Group " + ch + " Matchday " + matchday);
-            gLeagues[i].simulateMatchDay(matchday);
-        }
-    }
-
-    private static void dispGroupTables(Stage stage) {
-        System.out.println("\n" + stage.stage_name());
-        League[] gLeagues = groups.get(stage);
-        for (int i = 0; i < gLeagues.length; i++) {
-            char ch = (char) (65 + i);
-            System.out.println("Group " + ch);
-            gLeagues[i].getTable().showLongContinental();
-        }
-    }
-
-    private static void simulateGroupStage() {
-        for (int i = 1; i <= 6; i++) {
-            simulateGroupsMatchDay(Stage.CL_GROUP, i);
-            simulateGroupsMatchDay(Stage.EL_GROUP, i);
-            simulateGroupsMatchDay(Stage.ECL_GROUP, i);
-        }
-        // Show Tables
-        System.out.println("\nStandings");
-        dispGroupTables(Stage.CL_GROUP);
-        dispGroupTables(Stage.EL_GROUP);
-        dispGroupTables(Stage.ECL_GROUP);
-    }
-
     private static void simulateLeaguePhaseMatchDay(Stage stage, int matchday) {
         System.out.println("\n" + stage.stage_name() + " Matchday " + matchday);
         leagues.get(stage).simulateMatchDay(matchday);
@@ -1390,66 +1223,6 @@ public class ControllerEurope_Swiss {
         leagues.get(Stage.EL_GROUP).getTable().showLongContinental();
         System.out.println("\nCONFERENCE LEAGUE - LEAGUE PHASE");
         leagues.get(Stage.ECL_GROUP).getTable().showLongContinental();
-    }
-
-    private static List<String> getGroupTeamsAtRank(Stage stage, int rank) {
-        League[] leagues = groups.get(stage);
-        List<String> teams = new ArrayList<>();
-        for (int i = 0; i < leagues.length; i++) {
-            teams.add(leagues[i].getTeamAtRank(rank));
-        }
-        return teams;
-    }
-
-    private static void setupKnockouts() {
-        setupKnockouts(Stage.CL_KO_PO);
-        setupKnockouts(Stage.EL_KO_PO);
-        setupKnockouts(Stage.ECL_KO_PO);
-    }
-
-    private static void setupKnockouts(Stage stage) {
-        League league = leagues.get(stage);
-        int[][] ranks = new int[12][2];
-        for (int i = 0; i < 12; i++) {
-            boolean flag = CommonFunctions.getRandomInt(100) > 50;
-            ranks[i][0] = flag ? 2 * (i + 1) - 1 : (2 * (i + 1));
-            ranks[i][1] = !flag ? 2 * (i + 1) - 1 : (2 * (i + 1));
-        }
-        String[][] pairs = new String[16][2];
-        pairs[0][0] = league.getTeamAtRank(ranks[10][0]);
-        pairs[0][1] = league.getTeamAtRank(ranks[5][0]);
-        pairs[1][0] = null;
-        pairs[1][1] = league.getTeamAtRank(ranks[2][0]);
-        pairs[2][0] = league.getTeamAtRank(ranks[9][0]);
-        pairs[2][1] = league.getTeamAtRank(ranks[6][0]);
-        pairs[3][0] = null;
-        pairs[3][1] = league.getTeamAtRank(ranks[1][0]);
-        pairs[4][0] = league.getTeamAtRank(ranks[11][0]);
-        pairs[4][1] = league.getTeamAtRank(ranks[4][0]);
-        pairs[5][0] = null;
-        pairs[5][1] = league.getTeamAtRank(ranks[3][0]);
-        pairs[6][0] = league.getTeamAtRank(ranks[8][0]);
-        pairs[6][1] = league.getTeamAtRank(ranks[7][0]);
-        pairs[7][0] = null;
-        pairs[7][1] = league.getTeamAtRank(ranks[0][0]);
-
-        pairs[8][0] = league.getTeamAtRank(ranks[10][1]);
-        pairs[8][1] = league.getTeamAtRank(ranks[5][1]);
-        pairs[9][0] = null;
-        pairs[9][1] = league.getTeamAtRank(ranks[2][1]);
-        pairs[10][0] = league.getTeamAtRank(ranks[9][1]);
-        pairs[10][1] = league.getTeamAtRank(ranks[6][1]);
-        pairs[11][0] = null;
-        pairs[11][1] = league.getTeamAtRank(ranks[1][1]);
-        pairs[12][0] = league.getTeamAtRank(ranks[11][1]);
-        pairs[12][1] = league.getTeamAtRank(ranks[4][1]);
-        pairs[13][0] = null;
-        pairs[13][1] = league.getTeamAtRank(ranks[3][1]);
-        pairs[14][0] = league.getTeamAtRank(ranks[8][1]);
-        pairs[14][1] = league.getTeamAtRank(ranks[7][1]);
-        pairs[15][0] = null;
-        pairs[15][1] = league.getTeamAtRank(ranks[0][1]);
-
     }
 
     private static Stage getLeaguePhaseForCompetition(CCType.CompType comp) {
