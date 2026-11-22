@@ -5,6 +5,7 @@ import java.util.Map;
 class LeagueStructure {
     enum DivisionType {
         BASIC,
+        PLAYOFF,
         CUSTOM
     }
     private Map<Integer, Division> divisions;

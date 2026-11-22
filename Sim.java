@@ -237,10 +237,10 @@ public class Sim {
         if (SIMULATE_CONTINENTAL_COMPETITIONS && !TEST) {
             System.out.println("CONTINENTAL COMPS");
             // ControllerSAmerica.simulate();
-            ControllerNAmerica.simulate();
-            // ControllerEurope_Swiss.simulate();
+            // ControllerNAmerica.simulate();
+            ControllerEurope_Swiss.simulate();
             // ControllerAfrica.simulate();
-            // ControllerAsia.simulate();
+            ControllerAsia.simulate();
             // ControllerCWC.simulate();
             // Controller_WCL.simulate();
         }
@@ -563,7 +563,7 @@ public class Sim {
             System.out.println(i + " " + d[i] / 1000000000);
         }
         if (Sim.SHOW_DETAILS && !Sim.TEST) {
-            // showCompetitionHistories();
+            showCompetitionHistories();
             // showTeams();
             // showPlayers();
             // ControllerEurope_Swiss.showCoefficients();

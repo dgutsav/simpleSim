@@ -456,12 +456,23 @@ public class CommonFunctions {
             List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation.getName(), div_setup.level);
             if (club_sets == null)
                 System.out.println("CLUB SETS IS NULL");
-            // System.out.println(club_sets.size());
             int set_club = div_setup.num_teams;
             if (club_sets.size() <= div_setup.num_teams)
                 set_club = club_sets.size();
-            // int set_club = club_sets.size() <= div_setup.num_teams ? club_sets.size() :
-            // div_setup.num_teams;
+            int rnd_club = div_setup.num_teams - set_club;
+            List<String> ids = generateSetClub(club_sets, set_club, nation);
+            ids.addAll(generateRandomClub(rnd_club, div_setup.strength, div_setup.level, nation));
+            div.setTeams(ids);
+            return div;
+        } else if (div_setup.type == LeagueStructure.DivisionType.PLAYOFF) {
+            DomesticDivisionWithPlayoff div = new DomesticDivisionWithPlayoff(div_setup.name, div_setup.level, div_setup.num_prom,
+                    div_setup.num_rel, div_setup.strength, nation.getId());
+            List<Setups.Club_Setup> club_sets = Setups.getClubSetups(nation.getName(), div_setup.level);
+            if (club_sets == null)
+                System.out.println("CLUB SETS IS NULL");
+            int set_club = div_setup.num_teams;
+            if (club_sets.size() <= div_setup.num_teams)
+                set_club = club_sets.size();
             int rnd_club = div_setup.num_teams - set_club;
             List<String> ids = generateSetClub(club_sets, set_club, nation);
             ids.addAll(generateRandomClub(rnd_club, div_setup.strength, div_setup.level, nation));
